@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import LogIn from '../views/LogIn.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,11 +8,33 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'fav-neo/:neoId',
+        component: () => import('@/views/ViewNeologisme.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: '/login',
+        name: 'login',
+        props: true,
+        component: () => import('@/views/LogIn.vue'),
+      },
+    ]
   },
-  
   {
+    meta: {
+      showModal: true
+    },
     path: '/login',
     name: 'login',
+    props: true,
     component: () => import('@/views/LogIn.vue'),
   },
   {
@@ -32,8 +53,12 @@ const routes = [
     component: () => import('@/views/CreateNeologisme.vue'),
   },
   {
-    path: '/view-neologisme',
-    name: 'Ver Neologismo',
+    path: '/view-neologisme/:neoid',
+    name: 'vNeo',
+    meta:{
+      showModal: true,
+    },
+    props: true,
     component: () => import('@/views/ViewNeologisme.vue'),
   },
   {

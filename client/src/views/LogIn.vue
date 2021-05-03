@@ -1,5 +1,6 @@
 <template>
 <div class="login-body">
+  <router-link to='/'>X</router-link>
 <div class="login-card">
     <b-form @submit="onSubmit" v-if="show" ok-only>
       <b-form-group
@@ -29,7 +30,7 @@
           <p><a href="/forgot-password" class="blue-text ml-1">Forgot Password?</a></p>
           <p><a href="/create-user" class="blue-text ml-1">Registrer</a></p>
       </div>
-
+    
       <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
     
     </b-form>
@@ -74,7 +75,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .login-body{
   display: flex;
   justify-content: center !important;
@@ -83,12 +84,26 @@ export default {
 
 .login-card{
     background-color: rgb(231, 231, 231);
-    margin: 5%;
     padding: 3%;
-    box-shadow: 0px 0px 20px 1px black;
 }
 .links{
     display:flex;
     justify-content:space-around;
+}
+.modal-route {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+  .modal-content {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+  }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div class="v-neologisme-card">
+  <router-link to='/'>X</router-link>
   <h1>{{ name }}</h1>
 <div class="descriptions-cards">
   <div v-for="(value,index) in descriptions" :key=index>
@@ -15,12 +16,12 @@
 </div>
 </div>
 </template>
-caca
+
 <script>
 export default {
   data() {
     return{
-      id: '',
+      id: '987654321',
       name: 'Neologismo',
       descriptions: [
         {id:1,content:"DEscripcion A"},
@@ -41,9 +42,7 @@ export default {
 <style>
 .v-neologisme-card{
     background-color: rgb(231, 231, 231);
-    margin: 5%;
     padding: 3%;
-    box-shadow: 0px 0px 20px 1px black;
 }
 
 .fuentes-cards{

@@ -32,11 +32,16 @@ export default {
     grid-auto-columns: 1fr 5fr 1fr;
 }
 
-.title-header{
+.main-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.title-header{
     color: black !important;
     text-decoration: none !important;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     font-size: 22px
 }
 </style>

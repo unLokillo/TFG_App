@@ -12,16 +12,31 @@
             {{ creator }}
             {{ date }}
         </div>
-        <router-link :to="`/view-neologisme`" tag="b-button"> </router-link>
+        <router-link :to="`/fav-neo/${neo_id}`" tag="b-button"> Ver más </router-link>
+        
+        <div v-if="showModal" class="modal-route">
+        <div class="modal-content">
+            <router-view></router-view>
+        </div>
+    
+    </div>
     </div>
 
 </template>
 
 <script>
-export default {
-    data() {
+export default {    
+watch: {
+    $route: {
+      immediate: true,
+      handler: function(newVal, oldVal) {
+        this.showModal = newVal.meta && newVal.meta.showModal;
+      }
+    }
+  },data() {    
         return {
-            id: 0,
+            showModal: false,
+            neo_id: '987654321',
             name: 'Palabra',
             creator: 'User1 Surname ',
             date: '31/09/1997',
@@ -38,7 +53,7 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 .card-body{
     background-color: lightblue;
     margin: 40px 10px 40px 10px;
@@ -52,5 +67,22 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid black;
+}
+
+.modal-route {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+  .modal-content {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+  }
 }
 </style>
