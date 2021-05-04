@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGamepad, faHeart, faAward, faTrophy,faCog, faTimesCircle,faCheckCircle,faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad, faHeart, faAward, faTrophy,faCog, faTimesCircle,faCheckCircle,faQuestionCircle,faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
@@ -17,7 +17,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-library.add(faGamepad,faHeart,faAward,faTrophy,faCog,faTimesCircle,faCheckCircle,faQuestionCircle)
+library.add(faGamepad,faHeart,faAward,faTrophy,faCog,faTimesCircle,faCheckCircle,faQuestionCircle,faBars,faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 

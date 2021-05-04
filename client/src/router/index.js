@@ -26,16 +26,16 @@ const routes = [
         props: true,
         component: () => import('@/views/LogIn.vue'),
       },
+      {
+        meta: {
+        showModal: true
+        },
+        path: '/create-neologisme',
+        name: 'Create Neologisme',
+        props: true,
+        component: () => import('@/views/CreateNeologisme.vue'),
+      },
     ]
-  },
-  {
-    meta: {
-      showModal: true
-    },
-    path: '/login',
-    name: 'login',
-    props: true,
-    component: () => import('@/views/LogIn.vue'),
   },
   {
     path: '/forgot-password',
@@ -46,11 +46,6 @@ const routes = [
     path: '/create-user',
     name: 'Create User',
     component: () => import('@/views/CreateUser.vue'),
-  },
-  {
-    path: '/create-neologisme',
-    name: 'forgot-password',
-    component: () => import('@/views/CreateNeologisme.vue'),
   },
   {
     path: '/view-neologisme/:neoid',
@@ -66,6 +61,16 @@ const routes = [
     name: 'vUser',
     props: true,
     component: () => import('@/views/ViewUser.vue'),
+    children: [
+      {
+        meta: {
+          showModal: true
+        },
+        path: '/view-all-neologismes',
+        component: () => import('@/views/View_All_Neologismes.vue'),
+        props: true
+      }
+    ]
   },
 ]
 

@@ -6,7 +6,7 @@
     <router-link :to="`/login`" tag="div" v-else>
         Log in
     </router-link>
-    <div v-if="showModalLog" class="modal-route">
+    <div v-if="showModal" class="modal-route">
         <div class="modal-content">
             <router-view></router-view>
         </div>
@@ -26,9 +26,9 @@ export default {
   },
     data() {
         return {
-            showModalLog: false,
+            showModal: false,
             user_id: '123456789',
-            logged: false
+            logged: true
         }
     }
 }

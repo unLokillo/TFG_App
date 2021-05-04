@@ -35,7 +35,7 @@
           { icon: 'gamepad', caption: 'Toggle 3', state: true },
           { icon: 'gamepad', caption: 'Toggle 4', state: false }
         ],
-        logged: true
+        logged: false
       }
     },
     computed: {

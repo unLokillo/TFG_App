@@ -3,6 +3,13 @@
   <div class="menu-1">
     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,</p>
     <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>
+    
+    <div v-if="showModalLog" class="modal-route">
+        <div class="modal-content">
+            <router-view></router-view>
+        </div>
+    </div>
+  
   </div>
   <h2>Palabras de la semana</h2>
   <div class="frequent-words">
@@ -32,7 +39,15 @@ export default {
     Header,
     NeologismoCard,
     Ranking
-  }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler: function(newVal, oldVal) {
+        this.showModal = newVal.meta && newVal.meta.showModal;
+      }
+    }
+  },
 }
 </script>
 

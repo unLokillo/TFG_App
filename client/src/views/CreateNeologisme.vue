@@ -1,5 +1,6 @@
 <template>
     <div class="create-neologisme-body">
+        <router-link :to="`/`">X</router-link>
         <b-form>
       <b-form-group id="input-group-1" label="Neologismo" label-for="input-1">
         <b-form-input id="input-1" v-model="neologisme" type="text" placeholder="Introduce el Neologismo" required></b-form-input>
@@ -7,16 +8,16 @@
       </b-form>
 
         <div>
-        <h4>Fuentes</h4>
-        <TodoBox/>
+          <h4>Fuentes</h4>
+          <TodoBox/>
         </div>
 
         <div>
-        <h4>Descripciones</h4>
-        <TodoBox/>
+          <h4>Descripciones</h4>
+          <TodoBox/>
         </div>
 
-        <b-form-file v-model="img"
+      <b-form-file v-model="img"
       :state="Boolean(img)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
@@ -48,8 +49,8 @@ export default {
 <style>
 .create-neologisme-body{
     background-color: rgb(231, 231, 231);
-    margin: 5%;
     padding: 3%;
-    box-shadow: 0px 0px 20px 1px black;
+    max-height: 550px;
+    overflow: scroll;
 }
 </style>
