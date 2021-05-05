@@ -3,14 +3,16 @@
     <div class="top-menu">
         <div class="left-menu-card">
             <b-img src="https://picsum.photos/300/150/?image=41" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
-            <div class="badges-info">
+            <div class="badges_menu-info">
                 <font-awesome-icon style="font-size:20px;"
                 icon="trophy"/>
                 asdfg
             </div>
             <div class="points-info">
+                <router-link :to="`/badges_menu`" class="more-bttn" tag="div" >
                 <font-awesome-icon style="font-size:20px;" icon="award" />
-                asdf
+                    15/20
+                </router-link>
             </div>
             <div class="bio-info">
 
@@ -47,12 +49,19 @@
             <Non_Accepeted_Neos/>
         </div>
     </div>
+
+         
+     <div v-if="showModal" class="modal-route">
+        <div class="modal-content">
+            <router-view name="badges_menu"></router-view>
+        </div>
+    </div>
 </div>    
 </template>
 
 <script>
-import Accepeted_Neos from '@/components/User_View/Ran_Accepted_Neo.vue'
-import Non_Accepeted_Neos from '@/components/User_View/Ran_NonAccepted_Neo.vue'
+import Accepeted_Neos from '@/components/User_View/Accepted-Neo-Menu.vue'
+import Non_Accepeted_Neos from '@/components/User_View/Proposed-Neo-Menu.vue'
 export default {
   name: 'View-User',
   components: {
@@ -69,7 +78,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .top-menu{
     display: grid;
     grid-template-columns: 2fr 5fr 1fr;
@@ -81,7 +90,7 @@ export default {
     border-right: 2px solid black;
 }
 
-.badges-info{
+.badges_menu-info{
     margin: 8%;
 }
 
@@ -104,4 +113,22 @@ export default {
     grid-auto-flow: column;
     grid-auto-columns: 1fr 1fr;
 }
+
+.modal-route {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.6);
+  
+}
+.modal-content {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+  }
 </style>
