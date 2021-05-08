@@ -33,6 +33,9 @@ export default {
 .header-img{
     padding: 5%;
     border-left: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .user-bttn{
     cursor: pointer;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-b-toggle.sidebar-no-header class="hamburguer-button"><font-awesome-icon icon="bars"/> Menu</div>
+    <div v-b-toggle.sidebar-no-header class="hamburguer-button"> <font-awesome-icon icon="bars"/>Menu</div>
     <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow>
       <template #default="{ hide }">
         <div>
@@ -58,7 +58,8 @@
 .hamburguer-button{
   height: 100%;
   display: flex;
-  justify-content: center;
+  max-width: 150px;
+  justify-content:space-evenly;
   align-items: center;
   border-right: 1px solid black;
 }

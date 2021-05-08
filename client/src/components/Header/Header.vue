@@ -24,8 +24,7 @@ export default {
 </script>
 <style>
 .header-card{
-    width: 100%;
-    height: 5%;
+    min-height: 60px;
     background: rgb(123, 123, 243);
     display: grid;
     grid-auto-flow: column;

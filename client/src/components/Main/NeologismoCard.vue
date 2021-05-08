@@ -1,18 +1,17 @@
 <template>
     <div class="card-body">
-        <div class="card-header">
+        <div class="card-neo-header">
             <h2>{{ name }}</h2>
-            <div class="neo-likes"><font-awesome-icon icon="heart"/> {{ likes }}</div> 
+            <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ likes }}</div> 
         </div>
-        <div class="descriptions" v-for="(value,index) in descriptions" :key=index >
-            <div v-if="index<3">{{ index }}.-{{ value.content }}</div>
+        <div v-for="(value,index) in descriptions" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
         </div>
-
         <div class="user-tag">
-            {{ creator }}
-            {{ date }}
+            <div>Creado por: {{ creator }} </div> 
+            <div>{{ date }} </div>
         </div>
-        <router-link :to="`/fav-neo/${neo_id}`" tag="b-button"> Ver más </router-link>
+        <router-link :to="`/fav-neo/${neo_id}`" tag="b-button" style="width: 100%;"> Ver más </router-link>
        
     </div>
 
@@ -48,19 +47,26 @@ watch: {
 
 
 <style lang="scss" scoped>
+.descriptions{
+    padding: 3%;
+    padding-left: 10%;
+    text-align: left;
+}
 .card-body{
     background-color: lightblue;
-    margin: 40px 10px 40px 10px;
+    max-width: 350px;
 }
-.card-header{
+.card-neo-header{
     display:flex;
     justify-content: space-between;
+    align-items: center;
 }
 .user-tag{
     display:flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid black;
+    padding-bottom: 5%;
+    color: grey;
+    font-size: 14px; 
 }
 
 </style>

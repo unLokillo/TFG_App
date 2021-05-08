@@ -4,7 +4,7 @@
     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,</p>
     <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>  
   </div>
-  <h2>Palabras de la semana</h2>
+  <h4>Palabras de la semana</h4>
   <div class="frequent-words">
       <NeologismoCard/>
       <NeologismoCard/>
@@ -14,9 +14,10 @@
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,
     <b-button> Contribuye </b-button>
   </div>
+  <h4>Rankings</h4>
   <div class="rankings">
-    <Ranking/>
-    <Ranking/>
+    <ranking_users/>
+    <ranking_neo/>
   </div>
   <div v-if="showModal" class="modal-route">
         <div class="modal-content">
@@ -30,13 +31,15 @@
 // @ is an alias to /src
 import Header from '@/components/Header/Header.vue'
 import NeologismoCard from '@/components/Main/NeologismoCard.vue'
-import Ranking from '@/components/Main/Ranking_Main.vue'
+import ranking_users from '@/components/Main/Ranking_users_main.vue'
+import ranking_neo from '@/components/Main/Ranking_neo_main.vue'
 export default {
   name: 'Home',
   components: {
     Header,
     NeologismoCard,
-    Ranking
+    ranking_users,
+    ranking_neo
   },
   watch: {
     $route: {
@@ -55,18 +58,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.body > h4{
+  display: flex;
+  justify-content: space-around;
+}
+
 .menu-1{
   background-color: rgb(231, 231, 231);
-  display: grid;
+  display: flex;
   padding: 4%;
-  grid-template-rows: 1fr 1fr;
+  flex-direction: column;
 }
 
 
 .frequent-words{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .menu-2{
@@ -78,8 +86,8 @@ export default {
 }
 
 .rankings{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .modal-route {
