@@ -1,16 +1,11 @@
 <template>
 <div class="header-img">
     <router-link :to="{ name: 'vUser',params: { userid: user_id } }" class="user-bttn" tag="div" v-if="logged">
-        <b-avatar src="https://picsum.photos/300/150/?image=41"></b-avatar> jajaja ahora si 
+        <b-avatar src="https://picsum.photos/300/150/?image=41"></b-avatar> User_1 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
         Log in
     </router-link>
-    <div v-if="showModal" class="modal-route">
-        <div class="modal-content">
-            <router-view></router-view>
-        </div>
-    </div>
 </div>
 </template>
 
@@ -28,7 +23,7 @@ export default {
         return {
             showModal: false,
             user_id: '123456789',
-            logged: true
+            logged: false
         }
     }
 }
@@ -47,20 +42,4 @@ export default {
     background-color: aqua;
 }
 
-.modal-route {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba($color: #000000, $alpha: 0.5);
-  .modal-content {
-    width: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-  }
-}
 </style>

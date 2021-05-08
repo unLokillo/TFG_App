@@ -5,7 +5,7 @@ import View_Proposals_User from '../components/User_View/View_Proposals_User.vue
 import badges_menu from '../components/User_View/badges_menu.vue'
 Vue.use(VueRouter)
 
-const routes = [
+var route = [
   {
     path: '/',
     name: 'Home',
@@ -23,7 +23,7 @@ const routes = [
         meta: {
           showModal: true
         },
-        path: '/login',
+        path: 'login',
         name: 'login',
         props: true,
         component: () => import('@/views/LogIn.vue'),
@@ -32,24 +32,31 @@ const routes = [
         meta: {
         showModal: true
         },
-        path: '/create-neologisme',
+        path: 'create-neologisme',
         name: 'Create Neologisme',
         props: true,
         component: () => import('@/views/CreateNeologisme.vue'),
       },
       {
-        path: '/forgot-password',
+        meta: {
+          showModal: true
+        },
+        path: 'forgot-password',
         name: 'forgot-password',
         component: () => import('@/views/ForgotPassword.vue'),
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'create-user',
+        name: 'create-user',
+        component: () => import('@/views/CreateUser.vue'),
       },
     ]
   },
 
-  {
-    path: '/create-user',
-    name: 'Create User',
-    component: () => import('@/views/CreateUser.vue'),
-  },
+  
   {
     path: '/view-neologisme/:neoid',
     name: 'vNeo',
@@ -60,7 +67,7 @@ const routes = [
     component: () => import('@/views/ViewNeologisme.vue'),
   },
   {
-    path: '/view-user/:userid',
+    path: '/view-user/:userid/',
     name: 'vUser',
     props: true,
     component: () => import('@/views/ViewUser.vue'),
@@ -69,7 +76,8 @@ const routes = [
         meta: {
           showModal: true
         },
-        path: '/view-all-neologismes',
+        path: 'view-all-neologismes',
+        name: 'view-all-neologismes',
         component: () => import('@/components/User_View/View_All_Neologismes.vue'),
         props: true
       },
@@ -77,7 +85,8 @@ const routes = [
         meta: {
           showModal: true
         },
-        path: '/view-all-proposals',
+        path: 'view-all-proposals',
+        name: 'view-all-proposals',
         component: View_Proposals_User,
         props: true
       },
@@ -85,7 +94,17 @@ const routes = [
         meta: {
           showModal: true
         },
-        path: '/badges_menu',
+        path: 'badges_menu',
+        name: 'badges',
+        component: badges_menu,
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'ranking',
+        name: 'ranking',
         component: badges_menu,
         props: true
       }
@@ -96,7 +115,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: route,
 })
 
 export default router

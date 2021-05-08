@@ -2,14 +2,7 @@
 <div class="body">
   <div class="menu-1">
     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,</p>
-    <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>
-    
-    <div v-if="showModalLog" class="modal-route">
-        <div class="modal-content">
-            <router-view></router-view>
-        </div>
-    </div>
-  
+    <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>  
   </div>
   <h2>Palabras de la semana</h2>
   <div class="frequent-words">
@@ -25,6 +18,11 @@
     <Ranking/>
     <Ranking/>
   </div>
+  <div v-if="showModal" class="modal-route">
+        <div class="modal-content">
+            <router-view></router-view>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -48,10 +46,15 @@ export default {
       }
     }
   },
+  data(){
+    return{
+      showModal: false,
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .menu-1{
   background-color: rgb(231, 231, 231);
   display: grid;
@@ -77,5 +80,22 @@ export default {
 .rankings{
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.modal-route {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+  .modal-content {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+  }
 }
 </style>

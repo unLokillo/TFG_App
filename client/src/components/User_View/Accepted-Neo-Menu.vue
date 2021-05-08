@@ -12,14 +12,7 @@
          <b-button>+</b-button>
         </div>
      </div>
-    <router-link :to="`/view-all-neologismes`" class="more-bttn" tag="b-button" >Ver mas</router-link>
-     
-     <div v-if="showModal" class="modal-route">
-        <div class="modal-content">
-            <router-view></router-view>
-        </div>
-    </div>
-
+    <router-link :to="{name: 'view-all-neologismes',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>
     </div>
 </template>
 
@@ -74,21 +67,4 @@ export default {
     justify-content: space-evenly;
 }
 
-.modal-route {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba($color: #000000, $alpha: 0.6);
-  
-}
-.modal-content {
-    width: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-  }
 </style>

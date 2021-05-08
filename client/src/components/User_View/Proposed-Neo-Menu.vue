@@ -16,13 +16,7 @@
          <b-button>+</b-button>
         </div>
      </div>
-    <router-link :to="`/view-all-proposals`" class="more-bttn" tag="b-button" >Ver mas</router-link>
-     
-     <div v-if="showModal" class="modal-route">
-        <div class="modal-content">
-            <router-view name="View_Proposals_User"></router-view>
-        </div>
-    </div>
+    <router-link :to="{name: 'view-all-proposals',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>
     </div>
 </template>
 

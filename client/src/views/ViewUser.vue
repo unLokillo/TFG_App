@@ -4,12 +4,13 @@
         <div class="left-menu-card">
             <b-img src="https://picsum.photos/300/150/?image=41" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
             <div class="badges_menu-info">
-                <font-awesome-icon style="font-size:20px;"
-                icon="trophy"/>
-                asdfg
+               <router-link :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="div">
+                <font-awesome-icon style="font-size:20px;" icon="trophy"/>
+               </router-link> 
             </div>
+
             <div class="points-info">
-                <router-link :to="`/badges_menu`" class="more-bttn" tag="div" >
+                <router-link :to="{name: 'badges',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="award" />
                     15/20
                 </router-link>
@@ -53,7 +54,7 @@
          
      <div v-if="showModal" class="modal-route">
         <div class="modal-content">
-            <router-view name="badges_menu"></router-view>
+            <router-view></router-view>
         </div>
     </div>
 </div>    
@@ -63,13 +64,22 @@
 import Accepeted_Neos from '@/components/User_View/Accepted-Neo-Menu.vue'
 import Non_Accepeted_Neos from '@/components/User_View/Proposed-Neo-Menu.vue'
 export default {
-  name: 'View-User',
-  components: {
-    Accepeted_Neos,
-    Non_Accepeted_Neos
+    name: 'View-User',
+    components: {
+      Accepeted_Neos,
+      Non_Accepeted_Neos
+    },
+watch: {
+    $route: {
+      immediate: true,
+      handler: function(newVal, oldVal) {
+        this.showModal = newVal.meta && newVal.meta.showModal;
+      }
+    }
   },
   data(){
       return{
+          showModal: false,
           mainProps: {width: '200%', height:'200%', class: 'm1' },
           name: "User1", 
           surname: "UserSurname1 "
@@ -130,5 +140,6 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
+    overflow: scroll;
   }
 </style>

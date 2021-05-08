@@ -50,8 +50,7 @@
 
 .f-password-card{
     background-color: rgb(231, 231, 231);
-    margin: 5%;
-    padding: 3%;
-    box-shadow: 0px 0px 20px 1px black;
+    width: 100%;
+    margin: 2%;
 }
 </style>
