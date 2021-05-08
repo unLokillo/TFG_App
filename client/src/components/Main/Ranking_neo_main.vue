@@ -2,10 +2,10 @@
     <div class="ranking-card">
     <div class="ranking-title"><h3> Top Neologismos </h3></div>
     <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
-        <template #cell(points)="data">
-         <font-awesome-icon icon="heart"/>{{data.item.points}}
+        <template #cell(img)="data">
+         <b-avatar :src="data.item.img"></b-avatar>   
     </template>
-    </b-table> 
+    </b-table>
     <b-button class="more-bttn">Ver mas</b-button>
     </div>
 </template>
@@ -15,13 +15,13 @@ export default {
     data() {
         return {
             labels: [,
-            'position','neologismo',{ key: 'points', label: 'Me gustas' }],
+            'position',{ key: 'img', label: 'Imagen' },'neologismo', 'likes'],
             items: [
-                {position: 1,neologismo: 'Neo1',points: '2000',tdClass: 'nameOfTheClass'},
-                {position: 2,neologismo: 'Neo2',points: '1899',tdClass: 'nameOfTheClass'},
-                {position: 3,neologismo: 'Neo2',points: '1899',tdClass: 'nameOfTheClass'},
-                {position: 4,neologismo: 'Neo2',points: '1899',tdClass: 'nameOfTheClass'},
-                {position: 5,neologismo: 'Neo2',points: '1899',tdClass: 'nameOfTheClass'}
+                {position: 1,img: 'https://picsum.photos/300/150/?image=41',neologismo: 'User1',likes: '2000'},
+                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
+                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
+                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
+                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'}
             ]
         }
     }
