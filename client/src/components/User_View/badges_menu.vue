@@ -11,11 +11,11 @@
             <div v-for="(value,index) in badges" :key="index"  class="neologismes-badges_menu" >
                 <div style="overflow: scroll;">
                 <b-card img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top style="max-width: 20rem; max-height: 20rem;" class="mb-2">
-                <h6 style="border-bottom: 1px solid grey; padding-bottom: 1px;">{{ value.name_badge }}</h6>
+                <h6 style="border-bottom: 1px solid var(--border); padding-bottom: 1px;">{{ value.name_badge }}</h6>
                 <b-card-text style="font-size: 13px;">
                     {{ value.text }}
                 </b-card-text>
-                <div style="border-top: 1px solid grey;" v-if="value.completed">
+                <div style="border-top: 1px solid var(--border);" v-if="value.completed">
                     mira me cago en dios
                 </div>
                 </b-card>
@@ -49,7 +49,7 @@ export default {
     display: flex;
     justify-content: space-around;
     padding: 2%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--border);
 
 }
 

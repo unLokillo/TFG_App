@@ -1,11 +1,7 @@
 <template>
     <div class="create-neologisme-body">
-        <router-link :to="`/`">X</router-link>
-        <b-form>
-      <b-form-group id="input-group-1" label="Neologismo" label-for="input-1">
+    <div class="close-modal"><router-link to="/"> X </router-link></div>
         <b-form-input id="input-1" v-model="neologisme" type="text" placeholder="Introduce el Neologismo" required></b-form-input>
-      </b-form-group>
-      </b-form>
 
         <div>
           <h4>Fuentes</h4>
@@ -48,9 +44,15 @@ export default {
 
 <style>
 .create-neologisme-body{
-    background-color: rgb(231, 231, 231);
+    background-color: var(--main-color);
     padding: 3%;
-    max-height: 550px;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.todo-card{
+  width: 100%;
 }
 </style>

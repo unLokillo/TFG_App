@@ -32,7 +32,9 @@ export default {
 <style lang="scss" scoped>
 .header-img{
     padding: 5%;
-    border-left: solid 1px black;
+    border-left: solid 1px var(--border);
+    background-color: var(--buttons);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;

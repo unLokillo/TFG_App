@@ -53,7 +53,7 @@ watch: {
     text-align: left;
 }
 .card-body{
-    background-color: lightblue;
+    background-color: var(--third-color);
     max-width: 350px;
 }
 .card-neo-header{

@@ -1,17 +1,17 @@
 <template>
 
 <div class="f-password-body">
-    <header> <router-link to="/"> X </router-link> </header>
-        <h3>Forgot Password</h3>
+ <div class="close-modal"><router-link to="/"> X </router-link></div>
+        <h2>¿Has olvidado la contraseña?</h2>
         <p>Introduce el código que has recibido por correo</p>
         <b-form-input
           id="input-1"
           v-model="form.email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Introduce el email"
           required>
           </b-form-input>
-    <button type="submit" class="btn btn-dark btn-lg btn-block">Reset password</button>
+    <button type="submit" class="btn btn-dark btn-lg btn-block">Recuperar contraseña</button>
 </div>
 </template>
 

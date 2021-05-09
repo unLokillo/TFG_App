@@ -25,7 +25,8 @@ export default {
 <style>
 .header-card{
     min-height: 60px;
-    background: rgb(123, 123, 243);
+    background: var(--main-color);
+    border-bottom: 1px solid var(--border);
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr 5fr 1fr;

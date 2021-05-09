@@ -50,7 +50,7 @@ export default {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid var(--border);
     min-height: 50px;
 }
 

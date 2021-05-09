@@ -17,11 +17,22 @@ export default {
 </script>
 
 <style lang="scss">
+:root{
+  --main-color: #e0e5eb;
+  --secondary-color: #c5cece;
+  --third-color: rgb(245, 245, 245);
+  --border: rgb(156, 155, 155);
+  --border-left: rgb(58, 92, 245);
+  --letter-color: rgb(245, 245, 245);
+  --buttons: rgb(52, 129, 192);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background-color: var(--main-color);
   color: #2c3e50;
 }
 
@@ -37,13 +48,29 @@ export default {
     }
   }
 }
+button{
+  background-color: var(--buttons) !important;
+  border-radius: none !important;
+  border: none !important;
+  padding: 2% !important; 
+  color: var(--letter-color) !important;
+}
+
 input {
   border-radius: 0px !important;
 }
 
+textarea{
+  border-radius: none !important;
+  max-height: 3rem;
+}
+
+header{
+  width: 100%;
+}
+
 a {
   color: black !important;
-  text-decoration: none !important;
 }
 
 a:hover{
@@ -66,22 +93,23 @@ a:hover{
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    min-height: 50% !important;
-    max-height: 80% !important;
+    min-height: 50% ;
+    max-height: 80% ;
     min-width: 65% !important;
     max-width: 65% !important;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     background-color: #e7e7e7;
-    header{
-      position: absolute;
-      right: 5%;
-      top: 5%;
-    }
   }
 }
 
+  .close-modal{
+      width: 90%;
+      margin-right:4%;
+      transform: translate(50%,-50%);
+  }
   .modal-content > div{
     position: absolute;
     height: 100%;

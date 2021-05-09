@@ -1,16 +1,16 @@
 <template>
 <div class="login-body">
-  <header style="float:right;"> <router-link to="/"> X </router-link> </header>
+   <div class="close-modal"><router-link to="/"> X </router-link></div>
         <h3>Log In</h3>
         <b-form-input
           id="input-1"
           v-model="form.email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Introuduce tu email"
           required
         ></b-form-input>
 
-        <b-form-input type="password" id="text-password" aria-describedby="password-help-block" :state="validation"></b-form-input>
+        <b-form-input type="password" id="text-password" aria-describedby="password-help-block" placeholder="Introuduce tu contraseña" :state="validation"></b-form-input>
             <b-form-text id="password-help-block"></b-form-text>
 
       <div class="links">

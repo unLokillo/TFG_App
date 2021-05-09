@@ -97,7 +97,7 @@ watch: {
 
 .left-menu-card {
     padding: 4%;
-    border-right: 2px solid black;
+    border-right: 2px solid var(--border);
 }
 
 .badges_menu-info{

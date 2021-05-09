@@ -10,8 +10,9 @@
       <NeologismoCard/>
       <NeologismoCard/>
   </div>
+   <h4>Juegos</h4>
   <div class="menu-2">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper, </p>
     <b-button> Contribuye </b-button>
   </div>
   <h4>Rankings</h4>
@@ -64,10 +65,11 @@ export default {
 .body > h4{
   display: flex;
   justify-content: space-around;
+  margin: 2%;
 }
 
 .menu-1{
-  background-color: rgb(231, 231, 231);
+  background-color: var(--secondary-color);
   display: flex;
   padding: 4%;
   flex-direction: column;
@@ -84,9 +86,12 @@ export default {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  background-color: rgb(231, 231, 231);
+  background-color: var(--secondary-color);
 }
 
+.menu-2 > p{
+  margin-bottom: 2%;
+}
 .rankings{
   display: flex;
   justify-content: space-evenly;

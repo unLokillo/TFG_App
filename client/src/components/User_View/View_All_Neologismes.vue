@@ -42,7 +42,7 @@ export default {
 <style>
 .top-all-neologismes{
     margin: 30px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid var(--border);
 }
 
 .all-neologismes-card{
@@ -55,7 +55,7 @@ export default {
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
-    border: 1px solid black;
+    border: 1px solid var(--border);
     margin: 5%;
 }
 

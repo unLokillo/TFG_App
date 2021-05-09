@@ -61,7 +61,7 @@
   max-width: 150px;
   justify-content:space-evenly;
   align-items: center;
-  border-right: 1px solid black;
+  border-right: 1px solid var(--border);
 }
 
 .all-sidebar-buttons{
@@ -76,13 +76,13 @@
   justify-content: center;
   align-items: center;
   justify-content: space-evenly;
-  border-bottom: 1px solid grey;
-  border-left: 10px solid lightblue ;
+  border-bottom: 1px solid var(--border);
+  border-left: 10px solid var(--border-left) ;
   cursor: pointer;
 }
 
 .sidemenu-top{
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid var(--border);
   padding: 3% 0 3% 0;
   display: flex;
   justify-content: center;

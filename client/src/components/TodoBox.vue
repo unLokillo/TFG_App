@@ -4,7 +4,7 @@
   <b-form-textarea
       id="textarea"
       v-model="newItem"
-      placeholder="Enter something..."
+      placeholder="Introduce la información"
       rows="3"
       max-rows="6"
     ></b-form-textarea>
@@ -51,9 +51,21 @@ export default {
 
 <style>
 .list-item{
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-auto-columns: 5fr 1fr;
+  grid-auto-flow: column;
+  justify-content: space-around;
 }
+
+.list-item > button{
+  max-width: 50%;
+  max-height: 100%;
+}
+
+.list-item > input{
+  min-height: 50%;
+}
+
 .list-item > div{
 overflow:auto;
 margin: 10px;

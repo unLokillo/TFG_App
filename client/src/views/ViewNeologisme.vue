@@ -56,7 +56,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-top: solid black 1px;
+  border-top: solid var(--border) 1px;
 }
 
 .b-badge{
