@@ -20,7 +20,9 @@
     <ranking_neo/>
   </div>
   <div v-if="showModal" class="modal-route">
+    
         <div class="modal-content">
+          
             <router-view></router-view>
         </div>
     </div>
@@ -88,22 +90,5 @@ export default {
 .rankings{
   display: flex;
   justify-content: space-evenly;
-}
-
-.modal-route {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba($color: #000000, $alpha: 0.5);
-  .modal-content {
-    width: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-  }
 }
 </style>

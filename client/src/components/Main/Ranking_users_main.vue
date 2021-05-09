@@ -37,6 +37,7 @@ export default {
 }
 .ranking-title{
     text-align: left;
+    padding: 2%;
     padding-left: 20px;
     color: black;
     background-color: lightblue;

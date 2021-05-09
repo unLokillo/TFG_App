@@ -36,11 +36,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.user-bttn{
+    width: 100%; 
+    height:100%;
     cursor: pointer;
 }
-
 .header-img:hover{
     background-color: aqua;
 }
