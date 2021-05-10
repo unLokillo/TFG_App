@@ -62,7 +62,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-body{
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -81,8 +80,12 @@ export default {
 
 input{
     width: 70%;
+    height: 12%;
 }
 
+.modal-content{
+  height: 65%;
+}
 
 button {
   border-radius: 0 px !important;

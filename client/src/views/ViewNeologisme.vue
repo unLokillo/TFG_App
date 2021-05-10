@@ -1,65 +1,85 @@
 <template>
-<div class="v-neologisme-card">
-  <router-link to='/'>X</router-link>
-  <h1>{{ name }}</h1>
-<div class="descriptions-cards">
-  <div v-for="(value,index) in descriptions" :key=index>
-    <b-badge pill>1</b-badge>
-    {{ value.content }}
-  </div>
-  </div>
+    <div class="card-body">
+      <div class="close-modal"><router-link to="/"> X </router-link></div>
+        <div class="card-neo-header">
+            <h2>{{ name }}</h2>
+            <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ likes }}</div> 
+        </div>
+        <div class="descriptions-card">
+        <div v-for="(value,index) in descriptions" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
+        </div>
+        </div>
+        <div class="descriptions-card">
+        <div v-for="(value,index) in descriptions" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
+        </div>
+        </div>
 
-<div class="fuentes-cards">
-  <div v-for="(value,index) in fuentes" :key=index>
-    {{ value.content }}
-  </div>
-</div>
-</div>
+        <div class="user-tag">
+            <div>Creado por: {{ creator }} </div> 
+            <div>{{ date }} </div>
+        </div>
+       
+    </div>
+
 </template>
 
 <script>
-export default {
-  data() {
-    return{
-      id: '987654321',
-      name: 'Neologismo',
-      descriptions: [
-        {id:1,content:"DEscripcion A"},
-        {id:1,content:"DEscripcion B"}
-      ],
-      fuentes: [
-        {id:1,content:"DEscripcion 1"},
-        {id:1,content:"DEscripcion 1"}
-      ],
-      img: null,
-      creator: 'User_1',
-      likes: 2,
-      creation_date: '10/10/2010'
+export default {    
+watch: {
+    $route: {
+      immediate: true,
+      handler: function(newVal, oldVal) {
+        this.showModal = newVal.meta && newVal.meta.showModal;
+      }
     }
-  },
+  },data() {    
+        return {
+            showModal: false,
+            neo_id: '987654321',
+            name: 'Palabra',
+            creator: 'User1 Surname ',
+            date: '31/09/1997',
+            likes: 10,
+            descriptions: [
+                {id:0,content:"Definicion 1"},
+                {id:1,content:"Esto es un texto de prueba"},
+                {id:2,content:"Texto muy muy muy muy muy muy muy muy muy muy muy muy muy largo"},
+                {id:3,content:"Pedazo de palabra cruck"}
+            ]
+        };
+    },
 }
 </script>
-<style>
-.v-neologisme-card{
-    background-color: rgb(231, 231, 231);
+
+
+<style lang="scss" scoped>
+.card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.descriptions{
     padding: 3%;
+    text-align: left;
+    border-left: 10px solid var(--border-left);
 }
-
-.fuentes-cards{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-top: solid black 1px;
+.card-neo-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
 }
-
-.descriptions-cards{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-top: solid var(--border) 1px;
+.user-tag{
+    display:flex;
+    flex-direction: column;
+    padding-bottom: 5%;
+    color: grey;
+    font-size: 14px; 
 }
-
-.b-badge{
-  background-color: red;
+.descriptions-card{
+    border-bottom: 1px solid var(--border);
 }
 </style>

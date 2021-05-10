@@ -2,16 +2,15 @@
 <div>
 <div class="todo-card">
   <b-form-textarea
-      id="textarea"
       v-model="newItem"
       placeholder="Introduce la información"
       rows="3"
       max-rows="6"
     ></b-form-textarea>
-    <b-button @click="addItem">Add</b-button>
+    <b-button @click="addItem" class="bttn-todo">Add</b-button>
     </div>
     <b-list-group>
-      <b-list-group-item class="list-item" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)">X</b-button></b-list-group-item>
+      <b-list-group-item class="list-item" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >X</b-button></b-list-group-item>
   </b-list-group>
 
 </div>

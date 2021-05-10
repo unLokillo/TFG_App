@@ -48,6 +48,7 @@
 }
 
 input{
+    height: 12%;
     width: 70%;
 }
 

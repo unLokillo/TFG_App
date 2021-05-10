@@ -90,6 +90,7 @@ a:hover{
     width: 50%;
     position: relative;
     top: 50%;
+    height: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
@@ -98,7 +99,7 @@ a:hover{
     min-width: 65% !important;
     max-width: 65% !important;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: none;
     display: flex;
     justify-content: center;
     background-color: #e7e7e7;
@@ -106,9 +107,10 @@ a:hover{
 }
 
   .close-modal{
-      width: 90%;
-      margin-right:4%;
-      transform: translate(50%,-50%);
+margin-right: 10%;
+display: flex;
+flex-direction: row-reverse;
+width: 100%;
   }
   .modal-content > div{
     position: absolute;
