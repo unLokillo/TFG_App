@@ -23,6 +23,15 @@ var route = [
         meta: {
           showModal: true
         },
+        path: 'fav-neo/:neoId/reject-neologisme',
+        name: 'r-neologismes',
+        component: () => import('@/views/Reject_Neologisme.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
         path: 'login',
         name: 'login',
         props: true,
@@ -53,6 +62,7 @@ var route = [
         name: 'create-user',
         component: () => import('@/views/CreateUser.vue'),
       },
+
     ]
   },
 
@@ -107,7 +117,43 @@ var route = [
         name: 'ranking',
         component: badges_menu,
         props: true
-      }
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'view-neologisme/:neoId',
+        name: 'v-neologisme',
+        component: () => import('@/views/ViewNeologisme.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'view-all-neologismes/view-neologisme/:neoId',
+        name: 'v-neologismes',
+        component: () => import('@/views/ViewNeologisme.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'view-all-neologismes/view-neologisme/:neoId/reject-neologisme',
+        name: 'r-neologismes',
+        component: () => import('@/views/Reject_Neologisme.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'notify-error',
+        name: 'n-error',
+        component: () => import('@/views/Notify_Error.vue'),
+        props: true
+      },
     ]
   },
 ]

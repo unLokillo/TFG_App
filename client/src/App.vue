@@ -25,6 +25,8 @@ export default {
   --border-left: rgb(58, 92, 245);
   --letter-color: rgb(245, 245, 245);
   --buttons: rgb(52, 129, 192);
+  --success: #69b00b;
+  --fail: #b00b69;
 }
 
 #app {
@@ -48,6 +50,14 @@ export default {
     }
   }
 }
+.bttn-app{
+  background-color: var(--buttons) !important;
+  border-radius: none !important;
+  border: none !important;
+  padding: 2% !important; 
+  color: var(--letter-color) !important;
+}
+
 button{
   background-color: var(--buttons) !important;
   border-radius: none !important;

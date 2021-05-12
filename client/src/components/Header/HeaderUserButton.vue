@@ -23,7 +23,7 @@ export default {
         return {
             showModal: false,
             user_id: '123456789',
-            logged: false
+            logged: true
         }
     }
 }

@@ -11,10 +11,9 @@
             <div v-for="(value,index) in neologismes" :key="index">
                 <h5>{{ value.neologismo }}</h5>
                 <div>
-                    
                     <font-awesome-icon icon="heart"/> {{ value.likes }}
                 </div>
-                <b-button>+</b-button>
+                 <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
             </div>
         </div>
 

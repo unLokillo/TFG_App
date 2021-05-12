@@ -9,7 +9,7 @@
             <div>
             <font-awesome-icon icon="heart"/> {{ value.likes }}
             </div>
-         <b-button>+</b-button>
+         <b-button class="bttn-app" :to="{name: 'v-neologisme',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
         </div>
      </div>
     <router-link :to="{name: 'view-all-neologismes',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>
@@ -30,12 +30,12 @@ export default {
         return {
             showModal: false,
             items: [
-                {neologismo: 'Neologismo 1',accepeted: true},
-                {neologismo: 'Neologismo 2',accepeted: false},
-                {neologismo: 'Neologismo 3',accepeted: false},
-                {neologismo: 'Neologismo 4',accepeted: true},
-                {neologismo: 'Neologismo 5',accepeted: true},
-                {neologismo: 'Neologismo 6',accepeted: true}
+                {id: 123456, neologismo: 'Neologismo 1',accepeted: true},
+                {id: 123455, neologismo: 'Neologismo 2',accepeted: false},
+                {id: 123454, neologismo: 'Neologismo 3',accepeted: false},
+                {id: 123453, neologismo: 'Neologismo 4',accepeted: true},
+                {id: 123452, neologismo: 'Neologismo 5',accepeted: true},
+                {id: 123451, neologismo: 'Neologismo 6',accepeted: true}
             ]
         }
     }
@@ -46,17 +46,19 @@ export default {
 <style lang="scss" scoped>
 .ranking-card{
     margin: 40px 10px 40px 10px;
+    background-color: var(--third-color);
+    border: 1px solid var(--border);
 }
 .ranking-title{
     text-align: left;
     padding-left: 20px;
     color: black;
-    background-color: lightblue;
+    background-color: var(--buttons);
 }
 
 .more-bttn{
     width: 100%;
-    background-color: lightblue !important;
+    background-color: var(--buttons);
 }
 
 .neo-card > div{

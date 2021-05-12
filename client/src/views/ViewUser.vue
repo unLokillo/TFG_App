@@ -22,24 +22,34 @@
 
         <div class="main-info-card">
             <div class="info-card">
-                <strong> Name: </strong> {{ name }}
+                <strong> Nombre: </strong> {{ name }}
             </div>
             <div class="info-card">
-                <strong> Surname: </strong> {{ surname }}
+                <strong> Apellido: </strong> {{ surname }}
             </div>
             <div class="info-card">
-                <strong> Name: </strong> {{ name }}
+                <strong> Fecha Nacimiento: </strong> {{ date }}
             </div>
             <div class="info-card">
-                <strong> Name: </strong> {{ name }}
+                <strong> Email: </strong> {{ email }}
             </div>
             <div class="info-card">
-                <strong> Name: </strong> {{ name }}
+                <strong> Genero: </strong> {{ gender }}
+            </div>
+            <div class="info-card">
+                <strong> Genero: </strong> {{ gender }}
             </div>
         </div>
 
         <div class="options">
-            <font-awesome-icon style="font-size:30px;" icon="cog"/>
+            <b-dropdown right text="Opciones" class="m-2">
+            <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
+                <b-dropdown-item> Modificar Perfil </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item>Cambiar Idioma</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item :to="{name: 'n-error',params: { userid: $route.params.userid}}">Notificar Error</b-dropdown-item>
+            </b-dropdown>
         </div>
     </div>
     
@@ -82,7 +92,10 @@ watch: {
           showModal: false,
           mainProps: {width: '200%', height:'200%', class: 'm1' },
           name: "User1", 
-          surname: "UserSurname1 "
+          surname: "UserSurname1 ",
+          email: "asdfg@gmail.com",
+          date: "XX/XX/XXXX",
+          gender: "non binary",
       }
   }
 }
@@ -108,11 +121,11 @@ watch: {
     display: flex;
     flex-direction: column;
     margin: 5%;
-    background-color: brown
+    background-color: var(--third-color)
 }
 
 .info-card{
-    border-left: 10px solid red;
+    border-left: 10px solid var(--border-left);
     padding-left: 2%;
     margin-bottom: 2%;
     margin-top: 2%;
@@ -141,5 +154,8 @@ watch: {
     transform: translate(-50%, -50%);
     background: white;
     overflow: scroll;
+  }
+  .options-bttn > button{
+      padding: 10% !important;
   }
 </style>
