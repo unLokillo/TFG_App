@@ -1,6 +1,6 @@
 <template>
     <div class="create-neologisme-body">
-    <div class="close-modal"><router-link to="/"> X </router-link></div>
+    <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <b-form-input id="input-1" v-model="neologisme" type="text" placeholder="Introduce el Neologismo" required></b-form-input>
 
         <div>
@@ -49,7 +49,7 @@ export default {
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .todo-card{

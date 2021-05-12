@@ -1,6 +1,6 @@
 <template>
     <div class="create-user-body">
-        <div class="close-modal"><router-link to="/"> X </router-link></div>
+        <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h4>Creación de usuario</h4>
         <b-form-input id="input-1" v-model="form.user_name" type="text" placeholder="Enter User Name" required></b-form-input>
 

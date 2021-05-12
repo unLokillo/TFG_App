@@ -1,7 +1,7 @@
 <template>
 
 <div class="f-password-body">
- <div class="close-modal"><router-link to="/"> X </router-link></div>
+ <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h2>¿Has olvidado la contraseña?</h2>
         <p>Introduce el código que has recibido por correo</p>
         <b-form-input

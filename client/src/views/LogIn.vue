@@ -1,6 +1,6 @@
 <template>
 <div class="login-body">
-   <div class="close-modal"><router-link to="/"> X </router-link></div>
+   <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h3>Log In</h3>
         <b-form-input
           id="input-1"

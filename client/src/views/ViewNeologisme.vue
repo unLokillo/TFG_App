@@ -1,19 +1,25 @@
 <template>
     <div class="card-body">
-      <div class="close-modal"><router-link to="/"> X </router-link></div>
+      <div class="close-modal"><router-link to="/"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <div class="card-neo-header">
             <h2>{{ name }}</h2>
             <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ likes }}</div> 
         </div>
         <div class="descriptions-card">
+            <h4>Descripciones</h4>
         <div v-for="(value,index) in descriptions" :key=index >
             <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
         </div>
         </div>
         <div class="descriptions-card">
+            <h4>Fuentes</h4>
         <div v-for="(value,index) in descriptions" :key=index >
             <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
         </div>
+        </div>
+
+        <div class="image-card">
+            <b-img thumbnail src="https://picsum.photos/1024/400/?image=41" fluid-grow alt="Responsive image"></b-img>
         </div>
 
         <div class="user-tag">
@@ -58,11 +64,13 @@ watch: {
 .card-body{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  height: 100%;
+  overflow: scroll;
+  align-content: center;
 }
 .descriptions{
-    padding: 3%;
+    margin-bottom: 2%;
+
+    padding: 1%;
     text-align: left;
     border-left: 10px solid var(--border-left);
 }
@@ -81,5 +89,15 @@ watch: {
 }
 .descriptions-card{
     border-bottom: 1px solid var(--border);
+}
+
+h4{
+    text-align: left;
+    margin-top: 1%;
+}
+
+.img-thumbnail{
+    margin: 2% 0 2% 0;
+    background-color:var(--border-left) ;
 }
 </style>
