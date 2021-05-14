@@ -15,7 +15,6 @@
         interact-block-drag-down
         @draggedRight="emitAndNext('match')"
         @draggedLeft="emitAndNext('reject')"
-        @draggedUp="emitAndNext('skip')"
         class="rounded-borders card card--one">
         <div>
         <div style="width: 80%; margin: 10px auto">
@@ -57,13 +56,10 @@
     </div>
     <div class="footer fixed">
       <div class="btn btn--decline" @click="reject">
-          <i class="material-icons">close</i>
-      </div>
-      <div class="btn btn--skip" @click="skip">
-          <i class="material-icons">call_missed</i>
+       <font-awesome-icon icon="times"/>
       </div>
       <div class="btn btn--like" @click="match">
-          <i class="material-icons">favorite</i>
+          <font-awesome-icon icon="heart"/>
       </div>
     </div>
   </section>
@@ -72,7 +68,6 @@
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 const EVENTS = {
   MATCH: 'match',
-  SKIP: 'skip',
   REJECT: 'reject'
 }
 export default {
@@ -84,10 +79,9 @@ export default {
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
-        draggedUp: EVENTS.SKIP
       },
       cards: [
-        { src: 'Lil_Cat.png', name: 'Alexander', age: 5 },
+        { src: 'Lil_Cat.png', name: 'Alexander' },
       ]
     }
   },
@@ -105,9 +99,6 @@ export default {
     },
     reject() {
       InteractEventBus.$emit(EVENTS.REJECT)
-    },
-    skip() {
-      InteractEventBus.$emit(EVENTS.SKIP)
     },
     emitAndNext(event) {
       this.$emit(event, this.index)
@@ -165,7 +156,7 @@ export default {
   }
   &--like {
     background-color: red;
-    padding: .5rem;
+    padding: .75rem;
     color: white;
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
     i {
@@ -173,10 +164,8 @@ export default {
     }
   }
   &--decline {
+        padding: .75rem;
     color: red;
-  }
-  &--skip {
-    color: green;
   }
 }
 .flex {

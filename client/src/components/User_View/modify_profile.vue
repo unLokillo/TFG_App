@@ -1,0 +1,83 @@
+<template>
+  <div class="modify-user-body">
+        <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
+        <h4>Modificar Información de usuario</h4>
+        <b-form-input id="input-1" v-model="form.user_name" type="text" placeholder="Enter User Name" required></b-form-input>
+
+        <b-form-input v-model="form.name" type="text" placeholder="Enter Name" required></b-form-input>
+
+        <b-form-input v-model="form.surname" type="text" placeholder="Enter Last Name" required></b-form-input>
+
+        <b-form-input v-model="form.surname" type="email" placeholder="Enter E-mail" required></b-form-input>
+      <div>
+        <b-form-input  v-model="form.password" type="password" :state="validation" placeholder="Introduce Password" required></b-form-input>
+        <b-form-input :state="v_r_password" v-model="form.r_password" type="password" placeholder="Repite Password" required></b-form-input>
+          <b-form-input v-model="form.date" type="date" placeholder="Repite Password" required></b-form-input>
+          <div class="selectors-style">
+            <b-form-select v-model="form.gender" :options="genders" required></b-form-select>
+            <b-form-select v-model="form.gender" :options="genders" required></b-form-select>
+          </div>
+      </div>
+      <div>
+      <b-form-file v-model="img"
+      :state="Boolean(img)"
+      placeholder="Choose a file or drop it here..."
+      drop-placeholder="Drop file here..."
+      plain
+    ></b-form-file>
+    <div class="mt-3">Selected file: {{ img ? img.name : '' }}</div>
+    </div>
+    <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
+</div>
+</template>
+<script>
+export default {
+    data() {
+        return{
+        form: {
+          user_name: '',
+          name: '',
+          surname: '',
+          email: '',
+          date: '',
+          password: '',
+          r_password: '',
+          mother_tonge: '',
+          gender: '',
+          image: null,
+        },
+        genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
+        show: true
+      }
+    }
+}
+</script>
+
+<style scoped>
+.modify-user-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3%;
+}
+
+.modal-content{
+  min-height: 85% ;
+}
+.modify-user-card{
+    background-color: rgb(231, 231, 231);
+    padding: 3%;
+}
+
+input{
+    margin-bottom: 4%;
+}
+h4{
+  margin-bottom: 3%;
+}
+.selectors-style{
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 3%;
+}
+</style>

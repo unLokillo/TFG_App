@@ -154,6 +154,15 @@ var route = [
         component: () => import('@/views/Notify_Error.vue'),
         props: true
       },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'modify_profile',
+        name: 'm-perfil',
+        component: () => import('@/components/User_View/modify_profile.vue'),
+        props: true
+      },
     ]
   },
   {
@@ -174,7 +183,7 @@ var route = [
     ]
   },
   {
-    path: 'games/game_1',
+    path: 'game_1',
     name: 'game_1',
     component: () => import('@/components/Games/Swipable_cards.vue'),
     props: true

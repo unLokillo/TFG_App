@@ -38,15 +38,12 @@
             <div class="info-card">
                 <strong> Genero: </strong> {{ gender }}
             </div>
-            <div class="info-card">
-                <strong> Genero: </strong> {{ gender }}
-            </div>
         </div>
 
         <div class="options">
             <b-dropdown right text="Opciones" class="m-2">
             <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
-                <b-dropdown-item> Modificar Perfil </b-dropdown-item>
+                 <b-dropdown-item :to="{name: 'm-perfil',params: { userid: $route.params.userid}}">Modificar Perfil</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item>Cambiar Idioma</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
