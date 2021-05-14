@@ -12,6 +12,9 @@
                 <div class="sidebar-button" v-for="(btn, index) in buttons" :key="index">
                   <font-awesome-icon style="font-size: 120%; !important" :icon="btn.icon" /> {{ btn.caption }}
                 </div>
+          <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" style="  border-left: 10px solid red !important;" tag="div">
+              <font-awesome-icon style="font-size: 120%; !important" :icon="bars" /> AJUGAR
+          </router-link>
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="logged">
               <font-awesome-icon style="font-size: 120%; !important" :icon="bars" /> Salir
           </div>

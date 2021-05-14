@@ -5,7 +5,9 @@
             <b-img src="https://picsum.photos/300/150/?image=41" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
             <div class="badges_menu-info">
                <router-link :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="div">
-                <font-awesome-icon style="font-size:20px;" icon="trophy"/>
+                <font-awesome-icon style="font-size:20px;" icon="trophy"/> 
+                <strong> Posición: {{ position }}</strong> <br>
+                    <strong>Puntos: {{ points }}</strong>
                </router-link> 
             </div>
 
@@ -96,6 +98,8 @@ watch: {
           email: "asdfg@gmail.com",
           date: "XX/XX/XXXX",
           gender: "non binary",
+          points: 2100,
+          position: 3,
       }
   }
 }

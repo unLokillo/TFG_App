@@ -27,6 +27,9 @@ export default {
   --buttons: rgb(52, 129, 192);
   --success: #69b00b;
   --fail: #b00b69;
+  --gold: #f7c628;
+  --silver: #cac6c6;
+  --bronze: #be5e10;
 }
 
 #app {
@@ -54,7 +57,8 @@ export default {
   background-color: var(--buttons) !important;
   border-radius: none !important;
   border: none !important;
-  padding: 2% !important; 
+ // padding: 2% !important; 
+ height: 100% !important;
   color: var(--letter-color) !important;
 }
 
@@ -62,7 +66,7 @@ button{
   background-color: var(--buttons) !important;
   border-radius: none !important;
   border: none !important;
-  padding: 2% !important; 
+  //padding: 2% !important; 
   color: var(--letter-color) !important;
 }
 

@@ -115,7 +115,7 @@ var route = [
         },
         path: 'ranking',
         name: 'ranking',
-        component: badges_menu,
+        component: () => import('@/components/User_View/Ranking.vue'),
         props: true
       },
       {
@@ -155,6 +155,29 @@ var route = [
         props: true
       },
     ]
+  },
+  {
+    path: '/games/',
+    name: 'games',
+    props: true,
+    component: () => import('@/views/Games_menu.vue'),
+    children:[
+      {
+      meta: {
+        showModal: true
+      },
+      path: 'info_g1',
+      name: 'info_g1',
+      component: () => import('@/components/Games/info_g1.vue'),
+      props: true
+    }
+    ]
+  },
+  {
+    path: 'games/game_1',
+    name: 'game_1',
+    component: () => import('@/components/Games/Swipable_cards.vue'),
+    props: true
   },
 ]
 

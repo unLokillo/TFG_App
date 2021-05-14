@@ -91,7 +91,6 @@ watch: {
 }
 .descriptions{
     margin-bottom: 2%;
-
     padding: 1%;
     text-align: left;
     border-left: 10px solid var(--border-left);

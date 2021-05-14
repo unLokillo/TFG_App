@@ -21,9 +21,7 @@
     <ranking_neo/>
   </div>
   <div v-if="showModal" class="modal-route">
-    
         <div class="modal-content">
-          
             <router-view></router-view>
         </div>
     </div>
@@ -92,6 +90,7 @@ export default {
 .menu-2 > p{
   margin-bottom: 2%;
 }
+
 .rankings{
   display: flex;
   justify-content: space-evenly;
