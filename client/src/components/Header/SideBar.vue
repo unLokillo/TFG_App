@@ -9,12 +9,26 @@
             <div style="cursor:pointer;" block @click="hide"><font-awesome-icon style="font-size: 200%;" icon="bars"/></div>
           </div>
           <div class="all-sidebar-buttons">
-                <div class="sidebar-button" v-for="(btn, index) in buttons" :key="index">
-                  <font-awesome-icon style="font-size: 120%; !important" :icon="btn.icon" /> {{ btn.caption }}
-                </div>
-          <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" style="  border-left: 10px solid red !important;" tag="div">
-              <font-awesome-icon style="font-size: 120%; !important" :icon="bars" /> AJUGAR
-          </router-link>
+            <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
+                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego
+            </router-link>
+          
+            <router-link :to="{ name: 'ranking',params: {} }" class="sidebar-button" tag="div">
+               <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Usuarios
+            </router-link>
+
+            <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos
+            </router-link>
+
+            <router-link :to="{ name: 'view-all-proposals',params: {} }" class="sidebar-button"  tag="div">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Propuesta Neologismos
+            </router-link>
+
+            <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Logros
+                </router-link>
+
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="logged">
               <font-awesome-icon style="font-size: 120%; !important" :icon="bars" /> Salir
           </div>
@@ -72,16 +86,17 @@
     flex-direction: column;
 }
 
+
 .sidebar-button{
   padding: 8%;
   display: flex;
   font-size: 130%;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
   border-bottom: 1px solid var(--border);
   border-left: 10px solid var(--border-left) ;
   cursor: pointer;
+  justify-content: space-between;
 }
 
 .sidemenu-top{

@@ -55,7 +55,7 @@ export default {
 .ranking-title{
     text-align: left;
     padding-left: 20px;
-    color: black;
+    color: var(--letter-color);
     background-color: var(--buttons);
 }
 
@@ -66,12 +66,14 @@ export default {
 
 .neo-card{
     border-bottom: 1px solid var(--border);
+
 }
 
 .neo-card > div{
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .neo_card_pendent{

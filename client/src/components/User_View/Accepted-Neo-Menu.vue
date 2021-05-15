@@ -2,7 +2,6 @@
     <div class="ranking-card">
     <div class="ranking-title">
     <h3> Neologismos Aceptados </h3>
-    
     </div>
      <div class="neo-card" v-for="(value,index) in items" :key="index" >
          <div v-if="index<5">
@@ -48,12 +47,13 @@ export default {
 .ranking-card{
     margin: 40px 10px 40px 10px;
     background-color: var(--third-color);
+    
     border: 1px solid var(--border);
 }
 .ranking-title{
     text-align: left;
     padding-left: 20px;
-    color: black;
+    color: var(--letter-color);
     background-color: var(--buttons);
 }
 

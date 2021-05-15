@@ -48,6 +48,7 @@ export default {
     overflow: scroll;
 }
 
+
 .neologisme-cards > div{
     padding: 10px;
     display: flex;

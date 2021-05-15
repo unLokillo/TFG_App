@@ -1,10 +1,8 @@
 <template>
     <div class="all-neologismes-card">
+         <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <div class="top-all-neologismes">
             <h5> Propuestas de Neologismo </h5>
-                <router-link :to="{ name: 'vUser',params: { userid: user_id } }" class="user-bttn" tag="div">
-                <font-awesome-icon icon="times"/>
-            </router-link>
         </div>
 
         <div class="neologisme-cards">
@@ -17,6 +15,11 @@
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
+             <b-dropdown text="Acciones" v-if="admin">
+                    <b-dropdown-item href="#">Aceptar Propuesta</b-dropdown-item>
+                    <b-dropdown-item href="#">Rechazar Propuesta</b-dropdown-item>
+                    <b-dropdown-item style="color: red;" href="#">Eliminar Propuesta</b-dropdown-item>
+                </b-dropdown>
          <b-button>+</b-button>
             </div>
         </div>
@@ -28,6 +31,7 @@
 export default {
     data(){
         return{
+            admin:false,
             user_id: '123456789',
             neologismes: [
                 {neologismo: 'Neologismo 1',accepeted: true},
@@ -45,7 +49,8 @@ export default {
 <style>
 .top-all-neologismes{
     margin: 30px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border)  ;
+    color: black;
 }
 
 .all-neologismes-card{
@@ -58,6 +63,7 @@ export default {
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     border: 1px solid var(--border);
     margin: 5%;
 }

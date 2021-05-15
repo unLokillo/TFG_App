@@ -62,15 +62,7 @@ var route = [
         name: 'create-user',
         component: () => import('@/views/CreateUser.vue'),
       },
-      {
-        meta: {
-          showModal: true
-        },
-        path: 'ranking',
-        name: 'ranking',
-        component: () => import('@/components/User_View/Ranking.vue'),
-        props: true
-      },
+
     ]
   },
 
@@ -169,15 +161,6 @@ var route = [
         path: 'modify_profile',
         name: 'm-perfil',
         component: () => import('@/components/User_View/modify_profile.vue'),
-        props: true
-      },
-      {
-        meta: {
-          showModal: true
-        },
-        path: 'favorite_neologismes',
-        name: 'f-neo',
-        component: () => import('@/components/User_View/View_favorite_Neologismes.vue'),
         props: true
       },
     ]

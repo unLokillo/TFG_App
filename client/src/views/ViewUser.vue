@@ -59,7 +59,7 @@
     </div>
     
     <div class="bottom-menu">
-        <h3>Neologismos creados y Propuestas</h3>
+        <h4>Neologismos creados y Propuestas</h4>
         <div class="user-rankings">
             <Accepeted_Neos/>
             <Non_Accepeted_Neos/>
@@ -115,12 +115,15 @@ watch: {
     grid-template-columns: 2fr 5fr 1fr;
     margin: 3%;
 }
-
+.bottom-menu > h4{
+  display: flex;
+  margin: 2%;
+  border-bottom: 1px solid var(--border);
+}
 .left-menu-card {
     padding: 4%;
     border-right: 2px solid var(--border);
 }
-
 
   .ls-menu{
       border: 2px solid var(--border);
