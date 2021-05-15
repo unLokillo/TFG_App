@@ -1,24 +1,61 @@
 <template>
-    <div class="create-user-body">
+  <div class="modify-user-body">
         <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
-        <h4>Creación de usuario</h4>
-        <b-form-input id="input-1" v-model="form.user_name" type="text" placeholder="Enter User Name" required></b-form-input>
+        <h4>Crear cuenta</h4>
 
-        <b-form-input v-model="form.name" type="text" placeholder="Enter Name" required></b-form-input>
+          <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
+            <b-form-input :value="form.user_name" ></b-form-input>
+              <b-input-group-append>
+                <b-button variant="outline-success">Modificar</b-button>
+              </b-input-group-append>
+          </b-input-group>
 
-        <b-form-input v-model="form.surname" type="text" placeholder="Enter Last Name" required></b-form-input>
+          <b-input-group prepend="Nombre: " class="mt-3" >
+            <b-form-input :value="form.name" ></b-form-input>
+              <b-input-group-append>
+                <b-button variant="outline-success">Modificar</b-button>
+              </b-input-group-append>
+          </b-input-group>
 
-        <b-form-input v-model="form.surname" type="email" placeholder="Enter E-mail" required></b-form-input>
-      <div>
-        <b-form-input  v-model="form.password" type="password" :state="validation" placeholder="Introduce Password" required></b-form-input>
-        <b-form-input :state="v_r_password" v-model="form.r_password" type="password" placeholder="Repite Password" required></b-form-input>
-          <b-form-input v-model="form.date" type="date" placeholder="Repite Password" required></b-form-input>
-          <div class="selectors-style">
-            <b-form-select v-model="form.gender" :options="genders" required></b-form-select>
-            <b-form-select v-model="form.gender" :options="genders" required></b-form-select>
-          </div>
+      <b-input-group prepend="Apellidos: " class="mt-3" >
+            <b-form-input :value="form.user_name" ></b-form-input>
+              <b-input-group-append>
+                <b-button variant="outline-success">Modificar</b-button>
+              </b-input-group-append>
+          </b-input-group>
+
+      <b-input-group prepend="email: " class="mt-3" >
+            <b-form-input :value="form.user_name" type="email" ></b-form-input>
+              <b-input-group-append>
+                <b-button variant="outline-success">Modificar</b-button>
+              </b-input-group-append>
+          </b-input-group>
+
+      <div class="password-box">
+        <b-input-group prepend="Contraseña: " class="mt-3" >
+            <b-form-input type="password" :value="form.password" ></b-form-input>
+          </b-input-group>
+
+        <b-input-group prepend="Repite la Contraseña: " class="mt-3" >
+            <b-form-input type="password" :value="form.r_password" ></b-form-input>
+          </b-input-group>
+                <b-button variant="outline-success">Modificar</b-button>
       </div>
+
+          <div class="selectors-card">
+            <h6>Genero</h6>
+            <b-form-select :value="form.gender" :options="genders" required></b-form-select>
+          </div>  
+          <div class="selectors-card">
+            <h6>Lengua materna</h6>
+            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+          </div>
+          <div class="selectors-card">
+            <h6>Escuela UPM</h6>
+            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+          </div>  
       <div>
+
       <b-form-file v-model="img"
       :state="Boolean(img)"
       placeholder="Choose a file or drop it here..."
@@ -30,7 +67,7 @@
     <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
 </div>
 </template>
-crear
+
 <script>
 export default {
     data() {
@@ -61,8 +98,9 @@ export default {
     }
 }
 </script>
-<style>
-.create-user-body{
+
+<style scoped>
+.modify-user-body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -72,7 +110,7 @@ export default {
 .modal-content{
   min-height: 85% ;
 }
-.create-user-card{
+.modify-user-card{
     background-color: rgb(231, 231, 231);
     padding: 3%;
 }
@@ -82,10 +120,39 @@ input{
 }
 h4{
   margin-bottom: 3%;
+  border-bottom: 1px solid var(--border);
 }
 .selectors-style{
   display: flex;
   justify-content: space-evenly;
   padding-bottom: 3%;
+}
+
+.password-box{
+  padding: 3%;
+  border: 1px solid var(--border);
+}
+
+select{
+  display: block;
+width: 100%;
+padding: 0.375rem 0.75rem;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5;
+color: #212529;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+border-radius: 0.25rem;
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px;
+}
+
+.selectors-card {
+  margin: 2%;
 }
 </style>
