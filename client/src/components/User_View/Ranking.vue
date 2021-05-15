@@ -91,8 +91,9 @@ export default {
 }
 .avatar-card{
     width: 30%;
-display: flex;
-align-content: center !important;
-justify-content: inherit;
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
 }
+
 </style>

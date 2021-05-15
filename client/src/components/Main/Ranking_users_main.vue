@@ -8,7 +8,8 @@
          <b-avatar :src="data.item.img"></b-avatar>   
     </template>
     </b-table>
-    <b-button class="more-bttn">Ver mas</b-button>
+    <router-link class="more-bttn" :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="b-button"> 
+    Ver mas</router-link>
     </div>
 </template>
 
@@ -40,12 +41,12 @@ export default {
     padding: 2%;
     padding-left: 20px;
     color: black;
-    background-color: lightblue;
+    background-color: var(--buttons);
 }
 
 .more-bttn{
     width: 100%;
-    background-color: lightblue !important;
+    background-color: var(--buttons) !important;
 }
 
 .ranking-table{

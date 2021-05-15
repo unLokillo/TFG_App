@@ -37,12 +37,12 @@ export default {
     text-align: left;
     padding-left: 20px;
     color: black;
-    background-color: lightblue;
+    background-color: var(--buttons);
 }
 
 .more-bttn{
     width: 100%;
-    background-color: lightblue !important;
+    background-color: var(--buttons);
 }
 
 .ranking-table{

@@ -62,8 +62,8 @@ export default {
 
 .body > h4{
   display: flex;
-  justify-content: space-around;
   margin: 2%;
+  border-bottom: 1px solid var(--border);
 }
 
 .menu-1{
@@ -95,4 +95,5 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
+
 </style>

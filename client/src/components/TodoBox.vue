@@ -9,8 +9,11 @@
     ></b-form-textarea>
     <b-button @click="addItem" class="bttn-todo">Add</b-button>
     </div>
+    
     <b-list-group>
-      <b-list-group-item class="list-item" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >X</b-button></b-list-group-item>
+      <b-list-group-item class="list-item" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >
+               <font-awesome-icon icon="times"/>
+        </b-button></b-list-group-item>
   </b-list-group>
 
 </div>
@@ -50,10 +53,10 @@ export default {
 
 <style>
 .list-item{
-  display: grid;
-  grid-auto-columns: 5fr 1fr;
-  grid-auto-flow: column;
-  justify-content: space-around;
+  display: flex;
+  /* grid-auto-columns: 5fr 1fr;
+  grid-auto-flow: column;*/
+  justify-content: space-between;
 }
 
 .list-item > button{

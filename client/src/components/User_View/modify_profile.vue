@@ -1,6 +1,6 @@
 <template>
   <div class="modify-user-body">
-        <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
+          <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <h4>Modificar Información de usuario</h4>
 
           <b-input-group prepend="Nombre de Usuario: " class="mt-3" >

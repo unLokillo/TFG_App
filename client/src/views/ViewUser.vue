@@ -3,23 +3,29 @@
     <div class="top-menu">
         <div class="left-menu-card">
             <b-img src="https://picsum.photos/300/150/?image=41" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
-            <div class="badges_menu-info">
+            <div class="ls-menu">
+            <div class="left-side-menus">
                <router-link :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="trophy"/> 
                 <strong> Posición: {{ position }}</strong> <br>
-                    <strong>Puntos: {{ points }}</strong>
+                <strong>Puntos: {{ points }}</strong>
                </router-link> 
             </div>
 
-            <div class="points-info">
+            <div class="left-side-menus">
                 <router-link :to="{name: 'badges',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="award" />
                     15/20
                 </router-link>
             </div>
-            <div class="bio-info">
 
+            <div class="left-side-menus">
+                <router-link :to="{name: 'f-neo',params: { userid: $route.params.userid }}" tag="div">
+                <font-awesome-icon style="font-size:20px;" icon="heart" />
+                    {{ liked_neo }}
+                </router-link>
             </div>
+        </div>
         </div>
 
         <div class="main-info-card">
@@ -88,6 +94,7 @@ watch: {
   },
   data(){
       return{
+          liked_neo: 3,
           showModal: false,
           mainProps: {width: '200%', height:'200%', class: 'm1' },
           name: "User1", 
@@ -114,13 +121,24 @@ watch: {
     border-right: 2px solid var(--border);
 }
 
-.badges_menu-info{
-    margin: 8%;
+
+  .ls-menu{
+      border: 2px solid var(--border);
+      background-color: var(--second-color);
+      margin: 8% 0 0 0;
+  }
+
+.left-side-menus{
+
+    padding: 2%;
+    background-color: var(--third-color);
 }
+
 
 .main-info-card{
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     margin: 5%;
     background-color: var(--third-color)
 }
