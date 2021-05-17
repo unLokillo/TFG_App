@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import View_Proposals_User from '../components/User_View/View_Proposals_User.vue'
+import View_Neologisme from '../views/ViewNeologisme.vue'
 import badges_menu from '../components/User_View/badges_menu.vue'
 Vue.use(VueRouter)
 
@@ -124,7 +125,7 @@ var route = [
         },
         path: 'view-neologisme/:neoId',
         name: 'v-neologisme',
-        component: () => import('@/views/ViewNeologisme.vue'),
+        component: View_Neologisme,
         props: true
       },
       {
@@ -133,7 +134,7 @@ var route = [
         },
         path: 'view-all-neologismes/view-neologisme/:neoId',
         name: 'v-neologismes',
-        component: () => import('@/views/ViewNeologisme.vue'),
+        component: View_Neologisme,
         props: true
       },
       {
@@ -161,6 +162,15 @@ var route = [
         path: 'modify_profile',
         name: 'm-perfil',
         component: () => import('@/components/User_View/modify_profile.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'modify_proposal',
+        name: 'm-proposal',
+        component: () => import('@/components/User_View/modify_proposal.vue'),
         props: true
       },
     ]

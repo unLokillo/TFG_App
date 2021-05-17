@@ -41,10 +41,10 @@
             <div>{{ date }} </div>
         </div>
         <div class="admin-options" v-if="adm_flag">
-            <b-button class="bttn-app" style="background-color: var(--success) !important"> Aceptar Neologismo </b-button>
-            <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Neologismo </b-button>
+            <b-button class="bttn-app" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
+            <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
         </div>
-
+            <b-button v-if="!adm_flag" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </b-button>
     </div>
 
 </template>
@@ -61,7 +61,7 @@ watch: {
   },data() {    
         return {
             validated: true,
-            adm_flag: true,
+            adm_flag: false,
             showModal: false,
             rejected:true,
             neo_id: '987654321',
@@ -74,7 +74,6 @@ watch: {
                 {id:0,content:"Definicion 1"},
                 {id:1,content:"Esto es un texto de prueba"},
                 {id:2,content:"Texto muy muy muy muy muy muy muy muy muy muy muy muy muy largo"},
-                {id:3,content:"Pedazo de palabra cruck"}
             ],
         };
     },

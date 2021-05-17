@@ -20,7 +20,7 @@
                     <b-dropdown-item href="#">Rechazar Propuesta</b-dropdown-item>
                     <b-dropdown-item style="color: red;" href="#">Eliminar Propuesta</b-dropdown-item>
                 </b-dropdown>
-         <b-button>+</b-button>
+                 <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
             </div>
         </div>
 
@@ -34,12 +34,12 @@ export default {
             admin:false,
             user_id: '123456789',
             neologismes: [
-                {neologismo: 'Neologismo 1',accepeted: true},
-                {neologismo: 'Neologismo 2',accepeted: false},
-                {neologismo: 'Neologismo 3',accepeted: false},
-                {neologismo: 'Neologismo 4',accepeted: true},
-                {neologismo: 'Neologismo 5',accepeted: true},
-                {neologismo: 'Neologismo 6',accepeted: true}
+                {id:'12345',neologismo: 'Neologismo 1',accepeted: true},
+                {id:'12344',neologismo: 'Neologismo 2',accepeted: false},
+                {id:'12343',neologismo: 'Neologismo 3',accepeted: false},
+                {id:'12342',neologismo: 'Neologismo 4',accepeted: true},
+                {id:'12341',neologismo: 'Neologismo 5',accepeted: true},
+                {id:'123450',neologismo: 'Neologismo 6',accepeted: true}
                 ]
         }
     }

@@ -5,30 +5,20 @@
 
           <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
             <b-form-input :value="form.user_name" ></b-form-input>
-              <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
-              </b-input-group-append>
           </b-input-group>
 
           <b-input-group prepend="Nombre: " class="mt-3" >
             <b-form-input :value="form.name" ></b-form-input>
-              <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
-              </b-input-group-append>
           </b-input-group>
 
       <b-input-group prepend="Apellidos: " class="mt-3" >
             <b-form-input :value="form.user_name" ></b-form-input>
-              <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
-              </b-input-group-append>
+            
           </b-input-group>
 
       <b-input-group prepend="email: " class="mt-3" >
             <b-form-input :value="form.user_name" type="email" ></b-form-input>
-              <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
-              </b-input-group-append>
+            
           </b-input-group>
 
       <div class="password-box">
@@ -69,6 +59,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return{
@@ -95,6 +86,30 @@ export default {
       v_r_password() {
           return this.form.password == this.form.r_password
       }
+    },
+    methods:{
+      addBook(payload) {
+      const path = 'http://localhost:5000/create_user';
+      axios.post(path, payload)
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error);
+        });
+    },
+      onSubmit() {
+      if (this.addBookForm.read[0]) read = true;
+      const payload = {
+        user_name: this.form.user_name,
+        name: this.form.name,
+        surname: this.form.surname,
+        email: this.form.email,
+        date: this.form.date,
+        password: this.form.password,
+        mother_tonge: this.form.mother_tonge,
+        img: this.form.image
+      };
+      this.addUser(payload);
+    },
     }
 }
 </script>

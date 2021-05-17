@@ -24,12 +24,12 @@ export default {
         return{
             user_id: '123456789',
             neologismes: [
-                {neologismo: 'Neologismo 1',likes: '20'},
-                {neologismo: 'Neologismo 2',likes: '25'},
-                {neologismo: 'Neologismo 3',likes: '55'},
-                {neologismo: 'Neologismo 4',likes: '45'},
-                {neologismo: 'Neologismo 5',likes: '65'},
-                {neologismo: 'Neologismo 6',likes: '65'}
+                {id:'12345',neologismo: 'Neologismo 1',likes: '20'},
+                {id:'12344',neologismo: 'Neologismo 2',likes: '25'},
+                {id:'12343',neologismo: 'Neologismo 3',likes: '55'},
+                {id:'12342',neologismo: 'Neologismo 4',likes: '45'},
+                {id:'12341',neologismo: 'Neologismo 5',likes: '65'},
+                {id:'12340',neologismo: 'Neologismo 6',likes: '65'}
                 ]
         }
     }

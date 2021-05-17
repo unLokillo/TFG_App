@@ -43,7 +43,8 @@ export default {
     cursor: pointer;
 }
 .header-img:hover{
-    background-color: aqua;
+     transition: all .4s ease-in-out;
+    background-color: var(--buttons_hover);
 }
 
 </style>

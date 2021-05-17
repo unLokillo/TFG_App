@@ -33,12 +33,12 @@ export default {
         return {
             showModal: false,
             items: [
-                {neologismo: 'Neologismo 1',accepeted: true},
-                {neologismo: 'Neologismo 2',accepeted: false},
-                {neologismo: 'Neologismo 3',accepeted: false},
-                {neologismo: 'Neologismo 4',accepeted: true},
-                {neologismo: 'Neologismo 5',accepeted: true},
-                {neologismo: 'Neologismo 6',accepeted: true}
+                {id:'12345',neologismo: 'Neologismo 1',accepeted: true},
+                {id:'12344',neologismo: 'Neologismo 2',accepeted: false},
+                {id:'12343',neologismo: 'Neologismo 3',accepeted: false},
+                {id:'12342',neologismo: 'Neologismo 4',accepeted: true},
+                {id:'12341',neologismo: 'Neologismo 5',accepeted: true},
+                {id:'12340',neologismo: 'Neologismo 6',accepeted: true}
             ]
         }
     }
