@@ -1,17 +1,17 @@
 <template>
     <div class="card-body">
         <div class="card-neo-header">
-            <h2>{{ name }}</h2>
-            <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ likes }}</div> 
+            <h2>{{ this.neologismeData.neologisme }}</h2>
+            <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ this.neologismeData.liked }}</div> 
         </div>
-        <div v-for="(value,index) in descriptions" :key=index >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
+        <div v-for="(value,index) in this.neologismeData.descriptions" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value }}</div>
         </div>
         <div class="user-tag">
-            <div>Creado por: {{ creator }} </div> 
-            <div>{{ date }} </div>
+            <div>Creado por: {{ this.neologismeData.user }} </div> 
+            <div>{{ this.neologismeData.date }} </div>
         </div>
-        <router-link :to="`/fav-neo/${neo_id}`" tag="b-button" style="width: 100%;"> Ver más </router-link>
+        <router-link :to="`/fav-neo/${this.neologismeData.id}`" tag="b-button" style="width: 100%;"> Ver más </router-link>
        
     </div>
 
@@ -19,6 +19,10 @@
 
 <script>
 export default {    
+props: {
+    neologismeData: Object,
+    required: true
+  },
 watch: {
     $route: {
       immediate: true,
@@ -29,17 +33,12 @@ watch: {
   },data() {    
         return {
             showModal: false,
-            neo_id: '987654321',
-            name: 'Palabra',
-            creator: 'User1 Surname ',
-            date: '31/09/1997',
-            likes: 10,
-            descriptions: [
-                {id:0,content:"Definicion 1"},
-                {id:1,content:"Esto es un texto de prueba"},
-                {id:2,content:"Texto muy muy muy muy muy muy muy muy muy muy muy muy muy largo"},
-                {id:3,content:"Pedazo de palabra cruck"}
-            ]
+            neo_id: '',
+            name: '',
+            creator:'',
+            date: '',
+            likes: '',
+            descriptions: '',
         };
     },
 }

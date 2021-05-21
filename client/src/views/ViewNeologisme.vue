@@ -3,11 +3,11 @@
       <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
          
         <div class="card-neo-header">
-            <h2>{{ name }}</h2>
-            <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ likes }}</div> 
+            <h2>{{ form.neologisme }}</h2>
+            <div class="neo-likes"  ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
-        <div class="rejected-neologisme" v-if="rejected">
+        <div class="rejected-neologisme" v-if="form.rejected">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ name }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ rejected_reason }}
@@ -21,36 +21,46 @@
 
         <div class="descriptions-card">
             <h4>Descripciones</h4>
-        <div v-for="(value,index) in descriptions" :key=index >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
+        <div v-for="(value,index) in form.descriptions" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value}}</div>
         </div>
         </div>
         <div class="descriptions-card">
             <h4>Fuentes</h4>
-        <div v-for="(value,index) in descriptions" :key=index >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.content }}</div>
+        <div v-for="(value,index) in form.sources" :key=index >
+            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value }}</div>
         </div>
         </div>
 
-        <div class="image-card">
-            <b-img thumbnail src="https://picsum.photos/1024/400/?image=41" fluid-grow alt="Responsive image"></b-img>
+        <div class="image-card" v-if="form.img!=null">
+            <b-img thumbnail :src="form.img"  alt="Responsive image"></b-img>
         </div>
 
         <div class="user-tag" v-if="validated">
-            <div>Creado por: {{ creator }} </div> 
-            <div>{{ date }} </div>
+            <div>Creado por: {{ form.user }} </div> 
+            <div>{{ form.date }} </div>
         </div>
         <div class="admin-options" v-if="adm_flag">
             <b-button class="bttn-app" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
         </div>
-            <b-button v-if="!adm_flag" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </b-button>
+        <router-link tag="b-button" v-if="form.proposal" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </router-link>
     </div>
 
 </template>
 
 <script>
-export default {    
+import axios from 'axios'
+export default {
+    beforeCreate(){
+        var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
+        axios.get(uri)
+        .then(response => {
+            //this.name = response.data[0].name;
+            console.log(response.data);
+            this.form = response.data;
+        })
+    },    
 watch: {
     $route: {
       immediate: true,
@@ -60,6 +70,8 @@ watch: {
     }
   },data() {    
         return {
+            form: '',
+            login_data: '',
             validated: true,
             adm_flag: false,
             showModal: false,
@@ -77,6 +89,17 @@ watch: {
             ],
         };
     },
+    methods:{
+      like(){
+          var payload = {liked:this.form.liked+1}; 
+            var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
+            axios.patch(uri, payload)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+        this.form.liked = this.form.liked+1; 
+        },
+    }
 }
 </script>
 
@@ -86,6 +109,7 @@ watch: {
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  
   align-content: center;
 }
 .descriptions{
@@ -136,5 +160,9 @@ h4{
 .rejected-neologisme > h4{
     border-bottom: 1px solid var(--border);
     margin: 2%
+}
+
+.card-body > button{
+    max-height: 3rem;
 }
 </style>

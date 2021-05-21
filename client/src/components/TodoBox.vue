@@ -6,12 +6,13 @@
       placeholder="Introduce la información"
       rows="3"
       max-rows="6"
+      v-on:keyup="emitToParent"
     ></b-form-textarea>
-    <b-button @click="addItem" class="bttn-todo">Add</b-button>
+    <b-button  @click="addItem" class="bttn-todo">Add</b-button>
     </div>
     
     <b-list-group>
-      <b-list-group-item class="list-item" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >
+      <b-list-group-item class="list-item" v-on:keyup="emitToParent" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >
                <font-awesome-icon icon="times"/>
         </b-button></b-list-group-item>
   </b-list-group>
@@ -33,20 +34,21 @@ export default {
           this.items.push({
           id: this.items[this.items.length-1].id + 1,
           description: this.newItem,
-          completed: false,
         });
         } else {
           this.items.push({
-          id: this.items.length + 1,
+          id: 1,
           description: this.newItem,
-          completed: false,
         });
         }
         this.newItem = '';
       },
      removeItem: function (itemID) {
         this.items = this.items.filter((newItem) => newItem.id!== itemID);
-      } 
+      },
+      emitToParent (event) {
+      this.$emit('childToParent', this.items);
+    }
      }
 }
 </script>

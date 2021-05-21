@@ -6,9 +6,9 @@
   </div>
   <h4>Palabras de la semana</h4>
   <div class="frequent-words">
-      <NeologismoCard/>
-      <NeologismoCard/>
-      <NeologismoCard/>
+      <NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
+      <NeologismoCard :neologismeData="neoData[1]"></NeologismoCard>
+      <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>
   </div>
    <h4>Juegos</h4>
   <div class="menu-2">
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Header from '@/components/Header/Header.vue'
 import NeologismoCard from '@/components/Main/NeologismoCard.vue'
 import ranking_users from '@/components/Main/Ranking_users_main.vue'
 import ranking_neo from '@/components/Main/Ranking_neo_main.vue'
+import axios from 'axios'
 export default {
   name: 'Home',
   components: {
@@ -42,6 +42,14 @@ export default {
     ranking_users,
     ranking_neo
   },
+  
+  beforeCreate(){
+        axios.get('http://localhost:3000/neologismes')
+        .then(response => {
+            //this.name = response.data[0].name;
+            this.neoData = response.data;
+        })
+    },
   watch: {
     $route: {
       immediate: true,
@@ -53,6 +61,7 @@ export default {
   data(){
     return{
       showModal: false,
+      neoData: '',
     }
   }
 }

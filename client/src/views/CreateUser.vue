@@ -4,57 +4,57 @@
         <h4>Crear cuenta</h4>
 
           <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
-            <b-form-input :value="form.user_name" ></b-form-input>
+            <b-form-input  v-model="form.nickname" ></b-form-input>
           </b-input-group>
 
           <b-input-group prepend="Nombre: " class="mt-3" >
-            <b-form-input :value="form.name" ></b-form-input>
+            <b-form-input  v-model="form.name" ></b-form-input>
           </b-input-group>
+          <div class="mt-2">Value: {{ form.name }}</div>
 
       <b-input-group prepend="Apellidos: " class="mt-3" >
-            <b-form-input :value="form.user_name" ></b-form-input>
+            <b-form-input  v-model="form.surname" ></b-form-input>
             
           </b-input-group>
 
       <b-input-group prepend="email: " class="mt-3" >
-            <b-form-input :value="form.user_name" type="email" ></b-form-input>
+            <b-form-input  v-model="form.email" type="email" ></b-form-input>
             
           </b-input-group>
 
       <div class="password-box">
         <b-input-group prepend="Contraseña: " class="mt-3" >
-            <b-form-input type="password" :value="form.password" ></b-form-input>
+            <b-form-input type="password"  v-model="form.password" ></b-form-input>
           </b-input-group>
 
         <b-input-group prepend="Repite la Contraseña: " class="mt-3" >
-            <b-form-input type="password" :value="form.r_password" ></b-form-input>
+            <b-form-input type="password"  v-model="r_password" ></b-form-input>
           </b-input-group>
-                <b-button variant="outline-success">Modificar</b-button>
       </div>
 
           <div class="selectors-card">
             <h6>Genero</h6>
-            <b-form-select :value="form.gender" :options="genders" required></b-form-select>
+            <b-form-select  v-model="form.gender" :options="genders" required></b-form-select>
           </div>  
           <div class="selectors-card">
             <h6>Lengua materna</h6>
-            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+            <b-form-select class="mt-3"  v-model="form.mother_tonge" :options="mother_tonge" required></b-form-select>
           </div>
           <div class="selectors-card">
             <h6>Escuela UPM</h6>
-            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+            <b-form-select class="mt-3"  v-model="form.school" :options="schools" required></b-form-select>
           </div>  
       <div>
 
-      <b-form-file v-model="img"
-      :state="Boolean(img)"
+      <b-form-file v-model="form.img"
+      :state="Boolean(form.img)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
       plain
     ></b-form-file>
-    <div class="mt-3">Selected file: {{ img ? img.name : '' }}</div>
+    <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
     </div>
-    <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
+    <b-button v-on:click="submit()" class="mt-3" type="submit" variant="primary">Submit</b-button>
 </div>
 </template>
 
@@ -64,19 +64,25 @@ export default {
     data() {
         return{
         form: {
-          user_name: '',
+          nickname: '',
           name: '',
           surname: '',
           email: '',
           date: '',
-          password: '',
-          r_password: '',
-          mother_tonge: '',
           gender: '',
+          password: '',
+          school: '',
+          mother_tonge: '',
           image: null,
+          points: 0,
+          position: 10,
+          admin: false
         },
         genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
-        show: true
+        schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],
+        mother_tonge: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Frances', 'Chino'],
+        show: true,
+        r_password: ''
       }
     },
     computed: {
@@ -84,32 +90,17 @@ export default {
         return this.form.password.length > 4 && this.form.password.length < 13
       },
       v_r_password() {
-          return this.form.password == this.form.r_password
+          return this.form.password == this.r_password
       }
     },
     methods:{
-      addBook(payload) {
-      const path = 'http://localhost:5000/create_user';
-      axios.post(path, payload)
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log(error);
-        });
-    },
-      onSubmit() {
-      if (this.addBookForm.read[0]) read = true;
-      const payload = {
-        user_name: this.form.user_name,
-        name: this.form.name,
-        surname: this.form.surname,
-        email: this.form.email,
-        date: this.form.date,
-        password: this.form.password,
-        mother_tonge: this.form.mother_tonge,
-        img: this.form.image
-      };
-      this.addUser(payload);
-    },
+      submit(){
+            axios.post('http://localhost:3000/users', this.form)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+            this.$router.push({ path: `/` }) // -> /user/123
+        },
     }
 }
 </script>

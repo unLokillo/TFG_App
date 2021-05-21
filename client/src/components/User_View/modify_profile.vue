@@ -4,90 +4,137 @@
         <h4>Modificar Información de usuario</h4>
 
           <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
-            <b-form-input :value="form.user_name" ></b-form-input>
+            <b-form-input  v-model="form.nickname" :value="form.nickname" ></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
+                <b-button variant="outline-success" v-on:click="submit('nickname',form.nickname)" >Modificar</b-button>
               </b-input-group-append>
           </b-input-group>
 
           <b-input-group prepend="Nombre: " class="mt-3" >
-            <b-form-input :value="form.name" ></b-form-input>
+            <b-form-input v-model="form.name" :value="form.name" ></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
+                <b-button variant="outline-success" v-on:click="submit('name',form.name)">  Modificar</b-button>
               </b-input-group-append>
           </b-input-group>
 
       <b-input-group prepend="Apellidos: " class="mt-3" >
-            <b-form-input :value="form.user_name" ></b-form-input>
+            <b-form-input v-model="form.surname" :value="form.surname" ></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
+                <b-button variant="outline-success" v-on:click="submit('surname',form.surname)">Modificar</b-button>
               </b-input-group-append>
           </b-input-group>
 
       <b-input-group prepend="email: " class="mt-3" >
-            <b-form-input :value="form.user_name" type="email" ></b-form-input>
+            <b-form-input v-model="form.email" :value="form.email" type="email" ></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-success">Modificar</b-button>
+                <b-button  v-on:click="submit('email',form.email)" variant="outline-success">Modificar</b-button>
               </b-input-group-append>
           </b-input-group>
 
       <div class="password-box">
         <b-input-group prepend="Contraseña: " class="mt-3" >
-            <b-form-input type="password" :value="form.password" ></b-form-input>
+            <b-form-input type="password"  v-model="form.password" :value="form.password" ></b-form-input>
           </b-input-group>
 
         <b-input-group prepend="Repite la Contraseña: " class="mt-3" >
-            <b-form-input type="password" :value="form.r_password" ></b-form-input>
+            <b-form-input type="password" v-model="r_password" ></b-form-input>
           </b-input-group>
-                <b-button variant="outline-success">Modificar</b-button>
+                <b-button variant="outline-success" v-on:click="submit('password',form.password)">Modificar</b-button>
       </div>
 
-          <div class="selectors-card">
+        <div class="selectors-card">
             <h6>Genero</h6>
-            <b-form-select :value="form.gender" :options="genders" required></b-form-select>
+            <b-form-select  v-model="form.gender" :value="form.gender" :options="genders" required></b-form-select>
+            <b-button variant="outline-success"  v-on:click="submit('gender',form.gender)">Modificar</b-button>
           </div>  
           <div class="selectors-card">
             <h6>Lengua materna</h6>
-            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+            <b-form-select class="mt-3"  v-model="form.mother_tonge" :value="form.mother_tonge" :options="mother_tonges" required></b-form-select>
+            <b-button variant="outline-success"  v-on:click="submit('mother_tonge',form.mother_tonge)">Modificar</b-button>
           </div>
           <div class="selectors-card">
             <h6>Escuela UPM</h6>
-            <b-form-select class="mt-3" :value="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+            <b-form-select class="mt-3"  v-model="form.school" :value="form.school" :options="schools" required></b-form-select>
+            <b-button variant="outline-success"  v-on:click="submit('school',form.school)">Modificar</b-button>
           </div>  
       <div>
 
-      <b-form-file v-model="img"
-      :state="Boolean(img)"
+      <b-form-file v-model="form.img"
+      :state="Boolean(form.img)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
       plain
     ></b-form-file>
-    <div class="mt-3">Selected file: {{ img ? img.name : '' }}</div>
+    <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
     </div>
-    <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
+    <b-button class="mt-3" type="submit" v-on:click="submit('img',form.image)" variant="primary">Submit</b-button>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+      created(){
+        axios.get('http://localhost:3000/users/1')
+        .then(response => {
+            //this.name = response.data[0].name;
+            console.log(response.data);
+            this.form.nickname = response.data.nickname;
+            this.form.name = response.data.name;
+            this.form.surname = response.data.surname;
+            this.form.email = response.data.email;
+            this.form.date = response.data.date;
+            this.form.gender = response.data.gender;
+            this.form.password = response.data.password;
+            this.form.school = response.data.school;
+            this.form.mother_tonge = response.data.mother_tonge;
+            this.form.image = response.date.image;
+        })
+    },
     data() {
         return{
         form: {
-          user_name: 'User_1',
-          name: 'Username',
-          surname: 'Apellido_1',
-          email: 'emai@email.com',
+          nickname: '',
+          name: '',
+          surname: '',
+          email: '',
           date: '',
-          password: 'contraseña',
-          r_password: 'contraseña',
-          mother_tonge: 'Español',
-          gender: 'non binary',
+          gender: '',
+          password: '',
+          school: '',
+          mother_tonge: '',
           image: null,
+          points: 0,
+          position: 10,
+          admin: false
         },
         genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
-        mother_tonge: [{ text: 'Elige una ', value: null }, 'Español', 'Ingles', 'Frances', 'Aleman'],
-        show: true
+        schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],
+        mother_tonges: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Frances', 'Chino'],
+        show: true,
+        r_password: ''
       }
+    },
+        methods:{
+      submit(type,value){
+        var payload = {}; 
+          switch (type){
+            case 'nickname': payload = {nickname:value}; break;
+            case 'name': payload = {name:value}; break;
+            case 'surname': payload = {surname:value}; break;
+            case 'date': payload = {date:value}; break;
+            case 'gender': payload = {gender:value}; break;
+            case 'school': payload = {school:value}; break;
+            case 'mother_tonge': payload = {mother_tonge:value}; break;
+            case 'image': payload = {image:value}; break;
+            case 'email': payload = {email:value}; break; 
+          }
+            axios.patch('http://localhost:3000/users/1', payload)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+        },
+      
     }
 }
 </script>
@@ -146,6 +193,12 @@ background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.
 }
 
 .selectors-card {
+  padding: 3%;
+  border: 1px solid var(--border);
   margin: 2%;
+}
+
+.selectors-card > button{
+ margin-top: 2% ;
 }
 </style>

@@ -2,7 +2,7 @@
 <div class="v-user-body">
     <div class="top-menu">
         <div class="left-menu-card">
-            <b-img src="https://picsum.photos/300/150/?image=41" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
+            <b-img :src="this.img" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
             <div class="ls-menu">
             <div class="left-side-menus">
                <router-link :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="div">
@@ -44,6 +44,9 @@
             <div class="info-card">
                 <strong> Genero: </strong> {{ gender }}
             </div>
+            <div class="info-card">
+                <strong> Escuela: </strong> {{ school }}
+            </div>
         </div>
 
         <div class="options">
@@ -78,13 +81,30 @@
 <script>
 import Accepeted_Neos from '@/components/User_View/Accepted-Neo-Menu.vue'
 import Non_Accepeted_Neos from '@/components/User_View/Proposed-Neo-Menu.vue'
+import axios from 'axios'
 export default {
     name: 'View-User',
     components: {
       Accepeted_Neos,
       Non_Accepeted_Neos
     },
-watch: {
+    created(){
+        axios.get('http://localhost:3000/users/1')
+        .then(response => {
+            //this.name = response.data[0].name;
+            console.log(response.data);
+            this.name = response.data.name;
+            this.surname = response.data.surname;
+            this.email = response.data.email;
+            this.date = response.data.date;
+            this.gender = response.data.gender;
+            this.school = response.data.school;
+            this.points = response.data.points;
+            this.position = response.data.position;
+            this.img = response.data.img;
+        })
+    },
+    watch: {
     $route: {
       immediate: true,
       handler: function(newVal, oldVal) {
@@ -94,16 +114,18 @@ watch: {
   },
   data(){
       return{
-          liked_neo: 3,
+          liked_neo: 0,
           showModal: false,
           mainProps: {width: '200%', height:'200%', class: 'm1' },
-          name: "User1", 
-          surname: "UserSurname1 ",
-          email: "asdfg@gmail.com",
-          date: "XX/XX/XXXX",
-          gender: "non binary",
-          points: 2100,
-          position: 3,
+          name: '', 
+          surname: '',
+          email: '',
+          date: '',
+          gender: '',
+          school: '',
+          img: '',
+          points: 0,
+          position: 0,
       }
   }
 }

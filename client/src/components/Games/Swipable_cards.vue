@@ -19,7 +19,8 @@
         <div>
         <div style="width: 80%; margin: 10px auto">
           <img
-            :src="require(`@/assets/images/${current.src}`)"
+            v-if="current.src!=null"
+            :src="current.src"
             class="rounded-borders"/>
         </div>
         <div class="info">
@@ -40,7 +41,7 @@
       style="z-index: 2">
       <div style="height: 100%">
         <img
-          :src="require(`@/assets/images/${next.src}`)"
+          :src="next.src"
           class="rounded-borders"/>
         <div class="text">
             <h2>{{next.name}}, <span>{{next.age}}</span></h2>
@@ -65,6 +66,7 @@
   </section>
 </template>
 <script>
+import axios from 'axios'
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 const EVENTS = {
   MATCH: 'match',
@@ -72,17 +74,34 @@ const EVENTS = {
 }
 export default {
   components: { Vue2InteractDraggable },
+    created(){
+      var nData = [];
+      var card = [];
+        axios.get('http://localhost:3000/neologismes')
+        .then(response => {
+            //this.name = response.data[0].name;
+          for (let i = 0; i < response.data.length; i++) {
+          card.push({
+            src: response.data[i].img,
+            name: response.data[i].neologisme
+          });
+        }
+          this.nData = response.data; 
+          console.log(nData);
+        })
+      this.cards = card;
+      this.neoData = nData;   
+    },
   data() {
     return {
+      neoData: '',
       isVisible: true,
       index: 0,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
       },
-      cards: [
-        { src: 'Lil_Cat.png', name: 'Alexander' },
-      ]
+      cards: []
     }
   },
   computed: {
