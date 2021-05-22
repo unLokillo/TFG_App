@@ -1,0 +1,1543 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/U97/faceSOS/1.0.0
+info:
+  description: API para la aplicación Neologismos, parte del desarrollo del TFG.
+  version: "1.0"
+  title: faceSOS API
+  contact:
+    email: javier.barragan.haro@alumnos.upm.es
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+  - name: Usuario
+    description: Operaciones relacionadas con las cuentas de usuarios
+  - name: Administrador
+    description: Operaciones relacionadas con los administradores
+  - name: Propuestas
+    description: Operaciones relacionadas con elementos de gamificacion
+  
+paths:
+  /proposals:
+    get:
+      tags:
+        - Propuestas
+      summary: Obtiene información de todos las propuestas de la aplicación.
+      operationId: getProposals
+      description: Se obitene la información de todas las propuestas de la aplicación. Se permite filtrar por cantidad de resultados.
+      parameters:
+        - in: query
+          var: saldo
+          description: filtra por cantidad de puntos
+          required: false
+          schema:
+            type: string
+
+        - in: page
+          var: results
+          description: Selecciona la pagina donde quieres empezar
+          required: false
+          schema:
+            type: string
+
+        - in: count
+          var: results
+          description: Cantidad de resultados
+          required: false
+          schema:
+            type: int
+            format: int32
+            minimun: 10
+            maximum: 100
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProposals"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetProposals"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+        
+    post:
+      tags:
+        - Propuestas
+      summary: Añade una propouesta con los parametros necesarios
+      operationId: createProposal
+      parameters:
+
+        - in: query
+          var: lingu
+          description: Posibilidad de ser un Linguista
+          required: false
+          schema:
+            type: string
+      description: Se añade un nuevo usuario  
+      responses:   
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /proposals/{id-proposal}:  
+    put:
+      tags:
+        - Propuestas
+      summary:  Modifica la información de una propuesta.
+      operationId: modifyProposals
+      description: 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire crear la propouesta
+          required: true
+          schema:
+            type: integer
+            format: int10
+
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+        "400":
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"  
+        "409":
+          description: El recurso ya existe
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExitedError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ExitedError"   
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user:
+    get:
+      tags:
+        - Usuario
+      summary: Obtiene información de todos los usuario 
+      operationId: getUsers
+      description: Se obitene la información de todos los usuarios. Se permite filtrar por puntuación o cantidad de resultados.
+      parameters:
+        - in: query
+          var: saldo
+          description: filtra por cantidad de puntos
+          required: false
+          schema:
+            type: string
+
+        - in: page
+          var: results
+          description: Selecciona la pagina donde quieres empezar
+          required: false
+          schema:
+            type: string
+
+        - in: count
+          var: results
+          description: Cantidad de resultados
+          required: false
+          schema:
+            type: int
+            format: int32
+            minimun: 10
+            maximum: 100
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetAllUser"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+        
+    post:
+      tags:
+        - Usuario
+      summary: Añade usuario con los parametros necesarios
+      operationId: createUsers
+      parameters:
+        - in: query
+          var: admin
+          description: Posibilidad de ser administrador
+          required: false
+          schema:
+            type: string
+
+        - in: query
+          var: lingu
+          description: Posibilidad de ser un Linguista
+          required: false
+          schema:
+            type: string
+      description: Se añade un nuevo usuario  
+      responses:   
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsers"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostUsers"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user/{id-user}/all:
+    get: 
+      tags:
+        - Usuario
+      summary: Muestra los datos de un usuario y toda la informacion relativa a sus cuentas.
+      operationId: GetUserAll
+      description: Se muestra toda la informacion de una cuenta de usuario
+      parameters:
+        - in: path
+          var: id-user
+          description: Id del usuario a mostrar
+          required: true
+          schema:
+            type: integer
+            format: int10
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserAll"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetUserAll"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user/{id-user}:
+    get: 
+      tags:
+        - Usuario
+      summary: Muestra los datos de un usuario
+      operationId: GetUser
+      description: Se muestra toda la informacion de una cuenta de usuario
+      parameters:
+        - in: path
+          var: id-user
+          description: Id del usuario a mostrar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserData"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetUserData"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+        
+    delete:
+      tags:
+        - Usuario
+        - Administrador
+      summary: Elimina al usuario indicado
+      operationId: DeleteUser
+      description: Esta operacion unicamente puede ser realizada por un administrador del sistema, eliminando unicamente la cuenta y no las propuestas o Neologismos asociados a ella.
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "204":
+          description: No content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/DeleteUser"
+
+        "403": 
+          description: Acceso denegado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+              
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+    put:
+      tags:
+        - Usuario
+      summary: Modifica un usuario con los parametros dados
+      operationId: UpdateUser
+      description: Se modifican los parametros indicados de una cuenta de usuario 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a mostrar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserData"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetUserData"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+        
+
+  /user/{id-user}/neologismes:
+    get:
+      tags:
+        - Usuario
+      summary: Obtiene la informacion de todas los Neologismos asociados al usuario. Esto se refiere a los neologismos aceptados y favoritos
+      operationId: getUserNeologismes
+      description: Se obtiene por cada cuenta asociada al usuario todos los Neologismos validados y favoritos 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire conocer la informacion a sus propouestas
+          required: true
+          schema:
+            type: integer
+            format: int10
+        
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetNeologismes"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetNeologismes"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user/{id-user}/proposals:
+    get:
+      tags:
+        - Propuestas
+      summary: Obtiene la informacion de todas las Propuestas de Neologismos asociadas al usuario.
+      operationId: getUserNeologismes
+      description: Se obtiene por cada cuenta asociada al usuario todos las Propuestas de Neologismos.
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire conocer la informacion a sus propouestas
+          required: true
+          schema:
+            type: integer
+            format: int10
+        
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProposalUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetProposalUser"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user/{id-user}/proposals/{id-proposal}:   
+    delete:
+      tags:
+        - Propuestas
+      summary: Elimina la propuesta indicada
+      operationId: DeleteUser
+      description: Esta operacion unicamente puede ser realizada por un administrador del sistema, eliminando unicamente la cuenta y no las propuestas o Neologismos asociados a ella.
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "204":
+          description: No content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteProposals"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/DeleteProposals"
+
+        "403": 
+          description: Acceso denegado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+              
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+    
+    put:
+      tags:
+        - Propuestas
+      summary: Modifica una propuesta
+      operationId: ModifyProposal
+      description: Se modifican los parametros indicados de una cuenta de usuario 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a mostrar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostProposals"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  
+  /user/{id-user}/rejected-proposals:
+    get:
+      tags:
+        - Propuestas
+      summary: Obtiene la informacion de todas las Propuestas de Neologismos rechazadas asociadas al usuario.
+      operationId: getRejectedProposals
+      description: Se obtiene por cada cuenta asociada al usuario todos las Propuestas de Neologismos.
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire conocer la informacion a sus propouestas
+          required: true
+          schema:
+            type: integer
+            format: int10
+        
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProposalUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetProposalUser"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /user/{id-user}/rejected-proposals/{id-proposal}:   
+    put:
+      tags:
+        - Propuestas
+      summary: Rechaza una propuesta
+      operationId: RejectProposal
+      description: Se modifican los parametros indicados de una cuenta de usuario 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a mostrar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostProposalsUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostProposalsUser"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /badges:
+    get:
+      tags:
+        - Logros
+      summary: Obtiene información de todos los logros de la aplicación.
+      operationId: getBadges
+      description: Se obitene la información de todos los logros. Se permite filtrar por tipo o cantidad de resultados.
+      parameters:
+        - in: query
+          var: saldo
+          description: filtra por cantidad de puntos
+          required: false
+          schema:
+            type: string
+
+        - in: page
+          var: results
+          description: Selecciona la pagina donde quieres empezar
+          required: false
+          schema:
+            type: string
+
+        - in: count
+          var: results
+          description: Cantidad de resultados
+          required: false
+          schema:
+            type: int
+            format: int32
+            minimun: 10
+            maximum: 100
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetBadges"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetBadges"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+        
+    post:
+      tags:
+        - Logros
+      summary: Añade un logro con las caracteristicas indicadas.
+      operationId: createBadges
+      description: Se añade un nuevo usuario  
+      parameters:
+        - in: query
+          var: admin
+          description: Posibilidad de ser administrador
+          required: false
+          schema:
+            type: string
+
+        - in: query
+          var: lingu
+          description: Posibilidad de ser un Linguista
+          required: false
+          schema:
+            type: string
+      responses:   
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostUsers"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostUsers"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+  /badges/{badges_id}:
+    delete:
+      tags:
+        - Logros
+      summary: Elimina el logro indicado de la aplicación.
+      operationId: DeleteUser
+      description: Esta operacion unicamente puede ser realizada por un administrador del sistema, eliminando unicamente la cuenta y no las propuestas o Neologismos asociados a ella.
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int10
+      responses:
+        "204":
+          description: No content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteBadge"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/DeleteBadge"
+
+        "403": 
+          description: Acceso denegado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ForbidenAcces"
+              
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+  /user/{id-user}/badges:
+    get:
+      tags:
+        - Logros
+      summary: Obtiene la informacion de todas los logros del usuario.
+      operationId: getProposals
+      description: Se obtiene por cada cuenta asociada al usuario todas las propouestas asociadas a la cuenta
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire conocer la informacion a sus propouestas
+          required: true
+          schema:
+            type: integer
+            format: int10
+        - in: query
+          var: results
+          description: Filtra por cantidad de resultados
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimun: 10
+            maximum: 1000
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetBadgesUser"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GetBadgesUser"
+
+        "404":
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/NotFoundError"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+    put:
+      tags:
+        - Logros
+      summary:  Añade la obtención de un logro al usuario.
+      operationId: addBadge
+      description: 
+      parameters: 
+        - in: path
+          var: id-user
+          description: Id del usuario que quire crear la propouesta
+          required: true
+          schema:
+            type: integer
+            format: int10
+
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostBadges"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PostBadges"
+        "400":
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"  
+        "409":
+          description: El recurso ya existe
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExitedError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ExitedError"   
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError" 
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+components:
+  schemas:
+  ########################
+    ###Exito###
+  ########################
+    UserData:
+      type: object
+      required:
+        - Id-User
+        - Nombre de usuario
+        - Nombre
+        - Apellidos
+        - Email
+        - Image
+        - Fecha-nacimiento
+        - Genero
+        - Lengua materna
+        - Escuela
+        - location
+      properties:
+        Id-User:
+          type: integer
+          example: 1
+        Nombre de usuario:
+          type: string
+          example: Fancy-Dog
+        Nombre:
+          type: string
+          example: Jake
+        Apellidos:
+          type: string
+          example: El perro
+        Email:
+          type: string
+          format: email
+          example: jake.el.perro@gmail.com
+        Image:
+          type: string
+          format: url
+          example: 'https://api.restSOS.com/images/92147'
+        Fecha-nacimiento:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z'
+        Genero:
+          type: string
+          example: 'masculino'
+        Lengua Materna:
+          type: string
+          example: 'Español'
+        Escuela:
+          type: string
+          example: 'ETSIINF'
+        location:
+          type: string
+          format: url
+          example: 'https://api.restSOS.com/user/92147'
+
+    DescriptionData:
+      type: object
+      required:
+        - Description-id
+        - Description
+      properties:
+        Description-id:
+          type: int
+          example: 2
+        Description:
+          type: String
+          example: 'Descripción nº1'
+
+    SourceData:
+      type: object
+      required:
+        - Source-id
+        - Source
+      properties:
+        Source-id:
+          type: int
+          example: 2
+        Source:
+          type: String
+          example: 'Fuente nº1' 
+    
+    ProposalsData:
+      type: object
+      required:
+        - Proposal-id
+        - User-id
+        - name
+        - Descriptions
+        - Sources
+        - message
+        - rejected
+        - points
+        - image
+        - Fecha-creacion
+        - location
+      properties:
+        Proposal-id:
+          type: integer
+          example: 12345
+        User-id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Neologismo 1"
+        Descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptionData'
+        Sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceData'
+        message:
+          type: String
+          example: "Mensaje de rechazo"
+        rejected:
+          type: boolean
+          example: true
+        points:
+          type: int
+          example: 1234
+        image:
+          type: string
+          format: url
+          example: 'https://api.restSOS.com/images/92147'
+        Fecha-creacion:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+        location:
+          type: string
+          format: url
+          example: https://api.restSOS.com/withdraaw/92147'
+
+    BadgesData:
+      type: object
+      required:
+        - Badge-id
+        - Name
+        - Description
+        - type_badge
+        - image
+        - Fecha-Creacion
+        - location
+      properties:
+        Badge-id:
+          type: int
+          example: 2
+        Description:
+          type: String
+          example: 'Descripción nº1'
+        type_badge: 
+          type: string
+          example: 
+        image:
+          type: string
+          format: url
+          example: 'https://api.restSOS.com/images/92147'
+        Fecha-creacion:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+        location:
+          type: string
+          format: url
+          example: https://api.restSOS.com/withdraaw/92147'
+    
+    NeologismeData:
+      type: object
+      required:
+        - Proposal-id
+        - User-id
+        - name
+        - Descriptions
+        - Sources
+        - favorites
+        - image
+        - Fecha-creacion
+        - location
+      properties:
+        Proposal-id:
+          type: int
+          example: 12345
+        User-id:
+          type: int
+          example: 1
+        name:
+          type: String
+          example: "Neologismo 1"
+        Descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptionData'
+        Sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceData'
+        favorites:
+          type: int
+          example: 1234
+        image:
+          type: string
+          format: url
+          example: 'https://api.restSOS.com/images/92147'
+        Fecha-creacion:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+        location:
+          type: string
+          format: url
+          example: https://api.restSOS.com/withdraaw/92147'
+
+    UserAll:
+      type: object
+      required:
+        - User_Data
+        - Proposal_Data
+      properties:
+        User_Data:
+          $ref: '#/components/schemas/UserData'
+        Proposal_Data:
+          $ref: '#/components/schemas/UserData'
+
+    Pagination:
+      properties:
+        page:
+          type: integer
+          minimum: 1
+          example: 2
+        next:
+          type: string
+          format: url
+        previous:
+          type: string
+          format: url
+
+    GetProposals:
+      properties:
+        data:
+          $ref: '#/components/schemas/ProposalsData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        n_movements:
+          type: integer
+          example: 1 
+
+    GetProposalUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/ProposalsData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    GetNeologismes:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NeologismeData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    GetUserAll:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAll'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        n_users:
+          type: integer
+          example: 1
+
+    GetUserData:
+      properties:
+        data:
+          $ref: '#/components/schemas/UserData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    
+    GetAllUser:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    GetBadges:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BadgesData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    GetBadgesUser:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BadgesData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        user_id:
+          type: integer
+          example: 1
+
+
+################### POSTS #################
+    PostUsers:
+      properties:
+        objeto:
+          $ref: '#/components/schemas/UserData'
+        message:
+          type: string
+          message: Recurso creado correctamente
+
+    PostProposals:
+      properties:
+        objeto:
+          $ref: '#/components/schemas/ProposalsData'
+        message:
+          type: string
+          message: Recurso creado correctamente
+
+    PostProposalsUser:
+      properties:
+        objeto:
+          $ref: '#/components/schemas/ProposalsData'
+        user_id:
+          type: int
+          example: 12345
+        message:
+          type: string
+          message: Recurso creado correctamente
+
+    PostBadges:
+      properties:
+        objeto:
+          $ref: '#/components/schemas/BadgesData'
+        message:
+          type: string
+          message: Recurso creado correctamente
+      
+################### DELETES ####################
+    DeleteUserInfo:
+      properties:
+        id-user:
+          type: integer
+          format: id
+          example: 761290
+
+    DeleteProposalInfo:
+      properties:
+        id-proposal:
+          type: integer
+          format: id
+          example: 761290
+
+    DeleteUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteUserInfo'
+        message:
+          type: string
+          message: "Usuario eliminado con exito"
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+    
+    DeleteProposals:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteProposalInfo'
+        message:
+          type: string
+          message: "Usuario eliminado con exito"
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+
+    DeleteBadgeInfo:
+      properties:
+        id-user:
+          type: string
+          example: ES3467865453
+    
+    DeleteBadge:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteBadgeInfo'
+        message:
+          type: string
+          message: "Logro eliminado con exito"
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+          
+    DeleteTransferInfo:
+      properties:
+        id-transfer:
+          type: integer
+          format: id
+          example: 761290
+        
+    DeleteTransfer:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteTransferInfo'
+        message:
+          type: string
+          message: "Usuario eliminado con exito"
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+
+###################### ERRORES ##################
+
+    BadRequest:
+      properties:
+        message:
+          type: string
+          example: Datos Incorrectos
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          example: El recurso solicitado no existe
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+    
+    ServerError:
+      properties:
+        message:
+          type: string
+          example: Error en el servidor
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+
+    ServiceUnavailableError:
+      properties:
+        message:
+          type: string
+          example: 'El servicio no esta disponible'
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+    
+
+    ForbidenAcces:
+      properties:
+        message:
+          type: string
+          example: 'No tienes permisos suficientes para acceder al recurso'
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
+
+    ExitedError:
+      properties:
+        message:
+          type: string
+          example: 'El recurso ya existe'
+        time-stamp:
+          type: string
+          format: date-time
+          example: '1990-4-20T00:03:11.068Z' 
