@@ -1,8 +1,11 @@
 {
   "login": [
     {
-      "logged": false,
-      "user_id": 1
+      "email_or_user": "admin",
+      "password": "password",
+      "logged": true,
+      "user_id": 2,
+      "id": 1
     }
   ],
   "users": [
@@ -38,6 +41,22 @@
       "points": 2000,
       "liked_neo": 3,
       "admin": true
+    },
+    {
+      "nickname": "",
+      "name": "",
+      "surname": "",
+      "email": "",
+      "date": "",
+      "gender": "",
+      "password": "",
+      "school": "",
+      "mother_tonge": "",
+      "image": null,
+      "points": 0,
+      "position": 10,
+      "admin": false,
+      "id": 3
     }
   ],
   "neologismes": [
@@ -74,7 +93,9 @@
       "img": "https://picsum.photos/1024/400/?image=40",
       "liked": 2,
       "proposal": false,
+      "points": 0,
       "rejected": false,
+      "position": 1,
       "user": "User1 Surname1",
       "date": "30/10/1998",
       "mssg": "",
@@ -113,7 +134,9 @@
       "img": "https://picsum.photos/1024/400/?image=36",
       "liked": 5,
       "proposal": false,
+      "points": 0,
       "rejected": false,
+      "position": 2,
       "mssg": "",
       "user": "User1 Surname1",
       "date": "30/10/1998",
@@ -152,7 +175,9 @@
       "img": null,
       "liked": 10,
       "proposal": false,
+      "position": 3,
       "rejected": false,
+      "points": 0,
       "user": "User1 Surname1",
       "date": "30/10/1998",
       "mssg": "",

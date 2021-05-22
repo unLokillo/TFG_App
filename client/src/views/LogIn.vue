@@ -4,21 +4,33 @@
         <h3>Log In</h3>
         <b-form-input
           id="input-1"
-          v-model="form.email"
+          v-model="form.email_or_user"
           type="email"
-          placeholder="Introuduce tu email"
+          placeholder="Introduce tu email"
+          :state="this.correct_login"
           required
         ></b-form-input>
+        {{ this.form.email_or_user }}
+        <b-form-input  
+        v-model="form.password" 
+        type="password" 
+        id="text-password" 
+        aria-describedby="password-help-block" 
+        placeholder="Introduce tu contraseña" 
+        :state="this.correct_login"></b-form-input>
+        
+        <b-form-text id="password-help-block"></b-form-text>
 
-        <b-form-input type="password" id="text-password" aria-describedby="password-help-block" placeholder="Introuduce tu contraseña" :state="validation"></b-form-input>
-            <b-form-text id="password-help-block"></b-form-text>
+        <b-form-invalid-feedback id="input-live-feedback">
+          Usuario o contraseña incorrectos
+        </b-form-invalid-feedback>
 
       <div class="links">
           <p><a href="/forgot-password" class="blue-text ml-1">Forgot Password?</a></p>
           <p><a href="/create-user" class="blue-text ml-1">Registrer</a></p>
       </div>
     
-      <b-button class="mt-3" type="submit" variant="primary">Submit</b-button>
+      <b-button v-on:click="getUserInfo" class="mt-3" type="submit" variant="primary">Submit</b-button>
     
     <!-- DEscomentar para ver mas info sobre el JSON
     <b-card class="mt-3" header="Form Data Result">
@@ -29,17 +41,45 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return{
         form: {
-          email: '',
-          name: '',
+          email_or_user: '', //variable que indica el nombre de usuario o el email 
+          password: '',
+          logged: false,
+          user_id: 0
         },
+        correct_login: null,
         show: true
       }
     },
     methods: {
+      getUserInfo(){
+        this.correct_login = false;
+        var i = 0; 
+         axios.get('http://localhost:3000/users')
+        .then(response => {
+            while (!this.correct_login && (i < response.data.length)) {
+              this.correct_login = (response.data[i].nickname.localeCompare(this.form.email_or_user)) &&
+                            (response.data[i].password==this.form.password);
+              i++;
+          
+          if(this.correct_login){
+            this.form.user_id = response.data[i].id;
+              this.form.logged = true;
+            
+            axios.put('http://localhost:3000/login/' + i,this.form)
+          .then(response => {
+          
+            });
+          this.$router.push({ path: `/`}) // -> /user/123
+          };
+        }
+      });
+    },
+
       onSubmit(event) {
         event.preventDefault()
         alert(JSON.stringify(this.form))
@@ -80,7 +120,7 @@ export default {
 
 input{
     width: 70%;
-    height: 12%;
+    height: 8%;
 }
 
 .modal-content{
@@ -90,5 +130,7 @@ input{
 button {
   border-radius: 0 px !important;
   width: 70%;
+  height: 4rem;
+
 }
 </style>

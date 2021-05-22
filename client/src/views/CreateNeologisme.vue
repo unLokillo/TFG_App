@@ -44,6 +44,9 @@ export default {
           img: null,
           liked: 0,
           proposal: true,
+          points:0,
+          user: '',
+          date: '',
           rejected: false,
           mssg: ''
       }
@@ -59,13 +62,30 @@ export default {
       this.form.sources = value;
       console.log('source');
     },
+    prepare_data(){
+        this.form.date = Date.now(); // get actual date
+        var user_get = "";
+        axios.get('http://localhost:3000/login/1')
+          .then(response => {
+            axios.get('http://localhost:3000/users/' + response.data.user_id)
+             .then(response => {
+                 user_get = (' ' + response.data.nickname).slice(1);
+                 console.log('response.data.nickname');
+                 console.log(response.data.nickname);
+               });
+            });
+            console.log(user_get);
+            return user_get;
+        },
     submit(){
+        this.form.user = this.prepare_data();
+        console.log(this.form.user);
         axios.post('http://localhost:3000/neologismes', this.form)
               .then(function( response ){
                     // Handle success
               }.bind(this));
         this.$router.push({ path: `/` }) // -> /user/123
-    },    
+    }  
   }
 }
 </script>

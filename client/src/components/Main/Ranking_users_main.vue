@@ -14,18 +14,34 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+        created(){
+        axios.get('http://localhost:3000/users')
+          .then(response => {
+              this.items = response.data;
+            })
+        
+    },
+    mounted(){
+        console.log(this.items);
+        for (let index = 0; index < this.items; index++) {
+                if (this.items[index].admin) {
+                    this.items.splice(index,1);
+                }
+            console.log("aja");
+            }
+    },
     data() {
         return {
             labels: [,
-            'position',{ key: 'img', label: 'Imagen' },'username', 'points'],
-            items: [
-                {position: 1,img: 'https://picsum.photos/300/150/?image=41',username: 'User1',points: '2000'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',username: 'User2',points: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',username: 'User2',points: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',username: 'User2',points: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',username: 'User2',points: '1899'}
-            ]
+            'position',{ key: 'img', label: 'Imagen' },'nickname', 'points'],
+            items: []
+        }
+    },
+    methods: {
+        removeAdmin(){
+            
         }
     }
 }

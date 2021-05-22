@@ -11,20 +11,21 @@
 </template>
 
 <script>
+    import axios from 'axios';
 export default {
+    created(){
+        axios.get('http://localhost:3000/neologismes')
+          .then(response => {
+              this.items = response.data;
+            })
+    },
     data() {
         return {
             labels: [,
-            'position',{ key: 'img', label: 'Imagen' },'neologismo', 'likes'],
-            items: [
-                {position: 1,img: 'https://picsum.photos/300/150/?image=41',neologismo: 'User1',likes: '2000'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'},
-                {position: 2,img: 'https://picsum.photos/300/150/?image=40',neologismo: 'User2',likes: '1899'}
-            ]
+            'position',{ key: 'img', label: 'Imagen' },'neologisme', 'liked'],
+            items: []
         }
-    }
+    },
 }
 </script>
 

@@ -4,13 +4,23 @@
         <b-avatar src="https://picsum.photos/300/150/?image=41"></b-avatar> User_1 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
-        Log in
+        Log in 
     </router-link>
 </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    created() {
+        axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.logged = response.data.logged;
+              this.user_id = response.data.user_id;
+              console.log(response.data.logged);
+              console.log(response.data.user_id);
+            });
+    },
     watch: {
     $route: {
       immediate: true,
@@ -22,8 +32,8 @@ export default {
     data() {
         return {
             showModal: false,
-            user_id: '123456789',
-            logged: true
+            user_id: '',
+            logged: false
         }
     }
 }
