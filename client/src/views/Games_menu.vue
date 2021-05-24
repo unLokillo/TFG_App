@@ -8,9 +8,9 @@
   <router-link :to="{ name: 'info_g1',params: {} }" class="game-selector" style="right: 55%;" tag="div">
     <strong> Juego 1 </strong>
   </router-link >
-  <div class="game-selector" style="left: 45%; ">
+  <router-link :to="{ name: 'info_g2',params: {} }" class="game-selector" style="left: 45%;" tag="div">
     <strong> Juego 2 </strong>
-  </div>
+  </router-link >
   </div>
 <div v-if="showModal" class="modal-route">
         <div class="modal-content">

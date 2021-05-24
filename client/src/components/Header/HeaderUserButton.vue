@@ -21,6 +21,16 @@ export default {
               console.log(response.data.user_id);
             });
     },
+    mounted(){
+         axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.logged = response.data.logged;
+              this.user_id = response.data.user_id;
+              console.log(response.data.logged);
+              console.log(response.data.user_id);
+            });
+            this.$forceUpdate()
+    },
     watch: {
     $route: {
       immediate: true,

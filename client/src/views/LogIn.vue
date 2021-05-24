@@ -10,7 +10,6 @@
           :state="this.correct_login"
           required
         ></b-form-input>
-        {{ this.form.email_or_user }}
         <b-form-input  
         v-model="form.password" 
         type="password" 
@@ -49,7 +48,8 @@ export default {
           email_or_user: '', //variable que indica el nombre de usuario o el email 
           password: '',
           logged: false,
-          user_id: 0
+          user_id: 0,
+          admin: false
         },
         correct_login: null,
         show: true
@@ -63,14 +63,14 @@ export default {
         .then(response => {
             while (!this.correct_login && (i < response.data.length)) {
               this.correct_login = (response.data[i].nickname.localeCompare(this.form.email_or_user)) &&
-                            (response.data[i].password==this.form.password);
+                            (response.data[i].password.localeCompare(this.form.password));
               i++;
           
           if(this.correct_login){
             this.form.user_id = response.data[i].id;
-              this.form.logged = true;
-            
-            axios.put('http://localhost:3000/login/' + i,this.form)
+            this.form.logged = true;
+            this.admin = response.data[i].admin;
+          axios.put('http://localhost:3000/login/' + i,this.form)
           .then(response => {
           
             });

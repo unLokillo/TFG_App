@@ -19,19 +19,14 @@ export default {
         created(){
         axios.get('http://localhost:3000/users')
           .then(response => {
-              this.items = response.data;
-            })
-        
-    },
-    mounted(){
-        console.log(this.items);
-        for (let index = 0; index < this.items; index++) {
-                if (this.items[index].admin) {
-                    this.items.splice(index,1);
-                }
-            console.log("aja");
+            for (let index = 0; index < response.data.length; index++) {
+            if (!response.data[index].admin) {
+                this.items.push(response.data[index]);
             }
+            }
+          })
     },
+
     data() {
         return {
             labels: [,
@@ -39,11 +34,6 @@ export default {
             items: []
         }
     },
-    methods: {
-        removeAdmin(){
-            
-        }
-    }
 }
 </script>
 

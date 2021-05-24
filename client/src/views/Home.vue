@@ -1,7 +1,7 @@
 <template>
 <div class="body">
   <div class="menu-1">
-    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper,</p>
+    <p> ¡Buenos días! Bienvenido a <strong>Neologismos</strong> un proyecto de la Unviersidad Politecncia de Madrid que tiene con fin registrar nuevos nelogismos relaccionadsos con el mundos de las IT. ¿Te apetecería contribuir?</p>
     <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>  
   </div>
   <h4>Palabras de la semana</h4>
@@ -12,8 +12,8 @@
   </div>
    <h4>Juegos</h4>
   <div class="menu-2">
-    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue quam, finibus vitae blandit semper, </p>
-    <b-button> Contribuye </b-button>
+    <p> ¡Aquí podras encontrar algunos juegos y actividades! </p>
+     <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="b-button"> ¡Juega! </router-link>
   </div>
   <h4>Rankings</h4>
   <div class="rankings">

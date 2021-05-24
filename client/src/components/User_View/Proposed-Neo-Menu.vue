@@ -3,16 +3,16 @@
     <div class="ranking-title">
     <h3> Neologismos Propuestos </h3>
     </div>
-     <div class="neo-card" v-for="(value,index) in items" :key="index" >
+     <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
-         <h5>{{ value.neologismo }}</h5>
-            <div v-if="value.accepeted">
+         <h5>{{ value.neologisme }}</h5>
+            <div v-if="value.rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
             </div>
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
-         <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
+         <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">+</b-button>
         </div>
      </div>
     <router-link :to="{name: 'view-all-proposals',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
       watch: {
     $route: {
@@ -29,19 +30,27 @@ export default {
       }
     }
   },
+      created(){
+        axios.get('http://localhost:3000/neologismes')
+          .then(response => {
+            for (let index = 0; index < response.data.length; index++) {
+                console.log(response.data[index].proposal);
+            if (response.data[index].proposal) {
+                this.neologismes.push(response.data[index]);
+            }
+        }      
+            }),
+        axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.login = response.data;
+          })
+    },
     data() {
         return {
-            showModal: false,
-            items: [
-                {id:'12345',neologismo: 'Neologismo 1',accepeted: true},
-                {id:'12344',neologismo: 'Neologismo 2',accepeted: false},
-                {id:'12343',neologismo: 'Neologismo 3',accepeted: false},
-                {id:'12342',neologismo: 'Neologismo 4',accepeted: true},
-                {id:'12341',neologismo: 'Neologismo 5',accepeted: true},
-                {id:'12340',neologismo: 'Neologismo 6',accepeted: true}
-            ]
+            neologismes: [],
+            login: []
         }
-    }
+    },
 }
 </script>
 

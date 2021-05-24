@@ -66,8 +66,6 @@ var route = [
 
     ]
   },
-
-  
   {
     path: '/view-neologisme/:neoid',
     name: 'vNeo',
@@ -168,7 +166,7 @@ var route = [
         meta: {
           showModal: true
         },
-        path: 'modify_proposal',
+        path: 'view-neologisme/:neoId/modify_proposal',
         name: 'm-proposal',
         component: () => import('@/components/User_View/modify_proposal.vue'),
         props: true
@@ -188,6 +186,15 @@ var route = [
       path: 'info_g1',
       name: 'info_g1',
       component: () => import('@/components/Games/info_g1.vue'),
+      props: true
+    },
+    {
+      meta: {
+        showModal: true
+      },
+      path: 'info_g2',
+      name: 'info_g2',
+      component: () => import('@/components/Games/info_g2.vue'),
       props: true
     }
     ]

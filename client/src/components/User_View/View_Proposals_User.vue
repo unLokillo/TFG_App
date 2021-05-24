@@ -6,18 +6,18 @@
         </div>
 
         <div class="neologisme-cards">
-            <div v-for="(value,index) in neologismes" :key="index">
+            <div v-for="(value,index) in neologismes" :key="index" >
                 <h5>{{ value.neologismo }}</h5>
-            <div v-if="value.accepeted">
+            <div v-if="value.rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
             </div>
 
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
-             <b-dropdown text="Acciones" v-if="admin">
-                    <b-dropdown-item href="#">Aceptar Propuesta</b-dropdown-item>
-                    <b-dropdown-item href="#">Rechazar Propuesta</b-dropdown-item>
+             <b-dropdown text="Acciones" v-if="login.admin">
+                    <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar Propuesta</b-dropdown-item>
+                    <b-dropdown-item >Rechazar Propuesta</b-dropdown-item>
                     <b-dropdown-item style="color: red;" href="#">Eliminar Propuesta</b-dropdown-item>
                 </b-dropdown>
                  <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
@@ -28,21 +28,45 @@
 </template>
 
 <script>
+    import axios from 'axios';
 export default {
-    data(){
-        return{
-            admin:false,
-            user_id: '123456789',
-            neologismes: [
-                {id:'12345',neologismo: 'Neologismo 1',accepeted: true},
-                {id:'12344',neologismo: 'Neologismo 2',accepeted: false},
-                {id:'12343',neologismo: 'Neologismo 3',accepeted: false},
-                {id:'12342',neologismo: 'Neologismo 4',accepeted: true},
-                {id:'12341',neologismo: 'Neologismo 5',accepeted: true},
-                {id:'123450',neologismo: 'Neologismo 6',accepeted: true}
-                ]
+    created(){
+        axios.get('http://localhost:3000/neologismes')
+          .then(response => {
+            for (let index = 0; index < response.data.length; index++) {
+                console.log(response.data[index].proposal);
+            if (response.data[index].proposal) {
+                this.neologismes.push(response.data[index]);
+            }
+        }      
+            }),
+        axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.login = response.data;
+          })
+ 
+        //console.log(this.neologismes);
+        //console.log(non_proposals);
+    },
+    data() {
+        return {
+            neologismes: [],
+            login: []
         }
-    }
+    },
+    methods:{
+      submit(id,type,n_mssg){
+        var payload = {}; 
+          switch (type){
+            case 'accepted': payload = {proposal:false}; break;
+            case 'reject': payload = {rejected:true,mssg:n_mssg }; break;
+          }
+            axios.patch('http://localhost:3000/neologismes/' + id, payload)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+        },
+}
 }
 </script>
 

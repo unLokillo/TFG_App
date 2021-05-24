@@ -3,11 +3,11 @@
     <div class="ranking-title">
     <h3> Neologismos Aceptados </h3>
     </div>
-     <div class="neo-card" v-for="(value,index) in items" :key="index" >
+     <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
-         <h5>{{ value.neologismo }}</h5>
+         <h5>{{ value.neologisme }}</h5>
             <div>
-            <font-awesome-icon icon="heart"/> {{ value.likes }}
+            <font-awesome-icon icon="heart"/> {{ value.liked }}
             </div>
          <b-button class="bttn-app" :to="{name: 'v-neologisme',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
         </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     watch: {
     $route: {
@@ -26,19 +27,26 @@ export default {
       }
     }
   },
+      created(){
+        axios.get('http://localhost:3000/neologismes')
+          .then(response => {
+            for (let index = 0; index < response.data.length; index++) {
+            if (!response.data[index].proposal) {
+                this.neologismes.push(response.data[index]);
+            }
+        }      
+            }),
+        axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.login = response.data;
+          })
+    },
     data() {
         return {
-            showModal: false,
-            items: [
-                {id: 123456, neologismo: 'Neologismo 1',accepeted: true},
-                {id: 123455, neologismo: 'Neologismo 2',accepeted: false},
-                {id: 123454, neologismo: 'Neologismo 3',accepeted: false},
-                {id: 123453, neologismo: 'Neologismo 4',accepeted: true},
-                {id: 123452, neologismo: 'Neologismo 5',accepeted: true},
-                {id: 123451, neologismo: 'Neologismo 6',accepeted: true}
-            ]
+            neologismes: [],
+            login: []
         }
-    }
+    },
 }
 </script>
 

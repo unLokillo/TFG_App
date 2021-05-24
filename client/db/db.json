@@ -2,19 +2,20 @@
   "login": [
     {
       "email_or_user": "admin",
-      "password": "password",
-      "logged": true,
+      "password": "admin",
+      "logged": false,
       "user_id": 2,
+      "admin": false,
       "id": 1
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "Funciona xfa",
+      "nickname": "martin_martin",
       "name": "Martin",
       "surname": "Martin Martin",
-      "email": "ajajaasies@email.com",
+      "email": "email.super.real@real.domain.com",
       "date": "30/10/1998",
       "gender": "non binary",
       "password": "password",
@@ -37,26 +38,61 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "",
+      "img": "https://picsum.photos/300/150/?image=35",
       "points": 2000,
       "liked_neo": 3,
       "admin": true
     },
     {
-      "nickname": "",
-      "name": "",
-      "surname": "",
-      "email": "",
-      "date": "",
-      "gender": "",
-      "password": "",
-      "school": "",
-      "mother_tonge": "",
-      "image": null,
-      "points": 0,
-      "position": 10,
-      "admin": false,
-      "id": 3
+      "id": 3,
+      "nickname": "usuario nº1",
+      "name": "Usuario",
+      "surname": "Numero Uno",
+      "email": "email.super.real@real.domain.com",
+      "date": "11/09/2001",
+      "gender": "non binary",
+      "password": "password",
+      "school": "ETSIINF",
+      "mother_tonge": "Español",
+      "img": "https://picsum.photos/300/150/?image=41",
+      "position": 23,
+      "points": 2000,
+      "liked_neo": 3,
+      "admin": false
+    },
+    {
+      "id": 4,
+      "nickname": "idk",
+      "name": "I",
+      "surname": "De ca",
+      "email": "email.super.real@real.domain.com",
+      "date": "30/10/1998",
+      "gender": "non binary",
+      "password": "password",
+      "school": "ETSIINF",
+      "mother_tonge": "Español",
+      "img": "https://picsum.photos/300/150/?image=41",
+      "position": 23,
+      "points": 2000,
+      "liked_neo": 3,
+      "admin": false
+    },
+    {
+      "id": 5,
+      "nickname": "girl in red?",
+      "name": "Girl",
+      "surname": "De rojo",
+      "email": "mira no se solo quiero terminar esto",
+      "date": "30/10/1998",
+      "gender": "non binary",
+      "password": "password",
+      "school": "ETSIINF",
+      "mother_tonge": "Español",
+      "img": "https://picsum.photos/300/150/?image=41",
+      "position": 23,
+      "points": 2000,
+      "liked_neo": 3,
+      "admin": false
     }
   ],
   "neologismes": [
@@ -92,13 +128,13 @@
       ],
       "img": "https://picsum.photos/1024/400/?image=40",
       "liked": 2,
-      "proposal": false,
+      "proposal": true,
       "points": 0,
       "rejected": false,
       "position": 1,
       "user": "User1 Surname1",
       "date": "30/10/1998",
-      "mssg": "",
+      "mssg": "asdasd",
       "id": 1
     },
     {
@@ -182,9 +218,252 @@
       "date": "30/10/1998",
       "mssg": "",
       "id": 3
+    },
+    {
+      "neologisme": "Neologisme 4",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": false,
+      "position": 3,
+      "rejected": false,
+      "points": 0,
+      "user": "User1 Surname1",
+      "date": "30/10/1998",
+      "mssg": "",
+      "id": 4
+    },
+    {
+      "neologisme": "Neologisme 5",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": false,
+      "position": 3,
+      "rejected": false,
+      "points": 0,
+      "user": "User1 Surname1",
+      "date": "30/10/1998",
+      "mssg": "",
+      "id": 5
+    },
+    {
+      "neologisme": "Neologisme 6",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": true,
+      "position": 3,
+      "rejected": true,
+      "points": 0,
+      "user": "Martin",
+      "date": "30/10/1998",
+      "mssg": "Añade una descripción más concisa por favor",
+      "id": 6
+    },
+    {
+      "neologisme": "Neologisme 7",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": true,
+      "position": 3,
+      "rejected": true,
+      "points": 0,
+      "user": "User1 Surname1",
+      "date": "30/10/1998",
+      "mssg": "Nada de lo que has puesto tiene sentido",
+      "id": 7
+    },
+    {
+      "neologisme": "Neologisme 8",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": false,
+      "position": 3,
+      "rejected": false,
+      "points": 0,
+      "user": "User1 Surname1",
+      "date": "30/10/1998",
+      "mssg": "",
+      "id": 8
+    },
+    {
+      "neologisme": "Neologisme 9",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripcion 1"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "value": "Fuente 1"
+        },
+        {
+          "id": 3,
+          "value": "Fuente 2"
+        },
+        {
+          "id": 4,
+          "value": "Fuente 3"
+        }
+      ],
+      "img": null,
+      "liked": 10,
+      "proposal": false,
+      "position": 3,
+      "rejected": false,
+      "points": 0,
+      "user": "User1 Surname1",
+      "date": "30/10/1998",
+      "mssg": "",
+      "id": 9
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
