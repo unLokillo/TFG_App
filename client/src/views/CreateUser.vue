@@ -2,46 +2,53 @@
   <div class="modify-user-body">
         <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h4>Crear cuenta</h4>
-
-          <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
-            <b-form-input  v-model="form.nickname" ></b-form-input>
+<b-form @submit="submit()">
+          <b-input-group prepend="* Nombre de Usuario: " class="mt-3" >
+            <b-form-input required v-model="form.nickname" ></b-form-input>
           </b-input-group>
 
-          <b-input-group prepend="Nombre: " class="mt-3" >
-            <b-form-input  v-model="form.name" ></b-form-input>
+          <b-input-group prepend="* Nombre: " class="mt-3" >
+            <b-form-input required v-model="form.name" ></b-form-input>
           </b-input-group>
-          <div class="mt-2">Value: {{ form.name }}</div>
+
 
       <b-input-group prepend="Apellidos: " class="mt-3" >
             <b-form-input  v-model="form.surname" ></b-form-input>
             
           </b-input-group>
 
-      <b-input-group prepend="email: " class="mt-3" >
-            <b-form-input  v-model="form.email" type="email" ></b-form-input>
+      <b-input-group prepend="* email: " class="mt-3" >
+            <b-form-input required v-model="form.email" type="email" ></b-form-input>
             
           </b-input-group>
 
       <div class="password-box">
-        <b-input-group prepend="Contraseña: " class="mt-3" >
-            <b-form-input type="password"  v-model="form.password" ></b-form-input>
+        <b-form-text id="input-live-help">Your full name.</b-form-text>
+        <b-input-group prepend="* Contraseña: " class="mt-3" >
+            <b-form-input required type="password" id="input-live" aria-describedby="input-live-help input-live-feedback" v-model="form.password" :state="password_state" trim></b-form-input>
+          <b-form-invalid-feedback id="input-live-feedback">
+              EL tamaño de la contraseña debe de tener entre 6 y 12 caracteres.
+          </b-form-invalid-feedback>
+        </b-input-group>
+        <b-input-group prepend="* Repite la Contraseña: " class="mt-3" >
+            <b-form-input required type="password"  v-model="r_password" :state="repeat_password" aria-describedby="r_password_helper" ></b-form-input>
+            <b-form-invalid-feedback id="r_password_helper">
+              Las contraseñas deben de coincidir.
+          </b-form-invalid-feedback>
           </b-input-group>
 
-        <b-input-group prepend="Repite la Contraseña: " class="mt-3" >
-            <b-form-input type="password"  v-model="r_password" ></b-form-input>
-          </b-input-group>
       </div>
 
           <div class="selectors-card">
             <h6>Genero</h6>
-            <b-form-select  v-model="form.gender" :options="genders" required></b-form-select>
+            <b-form-select  v-model="form.gender" :options="genders"></b-form-select>
           </div>  
           <div class="selectors-card">
             <h6>Lengua materna</h6>
-            <b-form-select class="mt-3"  v-model="form.mother_tonge" :options="mother_tonge" required></b-form-select>
+            <b-form-select class="mt-3"  v-model="form.mother_tonge" :options="mother_tonge"></b-form-select>
           </div>
           <div class="selectors-card">
-            <h6>Escuela UPM</h6>
+            <h6>* Escuela UPM</h6>
             <b-form-select class="mt-3"  v-model="form.school" :options="schools" required></b-form-select>
           </div>  
       <div>
@@ -54,7 +61,9 @@
     ></b-form-file>
     <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
     </div>
-    <b-button v-on:click="submit()" class="mt-3" type="submit" variant="primary">Submit</b-button>
+    <!-- v-on:click="submit()"-->
+    <b-button  class="mt-3" type="submit" variant="primary">Submit</b-button>
+    </b-form>
 </div>
 </template>
 
@@ -76,6 +85,9 @@ export default {
           image: null,
           points: 0,
           position: 10,
+          proposals:[],
+          accepted_neo: [],
+          fav_neo: [],
           admin: false
         },
         genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
@@ -86,11 +98,11 @@ export default {
       }
     },
     computed: {
-      validation() {
-        return this.form.password.length > 4 && this.form.password.length < 13
+      password_state(){
+        return this.form.password.length > 6 && this.form.password.length <14;
       },
-      v_r_password() {
-          return this.form.password == this.r_password
+      repeat_password(){
+        return this.form.password.localeCompare(this.r_password) ? false:true
       }
     },
     methods:{

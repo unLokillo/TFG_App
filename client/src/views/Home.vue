@@ -2,7 +2,9 @@
 <div class="body">
   <div class="menu-1">
     <p> ¡Buenos días! Bienvenido a <strong>Neologismos</strong> un proyecto de la Unviersidad Politecncia de Madrid que tiene con fin registrar nuevos nelogismos relaccionadsos con el mundos de las IT. ¿Te apetecería contribuir?</p>
-    <router-link :to="`/create-neologisme`" tag="b-button"> ¡Contribuye! </router-link>  
+    <p style="color: var(--fail)" v-if="!login_info.logged"> Necesitas haber iniciado sesión para acceder a esta opción</p>
+    <b-button  v-if="!login_info.logged" disabled  variant="primary"> ¡Contribuye! </b-button>
+    <router-link :to="`/create-neologisme`" tag="b-button" v-else> ¡Contribuye! </router-link>  
   </div>
   <h4>Palabras de la semana</h4>
   <div class="frequent-words">
@@ -49,7 +51,13 @@ export default {
             //this.name = response.data[0].name;
             this.neoData = response.data;
         })
+    axios.get('http://localhost:3000/login/1')
+        .then(response => {
+            //this.name = response.data[0].name;
+            this.login_info = response.data;
+        })
     },
+    
   watch: {
     $route: {
       immediate: true,
@@ -62,6 +70,7 @@ export default {
     return{
       showModal: false,
       neoData: '',
+      login_info: []
     }
   }
 }

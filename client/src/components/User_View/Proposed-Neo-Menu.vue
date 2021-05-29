@@ -5,6 +5,7 @@
     </div>
      <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
+         <b-avatar :src="value.img"></b-avatar>
          <h5>{{ value.neologisme }}</h5>
             <div v-if="value.rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
@@ -12,7 +13,7 @@
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
-         <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">+</b-button>
+         <b-button class="bttn-app" :to="{name: 'vp-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">+</b-button>
         </div>
      </div>
     <router-link :to="{name: 'view-all-proposals',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>

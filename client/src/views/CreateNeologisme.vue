@@ -56,11 +56,9 @@ export default {
     // Triggered when `childToParent` event is emitted by the child.
     onDescriptionsClick (value) {
       this.form.descriptions = value;
-      console.log('descriptions');
     },
     onSourcesClick (value) {
       this.form.sources = value;
-      console.log('source');
     },
     prepare_data(){
         this.form.date = Date.now(); // get actual date

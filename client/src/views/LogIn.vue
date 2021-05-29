@@ -49,7 +49,7 @@ export default {
           password: '',
           logged: false,
           user_id: 0,
-          admin: false
+          admin: true
         },
         correct_login: null,
         show: true
@@ -71,8 +71,7 @@ export default {
             this.form.logged = true;
             this.admin = response.data[i].admin;
           axios.put('http://localhost:3000/login/' + i,this.form)
-          .then(response => {
-          
+          .then(response => {      
             });
           this.$router.push({ path: `/`}) // -> /user/123
           };

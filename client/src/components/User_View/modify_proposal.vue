@@ -1,7 +1,7 @@
 <template>
   <div class="modify-user-body">
           <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
-        <h4>Modificar Información de usuario</h4>
+        <h4>Modificar Propuesta de Neologismo</h4>
 
           <b-input-group prepend="Neologismo: " class="mt-3" >
             <b-form-input :value="neo_name" ></b-form-input>

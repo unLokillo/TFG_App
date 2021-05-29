@@ -5,11 +5,12 @@
     </div>
      <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
+        <b-avatar :src="value.img"></b-avatar>
          <h5>{{ value.neologisme }}</h5>
             <div>
             <font-awesome-icon icon="heart"/> {{ value.liked }}
             </div>
-         <b-button class="bttn-app" :to="{name: 'v-neologisme',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
+         <b-button class="bttn-app" :to="{name: 'v-neologisme',params: { userid: $route.params.userid ,neoid: value.id}}">+</b-button>
         </div>
      </div>
     <router-link :to="{name: 'view-all-neologismes',params: { userid: $route.params.userid }}" class="more-bttn" tag="b-button" >Ver mas</router-link>

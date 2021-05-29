@@ -1,7 +1,7 @@
 <template>
 <div class="header-img">
-    <router-link :to="{ name: 'vUser',params: { userid: user_id } }" class="user-bttn" tag="div" v-if="logged">
-        <b-avatar src="https://picsum.photos/300/150/?image=41"></b-avatar> User_1 
+    <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.logged">
+        <b-avatar :src="login_info.img"></b-avatar> {{ login_info.email_or_user }} 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
         Log in 
@@ -15,21 +15,8 @@ export default {
     created() {
         axios.get('http://localhost:3000/login/1')
           .then(response => {
-              this.logged = response.data.logged;
-              this.user_id = response.data.user_id;
-              console.log(response.data.logged);
-              console.log(response.data.user_id);
+              this.login_info = response.data;
             });
-    },
-    mounted(){
-         axios.get('http://localhost:3000/login/1')
-          .then(response => {
-              this.logged = response.data.logged;
-              this.user_id = response.data.user_id;
-              console.log(response.data.logged);
-              console.log(response.data.user_id);
-            });
-            this.$forceUpdate()
     },
     watch: {
     $route: {
@@ -43,7 +30,7 @@ export default {
         return {
             showModal: false,
             user_id: '',
-            logged: false
+            login_info: []
         }
     }
 }

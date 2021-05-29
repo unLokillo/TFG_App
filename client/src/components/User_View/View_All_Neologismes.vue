@@ -7,9 +7,10 @@
 
         <div class="neologisme-cards">
             <div v-for="(value,index) in neologismes" :key="index">
-                <h5>{{ value.neologismo }}</h5>
+                <b-avatar :src="value.img"></b-avatar>
+                <h5>{{ value.neologisme }}</h5>
                 <div>
-                    <font-awesome-icon icon="heart"/> {{ value.likes }}
+                    <font-awesome-icon icon="heart"/> {{ value.liked }}
                 </div>
                  <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
             </div>
@@ -19,18 +20,24 @@
 </template>
 
 <script>
+    import axios from 'axios';
 export default {
+    created(){
+        axios.get('http://localhost:3000/neologismes')
+          .then(response => {
+              var i = 0;
+              while(i<5 && i<response.data.length){
+                  if(!response.data[i].proposal){
+                    this.neologismes.push(response.data[i]);
+                  }
+                   i++;
+              }
+            })
+    },
     data(){
         return{
             user_id: '123456789',
-            neologismes: [
-                {id:'12345',neologismo: 'Neologismo 1',likes: '20'},
-                {id:'12344',neologismo: 'Neologismo 2',likes: '25'},
-                {id:'12343',neologismo: 'Neologismo 3',likes: '55'},
-                {id:'12342',neologismo: 'Neologismo 4',likes: '45'},
-                {id:'12341',neologismo: 'Neologismo 5',likes: '65'},
-                {id:'12340',neologismo: 'Neologismo 6',likes: '65'}
-                ]
+            neologismes: []
         }
     }
 }
@@ -44,18 +51,19 @@ export default {
 
 .all-neologismes-card{
     height: 100%;
-    max-height: 500px;
+    max-height: 700px;
     overflow: scroll;
 }
 
 
 .neologisme-cards > div{
+    border-left: 14px solid var(--border-left) !important;
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
     border: 1px solid var(--border);
     margin: 5%;
-    align-items: baseline;
+    align-items: center;
 }
 
 </style>

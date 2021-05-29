@@ -63,7 +63,24 @@ var route = [
         name: 'create-user',
         component: () => import('@/views/CreateUser.vue'),
       },
-
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'ranking_users',
+        name: 'ranking',
+        component: () => import('@/components/User_View/Ranking.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'ranking_neologismes',
+        name: 'ranking_neo',
+        component: () => import('@/components/Main/All_Neologismes_Ranking.vue'),
+        props: true
+      }
     ]
   },
   {
@@ -130,7 +147,16 @@ var route = [
         meta: {
           showModal: true
         },
-        path: 'view-all-neologismes/view-neologisme/:neoId',
+        path: 'view-all-proposals/view-neologisme/:neoId',
+        name: 'vp-neologismes',
+        component: View_Neologisme,
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'view-all-proposals/view-neologisme/:neoId',
         name: 'v-neologismes',
         component: View_Neologisme,
         props: true
@@ -171,6 +197,24 @@ var route = [
         component: () => import('@/components/User_View/modify_proposal.vue'),
         props: true
       },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'fav_neologismes',
+        name: 'f-neo',
+        component: () => import('@/components/User_View/fav-neologismes.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'fav_neologismes/view-neologisme/:neoId',
+        name: 'fv-neologismes',
+        component: View_Neologisme,
+        props: true
+      }
     ]
   },
   {

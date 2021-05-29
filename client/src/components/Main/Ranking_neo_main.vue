@@ -6,7 +6,8 @@
          <b-avatar :src="data.item.img"></b-avatar>   
     </template>
     </b-table>
-    <b-button class="more-bttn">Ver mas</b-button>
+     <router-link class="more-bttn" :to="{name: 'ranking_neo',params: { userid: $route.params.userid }}" tag="b-button"> 
+    Ver mas</router-link>
     </div>
 </template>
 
@@ -16,13 +17,22 @@ export default {
     created(){
         axios.get('http://localhost:3000/neologismes')
           .then(response => {
-              this.items = response.data;
+              var i = 0;
+              while(i<5 && i<response.data.length){
+                  if(!response.data[i].proposal){
+                    this.items.push(response.data[i]);
+                  }
+                   i++;
+              }
             })
     },
     data() {
         return {
             labels: [,
-            'position',{ key: 'img', label: 'Imagen' },'neologisme', 'liked'],
+            { key: 'position', label: 'Posición' },
+            { key: 'img', label: 'Imagen' },
+            { key: 'neologisme', label: 'Neologismo' }, 
+            { key: 'liked', label: 'Puntuación' }],
             items: []
         }
     },

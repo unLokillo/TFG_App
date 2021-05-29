@@ -3,16 +3,16 @@
     {
       "email_or_user": "admin",
       "password": "admin",
-      "logged": false,
+      "logged": true,
       "user_id": 2,
-      "admin": false,
+      "admin": true,
       "id": 1
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "martin_martin",
+      "nickname": "Martin",
       "name": "Martin",
       "surname": "Martin Martin",
       "email": "email.super.real@real.domain.com",
@@ -22,7 +22,16 @@
       "school": "ETSIINF",
       "mother_tonge": "Español",
       "img": "https://picsum.photos/300/150/?image=41",
-      "position": 23,
+      "position": 1,
+      "proposals": [
+        1
+      ],
+      "fav_neo": [
+        2
+      ],
+      "accepted_neo": [
+        2
+      ],
       "points": 2000,
       "liked_neo": 3,
       "admin": false
@@ -39,8 +48,18 @@
       "school": "ETSIINF",
       "mother_tonge": "Español",
       "img": "https://picsum.photos/300/150/?image=35",
+      "position": 0,
+      "proposals": [
+        1
+      ],
+      "accepted_neo": [
+        2
+      ],
+      "fav_neo": [
+        2
+      ],
       "points": 2000,
-      "liked_neo": 3,
+      "liked_neo": 1,
       "admin": true
     },
     {
@@ -54,8 +73,17 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=41",
-      "position": 23,
+      "img": "https://picsum.photos/300/150/?image=40",
+      "position": 2,
+      "proposals": [
+        1
+      ],
+      "accepted_neo": [
+        2
+      ],
+      "fav_neo": [
+        2
+      ],
       "points": 2000,
       "liked_neo": 3,
       "admin": false
@@ -71,8 +99,17 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=41",
-      "position": 23,
+      "img": "https://picsum.photos/300/150/?image=32",
+      "position": 3,
+      "proposals": [
+        1
+      ],
+      "accepted_neo": [
+        2
+      ],
+      "fav_neo": [
+        2
+      ],
       "points": 2000,
       "liked_neo": 3,
       "admin": false
@@ -88,8 +125,17 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=41",
-      "position": 23,
+      "img": "https://picsum.photos/300/150/?image=21",
+      "position": 4,
+      "proposals": [
+        1
+      ],
+      "accepted_neo": [
+        2
+      ],
+      "fav_neo": [
+        2
+      ],
       "points": 2000,
       "liked_neo": 3,
       "admin": false
@@ -172,7 +218,7 @@
       "proposal": false,
       "points": 0,
       "rejected": false,
-      "position": 2,
+      "position": 1,
       "mssg": "",
       "user": "User1 Surname1",
       "date": "30/10/1998",
@@ -208,10 +254,10 @@
           "value": "Fuente 3"
         }
       ],
-      "img": null,
+      "img": "https://picsum.photos/300/150/?image=21",
       "liked": 10,
       "proposal": false,
-      "position": 3,
+      "position": 2,
       "rejected": false,
       "points": 0,
       "user": "User1 Surname1",
@@ -290,10 +336,10 @@
           "value": "Fuente 3"
         }
       ],
-      "img": null,
+      "img": "https://picsum.photos/300/150/?image=45",
       "liked": 10,
       "proposal": false,
-      "position": 3,
+      "position": 4,
       "rejected": false,
       "points": 0,
       "user": "User1 Surname1",
@@ -334,7 +380,7 @@
       "img": null,
       "liked": 10,
       "proposal": true,
-      "position": 3,
+      "position": 5,
       "rejected": true,
       "points": 0,
       "user": "Martin",
@@ -372,10 +418,10 @@
           "value": "Fuente 3"
         }
       ],
-      "img": null,
+      "img": "https://picsum.photos/300/150/?image=56",
       "liked": 10,
       "proposal": true,
-      "position": 3,
+      "position": 6,
       "rejected": true,
       "points": 0,
       "user": "User1 Surname1",
@@ -413,10 +459,10 @@
           "value": "Fuente 3"
         }
       ],
-      "img": null,
+      "img": "https://picsum.photos/300/150/?image=54",
       "liked": 10,
       "proposal": false,
-      "position": 3,
+      "position": 7,
       "rejected": false,
       "points": 0,
       "user": "User1 Surname1",
@@ -454,10 +500,10 @@
           "value": "Fuente 3"
         }
       ],
-      "img": null,
+      "img": "https://picsum.photos/300/150/?image=16",
       "liked": 10,
       "proposal": false,
-      "position": 3,
+      "position": 8,
       "rejected": false,
       "points": 0,
       "user": "User1 Surname1",

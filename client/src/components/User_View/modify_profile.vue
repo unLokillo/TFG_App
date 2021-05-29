@@ -58,16 +58,18 @@
             <b-button variant="outline-success"  v-on:click="submit('school',form.school)">Modificar</b-button>
           </div>  
       <div>
-
+<div class="selectors-card">
+  <h6>Imagen de usuario</h6>
       <b-form-file v-model="form.img"
       :state="Boolean(form.img)"
-      placeholder="Choose a file or drop it here..."
+      placeholder="Elige un archivo o añadelo aquí"
       drop-placeholder="Drop file here..."
       plain
     ></b-form-file>
-    <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
+    <div class="mt-3">Imagen seleccionada: {{ form.img ? form.img.name : '' }}</div>
+    <b-button class="mt-3" type="submit" v-on:click="submit('img',form.image)" variant="primary">Modificar Imagen</b-button>
     </div>
-    <b-button class="mt-3" type="submit" v-on:click="submit('img',form.image)" variant="primary">Submit</b-button>
+    </div>  
 </div>
 </template>
 
@@ -78,7 +80,6 @@ export default {
         axios.get('http://localhost:3000/users/1')
         .then(response => {
             //this.name = response.data[0].name;
-            console.log(response.data);
             this.form.nickname = response.data.nickname;
             this.form.name = response.data.name;
             this.form.surname = response.data.surname;

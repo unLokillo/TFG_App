@@ -19,7 +19,7 @@ export default {
         created(){
         axios.get('http://localhost:3000/users')
           .then(response => {
-            for (let index = 0; index < response.data.length; index++) {
+            for (let index = 0; index<5 && index < response.data.length; index++) {
             if (!response.data[index].admin) {
                 this.items.push(response.data[index]);
             }
@@ -30,7 +30,11 @@ export default {
     data() {
         return {
             labels: [,
-            'position',{ key: 'img', label: 'Imagen' },'nickname', 'points'],
+            { key: 'position', label: 'Posición' },
+            { key: 'img', label: 'Imagen' },
+            { key: 'nickname', label: 'Usuario' }, 
+            { key: 'points', label: 'Puntuación' }
+            ],
             items: []
         }
     },

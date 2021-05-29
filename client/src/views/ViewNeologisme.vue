@@ -45,7 +45,8 @@
             <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
         </div>
-        <router-link tag="b-button" v-if="form.proposal" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </router-link>
+        <router-link tag="b-button" v-if="modify && proposals[0]==1" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </router-link>
+
     </div>
 
 </template>
@@ -56,17 +57,34 @@ export default {
     beforeCreate(){
         var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
         axios.get(uri)
-        .then(response => {
-            //this.name = response.data[0].name;
-            console.log(response.data);
-            this.form = response.data;
-        })
+        .then(response_neo => {
+            this.form = response_neo.data;
+        
 
     axios.get('http://localhost:3000/login/1')
+          .then(response_log => {
+              this.login = response_log.data;    
+    axios.get('http://localhost:3000/users/' + response_log.data.user_id)
           .then(response => {
-              this.login = response.data;
+              this.proposals = response.data.proposals;
+              var i= 0;
+              var res=false;
+              while(!res && i<response.data.proposals.length){
+                  console.log
+                  res=response_neo.data.proposal && (response.data.proposals[i]==response_neo.data.id);
+                  console.log(res);
+                  i++;
+              }
+              this.modify = res;
           })
-    },    
+          })
+         })
+    },
+    
+    mounted(){
+
+    },
+
 watch: {
     $route: {
       immediate: true,
@@ -76,8 +94,10 @@ watch: {
     }
   },data() {    
         return {
+            proposals: [],
             login: [],
             form: '',
+            modify:false,
             login_data: '',
             validated: true,
             showModal: false,

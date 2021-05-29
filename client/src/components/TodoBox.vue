@@ -31,15 +31,19 @@ export default {
      methods: {
       addItem: function() {
         if (this.items.length>0) {
+          if(this.newItem.length>0){
           this.items.push({
-          id: this.items[this.items.length-1].id + 1,
-          description: this.newItem,
+            id: this.items[this.items.length-1].id + 1,
+            description: this.newItem,
         });
+          }
         } else {
+          if(this.newItem.length>0){
           this.items.push({
-          id: 1,
-          description: this.newItem,
+            id: 1,
+            description: this.newItem,
         });
+          }
         }
         this.newItem = '';
       },

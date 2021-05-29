@@ -7,6 +7,7 @@
 
         <div class="neologisme-cards">
             <div v-for="(value,index) in neologismes" :key="index" >
+                <b-avatar :src="value.img"></b-avatar>
                 <h5>{{ value.neologismo }}</h5>
             <div v-if="value.rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
@@ -79,11 +80,12 @@ export default {
 
 .all-neologismes-card{
     height: 100%;
-    max-height: 500px;
+    max-height: 700px;
     overflow: scroll;
 }
 
 .neologisme-cards > div{
+    border-left: 14px solid var(--border-left) !important;
     padding: 10px;
     display: flex;
     justify-content: space-evenly;

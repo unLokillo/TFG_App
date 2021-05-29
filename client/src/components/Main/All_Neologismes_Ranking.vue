@@ -2,26 +2,21 @@
     <div class="v-ranking-card">
         <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <div class="v-ranking-title">
-            <h3>Ranking</h3>
+            <h3>Ranking Neologismos</h3>
         </div>
-        <div class="v-ranking-user" v-for="(value,index) in users" :key="index">
+        <div class="v-ranking-user" v-for="(value,index) in neologismes" :key="index">
             <div class="position-badge" :style="asign_color(value.position)"> <strong> {{ value.position }} </strong></div>
             <div class="avatar-card">
                 <b-avatar :src="value.img"></b-avatar> 
-                {{value.name}}
+                {{value.neologisme}}
             </div>
             <div class="v-ranking-points">
-                <font-awesome-icon style="font-size:15px;" icon="trophy"/>
-                {{  value.points  }}
+                <font-awesome-icon style="font-size:15px;" icon="heart"/>
+                {{  value.liked  }}
             </div>
-
-            <div >
-            <b-dropdown right text="Opciones" class="m-2" v-if="logged.admin">
-            <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
-                <b-dropdown-item> Eliminar Usuario </b-dropdown-item>
-            </b-dropdown>
+            <router-link :to="`/fav-neo/${value.id}`" tag="b-button" style="margin-right: 2rem;"> + </router-link>    
         </div>
-        </div>
+        
     </div>
 </template>
 
@@ -29,11 +24,11 @@
 import axios from 'axios';
 export default {
     created() {
-        axios.get('http://localhost:3000/users')
+        axios.get('http://localhost:3000/neologismes')
           .then(response => {
               for (let index = 0; index < response.data.length; index++) {
-            if (!response.data[index].admin) {
-                this.users.push(response.data[index]);
+            if (!response.data[index].proposal) {
+                this.neologismes.push(response.data[index]);
             }
         }
     });
@@ -47,7 +42,7 @@ export default {
     data(){
         return{
             admin: true,
-            users: [],
+            neologismes: [],
             logged: []
         }
     },
