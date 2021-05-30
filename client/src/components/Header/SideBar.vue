@@ -15,23 +15,23 @@
             </router-link>
           
             <router-link :to="{ name: 'ranking',params: {} }" class="sidebar-button" tag="div">
-               <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Usuarios <div></div>
+               <font-awesome-icon style="font-size: 120%; !important" icon="trophy" /> Ranking Usuarios <div></div>
             </router-link>
 
             <router-link :to="{ name: 'ranking_neo',params: {userid:form.user_id} }" class="sidebar-button" tag="div" >  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="trophy" /> Ranking Neologismos <div></div>
             </router-link>
 
             <router-link :to="{ name: 'main-view-all-proposals',params: {} }" class="sidebar-button"  tag="div" v-if="form.logged">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Tus Propuestas <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus Propuestas <div></div>
             </router-link>
 
             <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div" v-if="form.logged">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" />  <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
-              <font-awesome-icon style="font-size: 120%; !important" icon="bars" /> Salir <div></div>
+              <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
           </div>
           </div>
 
@@ -45,19 +45,19 @@
             </router-link>
 
             <router-link :to="{ name: 'vu-ranking_neo',params: {userid:form.user_id} }" class="sidebar-button" tag="div" >  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="trophy" /> Ranking Neologismos <div></div>
             </router-link>
 
             <router-link :to="{ name: 'view-all-proposals',params: {userid:form.user_id} }" class="sidebar-button"  tag="div" v-if="form.logged">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Tus Propuestas <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus Propuestas <div></div>
             </router-link>
 
             <router-link :to="{ name: 'vu-badges',params: {userid:form.user_id} }" class="sidebar-button" tag="div" v-if="form.logged">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Logros <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
-              <font-awesome-icon style="font-size: 120%; !important" icon="bars" /> Salir <div></div>
+              <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
           </div>
           </div>
 
