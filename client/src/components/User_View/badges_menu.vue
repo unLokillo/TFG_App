@@ -4,54 +4,45 @@
         <div class="top-badges_menu-section">
         <h3>Logros</h3>
         </div>
-        <div class="main-section">
-             <div v-for="(value,index) in badges" :key="index"  class="neologismes-badges_menu" >
-             <b-img src="https://picsum.photos/600/300/?image=20" v-bind="mainProps" rounded alt="Rounded image"></b-img>
-             <p>AJAJAJAJ ASI ES DOÑA</p>
-             <base-progress color="blue" percentage="50" class="mx-2 mb-2"
-        ></base-progress>
+        <div class="main-section-badges">
+            <h5>Logros de Usuario</h5>
+            <div v-for="(value,index) in badges" :key="index" class="neologismes-badges">
+            <div v-for="(value2,index2) in value" :key="index2"  class="neologismes-badges-card" >
+                <h6>{{ value2.name }}</h6>
+                <b-img :src="value2.img" v-bind="mainProps" rounded alt="Badge Img" v-if="!value2.completed"></b-img>
+                <b-img :src="value2.img" v-bind="mainProps" style="opacity:0.5" rounded alt="Badge Img" v-else></b-img>
+                <p > {{ value2.description }}</p>
+                <div class="progress-bar-div">
+                <b-progress max="100" v-if="!value2.completed">
+                    <b-progress-bar :value="value2.percentage" variant="success"></b-progress-bar>
+                </b-progress>
+                <p v-if="!value2.completed"> {{ value2.percentage/10 }}/10 </p>
+                <p v-else style="font-size:14px"> Completada el día: {{ value2.completed_date }} </p>
+                </div>
              </div>
         </div>
-    <!--
-        <div class="main-section">
-            <div v-for="(value,index) in badges" :key="index"  class="neologismes-badges_menu" >
-                <div style="overflow: scroll;">
-                <b-card img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top style="max-width: 20rem; max-height: 20rem;" class="mb-2">
-                <h6 style="border-bottom: 1px solid var(--border); padding-bottom: 1px;">{{ value.name_badge }}</h6>
-                <b-card-text style="font-size: 13px;">
-                    {{ value.text }}
-                </b-card-text>
-                <div style="border-top: 1px solid var(--border);" v-if="value.completed">
-                    mira me cago en dios
-                </div>
-                </b-card>
-                </div>
-            </div>
         </div>
-        -->
     </div>
 </template>
 
 <script>
-import BaseProgress from "@/components/User_View/BaseProgress";
-
+import axios from 'axios';
 export default {
   name: 'View-User',
-  components: {
-      BaseProgress
+created() {
+        axios.get('http://localhost:3000/badges')
+          .then(response => {
+              this.badges = new Array(Math.ceil(response.data.length / 4))
+                    .fill()
+                    .map(_ => response.data.splice(0, 4))
+               console.log(this.badges);
+            });
     },
     data(){
         return{
             mainProps: {width: 75, height: 75, class: 'm1' },
-            user_id: '123456789',
-            badges: [
-                {id_badge: '123456',text: "Logueate 3 veces en la apliacion",completed: false,name_badge: 'Badge_1',completed_date: 'XX/XX/XXXX',completion_percentage: 50},
-                {id_badge: '123456',text: "Logueate 5 veces en la apliacion",completed: true,name_badge: 'Badge_2',completed_date: '30/10/1998',completion_percentage: 50},
-                {id_badge: '123456',text: "Marca un neologismo como megusta",completed: false,name_badge: 'Badge_3',completed_date: 'XX/XX/XXXX',completion_percentage: 50},
-                {id_badge: '123456',text: "Marca dos neologismo como megusta",completed: true,name_badge: 'Badge_4',completed_date: 'XX/XX/XXXX',completion_percentage: 50}
-            ],
-            v_a: 33.333333333,
-            m_a: 50.0,
+            badges: [],
+            labels: ["Usuarios", "Neologismos"]
         }
     }
 }
@@ -61,17 +52,23 @@ export default {
 .top-badges_menu-section{
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     padding: 2%;
     border-bottom: 1px solid var(--border);
-
+    align-items: center;
 }
 
-.neologismes-badges_menu{
-display: flex;
-flex-direction: column;
-align-items: center;
-border: 1px solid var(--border);
-margin: 2%;
+.neologismes-badges{
+    display: flex;
+}
+
+.neologismes-badges-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--border);
+    margin: 2%;
+    max-width: 20%;
 }
 
 .neologismes-badges_menu > div{
@@ -79,9 +76,13 @@ margin: 2%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    }
+}
 
-.badge-card-unfinished{
-    opacity: 0.5;
+.progress-bar-div{
+    width: 90%;
+}
+
+.bages-section{
+    padding: 2%;
 }
 </style>

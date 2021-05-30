@@ -511,5 +511,70 @@
       "mssg": "",
       "id": 9
     }
+  ],
+  "badges":[
+    {
+      "id":1,
+      "name": "Logro 1",
+      "img": "https://picsum.photos/300/150/?image=41",
+      "description": "Descripción del logro 1",
+      "completed": false,
+      "percentage": 50,
+      "completed_date": "" 
+    },
+    {
+      "id":2,
+      "name": "Logro 2",
+      "img": "https://picsum.photos/300/150/?image=42",
+      "description": "Descripción del logro 3",
+      "completed": true,
+      "percentage": 50,
+      "completed_date": "30/10/1998" 
+    },
+    {
+      "id":3,
+      "name": "Logro 3",
+      "img": "https://picsum.photos/300/150/?image=43",
+      "description": "Descripción del logro 3",
+      "completed": false,
+      "percentage": 20,
+      "completed_date": "" 
+    },
+    {
+      "id":4,
+      "name": "Logro 4",
+      "img": "https://picsum.photos/300/150/?image=44",
+      "description": "Descripción del logro 4",
+      "completed": false,
+      "percentage": 90,
+      "completed_date": "" 
+    },
+    {
+      "id":5,
+      "name": "Logro 5",
+      "img": "https://picsum.photos/300/150/?image=45",
+      "description": "Descripción del logro 5",
+      "completed": true,
+      "percentage": 50,
+      "completed_date": "12/10/1998" 
+    },
+    {
+      "id":6,
+      "name": "Logro 6",
+      "img": "https://picsum.photos/300/150/?image=46",
+      "description": "Descripción del logro 6",
+      "completed": false,
+      "percentage": 5,
+      "completed_date": "" 
+    },
+    {
+      "id":7,
+      "name": "Logro 7",
+      "img": "https://picsum.photos/300/150/?image=7",
+      "description": "Descripción del logro 7",
+      "completed": true,
+      "percentage": 50,
+      "completed_date": "X/XX/XXXX" 
+    }
   ]
 }

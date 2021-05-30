@@ -58,6 +58,12 @@
                 <b-dropdown-item>Cambiar Idioma</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item :to="{name: 'n-error',params: { userid: $route.params.userid}}">Notificar Error</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item >
+                    <download-csv :data   = "neologismes" name    = "filename.csv">
+	                Descargar información Neologismos 
+                    </download-csv>
+                </b-dropdown-item>
             </b-dropdown>
         </div>
     </div>
@@ -105,7 +111,36 @@ export default {
             this.points = response.data.points;
             this.position = response.data.position;
             this.img = response.data.img;
-        })
+        });
+        axios.get('http://localhost:3000/neologismes')
+        .then(response => {
+            this.neologismes = response.data;
+        });
+    },
+    methods: {
+      toCSV: function(){  
+          axios.get('http://localhost:3000/neologismes')
+        .then(response => {
+            var array = typeof response.data != 'object' ? JSON.parse(response.data) : response.data;
+            var str = '';
+           for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ','
+                    line += array[i][index];
+                }
+                str += line + '\r\n';
+            }
+            // Convert Object to JSON
+            var encodedUri = encodeURI(str);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link); // Required for FF
+            link.click();
+            document.body.removeChild(link);
+        });
+        }
     },
     watch: {
     $route: {
@@ -129,6 +164,7 @@ export default {
           img: '',
           points: 0,
           position: 0,
+          neologismes: []
       }
   }
 }

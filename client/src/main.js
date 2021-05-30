@@ -7,6 +7,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSignOutAlt,faGamepad, faHeart, faAward,faBookOpen, faTrophy,faCog, faTimesCircle,faCheckCircle,faQuestionCircle,faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import JsonCSV from 'vue-json-csv'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -20,6 +21,7 @@ library.add(faSignOutAlt,faGamepad,faBookOpen,faHeart,faAward,faTrophy,faCog,faT
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
+Vue.component('downloadCsv', JsonCSV)
 new Vue({
   router,
   store,
