@@ -16,6 +16,24 @@ var route = [
         meta: {
           showModal: true
         },
+        path: 'badges_menu',
+        name: 'badges',
+        component: badges_menu,
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'view-all-proposals',
+        name: 'main-view-all-proposals',
+        component: View_Proposals_User,
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
         path: 'fav-neo/:neoId',
         component: () => import('@/views/ViewNeologisme.vue'),
         props: true
@@ -54,6 +72,14 @@ var route = [
         path: 'forgot-password',
         name: 'forgot-password',
         component: () => import('@/views/ForgotPassword.vue'),
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'forgot-password/reset',
+        name: 'forgot-password',
+        component: () => import('@/components/Main/Change-password.vue'),
       },
       {
         meta: {
@@ -102,6 +128,15 @@ var route = [
         meta: {
           showModal: true
         },
+        path: 'ranking_neologismes',
+        name: 'vu-ranking_neo',
+        component: () => import('@/components/Main/All_Neologismes_Ranking.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
         path: 'view-all-neologismes',
         name: 'view-all-neologismes',
         component: () => import('@/components/User_View/View_All_Neologismes.vue'),
@@ -121,7 +156,7 @@ var route = [
           showModal: true
         },
         path: 'badges_menu',
-        name: 'badges',
+        name: 'vu-badges',
         component: badges_menu,
         props: true
       },
@@ -130,7 +165,7 @@ var route = [
           showModal: true
         },
         path: 'ranking',
-        name: 'ranking',
+        name: 'vu-ranking',
         component: () => import('@/components/User_View/Ranking.vue'),
         props: true
       },

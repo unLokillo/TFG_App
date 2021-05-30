@@ -1,11 +1,12 @@
 <template>
 <div class="v-user-body">
+    <Header/>
     <div class="top-menu">
         <div class="left-menu-card">
             <b-img :src="this.img" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
             <div class="ls-menu">
             <div class="left-side-menus">
-               <router-link :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="div">
+               <router-link :to="{name: 'vu-ranking',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="trophy"/> 
                 <strong> Posición: {{ position }}</strong> <br>
                 <strong>Puntos: {{ points }}</strong>
@@ -13,7 +14,7 @@
             </div>
 
             <div class="left-side-menus">
-                <router-link :to="{name: 'badges',params: { userid: $route.params.userid }}" tag="div">
+                <router-link :to="{name: 'vu-badges',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="award" />
                     15/20
                 </router-link>
@@ -81,12 +82,14 @@
 <script>
 import Accepeted_Neos from '@/components/User_View/Accepted-Neo-Menu.vue'
 import Non_Accepeted_Neos from '@/components/User_View/Proposed-Neo-Menu.vue'
+import Header from '@/components/Header/Header.vue'
 import axios from 'axios'
 export default {
     name: 'View-User',
     components: {
       Accepeted_Neos,
-      Non_Accepeted_Neos
+      Non_Accepeted_Neos,
+      Header
     },
     created(){
         axios.get('http://localhost:3000/users/' + this.$route.params.userid)

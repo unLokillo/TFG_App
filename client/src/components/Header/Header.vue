@@ -1,8 +1,7 @@
 <template>
     <div class="header-card">
-        <Sidebar/> 
+        <Sidebar /> 
         <div class="main-section">
-            <!--<SearchBar/>-->
            <a href="/" class="title-header">Neologismos</a>
             </div>
         <UserButton/>

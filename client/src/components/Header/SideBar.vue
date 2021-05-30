@@ -4,35 +4,61 @@
     <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow>
       <template #default="{ hide }">
         <div>
-          <div class="sidemenu-top">
+          <div class="sidemenu-top" >
             <h4 id="sidebar-no-header-title">Menu</h4>
             <div style="cursor:pointer;" block @click="hide"><font-awesome-icon style="font-size: 200%;" icon="bars"/></div>
           </div>
-          <div class="all-sidebar-buttons">
+
+          <div class="all-sidebar-buttons" v-if="screen">
             <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
-                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego
+                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego <div></div>
             </router-link>
           
             <router-link :to="{ name: 'ranking',params: {} }" class="sidebar-button" tag="div">
-               <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Usuarios
+               <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Usuarios <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos
+            <router-link :to="{ name: 'ranking_neo',params: {userid:form.user_id} }" class="sidebar-button" tag="div" >  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'view-all-proposals',params: {} }" class="sidebar-button"  tag="div">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Propuesta Neologismos
+            <router-link :to="{ name: 'main-view-all-proposals',params: {} }" class="sidebar-button"  tag="div" v-if="form.logged">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Tus Propuestas <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Logros
+            <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div" v-if="form.logged">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" />  <div></div>
                 </router-link>
 
-            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="logged">
-              <font-awesome-icon style="font-size: 120%; !important" :icon="bars" /> Salir
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
+              <font-awesome-icon style="font-size: 120%; !important" icon="bars" /> Salir <div></div>
           </div>
+          </div>
+
+    <div class="all-sidebar-buttons" v-else>
+            <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
+                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego <div></div>
+            </router-link>
           
+            <router-link :to="{ name: 'vu-ranking',params: {userid:form.user_id} }" class="sidebar-button" tag="div">
+               <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Usuarios <div></div>
+            </router-link>
+
+            <router-link :to="{ name: 'vu-ranking_neo',params: {userid:form.user_id} }" class="sidebar-button" tag="div" >  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Ranking Neologismos <div></div>
+            </router-link>
+
+            <router-link :to="{ name: 'view-all-proposals',params: {userid:form.user_id} }" class="sidebar-button"  tag="div" v-if="form.logged">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Tus Propuestas <div></div>
+            </router-link>
+
+            <router-link :to="{ name: 'vu-badges',params: {userid:form.user_id} }" class="sidebar-button" tag="div" v-if="form.logged">  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /> Logros <div></div>
+                </router-link>
+
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
+              <font-awesome-icon style="font-size: 120%; !important" icon="bars" /> Salir <div></div>
+          </div>
           </div>
 
         </div>
@@ -42,17 +68,23 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
+    created(){
+    this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
+    axios.get('http://localhost:3000/login/1')
+          .then(response => {
+              this.form = response.data;
+            });
+    },
+    updated(){
+       this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
+    },
     data() {
       return {
         myToggle: false,
-        buttons: [
-          { icon: 'gamepad', caption: 'Juego', state: true },
-          { icon: 'gamepad', caption: 'Toggle 2', state: false },
-          { icon: 'gamepad', caption: 'Toggle 3', state: true },
-          { icon: 'gamepad', caption: 'Toggle 4', state: false }
-        ],
-        logged: false
+        form:[],
+        screen: false,
       }
     },
     computed: {

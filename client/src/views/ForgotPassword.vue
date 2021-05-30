@@ -6,12 +6,12 @@
         <p>Introduce el código que has recibido por correo</p>
         <b-form-input
           id="input-1"
-          v-model="form.email"
+          v-model="form.code"
           type="email"
-          placeholder="Introduce el email"
+          placeholder="Introduce el código"
           required>
           </b-form-input>
-    <button type="submit" class="btn btn-dark btn-lg btn-block">Recuperar contraseña</button>
+    <b-button style="width:70%" v-on:click="submit" type="submit" >Confirmar</b-button>
 </div>
 </template>
 
@@ -20,14 +20,16 @@
         data() {
             return {
                 form: {
-                    email: '',
+                    code: "",
                 }
             }
         },
         methods: {
-            onSubmit(event) {
-            event.preventDefault()
-            alert(JSON.stringify(this.form))
+            submit() {
+                console.log(this.form.code.localeCompare("ASDFG")); 
+                if(this.form.code.localeCompare("ASDFG")==0){
+                    this.$router.push({ path: `/forgot-password/reset` }) // -> /user/123
+                }
       },
     }
 }

@@ -1,5 +1,6 @@
 <template>
 <div class="body">
+      <Header/>
   <div class="menu-1">
     <p> ¡Buenos días! Bienvenido a <strong>Neologismos</strong> un proyecto de la Unviersidad Politecncia de Madrid que tiene con fin registrar nuevos nelogismos relaccionadsos con el mundos de las IT. ¿Te apetecería contribuir?</p>
     <p style="color: var(--fail)" v-if="!login_info.logged"> Necesitas haber iniciado sesión para acceder a esta opción</p>

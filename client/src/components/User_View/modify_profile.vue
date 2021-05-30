@@ -129,6 +129,7 @@ export default {
             case 'mother_tonge': payload = {mother_tonge:value}; break;
             case 'image': payload = {image:value}; break;
             case 'email': payload = {email:value}; break; 
+            case 'password': payload = {password:value}; break; 
           }
             axios.patch('http://localhost:3000/users/1', payload)
                 .then(function( response ){
