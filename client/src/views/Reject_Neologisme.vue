@@ -4,25 +4,50 @@
         <h2> Rechazar Neologismo </h2>
         <p> Porfavor escriba a continuación la razón del rechazo</p>
         <b-form-textarea v-model="mssg" placeholder="Introduce la información del rechazo" rows="5" max-rows="150" class="reject-info"></b-form-textarea>
-        <b-button v-on:click="submit(1,mssg)" style="background-color: var(--success) !important"> Aceptar </b-button>
+        <b-button v-on:click="submit(mssg)" style="background-color: var(--success) !important"> Aceptar </b-button>
     </div>
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
+    created(){
+        var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
+        axios.get(uri)
+        .then(response_neo => {
+            this.f_user = response_neo.data.user;
+        });
+         axios.get('http://localhost:3000/login/1')
+          .then(response_log => {
+              this.login = response_log.data;    
+          })
+    },
     data(){
         return{
+            login: [],
+            f_user: [],
             mssg: ''
         }
     },
     methods:{
-      submit(id,n_mssg){
-        var payload = {rejected:true,mssg:n_mssg }; 
-            axios.patch('http://localhost:3000/neologismes/1', payload)
+      submit(n_mssg){
+          for (let index = 0; index < this.f_user.length; index++) {
+              if(this.login.user_id==this.f_user[index].user_id){
+                  this.f_user.splice(index,1,{
+                    user_id: this.f_user[index].user_id,
+                    user: this.f_user[index].user,
+                    date: this.f_user[index].date,
+                    rejected:true,
+                    mssg:n_mssg
+                  }) 
+              break;
+              }
+          }
+            axios.patch('http://localhost:3000/neologismes/'+this.$route.params.neoId, {user:this.f_user})
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
+        //this.$router.go(-1) // -> /user/123
         },
 }
 }

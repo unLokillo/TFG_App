@@ -87,18 +87,46 @@ export default {
             }
     },
     submit(type){
-        var payload = {}; 
+        var payload = {};
+        for (let index = 0; index < this.form.user.length; index++) {
+              if(this.login.user_id==this.form.user[index].user_id){
+                  this.form.user.splice(index,1,{
+                    user_id: this.form.user[index].user_id,
+                    user: this.form.user[index].user,
+                    date: this.form.user[index].date,
+                    rejected:false,
+                    mssg:""
+                  }) 
+              break;
+              }
+          };
           switch (type){
-            case 'neologisme': payload = {neologisme:this.form.neologisme}; break;
-            case 'description_single': payload = {descriptions:this.form.descriptions}; break;
-            case 'source_single': payload = {sources:this.form.sources}; break;
+            case 'neologisme': payload = {
+              neologisme:this.form.neologisme,
+              modify:true,
+              user: this.form.user
+              }; 
+              break;
+            case 'description_single': payload = {
+              descriptions:this.form.descriptions,
+              modify:true,
+              user: this.form.user
+              };
+               break;
+            case 'source_single': payload = {
+              sources:this.form.sources,
+              modify:true,
+              user: this.form.user
+            }; break;
             case 'all': 
               this.addDescriptions();
               this.addSources();
             payload = {
               neologisme: this.form.neologisme,
               descriptions: this.form.descriptions,
-              sources: this.form.sources
+              sources: this.form.sources,
+              modify:true,
+              user: this.form.user
             }
             break;
           }

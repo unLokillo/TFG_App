@@ -189,12 +189,19 @@
       ],
       "img": "https://picsum.photos/1024/400/?image=40",
       "liked": 2,
+      "modify": false,
       "proposal": true,
       "points": 0,
-      "rejected": false,
       "position": 1,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
+      "user": [
+        {
+          "user_id": 2,
+          "user": "User1 Surname1",
+          "date": "30/10/1998",
+          "rejected": true,
+          "mssg": "fghfhhhhhhhhh"
+        }
+      ],
       "mssg": "asdasd",
       "id": 1
     },
@@ -212,6 +219,10 @@
         {
           "id": 3,
           "value": "Descripcion 3"
+        },
+        {
+          "id": 4,
+          "value": "ghjghj"
         }
       ],
       "sources": [
@@ -232,11 +243,17 @@
       "liked": 7,
       "proposal": false,
       "points": 0,
-      "rejected": false,
+      "modify": true,
       "position": 1,
-      "mssg": "",
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
+      "mssg": "asdasd",
+      "user": [
+        {
+          "user_id": 2,
+          "user": "User1 Surname1",
+          "date": "30/10/1998",
+          "rejected": true
+        }
+      ],
       "id": 2
     },
     {
@@ -273,294 +290,18 @@
       "liked": 10,
       "proposal": false,
       "position": 2,
-      "rejected": false,
       "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
+      "modify": false,
+      "user": [
+        {
+          "user_id": 2,
+          "user": "User1 Surname1",
+          "date": "30/10/1998",
+          "rejected": false
+        }
+      ],
       "mssg": "",
       "id": 3
-    },
-    {
-      "neologisme": "Neologisme 4",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": null,
-      "liked": 10,
-      "proposal": false,
-      "position": 3,
-      "rejected": false,
-      "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
-      "mssg": "",
-      "id": 4
-    },
-    {
-      "neologisme": "Neologisme 5",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": "https://picsum.photos/300/150/?image=45",
-      "liked": 10,
-      "proposal": false,
-      "position": 4,
-      "rejected": false,
-      "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
-      "mssg": "",
-      "id": 5
-    },
-    {
-      "neologisme": "Neologisme 6",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": null,
-      "liked": 10,
-      "proposal": true,
-      "position": 5,
-      "rejected": true,
-      "points": 0,
-      "user": "Martin",
-      "date": "30/10/1998",
-      "mssg": "Añade una descripción más concisa por favor",
-      "id": 6
-    },
-    {
-      "neologisme": "Neologisme 7",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": "https://picsum.photos/300/150/?image=56",
-      "liked": 10,
-      "proposal": true,
-      "position": 6,
-      "rejected": true,
-      "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
-      "mssg": "Nada de lo que has puesto tiene sentido",
-      "id": 7
-    },
-    {
-      "neologisme": "Neologisme 8",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": "https://picsum.photos/300/150/?image=54",
-      "liked": 10,
-      "proposal": false,
-      "position": 7,
-      "rejected": false,
-      "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
-      "mssg": "",
-      "id": 8
-    },
-    {
-      "neologisme": "Neologisme 9",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": "https://picsum.photos/300/150/?image=16",
-      "liked": 10,
-      "proposal": false,
-      "position": 8,
-      "rejected": false,
-      "points": 0,
-      "user": "User1 Surname1",
-      "date": "30/10/1998",
-      "mssg": "",
-      "id": 9
-    },
-    {
-      "neologisme": "NEo1",
-      "descriptions": [
-        {
-          "id": 1,
-          "description": "Fuente 1"
-        },
-        {
-          "id": 2,
-          "description": "DEscripcion2\n"
-        }
-      ],
-      "sources": [
-        {
-          "id": 1,
-          "description": "DEscripcion1"
-        },
-        {
-          "id": 2,
-          "description": "DEscripcion1"
-        },
-        {
-          "id": 3,
-          "description": "DEscripcion1"
-        }
-      ],
-      "img": null,
-      "liked": 0,
-      "proposal": true,
-      "points": 0,
-      "user": "",
-      "date": 1622467254028,
-      "rejected": false,
-      "mssg": "",
-      "id": 10
     }
   ],
   "badges": [
@@ -626,6 +367,14 @@
       "completed": true,
       "percentage": 50,
       "completed_date": "X/XX/XXXX"
+    }
+  ],
+  "modify": [
+    {
+      "id": 1,
+      "neo_id": 2,
+      "user_id": 1,
+      "date": "30/10/1998"
     }
   ]
 }

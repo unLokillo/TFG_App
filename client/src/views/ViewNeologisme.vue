@@ -7,7 +7,7 @@
             <div class="neo-likes"  ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
-        <div class="rejected-neologisme" v-if="form.rejected">
+        <div class="rejected-neologisme" v-if="see_reject_div">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.mssg }}
@@ -37,16 +37,20 @@
             <b-img thumbnail :src="form.img"  alt="Responsive image"></b-img>
         </div>
 
-        <div class="user-tag" v-if="validated">
-            <div>Creado por: {{ form.user }} </div> 
-            <div>{{ form.date }} </div>
+        <div class="user-tag" v-if="!form.rejected">
+            <div>Creado por: {{ form.user[0].user }} </div> 
+            <div>{{ form.user[0].date }} </div>
+            <div class="modify-user-tag" v-for="(value,i) in form.user" :key="i">
+                <p v-if="i!=0"> Modificado por: {{ value.user }} en {{ value.date }}</p>
+                
+            </div>
         </div>
-        <div class="admin-options" v-if="login.admin && form.proposal">
+        <div class="admin-options" v-if="login.admin">
             <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
         </div>
-        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Neologismo </router-link>
 
+        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Neologismo </router-link>
     </div>
 
 </template>
@@ -59,54 +63,36 @@ export default {
         axios.get(uri)
         .then(response_neo => {
             this.form = response_neo.data;
-        
 
     axios.get('http://localhost:3000/login/1')
           .then(response_log => {
               this.login = response_log.data;    
-    axios.get('http://localhost:3000/users/' + response_log.data.user_id)
-          .then(response => {
-              this.neologisme_data = response.data;
-              this.proposals = response.data.proposals;
-              var i= 0;
-              var res=false;
-              while(!res && i<response.data.proposals.length){
-                  res=response_neo.data.proposal && (response.data.proposals[i]==response_neo.data.id);
-                  i++;
-              }
-              this.modify = res;
-              this.fav_neo = response.data.fav_neo;
-          })
           })
          })
+    },computed:{
+         see_reject_div: function () {
+             var res = false;
+                console.log(this.form.user.length);
+            for (let index = 0; !res && (index < this.form.user.length); index++) {
+                console.log(this.login.user_id);
+                console.log(this.form.user[index].user_id);
+                res = (this.login.user_id == this.form.user[index].user_id)&&(!this.form.user[index].aprove)
+            }
+            return res;
+    }
     },
-    computed:{
-        fav_neo_f(){
-            return this.fav_neo.includes(this.$route.params.neoId)
+    watch: {
+        $route: {
+            immediate: true,
+            handler: function(newVal, oldVal) {
+            this.showModal = newVal.meta && newVal.meta.showModal;
         }
-    },
-watch: {
-    $route: {
-      immediate: true,
-      handler: function(newVal, oldVal) {
-        this.showModal = newVal.meta && newVal.meta.showModal;
-      }
     }
   },data() {    
         return {
             proposals: [],
             login: [],
-            neologisme_data: [],
-            form: '',
-            modify:false,
-            login_data: '',
-            validated: true,
-            showModal: false,
-            rejected:true,
-            neo_id: '987654321',
-            creator: 'User1 Surname ',
-            date: '31/09/1997',
-            fav_neo:  []
+            form: []
         };
     },
     methods:{
@@ -130,7 +116,10 @@ watch: {
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
-        }
+        },
+    reject_modify(){
+        
+    }
 }
 </script>
 
@@ -195,5 +184,9 @@ h4{
 
 .card-body > button{
     max-height: 3rem;
+}
+
+.admin-options{
+    margin-bottom: 3%;
 }
 </style>

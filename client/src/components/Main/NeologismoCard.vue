@@ -4,12 +4,12 @@
             <h2>{{ neologismeData.neologisme }}</h2>
             <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ this.neologismeData.liked }}</div> 
         </div>
-        <div v-for="(value,index) in neologismeData.descriptions" :key=index >
+        <div v-for="(value,index) in neologismeData.descriptions" :key="index" >
             <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value }}</div>
         </div>
         <div class="user-tag">
-            <div>Creado por: {{ neologismeData.user }} </div> 
-            <div>{{ neologismeData.date }} </div>
+            <div>Creado por: {{ neologismeData.user[0].user }} </div> 
+            <div>{{ neologismeData.user[0].date }} </div>
         </div>
         <router-link :to="`/fav-neo/${neologismeData.id}`" tag="b-button" style="width: 100%;"> Ver más </router-link>
        

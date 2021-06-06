@@ -44,11 +44,7 @@ export default {
           img: null,
           liked: 0,
           proposal: true,
-          points:0,
-          user: '',
-          date: '',
-          rejected: false,
-          mssg: ''
+          user: [],
       }
   }
   },
@@ -61,25 +57,38 @@ export default {
       this.form.sources = value;
       console.log(this.form.sources);
     },
-    prepare_data(){
-        this.form.date = Date.now(); // get actual date
-        var user_get = "";
+    formatDate() {
+    var d = Date.now()
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+    console.log("asdas");
+    return [year, month, day].join('-');
+},
+    submit(){
+        console.log(this.formatDate());
         axios.get('http://localhost:3000/login/1')
           .then(response => {
             axios.get('http://localhost:3000/users/' + response.data.user_id)
-             .then(response => {
-                 user_get = (' ' + response.data.nickname).slice(1);
-               });
-            });
-            return user_get;
-        },
-    submit(){
-        this.form.user = this.prepare_data();
-        console.log(this.form.user);
-        axios.post('http://localhost:3000/neologismes', this.form)
+             .then(response_user => {
+               this.form.user.push({
+                 user: response_user.data.nickname,
+                 user_id: this.$route.params.userid,
+                 date:  this.formatDate(),
+                 rejected: false,
+                 mssg: ''
+               })
+            axios.post('http://localhost:3000/neologismes', this.form)
               .then(function( response ){
                     // Handle success
               }.bind(this));
+               });
+            });
         this.$router.push({ path: `/` }) // -> /user/123
     }  
   }
