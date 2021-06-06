@@ -45,7 +45,7 @@
             <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
         </div>
-        <router-link tag="b-button" v-if="modify && proposals[0]==1" class="bttn-app" :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Propuesta </router-link>
+        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Neologismo </router-link>
 
     </div>
 
@@ -66,25 +66,25 @@ export default {
               this.login = response_log.data;    
     axios.get('http://localhost:3000/users/' + response_log.data.user_id)
           .then(response => {
+              this.neologisme_data = response.data;
               this.proposals = response.data.proposals;
               var i= 0;
               var res=false;
               while(!res && i<response.data.proposals.length){
-                  console.log
                   res=response_neo.data.proposal && (response.data.proposals[i]==response_neo.data.id);
-                  console.log(res);
                   i++;
               }
               this.modify = res;
+              this.fav_neo = response.data.fav_neo;
           })
           })
          })
     },
-    
-    mounted(){
-
+    computed:{
+        fav_neo_f(){
+            return this.fav_neo.includes(this.$route.params.neoId)
+        }
     },
-
 watch: {
     $route: {
       immediate: true,
@@ -96,6 +96,7 @@ watch: {
         return {
             proposals: [],
             login: [],
+            neologisme_data: [],
             form: '',
             modify:false,
             login_data: '',
@@ -103,16 +104,9 @@ watch: {
             showModal: false,
             rejected:true,
             neo_id: '987654321',
-            name: 'Palabra',
             creator: 'User1 Surname ',
             date: '31/09/1997',
-            likes: 10,
-            rejected_reason: '',
-            descriptions: [
-                {id:0,content:"Definicion 1"},
-                {id:1,content:"Esto es un texto de prueba"},
-                {id:2,content:"Texto muy muy muy muy muy muy muy muy muy muy muy muy muy largo"},
-            ],
+            fav_neo:  []
         };
     },
     methods:{

@@ -59,6 +59,7 @@ export default {
     },
     onSourcesClick (value) {
       this.form.sources = value;
+      console.log(this.form.sources);
     },
     prepare_data(){
         this.form.date = Date.now(); // get actual date
@@ -68,11 +69,8 @@ export default {
             axios.get('http://localhost:3000/users/' + response.data.user_id)
              .then(response => {
                  user_get = (' ' + response.data.nickname).slice(1);
-                 console.log('response.data.nickname');
-                 console.log(response.data.nickname);
                });
             });
-            console.log(user_get);
             return user_get;
         },
     submit(){

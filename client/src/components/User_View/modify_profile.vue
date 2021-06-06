@@ -77,7 +77,7 @@
 import axios from 'axios'
 export default {
       created(){
-        axios.get('http://localhost:3000/users/1')
+        axios.get('http://localhost:3000/users/' + this.$route.params.userid)
         .then(response => {
             //this.name = response.data[0].name;
             this.form.nickname = response.data.nickname;

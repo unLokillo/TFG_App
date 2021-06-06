@@ -12,9 +12,9 @@
   "users": [
     {
       "id": 1,
-      "nickname": "Martin",
+      "nickname": "Andres",
       "name": "Martin",
-      "surname": "Martin Martin",
+      "surname": "Apellidos",
       "email": "email.super.real@real.domain.com",
       "date": "30/10/1998",
       "gender": "non binary",
@@ -34,7 +34,22 @@
       ],
       "points": 2000,
       "liked_neo": 3,
-      "admin": false
+      "admin": false,
+      "neologisme": "Descrip",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "Descripciasd"
+        },
+        {
+          "id": 2,
+          "value": "Descripcion 2"
+        },
+        {
+          "id": 3,
+          "value": "Descripcion 3"
+        }
+      ]
     },
     {
       "id": 2,
@@ -188,7 +203,7 @@
       "descriptions": [
         {
           "id": 1,
-          "value": "Descripcion 1"
+          "value": "Descsdfsdf"
         },
         {
           "id": 2,
@@ -201,20 +216,20 @@
       ],
       "sources": [
         {
+          "id": 1,
+          "value": "Fusdfsdfasd"
+        },
+        {
           "id": 2,
-          "value": "Fuente 1"
+          "value": "Fuxcvxcv"
         },
         {
           "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
           "value": "Fuente 3"
         }
       ],
       "img": "https://picsum.photos/1024/400/?image=36",
-      "liked": 5,
+      "liked": 7,
       "proposal": false,
       "points": 0,
       "rejected": false,
@@ -510,71 +525,107 @@
       "date": "30/10/1998",
       "mssg": "",
       "id": 9
+    },
+    {
+      "neologisme": "NEo1",
+      "descriptions": [
+        {
+          "id": 1,
+          "description": "Fuente 1"
+        },
+        {
+          "id": 2,
+          "description": "DEscripcion2\n"
+        }
+      ],
+      "sources": [
+        {
+          "id": 1,
+          "description": "DEscripcion1"
+        },
+        {
+          "id": 2,
+          "description": "DEscripcion1"
+        },
+        {
+          "id": 3,
+          "description": "DEscripcion1"
+        }
+      ],
+      "img": null,
+      "liked": 0,
+      "proposal": true,
+      "points": 0,
+      "user": "",
+      "date": 1622467254028,
+      "rejected": false,
+      "mssg": "",
+      "id": 10
     }
   ],
-  "badges":[
+  "badges": [
     {
-      "id":1,
+      "id": 1,
       "name": "Logro 1",
       "img": "https://picsum.photos/300/150/?image=41",
       "description": "Descripción del logro 1",
       "completed": false,
       "percentage": 50,
-      "completed_date": "" 
+      "completed_date": ""
     },
     {
-      "id":2,
+      "id": 2,
       "name": "Logro 2",
       "img": "https://picsum.photos/300/150/?image=42",
       "description": "Descripción del logro 3",
       "completed": true,
       "percentage": 50,
-      "completed_date": "30/10/1998" 
+      "completed_date": "30/10/1998"
     },
     {
-      "id":3,
+      "id": 3,
       "name": "Logro 3",
       "img": "https://picsum.photos/300/150/?image=43",
       "description": "Descripción del logro 3",
       "completed": false,
       "percentage": 20,
-      "completed_date": "" 
+      "completed_date": ""
     },
     {
-      "id":4,
+      "id": 4,
       "name": "Logro 4",
       "img": "https://picsum.photos/300/150/?image=44",
       "description": "Descripción del logro 4",
       "completed": false,
       "percentage": 90,
-      "completed_date": "" 
+      "completed_date": ""
     },
     {
-      "id":5,
+      "id": 5,
       "name": "Logro 5",
       "img": "https://picsum.photos/300/150/?image=45",
       "description": "Descripción del logro 5",
       "completed": true,
       "percentage": 50,
-      "completed_date": "12/10/1998" 
+      "completed_date": "12/10/1998"
     },
     {
-      "id":6,
+      "id": 6,
       "name": "Logro 6",
       "img": "https://picsum.photos/300/150/?image=46",
       "description": "Descripción del logro 6",
       "completed": false,
       "percentage": 5,
-      "completed_date": "" 
+      "completed_date": ""
     },
     {
-      "id":7,
+      "id": 7,
       "name": "Logro 7",
       "img": "https://picsum.photos/300/150/?image=7",
       "description": "Descripción del logro 7",
       "completed": true,
       "percentage": 50,
-      "completed_date": "X/XX/XXXX" 
+      "completed_date": "X/XX/XXXX"
     }
   ]
 }

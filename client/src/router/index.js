@@ -51,6 +51,15 @@ var route = [
         meta: {
           showModal: true
         },
+        path: 'fav-neo/:neoId/modify-neologisme',
+        name: 'm-neologismes',
+        component: () => import('@/components/User_View/modify_proposal.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
         path: 'login',
         name: 'login',
         props: true,
