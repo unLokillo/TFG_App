@@ -1,12 +1,12 @@
 <template>
 <div class="login-body">
    <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
-        <h3>Log In</h3>
+        <h3>Iniciar sesión</h3>
         <b-form-input
           id="input-1"
           v-model="form.email_or_user"
           type="email"
-          placeholder="Introduce tu email"
+          placeholder="Correo electronico"
           :state="this.correct_login"
           required
         ></b-form-input>
@@ -15,7 +15,7 @@
         type="password" 
         id="text-password" 
         aria-describedby="password-help-block" 
-        placeholder="Introduce tu contraseña" 
+        placeholder="Contraseña" 
         :state="this.correct_login"></b-form-input>
         
         <b-form-text id="password-help-block"></b-form-text>
@@ -25,11 +25,11 @@
         </b-form-invalid-feedback>
 
       <div class="links">
-          <p><a href="/forgot-password" class="blue-text ml-1">Forgot Password?</a></p>
-          <p><a href="/create-user" class="blue-text ml-1">Registrer</a></p>
+          <p><a href="/forgot-password" class="blue-text ml-1">¿Has olvidado la <br> contraseña?</a></p>
+          <p><a href="/create-user" class="blue-text ml-1">Registrate</a></p>
       </div>
     
-      <b-button v-on:click="getUserInfo" class="mt-3" type="submit" variant="primary">Submit</b-button>
+      <b-button v-on:click="getUserInfo" class="mt-3" type="submit" variant="primary">Enviar</b-button>
     
     <!-- DEscomentar para ver mas info sobre el JSON
     <b-card class="mt-3" header="Form Data Result">

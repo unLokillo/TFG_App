@@ -5,7 +5,7 @@
       <template #default="{ hide }">
         <div>
           <div class="sidemenu-top" >
-            <h4 id="sidebar-no-header-title">Menu</h4>
+            <h4 id="sidebar-no-header-title">Menú</h4>
             <div style="cursor:pointer;" block @click="hide"><font-awesome-icon style="font-size: 200%;" icon="bars"/></div>
           </div>
 
@@ -23,7 +23,7 @@
             </router-link>
 
             <router-link :to="{ name: 'main-view-all-proposals',params: {} }" class="sidebar-button"  tag="div" v-if="form.logged">  
-                  <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus Propuestas <div></div>
+                  <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus propuestas <div></div>
             </router-link>
 
             <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div" v-if="form.logged">  

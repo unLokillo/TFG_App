@@ -7,8 +7,9 @@
       rows="3"
       max-rows="6"
       v-on:keyup="emitToParent"
+      maxlength="500"
     ></b-form-textarea>
-    <b-button  @click="addItem" class="bttn-todo">Add</b-button>
+    <b-button  @click="addItem" class="bttn-todo">Añadir</b-button>
     </div>
     
     <b-list-group>

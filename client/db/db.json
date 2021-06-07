@@ -158,54 +158,6 @@
   ],
   "neologismes": [
     {
-      "neologisme": "Neologisme 1",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripcion 1"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ],
-      "sources": [
-        {
-          "id": 2,
-          "value": "Fuente 1"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
-        }
-      ],
-      "img": "https://picsum.photos/1024/400/?image=40",
-      "liked": 2,
-      "modify": false,
-      "proposal": true,
-      "points": 0,
-      "position": 1,
-      "user": [
-        {
-          "user_id": 2,
-          "user": "User1 Surname1",
-          "date": "30/10/1998",
-          "rejected": true,
-          "mssg": "fghfhhhhhhhhh"
-        }
-      ],
-      "mssg": "asdasd",
-      "id": 1
-    },
-    {
       "neologisme": "Neologisme 2",
       "descriptions": [
         {

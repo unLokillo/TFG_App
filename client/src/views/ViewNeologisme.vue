@@ -7,7 +7,20 @@
             <div class="neo-likes"  ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
-        <div class="rejected-neologisme" v-if="see_reject_div">
+        <div class="rejected-neologisme-admin" v-if="login.admin">
+            <h4>Su propuesta ha sido rechazada</h4>
+            <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
+            {{ form.mssg }}
+            <br>
+            <strong>Si usted lo desea puede modificar la informacón requerida, y el neologismo sera evaluado nuevamente.
+                Gracias por su atencón
+            </strong>
+        </p>
+
+            <router-link :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" class="bttn-app" style="background-color: var(--fail) !important">Modificar</router-link>
+        </div>
+
+        <div class="rejected-neologisme" v-if="see_reject_div && !login.admin">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.mssg }}
@@ -21,7 +34,7 @@
         </div>
 
         <div class="descriptions-card">
-            <h4>Descripciones</h4>
+            <h4>Contextos</h4>
         <div v-for="(value,index) in form.descriptions" :key=index >
             <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value}}</div>
         </div>
@@ -45,12 +58,12 @@
                 
             </div>
         </div>
-        <div class="admin-options" v-if="login.admin">
-            <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar Propuesta </b-button>
-            <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar Propuesta </b-button>
+        <div class="admin-options" v-if="login.admin && (form.rejected || form.modify)">
+            <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
+            <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar propuesta </b-button>
         </div>
 
-        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar Neologismo </router-link>
+        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar propuesta </router-link>
     </div>
 
 </template>
@@ -72,10 +85,7 @@ export default {
     },computed:{
          see_reject_div: function () {
              var res = false;
-                console.log(this.form.user.length);
             for (let index = 0; !res && (index < this.form.user.length); index++) {
-                console.log(this.login.user_id);
-                console.log(this.form.user[index].user_id);
                 res = (this.login.user_id == this.form.user[index].user_id)&&(!this.form.user[index].aprove)
             }
             return res;
@@ -116,10 +126,7 @@ export default {
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
-        },
-    reject_modify(){
-        
-    }
+        }
 }
 </script>
 
@@ -188,5 +195,10 @@ h4{
 
 .admin-options{
     margin-bottom: 3%;
+}
+
+.rejected-neologisme-admin{
+    overflow: scroll;
+    max-height: 30rem;
 }
 </style>

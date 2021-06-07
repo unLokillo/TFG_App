@@ -4,7 +4,7 @@
         <b-avatar :src="login_info.img"></b-avatar> {{ login_info.email_or_user }} 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
-        Log in 
+        Inciar sesión
     </router-link>
 </div>
 </template>

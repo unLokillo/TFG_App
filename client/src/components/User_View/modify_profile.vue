@@ -3,7 +3,7 @@
           <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <h4>Modificar Información de usuario</h4>
 
-          <b-input-group prepend="Nombre de Usuario: " class="mt-3" >
+          <b-input-group prepend="Alias: " class="mt-3" >
             <b-form-input  v-model="form.nickname" :value="form.nickname" ></b-form-input>
               <b-input-group-append>
                 <b-button variant="outline-success" v-on:click="submit('nickname',form.nickname)" >Modificar</b-button>
@@ -24,7 +24,7 @@
               </b-input-group-append>
           </b-input-group>
 
-      <b-input-group prepend="email: " class="mt-3" >
+      <b-input-group prepend="Correo electrónico: " class="mt-3" >
             <b-form-input v-model="form.email" :value="form.email" type="email" ></b-form-input>
               <b-input-group-append>
                 <b-button  v-on:click="submit('email',form.email)" variant="outline-success">Modificar</b-button>
@@ -59,7 +59,7 @@
           </div>  
       <div>
 <div class="selectors-card">
-  <h6>Imagen de usuario</h6>
+  <h6>Avatar</h6>
       <b-form-file v-model="form.img"
       :state="Boolean(form.img)"
       placeholder="Elige un archivo o añadelo aquí"
@@ -67,7 +67,7 @@
       plain
     ></b-form-file>
     <div class="mt-3">Imagen seleccionada: {{ form.img ? form.img.name : '' }}</div>
-    <b-button class="mt-3" type="submit" v-on:click="submit('img',form.image)" variant="primary">Modificar Imagen</b-button>
+    <b-button class="mt-3" type="submit" v-on:click="submit('img',form.image)" variant="primary">Modificar imagen</b-button>
     </div>
     </div>  
 </div>
@@ -109,7 +109,7 @@ export default {
           position: 10,
           admin: false
         },
-        genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
+        genders: [{ text: 'Select One', value: null }, 'Masculino', 'Femenino', 'No binario', 'Prefiero no decirlo'],
         schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],
         mother_tonges: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Frances', 'Chino'],
         show: true,

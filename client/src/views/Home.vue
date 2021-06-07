@@ -2,23 +2,25 @@
 <div class="body">
       <Header/>
   <div class="menu-1">
-    <p> ¡Buenos días! Bienvenido a <strong>Neologismos</strong> un proyecto de la Universidad Politecnica de Madrid que tiene con fin registrar nuevos nelogismos relaccionados con el mundos de las IT. ¿Te apetecería contribuir?</p>
+    <p> ¡Os damos la bienvendia a <strong>Pescaneo</strong>! <br>
+    Una aplicación para proponer, definir y valorar nuevos términos en el ámbito del Internet de las Cosas. <br> 
+    Si quieres participar, regístrate y pulsa en <strong> “¡Contribuye!” </strong></p>
     <p style="color: var(--fail)" v-if="!login_info.logged"> Necesitas haber iniciado sesión para acceder a esta opción</p>
     <b-button  v-if="!login_info.logged" disabled  variant="primary"> ¡Contribuye! </b-button>
     <router-link :to="`/create-neologisme`" tag="b-button" v-else> ¡Contribuye! </router-link>  
   </div>
-  <h4>Palabras de la semana</h4>
+  <h4>Neologismos de la semana</h4>
   <div class="frequent-words">
       <NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
       <NeologismoCard :neologismeData="neoData[1]"></NeologismoCard>
       <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>
   </div>
-   <h4>Juegos</h4>
+   <h4>Actividades</h4>
   <div class="menu-2">
-    <p> ¡Aquí podras encontrar algunos juegos y actividades! </p>
-     <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="b-button"> ¡Juega! </router-link>
+    <p> ¿Te parecen apropiados estos nuevos términos propuestos por otros usuarios? </p>
+     <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="b-button"> ¡Participa! </router-link>
   </div>
-  <h4>Rankings</h4>
+  <h4>Clasificaciones</h4>
   <div class="rankings">
     <ranking_users/>
     <ranking_neo/>

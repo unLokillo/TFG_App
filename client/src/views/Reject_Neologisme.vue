@@ -1,10 +1,10 @@
 <template>
     <div class="reject-body">
-              <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
-        <h2> Rechazar Neologismo </h2>
-        <p> Porfavor escriba a continuación la razón del rechazo</p>
-        <b-form-textarea v-model="mssg" placeholder="Introduce la información del rechazo" rows="5" max-rows="150" class="reject-info"></b-form-textarea>
-        <b-button v-on:click="submit(mssg)" style="background-color: var(--success) !important"> Aceptar </b-button>
+        <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
+        <h2> Rechazar neologismo </h2>
+        <p> Por favor, cuéntanos por qué has rechazado este neologismo</p>
+        <b-form-textarea v-model="mssg" placeholder="¿Por qué lo has rechazado?" rows="5" max-rows="150" class="reject-info"></b-form-textarea>
+        <b-button v-on:click="submit(mssg)" style="background-color: var(--success) !important"> Enviar </b-button>
     </div>
 </template>
 
@@ -44,10 +44,8 @@ export default {
               }
           }
             axios.patch('http://localhost:3000/neologismes/'+this.$route.params.neoId, {user:this.f_user})
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
-        //this.$router.go(-1) // -> /user/123
+                .then(function( response ){}.bind(this));
+        this.$router.go(-1) // -> /user/123
         },
 }
 }

@@ -2,7 +2,7 @@
     <div class="v-ranking-card">
         <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <div class="v-ranking-title">
-            <h3>Ranking</h3>
+            <h3>Participantes destacados</h3>
         </div>
         <div class="v-ranking-user" v-for="(value,index) in users" :key="index">
             <div class="position-badge" :style="asign_color(value.position)"> <strong> {{ value.position }} </strong></div>
@@ -18,7 +18,7 @@
             <div >
             <b-dropdown right text="Opciones" class="m-2" v-if="logged.admin">
             <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
-                <b-dropdown-item> Eliminar Usuario </b-dropdown-item>
+                <b-dropdown-item v-on:click="deleteData(value.id)"> <div style="color: red !important;"> Eliminar Usuario </div> </b-dropdown-item>
             </b-dropdown>
         </div>
         </div>
@@ -63,14 +63,11 @@ export default {
             }
             return style;
         },
-        deleteData(result, Memb_ID) {
-        axios
-            .delete("localhost:9000/api/delete/user/" + result.Memb_ID)
-            .then(response => {
-                this.result.splice(Memb_ID, 1);
-                console.log(this.result);
-            });
-},
+
+    deleteData(id) {
+        axios.delete('http://localhost:3000/neologismes/' + id)
+            .then(response => {});
+        }
     }
 }
 </script>

@@ -2,7 +2,7 @@
     <div class="all-neologismes-card">
         <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <div class="top-all-neologismes">
-            <h5> Neologismos Favortios </h5>
+            <h5> Neologismos favortios </h5>
         </div>
 
         <div class="neologisme-cards">

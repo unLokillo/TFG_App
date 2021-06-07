@@ -1,17 +1,17 @@
 <template>
     <div class="ranking-card">
     <div class="ranking-title">
-    <h3> Neologismos Propuestos </h3>
+    <h3> Neologismos propuestos </h3>
     </div>
      <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
          <b-avatar :src="value.img"></b-avatar>
          <h5>{{ value.neologisme }}</h5>
             <div v-if="see_reject" :v-model="value.user">
-            <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
+            <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
             </div>
             <div v-else-if="value.modify">
-                <font-awesome-icon style="font-size: 20px;color: darkgreen;" icon="plus-circle"/> Modificada
+                <font-awesome-icon style="font-size: 20px;color: darkgreen;" icon="plus-circle"/> Modificado
             </div>
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 

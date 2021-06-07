@@ -5,7 +5,7 @@
         <h3>Logros</h3>
         </div>
         <div class="main-section-badges">
-            <h5>Logros de Usuario</h5>
+            <h5>Logros del participante</h5>
             <div v-for="(value,index) in badges" :key="index" class="neologismes-badges">
             <div v-for="(value2,index2) in value" :key="index2"  class="neologismes-badges-card" >
                 <h6>{{ value2.name }}</h6>
@@ -17,7 +17,7 @@
                     <b-progress-bar :value="value2.percentage" variant="success"></b-progress-bar>
                 </b-progress>
                 <p v-if="!value2.completed"> {{ value2.percentage/10 }}/10 </p>
-                <p v-else style="font-size:14px"> Completada el día: {{ value2.completed_date }} </p>
+                <p v-else style="font-size:14px"> Completado el día: {{ value2.completed_date }} </p>
                 </div>
              </div>
         </div>

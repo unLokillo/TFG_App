@@ -1,6 +1,6 @@
 <template>
     <div class="ranking-card">
-    <div class="ranking-title"><h3> Top Neologismos </h3></div>
+    <div class="ranking-title"><h3> Neologismos destacados </h3></div>
     <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
         <template #cell(img)="data">
          <b-avatar :src="data.item.img"></b-avatar>   

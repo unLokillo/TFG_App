@@ -25,8 +25,10 @@
         </div>
         <div class="info">
           <div class="game-card">
-          <h5>Descripción</h5>
-            <p>DESCRIPCION yasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
+          <h5>Contexto</h5>
+            <div v-for="(value,index) in nData.descriptions" :key="index">
+              <p>{{value.value}}</p>
+            </div>
           </div>
         </div>
           <div class="text">
@@ -59,7 +61,7 @@
       <div class="btn btn--decline" @click="reject">
        <font-awesome-icon icon="times"/>
       </div>
-      <div class="btn btn--like" @click="match">
+      <div class="btn btn--like" @click="match()">
           <font-awesome-icon icon="heart"/>
       </div>
     </div>
@@ -77,17 +79,24 @@ export default {
     created(){
       var nData = [];
       var card = [];
+        axios.get('http://localhost:3000/login/1')
+        .then(response_l => {
+        axios.get('http://localhost:3000/users/' + response_l.data.user_id)
+        .then(response_u => {
         axios.get('http://localhost:3000/neologismes')
         .then(response => {
             //this.name = response.data[0].name;
           for (let i = 0; i < response.data.length; i++) {
+          if(!response_u.data.fav_neo.includes(response.data[i].id)){
           card.push({
             src: response.data[i].img,
             name: response.data[i].neologisme
           });
         }
+      }
           this.nData = response.data; 
-          console.log(nData);
+        })
+        })
         })
       this.cards = card;
       this.neoData = nData;   
@@ -113,8 +122,10 @@ export default {
     }
   },
   methods: {
-    match() {
-      InteractEventBus.$emit(EVENTS.MATCH)
+    match(id) {
+      InteractEventBus.$emit(EVENTS.MATCH);
+      axios.patch('http://localhost:3000/neologismes/' + id).then(response_l => {
+      });
     },
     reject() {
       InteractEventBus.$emit(EVENTS.REJECT)

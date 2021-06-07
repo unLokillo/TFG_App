@@ -3,7 +3,7 @@
         <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h4>Crear cuenta</h4>
 <b-form @submit="submit()">
-          <b-input-group prepend="* Nombre de Usuario: " class="mt-3" >
+          <b-input-group prepend="* Alias: " class="mt-3" >
             <b-form-input required v-model="form.nickname" ></b-form-input>
           </b-input-group>
 
@@ -12,35 +12,31 @@
           </b-input-group>
 
 
-      <b-input-group prepend="Apellidos: " class="mt-3" >
-            <b-form-input  v-model="form.surname" ></b-form-input>
-            
+      <b-input-group prepend="* Apellidos: " class="mt-3" >
+            <b-form-input required v-model="form.surname" ></b-form-input>
           </b-input-group>
 
-      <b-input-group prepend="* email: " class="mt-3" >
-            <b-form-input required v-model="form.email" type="email" ></b-form-input>
-            
+      <b-input-group prepend="* Correo electrónico: " class="mt-3" >
+            <b-form-input required v-model="form.email" type="email" ></b-form-input>            
           </b-input-group>
 
       <div class="password-box">
-        <b-form-text id="input-live-help">Your full name.</b-form-text>
         <b-input-group prepend="* Contraseña: " class="mt-3" >
             <b-form-input required type="password" id="input-live" aria-describedby="input-live-help input-live-feedback" v-model="form.password" :state="password_state" trim></b-form-input>
           <b-form-invalid-feedback id="input-live-feedback">
-              EL tamaño de la contraseña debe de tener entre 6 y 12 caracteres.
+              La contraseña debe de tener entre 6 y 12 caracteres, una mayuscula y un caracter no alfabético.
           </b-form-invalid-feedback>
         </b-input-group>
         <b-input-group prepend="* Repite la Contraseña: " class="mt-3" >
             <b-form-input required type="password"  v-model="r_password" :state="repeat_password" aria-describedby="r_password_helper" ></b-form-input>
             <b-form-invalid-feedback id="r_password_helper">
-              Las contraseñas deben de coincidir.
+              Las contraseñas deben coincidir.
           </b-form-invalid-feedback>
           </b-input-group>
-
       </div>
 
           <div class="selectors-card">
-            <h6>Genero</h6>
+            <h6>Género</h6>
             <b-form-select  v-model="form.gender" :options="genders"></b-form-select>
           </div>  
           <div class="selectors-card">
@@ -52,17 +48,19 @@
             <b-form-select class="mt-3"  v-model="form.school" :options="schools" required></b-form-select>
           </div>  
       <div>
-
+<div class="selectors-card">
+  <h6>Avatar</h6>
       <b-form-file v-model="form.img"
       :state="Boolean(form.img)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
       plain
     ></b-form-file>
-    <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
+    <div class="mt-3">Archivo seleccionado: {{ form.img ? form.img.name : '' }}</div>
+</div>
+
     </div>
-    <!-- v-on:click="submit()"-->
-    <b-button  class="mt-3" type="submit" variant="primary">Submit</b-button>
+    <b-button  class="mt-3" type="submit" variant="primary">Enviar</b-button>
     </b-form>
 </div>
 </template>
@@ -90,7 +88,7 @@ export default {
           fav_neo: [],
           admin: false
         },
-        genders: [{ text: 'Select One', value: null }, 'male', 'female', 'non binary', 'undefined'],
+        genders: [{ text: 'Select One', value: null }, 'Masculino', 'Femenino', 'No binario', 'Prefiero no decirlo'],
         schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],
         mother_tonge: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Frances', 'Chino'],
         show: true,
@@ -99,7 +97,9 @@ export default {
     },
     computed: {
       password_state(){
-        return this.form.password.length > 6 && this.form.password.length <14;
+        console.log(this.isUpper(this.form.password.length));
+        return (this.form.password.length > 6 && this.form.password.length <14) 
+        && this.isUpper(this.form.password) && this.hasNumeric(this.form.password);
       },
       repeat_password(){
         return this.form.password.localeCompare(this.r_password) ? false:true
@@ -113,7 +113,26 @@ export default {
                 }.bind(this));
             this.$router.push({ path: `/` }) // -> /user/123
         },
+    isUpper(str) {
+      var result=false;
+        for (let index = 0; !result&& (index <str.length); index++) {
+                var character = str.charAt(index);
+                if (character == character.toUpperCase()) {
+                    result = true;
+                }
+              }
+          return result;   
+    },
+    hasNumeric(str){
+        var result=false;
+        for (let index = 0; !result&& (index <str.length); index++) {
+                if (!isNaN(str.charAt(index) * 1)) {
+                    result = true;
+                }
+              }
+          return result;   
     }
+  }
 }
 </script>
 

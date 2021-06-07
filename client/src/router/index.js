@@ -210,7 +210,7 @@ var route = [
           showModal: true
         },
         path: 'view-all-neologismes/view-neologisme/:neoId/reject-neologisme',
-        name: 'r-neologismes',
+        name: 'rp-neologismes',
         component: () => import('@/views/Reject_Neologisme.vue'),
         props: true
       },

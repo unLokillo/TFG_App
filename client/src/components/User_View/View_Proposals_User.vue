@@ -2,24 +2,28 @@
     <div class="all-neologismes-card">
          <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <div class="top-all-neologismes">
-            <h5> Propuestas de Neologismo </h5>
+            <h5> Neologismos propuestos </h5>
         </div>
 
         <div class="neologisme-cards">
             <div v-for="(value,index) in neologismes" :key="index" >
+                {{ index+1 }}
                 <b-avatar :src="value.img"></b-avatar>
-                <h5>{{ value.neologismo }}</h5>
-            <div v-if="value.rejected">
-            <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazada
+                <h5>{{ value.neologisme }}</h5>
+            
+            <div v-if="see_reject" :v-model="value.user">
+            <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
             </div>
-
+            <div v-else-if="value.modify">
+                <font-awesome-icon style="font-size: 20px;color: darkgreen;" icon="plus-circle"/> Modificado
+            </div>
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
              <b-dropdown text="Acciones" v-if="login.admin">
-                    <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar Propuesta</b-dropdown-item>
-                    <b-dropdown-item >Rechazar Propuesta</b-dropdown-item>
-                    <b-dropdown-item style="color: red;" href="#">Eliminar Propuesta</b-dropdown-item>
+                    <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar propuesta</b-dropdown-item>
+                    <b-dropdown-item :to="{name: 'rp-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">Rechazar propuesta</b-dropdown-item>
+                    <b-dropdown-item style="color: red; !important" v-on:click="deleteData(value.id)">Eliminar propuesta</b-dropdown-item>
                 </b-dropdown>
                  <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
             </div>
@@ -32,22 +36,26 @@
     import axios from 'axios';
 export default {
     created(){
+        axios.get('http://localhost:3000/login/1')
+          .then(response_l => {
+              this.login = response_l.data;
+          
+        axios.get('http://localhost:3000/users/' + response_l.data.user_id)
+          .then(response_u => { 
+
         axios.get('http://localhost:3000/neologismes')
           .then(response => {
             for (let index = 0; index < response.data.length; index++) {
-                console.log(response.data[index].proposal);
-            if (response.data[index].proposal) {
+            if (this.login.admin && (response.data[index].proposal || response.data[index].modify)) {
+                this.neologismes.push(response.data[index]);
+            } else if(response_u.data.proposals.include(response.data[index].id) 
+            && (response.data[index].proposal || response.data[index].modify)){
                 this.neologismes.push(response.data[index]);
             }
-        }      
-            }),
-        axios.get('http://localhost:3000/login/1')
-          .then(response => {
-              this.login = response.data;
+        }  
+        })   
           })
- 
-        //console.log(this.neologismes);
-        //console.log(non_proposals);
+        })
     },
     data() {
         return {
@@ -67,6 +75,12 @@ export default {
                     // Handle success
                 }.bind(this));
         },
+    deleteData(id) {
+    axios.delete('http://localhost:3000/neologismes/' + id)
+        .then(response => {
+      console.log(this.result);
+    });
+    }
 }
 }
 </script>
@@ -85,7 +99,7 @@ export default {
 }
 
 .neologisme-cards > div{
-    border-left: 14px solid var(--border-left) !important;
+    border-left: 16px solid var(--border-left) !important;
     padding: 10px;
     display: flex;
     justify-content: space-evenly;

@@ -2,25 +2,13 @@
   <div class="modify-user-body">
           <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
         <h4>Modificar Propuesta de Neologismo</h4>
-
+        <p style="font-size: 14px"> <i> Un neologismo es una palabra del ámbito del Internet de las Cosas que te parezca novedosa.</i></p>
           <b-input-group prepend="Neologismo: " class="mt-3" >
             <b-form-input :value="form.neologisme" ></b-form-input>
               <b-input-group-append>
                 <b-button variant="outline-success" v-on:click="submit('neologisme')" >Modificar</b-button>
               </b-input-group-append>
           </b-input-group>
-
-        <h6>Modificar Descripciones</h6>
-          <div v-for="(value,index) in form.descriptions" :key="index">
-          <b-input-group prepend="Descripción: "  class="mt-3" >
-            <b-form-input v-model="form.descriptions[index].value" ></b-form-input>
-            <b-input-group-append>
-                <b-button variant="outline-success" v-on:click="submit('description_single')" >Modificar</b-button>
-              </b-input-group-append>
-          </b-input-group>
-        </div>
-      <h6> Añadir Descripciones</h6>
-      <TodoBox v-on:childToParent="onDescriptionsClick"/>
 
         <h6> Modificar Fuentes</h6>
           <div v-for="(value,index) in form.sources" :key="'A'+index">
@@ -32,7 +20,22 @@
           </b-input-group>
         </div>
         <h6> Añadir Fuentes</h6>
+          <p style="font-size: 14px"> <i> Indica con detalle dónde lo has encontrado </i> </p>
         <TodoBox v-on:childToParent="onSourcesClick"/>
+
+        <h6>Modificar Contextos</h6>
+          <div v-for="(value,index) in form.descriptions" :key="index">
+          <b-input-group prepend="Descripción: "  class="mt-3" >
+            <b-form-input v-model="form.descriptions[index].value" ></b-form-input>
+            <b-input-group-append>
+                <b-button variant="outline-success" v-on:click="submit('description_single')" >Modificar</b-button>
+              </b-input-group-append>
+          </b-input-group>
+        </div>
+      <h6> Añadir Contextos</h6>
+        <p style="font-size: 14px"> <i> Incluye la frase completa en la que has encontrado el neologismo</i> </p>
+      <TodoBox v-on:childToParent="onDescriptionsClick"/>
+
     <b-button class="mt-3" type="submit" variant="primary" v-on:click="submit('all')">Modificar</b-button>
 </div>
 </template>

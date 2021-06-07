@@ -2,14 +2,18 @@
     <div class="create-neologisme-body">
     <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h4>Crear Neologismo</h4>
+        <p style="font-size: 14px"> <i> Un neologismo es una palabra del ámbito del Internet de las Cosas que te parezca novedosa.</i></p>
+        <h6>Neologismo</h6>
         <b-form-input id="input-1" v-model="form.neologisme" type="text" placeholder="Introduce el Neologismo" required></b-form-input>
         <div>
           <h6>Fuentes</h6>
+          <p style="font-size: 14px"> <i> Indica con detalle dónde lo has encontrado </i> </p>
           <TodoBox v-on:childToParent="onSourcesClick"/>
         </div>
 
         <div>
-          <h6>Descripciones</h6>
+          <h6>Contextos</h6>
+            <p style="font-size: 14px"> <i> Incluye la frase completa en la que has encontrado el neologismo</i> </p>
           <TodoBox v-on:childToParent="onDescriptionsClick"/>
         </div>
     <h6>Imagen</h6>
@@ -20,9 +24,9 @@
       drop-placeholder="Drop file here..."
       plain
     ></b-form-file>
-    <div class="mt-3">Selected file: {{ form.img ? form.img.name : '' }}</div>
+    <div class="mt-3">Archivo seleccionado: {{ form.img ? form.img.name : '' }}</div>
     </div>
-    <b-button @click="submit"> DONE</b-button>
+    <b-button @click="submit"> Listo </b-button>
     </div>
 
 </template>
@@ -109,7 +113,7 @@ export default {
   width: 100%;
 }
 
-h4, h6{
+ h6{
   border-bottom: 1px solid var(--border);
   text-align: left;
   margin: 2%;

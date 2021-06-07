@@ -1,7 +1,7 @@
 <template>
     <div class="ranking-card">
     <div class="ranking-title">
-    <h3> Ranking </h3>
+    <h3> Participantes destacados </h3>
     </div>
      <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
         <template #cell(img)="data">
@@ -32,7 +32,7 @@ export default {
             labels: [,
             { key: 'position', label: 'Posición' },
             { key: 'img', label: 'Imagen' },
-            { key: 'nickname', label: 'Usuario' }, 
+            { key: 'nickname', label: 'Particpante' }, 
             { key: 'points', label: 'Puntuación' }
             ],
             items: []

@@ -8,8 +8,8 @@
             <div class="left-side-menus">
                <router-link :to="{name: 'vu-ranking',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="trophy"/> 
-                <strong> Posición: {{ position }}</strong> <br>
-                <strong>Puntos: {{ points }}</strong>
+                <strong>Posición: {{ position }}</strong> <br>
+                <strong>Puntuación: {{ points }}</strong>
                </router-link> 
             </div>
 
@@ -31,48 +31,47 @@
 
         <div class="main-info-card">
             <div class="info-card">
-                <strong> Nombre: </strong> {{ name }}
-            </div>
-            <div class="info-card">
-                <strong> Apellido: </strong> {{ surname }}
+                <strong> Nombre y Apellidos: </strong> {{ name }} {{ surname }}
             </div>
             <div class="info-card">
                 <strong> Fecha Nacimiento: </strong> {{ date }}
             </div>
             <div class="info-card">
-                <strong> Email: </strong> {{ email }}
+                <strong> Correo Electrónico: </strong> {{ email }}
             </div>
             <div class="info-card">
-                <strong> Genero: </strong> {{ gender }}
+                <strong> Género: </strong> {{ gender }}
             </div>
             <div class="info-card">
-                <strong> Escuela: </strong> {{ school }}
+                <strong> Escuela UPM: </strong> {{ school }}
             </div>
         </div>
 
         <div class="options">
             <b-dropdown right text="Opciones" class="m-2">
             <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
-                 <b-dropdown-item :to="{name: 'm-perfil',params: { userid: $route.params.userid}}">Modificar Perfil</b-dropdown-item>
+                 <b-dropdown-item :to="{name: 'm-perfil',params: { userid: $route.params.userid}}">Modificar perfil</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item>Cambiar Idioma</b-dropdown-item>
+                <b-dropdown-item>Cambiar idioma</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item :to="{name: 'n-error',params: { userid: $route.params.userid}}">Notificar Error</b-dropdown-item>
+                <b-dropdown-item :to="{name: 'n-error',params: { userid: $route.params.userid}}">Notificar error</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item >
                     <download-csv :data   = "neologismes" name    = "filename.csv">
-	                Descargar información Neologismos 
+	                Descargar información neologismos 
                     </download-csv>
                 </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item v-on:click="deleteData($route.params.userid)"> <div style="color: red !important;"> Eliminar cuenta</div></b-dropdown-item>
             </b-dropdown>
         </div>
     </div>
     
     <div class="bottom-menu">
-        <h4>Neologismos creados y Propuestas</h4>
+        <h4>Neologismos propuestos y aceptados</h4>
         <div class="user-rankings">
-            <Accepeted_Neos/>
             <Non_Accepeted_Neos/>
+            <Accepeted_Neos/>
         </div>
     </div>
 
@@ -100,8 +99,6 @@ export default {
     created(){
         axios.get('http://localhost:3000/users/' + this.$route.params.userid)
         .then(response => {
-            //this.name = response.data[0].name;
-            console.log(response.data);
             this.name = response.data.name;
             this.surname = response.data.surname;
             this.email = response.data.email;
@@ -166,6 +163,15 @@ export default {
           position: 0,
           neologismes: []
       }
+
+  },
+  methods: {
+    deleteData(id) {
+   axios.delete('http://localhost:3000/neologismes/' + id)
+        .then(response => {
+      console.log(this.result);
+    });
+    }
   }
 }
 </script>

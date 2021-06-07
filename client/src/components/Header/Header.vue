@@ -2,7 +2,7 @@
     <div class="header-card">
         <Sidebar /> 
         <div class="main-section">
-           <a href="/" class="title-header">Neologismos</a>
+           <a href="/" class="title-header">Pescaneo</a>
             </div>
         <UserButton/>
     </div>
@@ -40,7 +40,11 @@ export default {
 .title-header{
     color: black !important;
     text-decoration: none !important;
-    letter-spacing: 6px;
-    font-size: 22px
+    letter-spacing: 7px;
+    font-size: 23px;
+}
+
+.title-header:hover{
+   pointer-events: none;
 }
 </style>
