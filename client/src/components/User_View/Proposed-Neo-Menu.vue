@@ -37,25 +37,36 @@ export default {
   computed:{
          see_reject (value) {
              var res = false;
-             console.log(value);
             for (let index = 0; !res && (index < value.length); index++) {
-                res = ((this.login.user_id == value[index].user_id) || this.login.admin)&&(!value[index].aprove)
+                res = ((this.login.user_id == value[index].user_id) || (this.login.linguist || this.login.admin))&&(!value[index].aprove)
             }
             return res;
         }
     },
       created(){
-        axios.get('http://localhost:3000/neologismes')
-          .then(response => {
-            for (let index = 0; index < response.data.length; index++) {
-            if (response.data[index].proposal || response.data[index].modify) {
-                this.neologismes.push(response.data[index]);
-            }
-        }      
-            }),
         axios.get('http://localhost:3000/login/1')
-          .then(response => {
-              this.login = response.data;
+        .then(response_l => {
+            this.login = response_l.data;
+          axios.get('http://localhost:3000/users/' + response_l.data.id)
+           .then(response_u => {
+             axios.get('http://localhost:3000/neologismes')
+             .then(response => {
+                 if(response_l.data.admin || response_l.data.linguist){
+                     for (let index = 0; index < response.data.length; index++) {
+                         if (response.data[index].proposal) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
+            }else{
+                for (let index = 0; index < response.data.length; index++) {
+                    console.log(response_u.data.proposals.includes(response.data[index].id));
+                    if (response_u.data.proposals.includes(response.data[index].id)) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
+            }
+            })
+            })
           })
     },
     data() {

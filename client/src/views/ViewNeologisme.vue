@@ -20,7 +20,7 @@
             <router-link :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" class="bttn-app" style="background-color: var(--fail) !important">Modificar</router-link>
         </div>
 
-        <div class="rejected-neologisme" v-if="see_reject_div && !login.admin">
+        <div class="rejected-neologisme" v-if="see_reject_div">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.mssg }}
@@ -58,7 +58,7 @@
                 
             </div>
         </div>
-        <div class="admin-options" v-if="login.admin && (form.rejected || form.modify)">
+        <div class="admin-options" v-if="(login.linguist || login.admin) && (form.rejected || form.modify)">
             <b-button class="bttn-app" v-on:click="submit(value.id)" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar propuesta </b-button>
         </div>
@@ -106,7 +106,7 @@ export default {
     },
     methods:{
         seeModify(){
-            return this.form.proposal && ((this.form.user[0].user_id == this.login.user_id) || this.login.admin)
+            return this.form.proposal && ((this.form.user[0].user_id == this.login.user_id) || (this.loginlogin.admin || this.login.admin))
         },
       like(){
           var payload = {liked:this.form.liked+1}; 

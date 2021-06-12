@@ -86,7 +86,8 @@ export default {
           proposals:[],
           accepted_neo: [],
           fav_neo: [],
-          admin: false
+          admin: false,
+          linguist:false
         },
         genders: [{ text: 'Select One', value: null }, 'Masculino', 'Femenino', 'No binario', 'Prefiero no decirlo'],
         schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],

@@ -24,20 +24,34 @@
     import axios from 'axios';
 export default {
     created(){
-        axios.get('http://localhost:3000/neologismes')
-          .then(response => {
-              var i = 0;
-              while(i<5 && i<response.data.length){
-                  if(!response.data[index].proposal && !response.data[index].modify){
-                    this.neologismes.push(response.data[i]);
-                  }
-                   i++;
-              }
+        axios.get('http://localhost:3000/login/1')
+        .then(response_l => {
+            this.login = response_l.data;
+          axios.get('http://localhost:3000/users/' + response_l.data.id)
+           .then(response_u => {
+             axios.get('http://localhost:3000/neologismes')
+             .then(response => {
+                 if(response_l.data.admin || response_l.data.linguist){
+                     for (let index = 0; index < response.data.length; index++) {
+                         if (!response.data[index].proposal) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
+            }else{
+                for (let index = 0; index < response.data.length; index++) {
+                    if (response_u.data.accepted_neo.includes(response.data[index].id)) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
+            }
             })
+            })
+          })
     },
     data(){
         return{
-            neologismes: []
+            neologismes: [],
+            login:[]
         }
     }
 }

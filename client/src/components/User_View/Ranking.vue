@@ -17,7 +17,11 @@
 
             <div >
             <b-dropdown right text="Opciones" class="m-2" v-if="logged.admin">
-            <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
+                <b-dropdown-item v-on:click="addPrivileges('linguist',value.id)"> Convertir en Lingüista </b-dropdown-item>
+                <b-dropdown-item v-on:click="addPrivileges('admin',value.id)"> Convertir en Administrador </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item v-on:click="addPrivileges('admin',value.id)" v-if="value.linguist"> <div style="color: red !important;"> Quitar privilegios de Lingüista </div> </b-dropdown-item>
+                <b-dropdown-item v-on:click="addPrivileges('admin',value.id)" v-if="value.admin"> <div style="color: red !important;"> Quitar privilegios de Administrador </div> </b-dropdown-item>
                 <b-dropdown-item v-on:click="deleteData(value.id)"> <div style="color: red !important;"> Eliminar Usuario </div> </b-dropdown-item>
             </b-dropdown>
         </div>
@@ -41,7 +45,6 @@ export default {
     axios.get('http://localhost:3000/login/1')
           .then(response => {
               this.logged = response.data;
-              console.log(response.data.logged);
             });
     },
     data(){
@@ -54,7 +57,6 @@ export default {
     methods: {
         asign_color: function(pos){
             var style  = {};
-            console.log(pos);
             switch(pos){
                 default: style.backgroundColor = "var(--buttons)"; break;
                 case 1: style.backgroundColor = "var(--gold) "; break;
@@ -65,9 +67,18 @@ export default {
         },
 
     deleteData(id) {
-        axios.delete('http://localhost:3000/neologismes/' + id)
+        axios.delete('http://localhost:3000/users/' + id)
             .then(response => {});
+        },
+    addPrivileges(type,id){
+        var payload={};
+        switch(type){
+            case 'linguist': payload={linguist:true}; break;
+            case 'admin': payload={admin:true}; break;
         }
+        axios.patch('http://localhost:3000/users/' + id, payload).then(response_l => {
+      });
+    }
     }
 }
 </script>

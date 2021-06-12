@@ -3,9 +3,10 @@
     {
       "email_or_user": "email.super.real@real.domain.com",
       "password": "contraseña",
-      "logged": false,
+      "logged": true,
       "user_id": 1,
-      "admin": true,
+      "admin": false,
+      "linguist":false,
       "id": 1
     }
   ],
@@ -24,32 +25,19 @@
       "img": "https://picsum.photos/300/150/?image=41",
       "position": 1,
       "proposals": [
-        1
+        2
       ],
       "fav_neo": [
         2
       ],
       "accepted_neo": [
-        2
+        3
       ],
       "points": 2000,
       "liked_neo": 3,
       "admin": false,
-      "neologisme": "Descrip",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Descripciasd"
-        },
-        {
-          "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
-        }
-      ]
+      "linguist": true,
+      "type": true
     },
     {
       "id": 2,
@@ -75,7 +63,8 @@
       ],
       "points": 2000,
       "liked_neo": 1,
-      "admin": true
+      "admin": true,
+      "linguist": false
     },
     {
       "id": 3,
@@ -101,6 +90,7 @@
       ],
       "points": 2000,
       "liked_neo": 3,
+      "linguist": true,
       "admin": false
     },
     {
@@ -127,6 +117,7 @@
       ],
       "points": 2000,
       "liked_neo": 3,
+      "linguist": true,
       "admin": false
     },
     {
@@ -153,6 +144,7 @@
       ],
       "points": 2000,
       "liked_neo": 3,
+      "linguist": true,
       "admin": false
     }
   ],
@@ -193,9 +185,8 @@
       ],
       "img": "https://picsum.photos/1024/400/?image=36",
       "liked": 7,
-      "proposal": false,
+      "proposal": true,
       "points": 0,
-      "modify": true,
       "position": 1,
       "mssg": "asdasd",
       "user": [
@@ -243,7 +234,6 @@
       "proposal": false,
       "position": 2,
       "points": 0,
-      "modify": true,
       "user": [
         {
           "user_id": 2,

@@ -30,7 +30,7 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
-            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
               <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
           </div>
           </div>
@@ -56,8 +56,8 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
-            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-if="form.logged">
-              <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
+              <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt"/> Salir <div></div>
           </div>
           </div>
 
@@ -91,6 +91,13 @@ import axios from 'axios'
       btnStates() {
         return this.buttons.map(btn => btn.state)
       }
+    },
+    methods:{
+      logOut(){
+         axios.patch('http://localhost:3000/login/1', {logged:false}).then(response_l => {
+            this.$router.push({ path: `/` }) // -> /user/123
+      });
+      }
     }
   }
 </script>
@@ -117,7 +124,6 @@ import axios from 'axios'
     display: flex;
     flex-direction: column;
 }
-
 
 .sidebar-button{
   padding: 8%;

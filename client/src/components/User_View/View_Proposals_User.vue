@@ -20,10 +20,10 @@
             <div class="neo_card_pendent" v-else>
             <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
-             <b-dropdown text="Acciones" v-if="login.admin">
+             <b-dropdown text="Acciones" v-if="login.linguist || login.admin">
                     <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar propuesta</b-dropdown-item>
                     <b-dropdown-item :to="{name: 'rp-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">Rechazar propuesta</b-dropdown-item>
-                    <b-dropdown-item style="color: red; !important" v-on:click="deleteData(value.id)">Eliminar propuesta</b-dropdown-item>
+                    <b-dropdown-item v-if="login.admin" style="color: red; !important" v-on:click="deleteData(value.id)">Eliminar propuesta</b-dropdown-item>
                 </b-dropdown>
                  <b-button class="bttn-app" :to="{name: 'v-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}"> +</b-button>
             </div>
@@ -45,14 +45,20 @@ export default {
 
         axios.get('http://localhost:3000/neologismes')
           .then(response => {
-            for (let index = 0; index < response.data.length; index++) {
-            if (this.login.admin && (response.data[index].proposal || response.data[index].modify)) {
-                this.neologismes.push(response.data[index]);
-            } else if(response_u.data.proposals.include(response.data[index].id) 
-            && (response.data[index].proposal || response.data[index].modify)){
-                this.neologismes.push(response.data[index]);
+            if(response_l.data.admin || response_l.data.linguist){
+                     for (let index = 0; index < response.data.length; index++) {
+                         if (response.data[index].proposal) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
+            }else{
+                for (let index = 0; index < response.data.length; index++) {
+                    console.log(response_u.data.proposals.includes(response.data[index].id));
+                    if (response_u.data.proposals.includes(response.data[index].id)) {
+                        this.neologismes.push(response.data[index]);
+                    }
+                }
             }
-        }  
         })   
           })
         })
