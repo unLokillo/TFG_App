@@ -1,10 +1,10 @@
 <template>
 <div class="header-img">
     <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.logged">
-        <b-avatar :src="login_info.img"></b-avatar> {{ login_info.email_or_user }} 
+        <b-avatar :src="login_info.img"></b-avatar> {{ user_info.nickname }} 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
-        Inciar sesión
+        Iniciar sesión
     </router-link>
 </div>
 </template>
@@ -16,7 +16,19 @@ export default {
         axios.get('http://localhost:3000/login/1')
           .then(response => {
               this.login_info = response.data;
+        axios.get('http://localhost:3000/users/' + response.data.user_id)
+          .then(response_u => { 
+              this.user_info = response_u.data;
             });
+            });
+    },
+    data() {
+        return {
+            user_info: [],
+            showModal: false,
+            user_id: '',
+            login_info: []
+        }
     },
     watch: {
     $route: {
@@ -24,15 +36,8 @@ export default {
       handler: function(newVal, oldVal) {
         this.showModal = newVal.meta && newVal.meta.showModal;
       }
-    }
-  },
-    data() {
-        return {
-            showModal: false,
-            user_id: '',
-            login_info: []
-        }
-    }
+    },
+}
 }
 </script>
 

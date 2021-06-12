@@ -80,6 +80,14 @@ var route = [
         },
         path: 'forgot-password',
         name: 'forgot-password',
+        component: () => import('@/components/Main/fp-email.vue'),
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'forgot-password/code',
+        name: 'forgot-password-c',
         component: () => import('@/views/ForgotPassword.vue'),
       },
       {

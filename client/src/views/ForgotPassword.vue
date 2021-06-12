@@ -9,8 +9,14 @@
           v-model="form.code"
           type="email"
           placeholder="Introduce el código"
+          :state="this.correct_code"
           required>
           </b-form-input>
+
+        <b-form-invalid-feedback id="input-live-feedback">
+            El código introducido no es valido.
+        </b-form-invalid-feedback>
+
     <b-button style="width:70%" v-on:click="submit" type="submit" >Confirmar</b-button>
 </div>
 </template>
@@ -21,13 +27,14 @@
             return {
                 form: {
                     code: "",
-                }
+                },
+                correct_code: null
             }
         },
         methods: {
             submit() {
-                console.log(this.form.code.localeCompare("ASDFG")); 
-                if(this.form.code.localeCompare("ASDFG")==0){
+                this.correct_code = this.form.code.localeCompare("ASDFG")==0;
+                if(this.correct_code){
                     this.$router.push({ path: `/forgot-password/reset` }) // -> /user/123
                 }
       },

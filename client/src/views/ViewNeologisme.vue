@@ -59,11 +59,11 @@
             </div>
         </div>
         <div class="admin-options" v-if="login.admin && (form.rejected || form.modify)">
-            <b-button class="bttn-app" v-on:click="submit(value.id,'accepted','')" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
+            <b-button class="bttn-app" v-on:click="submit(value.id)" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar propuesta </b-button>
         </div>
 
-        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar propuesta </router-link>
+        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" v-if="seeModify" > Modificar propuesta </router-link>
     </div>
 
 </template>
@@ -72,8 +72,7 @@
 import axios from 'axios'
 export default {
     beforeCreate(){
-        var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
-        axios.get(uri)
+    axios.get("http://localhost:3000/neologismes/" + this.$route.params.neoId)
         .then(response_neo => {
             this.form = response_neo.data;
 
@@ -106,6 +105,9 @@ export default {
         };
     },
     methods:{
+        seeModify(){
+            return this.form.proposal && ((this.form.user[0].user_id == this.login.user_id) || this.login.admin)
+        },
       like(){
           var payload = {liked:this.form.liked+1}; 
             var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
@@ -116,12 +118,18 @@ export default {
         this.form.liked = this.form.liked+1; 
         },
     },
-      submit(id,type,n_mssg){
-        var payload = {}; 
-          switch (type){
-            case 'accepted': payload = {proposal:false}; break;
-            case 'reject': payload = {rejected:true,mssg:n_mssg }; break;
-          }
+      submit(id){
+        var payload = {
+                proposal:false, 
+                user:{
+                    user_id: this.form.user[0].user_id,
+                    user: this.form.user[0].user,
+                    date: this.form.user[0].date,
+                    rejected: false,
+                    mssg: "",
+                },
+                modify: false
+            }
             axios.patch('http://localhost:3000/neologismes/' + id, payload)
                 .then(function( response ){
                     // Handle success

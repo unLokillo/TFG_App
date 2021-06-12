@@ -30,12 +30,7 @@
       </div>
     
       <b-button v-on:click="getUserInfo" class="mt-3" type="submit" variant="primary">Enviar</b-button>
-    
-    <!-- DEscomentar para ver mas info sobre el JSON
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
-    -->
+
   </div>
 </template>
 
@@ -58,19 +53,22 @@ export default {
     methods: {
       getUserInfo(){
         this.correct_login = false;
-        var i = 0; 
+        var i = -1; 
          axios.get('http://localhost:3000/users')
         .then(response => {
             while (!this.correct_login && (i < response.data.length)) {
-              this.correct_login = (response.data[i].nickname.localeCompare(this.form.email_or_user)) &&
-                            (response.data[i].password.localeCompare(this.form.password));
               i++;
-          
+              this.correct_login = (response.data[i].email.localeCompare(this.form.email_or_user)==0|| 
+              (response.data[i].nickname.localeCompare(this.form.email_or_user)==0)) &&
+                            (response.data[i].password.localeCompare(this.form.password)==0);
+
           if(this.correct_login){
             this.form.user_id = response.data[i].id;
             this.form.logged = true;
             this.admin = response.data[i].admin;
-          axios.put('http://localhost:3000/login/' + i,this.form)
+            this.form.user_id = response.data[i].id;
+            console.log(response.data[i].id);
+          axios.put('http://localhost:3000/login/1',this.form)
           .then(response => {      
             });
           this.$router.push({ path: `/`}) // -> /user/123
@@ -78,22 +76,6 @@ export default {
         }
       });
     },
-
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
     }
 
 }

@@ -1,10 +1,10 @@
 {
   "login": [
     {
-      "email_or_user": "admin",
-      "password": "admin",
-      "logged": true,
-      "user_id": 2,
+      "email_or_user": "email.super.real@real.domain.com",
+      "password": "contraseña",
+      "logged": false,
+      "user_id": 1,
       "admin": true,
       "id": 1
     }
@@ -227,11 +227,11 @@
       "sources": [
         {
           "id": 2,
-          "value": "Fuente 1"
+          "value": "sdsdfsdf"
         },
         {
           "id": 3,
-          "value": "Fuente 2"
+          "value": "ssente 2"
         },
         {
           "id": 4,
@@ -243,13 +243,14 @@
       "proposal": false,
       "position": 2,
       "points": 0,
-      "modify": false,
+      "modify": true,
       "user": [
         {
           "user_id": 2,
           "user": "User1 Surname1",
           "date": "30/10/1998",
-          "rejected": false
+          "rejected": false,
+          "mssg": ""
         }
       ],
       "mssg": "",
@@ -321,12 +322,5 @@
       "completed_date": "X/XX/XXXX"
     }
   ],
-  "modify": [
-    {
-      "id": 1,
-      "neo_id": 2,
-      "user_id": 1,
-      "date": "30/10/1998"
-    }
-  ]
+  "modify": []
 }

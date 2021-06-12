@@ -48,7 +48,7 @@ import axios from 'axios'
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
-            this.$router.push({ path: `/` }) // -> /user/123
+            this.$router.push({ path: `/` }) 
         },
     }
 }

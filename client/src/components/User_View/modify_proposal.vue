@@ -48,23 +48,26 @@ export default {
     TodoBox
   },
     created(){
-        var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
-        axios.get(uri)
+        axios.get("http://localhost:3000/neologismes/" + this.$route.params.neoId)
         .then(response_neo => {
             this.form = response_neo.data;
+        }),
+        axios.get("http://localhost:3000/login/1")
+        .then(response => {
+            this.login = response.data;
         })
     },
     data() {
         return{
           form:[],
           descriptions: [],
+          login:[],
           sources: [],
           name: '',
           neo_aux: ''
     }
   },
   methods: {
-   
     onDescriptionsClick (value) {
       this.descriptions = value;
     },
@@ -73,7 +76,6 @@ export default {
     },
     addDescriptions(){
           for (let index = 0; index < this.descriptions.length; index++) {
-            console.log(this.descriptions);
               this.form.descriptions.push({
                 id:this.form.descriptions[this.form.descriptions.length-1].id+(1+index),
                 value:this.descriptions[index].description
@@ -82,7 +84,6 @@ export default {
     },
     addSources(){
           for (let index = 0; index < this.sources.length; index++) {
-            console.log(this.sources);
               this.form.sources.push({
                 id:this.form.sources[this.form.sources.length-1].id+(1+index),
                 value:this.sources[index].description
@@ -98,7 +99,8 @@ export default {
                     user: this.form.user[index].user,
                     date: this.form.user[index].date,
                     rejected:false,
-                    mssg:""
+                    mssg:"",
+                    modify_elements: this.mod_elements
                   }) 
               break;
               }
