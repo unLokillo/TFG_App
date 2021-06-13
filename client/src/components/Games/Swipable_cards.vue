@@ -1,4 +1,6 @@
 <template>
+<div>
+  <Header/>
   <section class="container">
     <div
       v-if="current"
@@ -26,8 +28,13 @@
         <div class="info">
           <div class="game-card">
           <h5>Contexto</h5>
-            <div v-for="(value,index) in nData.descriptions" :key="index">
-              <p>{{value.value}}</p>
+            <div v-for="(value,index) in nData" :key="index">
+              <p> {{ index }} - {{ value.descriptions[0].value }}</p>
+            </div>
+
+            <h5>Fuentes</h5>
+            <div v-for="(value,index) in nData" :key="index">
+              <p> {{ index }} - {{ value.sources[0].value }}</p>
             </div>
           </div>
         </div>
@@ -66,22 +73,26 @@
       </div>
     </div>
   </section>
+ </div> 
 </template>
 <script>
 import axios from 'axios'
+import Header from '@/components/Header/Header.vue'
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 const EVENTS = {
   MATCH: 'match',
   REJECT: 'reject'
 }
 export default {
-  components: { Vue2InteractDraggable },
+  components: 
+  { Vue2InteractDraggable,
+  Header },
     created(){
       var nData = [];
       var card = [];
         axios.get('http://localhost:3000/login/1')
         .then(response_l => {
-        axios.get('http://localhost:3000/users/' + response_l.data.user_id)
+        ('http://localhost:3000/users/' + response_l.data.user_id)
         .then(response_u => {
         axios.get('http://localhost:3000/neologismes')
         .then(response => {
@@ -103,7 +114,7 @@ export default {
     },
   data() {
     return {
-      neoData: '',
+      neoData: [],
       isVisible: true,
       index: 0,
       interactEventBus: {
@@ -124,7 +135,7 @@ export default {
   methods: {
     match(id) {
       InteractEventBus.$emit(EVENTS.MATCH);
-      axios.patch('http://localhost:3000/neologismes/' + id).then(response_l => {
+      axios.patch('http://localhost:3000/neologismes/' + id,{liked: this.nData.liked+1}).then(response_l => {
       });
     },
     reject() {
@@ -147,12 +158,12 @@ export default {
 .container {
   background: #eceff1;
   width: 100%;
-  height: 100vh;
+  height: 52rem;
 }
 
 .footer {
   width: 77vw;
-  bottom: -4%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -210,7 +221,7 @@ export default {
   &--center {
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
   }
 }
 .rounded-borders {
@@ -218,7 +229,7 @@ export default {
 }
 .card {
   width: 40vw;
-  height: 80vh;
+  height: 60vh;
   color: white;
   img {
     object-fit: cover;
@@ -265,10 +276,8 @@ export default {
 }
 
 .info{
-    height: 55%;
     width: 80%;
     margin-bottom: 2%;
-    padding: 1%;
     margin: 10px auto;
     color: black  ;
   .game-card{

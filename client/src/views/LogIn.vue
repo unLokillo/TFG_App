@@ -2,21 +2,8 @@
 <div class="login-body">
    <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h3>Iniciar sesión</h3>
-        <b-form-input
-          id="input-1"
-          v-model="form.email_or_user"
-          type="email"
-          placeholder="Correo electronico"
-          :state="this.correct_login"
-          required
-        ></b-form-input>
-        <b-form-input  
-        v-model="form.password" 
-        type="password" 
-        id="text-password" 
-        aria-describedby="password-help-block" 
-        placeholder="Contraseña" 
-        :state="this.correct_login"></b-form-input>
+        <b-form-input v-model="form.email_or_user" placeholder="Correo electronico" :state="this.correct_login" required></b-form-input>
+        <b-form-input v-model="form.password" type="password" placeholder="Contraseña" :state="this.correct_login"></b-form-input>
         
         <b-form-text id="password-help-block"></b-form-text>
 
@@ -44,7 +31,8 @@ export default {
           password: '',
           logged: false,
           user_id: 0,
-          admin: true
+          admin: false,
+          linguist: false
         },
         correct_login: null,
         show: true
@@ -65,13 +53,15 @@ export default {
           if(this.correct_login){
             this.form.user_id = response.data[i].id;
             this.form.logged = true;
-            this.admin = response.data[i].admin;
+            console.log(response.data[i].admin);
+            this.form.admin = response.data[i].admin;
+            this.form.linguist = response.data[i].linguist;
             this.form.user_id = response.data[i].id;
-            console.log(response.data[i].id);
           axios.put('http://localhost:3000/login/1',this.form)
           .then(response => {      
             });
-          this.$router.push({ path: `/`}) // -> /user/123
+          this.$router.push({ path: `/register`}) 
+          this.$router.push({ path: `/`}) 
           };
         }
       });

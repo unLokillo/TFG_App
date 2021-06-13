@@ -296,10 +296,9 @@ var route = [
     ]
   },
   {
-    path: 'game_1',
+    path: 'swipable-cards',
     name: 'game_1',
     component: () => import('@/components/Games/Swipable_cards.vue'),
-    props: true
   },
 ]
 

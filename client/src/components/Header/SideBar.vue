@@ -11,7 +11,7 @@
 
           <div class="all-sidebar-buttons" v-if="screen">
             <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
-                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego <div></div>
+                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Actividades <div></div>
             </router-link>
           
             <router-link :to="{ name: 'ranking',params: {} }" class="sidebar-button" tag="div">
@@ -37,7 +37,7 @@
 
     <div class="all-sidebar-buttons" v-else>
             <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="div">  
-                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Juego <div></div>
+                <div><font-awesome-icon style="font-size: 120%; !important" icon="gamepad" /></div>  Actividades <div></div>
             </router-link>
           
             <router-link :to="{ name: 'vu-ranking',params: {userid:form.user_id} }" class="sidebar-button" tag="div">

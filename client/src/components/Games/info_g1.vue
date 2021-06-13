@@ -7,7 +7,7 @@
        <p>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque orci non rutrum dictum. Mauris pharetra metus quis arcu accumsan volutpat. Mauris vel posuere massa. Aenean lobortis, erat et ornare tempor, erat diam venenatis quam, non volutpat purus purus a lectus. Sed laoreet augue et pulvinar porttitor. Maecenas facilisis, leo eget fermentum suscipit, elit dolor placerat nulla, efficitur vestibulum arcu nisi a massa. Morbi nibh libero, viverra a neque in, vestibulum blandit nibh. Nunc faucibus sodales felis at aliquam. Integer sodales enim ac placerat ullamcorper. Pellentesque mollis, urna et condimentum interdum, urna lorem finibus erat, at euismod lorem leo eu sapien. Mauris et sapien id enim convallis blandit. Fusce eleifend tempus ligula, ut placerat dui ullamcorper eget. </p>
-    <b-button :to="{name: 'game_1',params: {}}" > ¡¡ Juega !! </b-button>
+    <b-button :to="{name: 'game_1'}" > ¡¡ Juega !! </b-button>
     </div>     
 </template>
 

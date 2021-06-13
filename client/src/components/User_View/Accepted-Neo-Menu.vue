@@ -32,7 +32,7 @@ export default {
        axios.get('http://localhost:3000/login/1')
         .then(response_l => {
             this.login = response_l.data;
-          axios.get('http://localhost:3000/users/' + response_l.data.id)
+          axios.get('http://localhost:3000/users/' + response_l.data.user_id)
            .then(response_u => {
              axios.get('http://localhost:3000/neologismes')
              .then(response => {

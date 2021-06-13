@@ -47,11 +47,12 @@ export default {
         axios.get('http://localhost:3000/login/1')
         .then(response_l => {
             this.login = response_l.data;
-          axios.get('http://localhost:3000/users/' + response_l.data.id)
+          axios.get('http://localhost:3000/users/' + response_l.data.user_id)
            .then(response_u => {
              axios.get('http://localhost:3000/neologismes')
              .then(response => {
                  if(response_l.data.admin || response_l.data.linguist){
+                      console.log('A');
                      for (let index = 0; index < response.data.length; index++) {
                          if (response.data[index].proposal) {
                         this.neologismes.push(response.data[index]);
@@ -59,7 +60,6 @@ export default {
                 }
             }else{
                 for (let index = 0; index < response.data.length; index++) {
-                    console.log(response_u.data.proposals.includes(response.data[index].id));
                     if (response_u.data.proposals.includes(response.data[index].id)) {
                         this.neologismes.push(response.data[index]);
                     }

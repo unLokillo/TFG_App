@@ -34,7 +34,10 @@
           </b-form-invalid-feedback>
           </b-input-group>
       </div>
-
+          <div class="selectors-card">
+            <h6>Fecha de Nacimiento</h6>
+            <b-form-datepicker v-model="form.date" class="mb-2"></b-form-datepicker>
+          </div>  
           <div class="selectors-card">
             <h6>Género</h6>
             <b-form-select  v-model="form.gender" :options="genders"></b-form-select>
@@ -50,13 +53,12 @@
       <div>
 <div class="selectors-card">
   <h6>Avatar</h6>
-      <b-form-file v-model="form.img"
-      :state="Boolean(form.img)"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
+      <b-form-file 
+      v-model="form.image"
+      accept=".jpg, .png"
       plain
     ></b-form-file>
-    <div class="mt-3">Archivo seleccionado: {{ form.img ? form.img.name : '' }}</div>
+    <div class="mt-3">Archivo seleccionado: {{ form.image ? form.image.name : '' }}</div>
 </div>
 
     </div>
@@ -80,7 +82,7 @@ export default {
           password: '',
           school: '',
           mother_tonge: '',
-          image: null,
+          image: undefined,
           points: 0,
           position: 10,
           proposals:[],
@@ -90,15 +92,14 @@ export default {
           linguist:false
         },
         genders: [{ text: 'Select One', value: null }, 'Masculino', 'Femenino', 'No binario', 'Prefiero no decirlo'],
-        schools: [{ text: 'Select One', value: null }, 'ETSIINF', 'ETSII', 'ETSIAE', 'INEF'],
-        mother_tonge: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Frances', 'Chino'],
+        schools: [{ text: 'Select One', value: null }, 'ETSAM','ETSE','ETSIINF', 'ETSII', 'ETSIAE', 'INEF','ETSISI','ETSIST','ETSME'],
+        mother_tonge: [{ text: 'Select One', value: null }, 'Español', 'Ingles', 'Portugues','Aleman','Frances', 'Chino'],
         show: true,
         r_password: ''
       }
     },
     computed: {
       password_state(){
-        console.log(this.isUpper(this.form.password.length));
         return (this.form.password.length > 6 && this.form.password.length <14) 
         && this.isUpper(this.form.password) && this.hasNumeric(this.form.password);
       },
@@ -112,7 +113,7 @@ export default {
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
-            this.$router.push({ path: `/` }) // -> /user/123
+            this.$router.push({ path: `/login` }) // -> /user/123
         },
     isUpper(str) {
       var result=false;

@@ -75,23 +75,31 @@ export default {
     return [year, month, day].join('-');
 },
     submit(){
-        console.log(this.formatDate());
         axios.get('http://localhost:3000/login/1')
           .then(response => {
+          axios.get('http://localhost:3000/neologismes')
+          .then(response_neo => {
             axios.get('http://localhost:3000/users/' + response.data.user_id)
              .then(response_user => {
                this.form.user.push({
                  user: response_user.data.nickname,
                  user_id: this.$route.params.userid,
-                 date:  this.formatDate(),
+                 date: '14/05/2021',
                  rejected: false,
                  mssg: ''
                })
+               
             axios.post('http://localhost:3000/neologismes', this.form)
+              .then(function( response ){}.bind(this));
+            var n_proposal = [];
+            response_user.data.proposals.push(response_neo.data.length +2);
+            n_proposal.push(response_neo.data.length +1);
+            axios.patch('http://localhost:3000/users/'+response_user.data.id, {proposals:response_user.data.proposals})
               .then(function( response ){
                     // Handle success
               }.bind(this));
-               });
+              });
+              });
             });
         this.$router.push({ path: `/` }) // -> /user/123
     }  

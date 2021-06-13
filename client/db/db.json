@@ -1,12 +1,12 @@
 {
   "login": [
     {
-      "email_or_user": "email.super.real@real.domain.com",
-      "password": "contraseña",
+      "email_or_user": "admin",
+      "password": "password",
       "logged": true,
-      "user_id": 1,
-      "admin": false,
-      "linguist":false,
+      "user_id": 2,
+      "admin": true,
+      "linguist": false,
       "id": 1
     }
   ],
@@ -17,7 +17,7 @@
       "name": "Martin",
       "surname": "Apellidos",
       "email": "email.super.real@real.domain.com",
-      "date": "30/10/1998",
+      "date": "2021-06-16",
       "gender": "non binary",
       "password": "contraseña",
       "school": "ETSIINF",
@@ -45,7 +45,7 @@
       "name": "admin",
       "surname": "admin",
       "email": "email@email.com",
-      "date": "10/10/1998",
+      "date": "2021-06-02",
       "gender": "No Binary",
       "password": "password",
       "school": "ETSIINF",
@@ -146,6 +146,31 @@
       "liked_neo": 3,
       "linguist": true,
       "admin": false
+    },
+    {
+      "nickname": "Javitemek",
+      "name": "Javier",
+      "surname": "Barragán Haro",
+      "email": "javierbarraganh@gmail.com",
+      "date": "",
+      "gender": "No binario",
+      "password": "javier.89",
+      "school": "ETSIINF",
+      "mother_tonge": "Español",
+      "image": null,
+      "points": 0,
+      "position": 10,
+      "proposals": [
+        3
+      ],
+      "accepted_neo": [],
+      "fav_neo": [],
+      "admin": false,
+      "linguist": false,
+      "img": {
+        "$path": ""
+      },
+      "id": 6
     }
   ],
   "neologismes": [
@@ -245,6 +270,39 @@
       ],
       "mssg": "",
       "id": 3
+    },
+    {
+      "neologisme": "aaaaaaaaaaaaaaaaaaaf",
+      "descriptions": [
+        {
+          "id": 1,
+          "description": "fffffffffffffffffssssssssssss"
+        }
+      ],
+      "sources": [
+        {
+          "id": 1,
+          "description": "aaaaaaaaaaffffffffffff"
+        }
+      ],
+      "img": null,
+      "liked": 0,
+      "proposal": false,
+      "user": [
+        {
+          "user": "Javitemek",
+          "date": "14/05/2021",
+          "rejected": false,
+          "mssg": ""
+        },
+        {
+          "user": "Javitemek",
+          "date": "14/05/2021",
+          "rejected": false,
+          "mssg": ""
+        }
+      ],
+      "id": 4
     }
   ],
   "badges": [

@@ -41,7 +41,12 @@
           </b-input-group>
                 <b-button variant="outline-success" v-on:click="submit('password',form.password)">Modificar</b-button>
       </div>
-
+        
+        <div class="selectors-card">
+            <h6>Fecha de Nacimiento</h6>
+            <b-form-datepicker v-model="form.date" class="mb-2"></b-form-datepicker>
+                <b-button variant="outline-success"  v-on:click="submit('date',form.date)">Modificar</b-button>
+          </div>  
         <div class="selectors-card">
             <h6>Genero</h6>
             <b-form-select  v-model="form.gender" :value="form.gender" :options="genders" required></b-form-select>
@@ -78,8 +83,9 @@ import axios from 'axios'
 export default {
       created(){
         axios.get('http://localhost:3000/users/' + this.$route.params.userid)
+
         .then(response => {
-            //this.name = response.data[0].name;
+        //this.name = response.data[0].name;
             this.form.nickname = response.data.nickname;
             this.form.name = response.data.name;
             this.form.surname = response.data.surname;
@@ -89,7 +95,7 @@ export default {
             this.form.password = response.data.password;
             this.form.school = response.data.school;
             this.form.mother_tonge = response.data.mother_tonge;
-            this.form.image = response.date.image;
+            this.form.image = response.data.image;
         })
     },
     data() {
@@ -119,6 +125,7 @@ export default {
         methods:{
       submit(type,value){
         var payload = {}; 
+            console.log(value);
           switch (type){
             case 'nickname': payload = {nickname:value}; break;
             case 'name': payload = {name:value}; break;
@@ -131,7 +138,7 @@ export default {
             case 'email': payload = {email:value}; break; 
             case 'password': payload = {password:value}; break; 
           }
-            axios.patch('http://localhost:3000/users/1', payload)
+            axios.patch('http://localhost:3000/users/' + this.$route.params.userid, payload)
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
