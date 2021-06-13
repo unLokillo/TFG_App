@@ -1,31 +1,39 @@
 <template>
-<div class="games-selection">
-  <div class="top-menu">
-    <h5>Juegos</h5>
-    <p>¡¡Bienvenido a la zona de actividades!!</p>
+<div class="body-games">
+  <Header/>
+  <div style="background-color: var(--secondary-color); padding: 5%">
+    <h3>Actividades</h3>
+    ¡Bienvenido a la zona de Actividades!
   </div>
-<div>
-  <router-link :to="{ name: 'info_g1',params: {} }" class="game-selector" style="right: 55%;" tag="div">
-    <strong> Juego 1 </strong>
-  </router-link >
-  <router-link :to="{ name: 'info_g2',params: {} }" class="game-selector" style="left: 45%;" tag="div">
-    <strong> Juego 2 </strong>
-  </router-link >
+<div class="games-selection">
+  <div class="game-selector" style="margin-right:20%">
+    <router-link :to="{ name: 'info_g1',params: {} }" tag="div">
+      <strong> Cartas deslizantes </strong>
+    </router-link >
+  </div>
+  <div class="game-selector">
+    <router-link :to="{ name: 'info_g2',params: {} }" class="game-selector-1" tag="div">
+      <strong> El contexto correcto </strong>
+    </router-link >
+  </div>
   </div>
 <div v-if="showModal" class="modal-route">
         <div class="modal-content">
             <router-view></router-view>
         </div>
     </div>
-</div>
+<Footer/>
+  </div>
 </template>
 <script>
   import Header from '@/components/Header/Header.vue'
+  import Footer from '@/components/Footer/Footer.vue'
 export default {
   components: {
-     Header
+    Header,
+    Footer
   },
- watch: {
+   watch: {
     $route: {
       immediate: true,
       handler: function(newVal, oldVal) {
@@ -33,44 +41,42 @@ export default {
       }
     }
   },
-  data(){
-    return{
-      showModal: false,
+    data(){
+      return{
+        showModal: false
+      }
     }
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-
-.top-menu{
-  margin: 2%;
-  background-color: var(--secondary-color);
-width: 100%;
-height: 15%;
-padding:1%;
-
-}
-
-.games-selection{
-    background-color: var(--main-color);
-  display: flex;
-  justify-content: space-around;
-  height: 38rem;
-}
-.game-selector{
-  cursor: pointer;
-  border: 5px solid var(--buttons);
-  width: 30%;
-  margin: 0 0 0 10%;
-  height: 20rem;
+.body-games{
   position: absolute;
-  top: 35%;
-  border-radius: 10px;
-  text-align: center;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+.games-selection{
+  background-color: var(--main-color);
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  height: 67%;
+}
+
+.game-selector{
+  width: 25rem;
+  height: 50%;
+  margin-top: 10%;
+  background-color: #a6d3f8;
+}
+
+.game-selector > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .game-selector:hover{
@@ -79,4 +85,5 @@ padding:1%;
   background-color: var(--buttons); 
   color: var(--letter-color);
 }
+
 </style>
