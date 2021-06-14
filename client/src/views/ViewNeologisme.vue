@@ -4,7 +4,8 @@
          
         <div class="card-neo-header">
             <h2>{{ form.neologisme }}</h2>
-            <div class="neo-likes"  ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
+            <div class="neo-likes" v-if="seeLiked" ><font-awesome-icon v-on:click="like" style="color:red;" icon="heart"/> {{ form.liked }}</div> 
+            <div class="neo-likes" v-else ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
         <div class="rejected-neologisme-admin" v-if="login.admin">
@@ -20,13 +21,13 @@
             <router-link :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" class="bttn-app" style="background-color: var(--fail) !important">Modificar</router-link>
         </div>
 
-        <div class="rejected-neologisme" v-if="see_reject_div">
+        <div class="rejected-neologisme" v-if="form.user[0].rejected">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
-            {{ form.mssg }}
+            {{ form.user[0].mssg }}
             <br>
-            <strong>Si usted lo desea puede modificar la informacón requerida, y el neologismo sera evaluado nuevamente.
-                Gracias por su atencón
+            <strong>Si usted lo desea puede modificar la información requerida, y el neologismo sera evaluado nuevamente.
+                Gracias por su atención
             </strong>
         </p>
 
@@ -50,16 +51,12 @@
             <b-img thumbnail :src="form.img"  alt="Responsive image"></b-img>
         </div>
 
-        <div class="user-tag" v-if="!form.rejected">
+        <div class="user-tag" >
             <div>Creado por: {{ form.user[0].user }} </div> 
             <div>{{ form.user[0].date }} </div>
-            <div class="modify-user-tag" v-for="(value,i) in form.user" :key="i">
-                <p v-if="i!=0"> Modificado por: {{ value.user }} en {{ value.date }}</p>
-                
-            </div>
         </div>
-        <div class="admin-options" v-if="(login.linguist || login.admin) && (form.rejected || form.modify)">
-            <b-button class="bttn-app" v-on:click="submit(value.id)" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
+        <div class="admin-options" v-if="(login.linguist || login.admin)&&form.proposal">
+            <b-button class="bttn-app" v-on:click="submit(form.id)" style="background-color: var(--success) !important"> Aceptar propuesta </b-button>
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar propuesta </b-button>
         </div>
 
@@ -79,16 +76,13 @@ export default {
     axios.get('http://localhost:3000/login/1')
           .then(response_log => {
               this.login = response_log.data;    
+    
+    axios.get('http://localhost:3000/users/' + response_log.data.user_id)
+          .then(response_u => {
+              this.form_user = response_u.data;    
+          })
           })
          })
-    },computed:{
-         see_reject_div: function () {
-             var res = false;
-            for (let index = 0; !res && (index < this.form.user.length); index++) {
-                res = (this.login.user_id == this.form.user[index].user_id)&&(!this.form.user[index].aprove)
-            }
-            return res;
-    }
     },
     watch: {
         $route: {
@@ -101,40 +95,48 @@ export default {
         return {
             proposals: [],
             login: [],
-            form: []
+            form: [],
+            form_user: []
         };
     },
     methods:{
         seeModify(){
             return this.form.proposal && ((this.form.user[0].user_id == this.login.user_id) || (this.loginlogin.admin || this.login.admin))
         },
+        seeLiked(){
+            return this.form_user.fav_neo.includes(this.form.id);
+        },
       like(){
+          if(!this.form_user.fav_neo.includes(this.form.id)){
           var payload = {liked:this.form.liked+1}; 
-            var uri= "http://localhost:3000/neologismes/" + this.$route.params.neoId;
-            axios.patch(uri, payload)
+            axios.patch("http://localhost:3000/neologismes/" + this.$route.params.neoId, payload)
                 .then(function( response ){
-                    // Handle success
+                }.bind(this));
+          this.form_user.fav_neo.push(this.form.id);
+            axios.patch("http://localhost:3000/users/" + this.login.user_id, {fav_neo: this.form_user.fav_neo})
+                .then(function( response ){
                 }.bind(this));
         this.form.liked = this.form.liked+1; 
+          }
         },
-    },
+   
       submit(id){
         var payload = {
                 proposal:false, 
-                user:{
+                user:[{
                     user_id: this.form.user[0].user_id,
                     user: this.form.user[0].user,
                     date: this.form.user[0].date,
                     rejected: false,
                     mssg: "",
-                },
-                modify: false
+                }],
             }
             axios.patch('http://localhost:3000/neologismes/' + id, payload)
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
         }
+    },
 }
 </script>
 

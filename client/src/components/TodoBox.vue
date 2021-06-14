@@ -13,7 +13,7 @@
     </div>
     
     <b-list-group>
-      <b-list-group-item class="list-item" v-on:keyup="emitToParent" v-for="(value,index) in items" :key=index><div>{{ value.description }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >
+      <b-list-group-item class="list-item" v-on:keyup="emitToParent" v-for="(value,index) in items" :key=index><div>{{ value.value }} </div><b-button @click="removeItem(value.id)" class="bttn-todo" >
                <font-awesome-icon icon="times"/>
         </b-button></b-list-group-item>
   </b-list-group>
@@ -35,14 +35,14 @@ export default {
           if(this.newItem.length>0){
           this.items.push({
             id: this.items[this.items.length-1].id + 1,
-            description: this.newItem,
+            value: this.newItem,
         });
           }
         } else {
           if(this.newItem.length>0){
           this.items.push({
             id: 1,
-            description: this.newItem,
+            value: this.newItem,
         });
           }
         }

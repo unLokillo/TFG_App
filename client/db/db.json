@@ -13,10 +13,10 @@
   "users": [
     {
       "id": 1,
-      "nickname": "Andres",
+      "nickname": "M4RT1N",
       "name": "Martin",
       "surname": "Apellidos",
-      "email": "email.super.real@real.domain.com",
+      "email": "email@real.domain.com",
       "date": "2021-06-16",
       "gender": "non binary",
       "password": "contraseña",
@@ -24,15 +24,9 @@
       "mother_tonge": "Español",
       "img": "https://picsum.photos/300/150/?image=41",
       "position": 1,
-      "proposals": [
-        2
-      ],
-      "fav_neo": [
-        2
-      ],
-      "accepted_neo": [
-        3
-      ],
+      "proposals": [],
+      "fav_neo": [],
+      "accepted_neo": [],
       "points": 2000,
       "liked_neo": 3,
       "admin": false,
@@ -53,197 +47,79 @@
       "img": "https://picsum.photos/300/150/?image=35",
       "position": 0,
       "proposals": [
-        1
+        1,
+        4,
+        5,
+        6,
+        7
       ],
       "accepted_neo": [
         2
       ],
       "fav_neo": [
-        2
+        2,
+        1
       ],
       "points": 2000,
       "liked_neo": 1,
       "admin": true,
       "linguist": false
-    },
-    {
-      "id": 3,
-      "nickname": "usuario nº1",
-      "name": "Usuario",
-      "surname": "Numero Uno",
-      "email": "email.super.real@real.domain.com",
-      "date": "11/09/2001",
-      "gender": "non binary",
-      "password": "password",
-      "school": "ETSIINF",
-      "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=40",
-      "position": 2,
-      "proposals": [
-        1
-      ],
-      "accepted_neo": [
-        2
-      ],
-      "fav_neo": [
-        2
-      ],
-      "points": 2000,
-      "liked_neo": 3,
-      "linguist": true,
-      "admin": false
-    },
-    {
-      "id": 4,
-      "nickname": "idk",
-      "name": "I",
-      "surname": "De ca",
-      "email": "email.super.real@real.domain.com",
-      "date": "30/10/1998",
-      "gender": "non binary",
-      "password": "password",
-      "school": "ETSIINF",
-      "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=32",
-      "position": 3,
-      "proposals": [
-        1
-      ],
-      "accepted_neo": [
-        2
-      ],
-      "fav_neo": [
-        2
-      ],
-      "points": 2000,
-      "liked_neo": 3,
-      "linguist": true,
-      "admin": false
-    },
-    {
-      "id": 5,
-      "nickname": "girl in red?",
-      "name": "Girl",
-      "surname": "De rojo",
-      "email": "mira no se solo quiero terminar esto",
-      "date": "30/10/1998",
-      "gender": "non binary",
-      "password": "password",
-      "school": "ETSIINF",
-      "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=21",
-      "position": 4,
-      "proposals": [
-        1
-      ],
-      "accepted_neo": [
-        2
-      ],
-      "fav_neo": [
-        2
-      ],
-      "points": 2000,
-      "liked_neo": 3,
-      "linguist": true,
-      "admin": false
-    },
-    {
-      "nickname": "Javitemek",
-      "name": "Javier",
-      "surname": "Barragán Haro",
-      "email": "javierbarraganh@gmail.com",
-      "date": "",
-      "gender": "No binario",
-      "password": "javier.89",
-      "school": "ETSIINF",
-      "mother_tonge": "Español",
-      "image": null,
-      "points": 0,
-      "position": 10,
-      "proposals": [
-        3
-      ],
-      "accepted_neo": [],
-      "fav_neo": [],
-      "admin": false,
-      "linguist": false,
-      "img": {
-        "$path": ""
-      },
-      "id": 6
     }
   ],
   "neologismes": [
     {
-      "neologisme": "Neologisme 2",
+      "neologisme": "Hackear",
       "descriptions": [
         {
           "id": 1,
-          "value": "Descsdfsdf"
+          "value": "Se hackea una cuenta en las redes sociales o un correo electrónico"
         },
         {
           "id": 2,
-          "value": "Descripcion 2"
+          "value": "Robar la identidad del hackeado, es decir, para hacerse pasar por él."
         },
         {
           "id": 3,
-          "value": "Descripcion 3"
-        },
-        {
-          "id": 4,
-          "value": "ghjghj"
+          "value": "Para vigilar al hackeado y así conocer sus movimientos y rutinas para cometer delitos."
         }
       ],
       "sources": [
         {
           "id": 1,
-          "value": "Fusdfsdfasd"
-        },
-        {
-          "id": 2,
-          "value": "Fuxcvxcv"
-        },
-        {
-          "id": 3,
-          "value": "Fuente 3"
+          "value": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/me-hackearon-la-cuenta-de-Facebook-que-hago"
         }
       ],
       "img": "https://picsum.photos/1024/400/?image=36",
-      "liked": 7,
-      "proposal": true,
-      "points": 0,
+      "liked": 15,
+      "proposal": false,
       "position": 1,
-      "mssg": "asdasd",
+      "mssg": "",
       "user": [
         {
           "user_id": 2,
-          "user": "User1 Surname1",
+          "user": "Martin martin",
           "date": "30/10/1998",
-          "rejected": true
+          "rejected": false
         }
       ],
-      "id": 2
+      "id": 1
     },
     {
-      "neologisme": "Neologisme 3",
+      "neologisme": "Feature",
       "descriptions": [
         {
           "id": 1,
-          "value": "Descripcion 1"
+          "value": "El Desarrollo de Software Orientado a Features (FOSD)..."
         },
         {
           "id": 2,
-          "value": "Descripcion 2"
-        },
-        {
-          "id": 3,
-          "value": "Descripcion 3"
+          "value": "Una  característica  (feature)  es  una  unidadfuncional  de  un  sistema  de  software "
         }
       ],
       "sources": [
         {
           "id": 2,
-          "value": "sdsdfsdf"
+          "value": "ANÁLISIS  DE  DESARROLLO  DE  SOFTWARE  ORIENTADO  A FEATURE - LÍNEA DE PRODUCTO DE SOFTWARE PARA APLICACIONES DE TVDI"
         },
         {
           "id": 3,
@@ -255,54 +131,54 @@
         }
       ],
       "img": "https://picsum.photos/300/150/?image=21",
-      "liked": 10,
+      "liked": 6,
       "proposal": false,
       "position": 2,
-      "points": 0,
       "user": [
         {
           "user_id": 2,
-          "user": "User1 Surname1",
-          "date": "30/10/1998",
+          "user": "Raul Carbajosa",
+          "date": "02/06/2021",
           "rejected": false,
           "mssg": ""
         }
       ],
-      "mssg": "",
-      "id": 3
+      "id": 2
     },
     {
-      "neologisme": "aaaaaaaaaaaaaaaaaaaf",
+      "neologisme": "Memoria",
       "descriptions": [
         {
           "id": 1,
-          "description": "fffffffffffffffffssssssssssss"
+          "value": "https://www.redalyc.org/pdf/4959/495952431002.pdf"
+        },
+        {
+          "id": 2,
+          "value": "NEOLOGISMOS TECNOLÓGICOS Y NUEVOSCOMPORTAMIENTOS EN LA SOCIEDAD RED"
         }
       ],
       "sources": [
         {
           "id": 1,
-          "description": "aaaaaaaaaaffffffffffff"
+          "value": "Los datos se registran en su memoria en código binario como elementos independientes y acontextuales."
+        },
+        {
+          "id": 2,
+          "value": "los ordenadores tienen “memoria” cuando nos referimos a sus sistemas de registro temporal de datos."
         }
       ],
       "img": null,
-      "liked": 0,
+      "liked": 1,
       "proposal": false,
       "user": [
         {
-          "user": "Javitemek",
-          "date": "14/05/2021",
-          "rejected": false,
-          "mssg": ""
-        },
-        {
-          "user": "Javitemek",
+          "user": "admin",
           "date": "14/05/2021",
           "rejected": false,
           "mssg": ""
         }
       ],
-      "id": 4
+      "id": 3
     }
   ],
   "badges": [

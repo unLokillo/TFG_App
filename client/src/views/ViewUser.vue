@@ -22,8 +22,8 @@
 
             <div class="left-side-menus">
                 <router-link :to="{name: 'f-neo',params: { userid: $route.params.userid }}" tag="div">
-                <font-awesome-icon style="font-size:20px;" icon="heart" />
-                    {{ liked_neo }}
+                <font-awesome-icon style="font-size:20px;color:red;" icon="heart" />
+                    {{ fav_neo.length }}
                 </router-link>
             </div>
         </div>
@@ -107,6 +107,7 @@ export default {
             this.school = response.data.school;
             this.points = response.data.points;
             this.position = response.data.position;
+            this.fav_neo = response.data.fav_neo;
             this.img = response.data.img;
         });
         axios.get('http://localhost:3000/neologismes')
@@ -154,6 +155,7 @@ export default {
           mainProps: {width: '200%', height:'200%', class: 'm1' },
           name: '', 
           surname: '',
+          fav_neo: [],
           email: '',
           date: '',
           gender: '',

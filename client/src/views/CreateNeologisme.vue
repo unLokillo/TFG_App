@@ -6,15 +6,15 @@
         <h6>Neologismo</h6>
         <b-form-input id="input-1" v-model="form.neologisme" type="text" placeholder="Introduce el Neologismo" required></b-form-input>
         <div>
-          <h6>Fuentes</h6>
-          <p style="font-size: 14px"> <i> Indica con detalle dónde lo has encontrado </i> </p>
-          <TodoBox v-on:childToParent="onSourcesClick"/>
-        </div>
-
         <div>
           <h6>Contextos</h6>
             <p style="font-size: 14px"> <i> Incluye la frase completa en la que has encontrado el neologismo</i> </p>
           <TodoBox v-on:childToParent="onDescriptionsClick"/>
+        </div>
+
+          <h6>Fuentes</h6>
+          <p style="font-size: 14px"> <i> Indica con detalle dónde lo has encontrado </i> </p>
+          <TodoBox v-on:childToParent="onSourcesClick"/>
         </div>
     <h6>Imagen</h6>
     <div>
@@ -59,7 +59,6 @@ export default {
     },
     onSourcesClick (value) {
       this.form.sources = value;
-      console.log(this.form.sources);
     },
     formatDate() {
     var d = Date.now()

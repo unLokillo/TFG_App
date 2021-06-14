@@ -7,14 +7,11 @@
          <div v-if="index<5">
          <b-avatar :src="value.img"></b-avatar>
          <h5>{{ value.neologisme }}</h5>
-            <div v-if="see_reject" :v-model="value.user">
+            <div v-if="value.user[0].rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
             </div>
-            <div v-else-if="value.modify">
-                <font-awesome-icon style="font-size: 20px;color: darkgreen;" icon="plus-circle"/> Modificado
-            </div>
             <div class="neo_card_pendent" v-else>
-            <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
+                <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
          <b-button class="bttn-app" :to="{name: 'vp-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">+</b-button>
         </div>
@@ -34,16 +31,7 @@ export default {
       }
     }
   },
-  computed:{
-         see_reject (value) {
-             var res = false;
-            for (let index = 0; !res && (index < value.length); index++) {
-                res = ((this.login.user_id == value[index].user_id) || (this.login.linguist || this.login.admin))&&(!value[index].aprove)
-            }
-            return res;
-        }
-    },
-      created(){
+    created(){
         axios.get('http://localhost:3000/login/1')
         .then(response_l => {
             this.login = response_l.data;
@@ -52,7 +40,6 @@ export default {
              axios.get('http://localhost:3000/neologismes')
              .then(response => {
                  if(response_l.data.admin || response_l.data.linguist){
-                      console.log('A');
                      for (let index = 0; index < response.data.length; index++) {
                          if (response.data[index].proposal) {
                         this.neologismes.push(response.data[index]);

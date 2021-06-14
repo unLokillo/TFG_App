@@ -31,21 +31,16 @@ export default {
     },
     methods:{
       submit(n_mssg){
-          for (let index = 0; index < this.f_user.length; index++) {
-              if(this.login.user_id==this.f_user[index].user_id){
-                  this.f_user.splice(index,1,{
-                    user_id: this.f_user[index].user_id,
-                    user: this.f_user[index].user,
-                    date: this.f_user[index].date,
+          this.f_user.splice(0,1,{
+                    user_id: this.f_user[0].user_id,
+                    user: this.f_user[0].user,
+                    date: this.f_user[0].date,
                     rejected:true,
                     mssg:n_mssg
                   }) 
-              break;
-              }
-          }
             axios.patch('http://localhost:3000/neologismes/'+this.$route.params.neoId, {user:this.f_user})
                 .then(function( response ){}.bind(this));
-        this.$router.go(-1) // -> /user/123
+        this.$router.go(-2) // -> /user/123
         },
 }
 }

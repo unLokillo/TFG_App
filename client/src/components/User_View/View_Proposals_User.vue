@@ -11,14 +11,11 @@
                 <b-avatar :src="value.img"></b-avatar>
                 <h5>{{ value.neologisme }}</h5>
             
-            <div v-if="see_reject" :v-model="value.user">
-            <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
-            </div>
-            <div v-else-if="value.modify">
-                <font-awesome-icon style="font-size: 20px;color: darkgreen;" icon="plus-circle"/> Modificado
+            <div v-if="value.user[0].rejected">
+                <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
             </div>
             <div class="neo_card_pendent" v-else>
-            <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
+                <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
              <b-dropdown text="Acciones" v-if="login.linguist || login.admin">
                     <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar propuesta</b-dropdown-item>
