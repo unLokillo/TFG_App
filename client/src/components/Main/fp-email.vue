@@ -3,7 +3,7 @@
 <div class="f-password-body">
  <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h2>¿Has olvidado la contraseña?</h2>
-        <p>Introduce tu email, para que podamos mandarte el código de virificación.</p>
+        <p>Introduce tu email, para que podamos mandarte el código de verificación.</p>
         <b-form-input
           id="input-1"
           v-model="email"
@@ -40,7 +40,7 @@ import axios from 'axios';
                 for (let index = 0; index < this.form.length; index++) {
                     if(this.form[index].email.localeCompare(this.email)==0){
                         this.correct_email = true;
-                        this.$router.push({ path: `/forgot-password/code` });
+                        this.$router.push({ name: `forgot-password-cp`,params:{userId: this.form[index].id}});
                         break;
                     }
                 }

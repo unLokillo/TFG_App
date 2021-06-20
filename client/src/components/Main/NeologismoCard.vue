@@ -54,6 +54,9 @@ watch: {
 .card-body{
     background-color: var(--third-color);
     max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .card-neo-header{
     display:flex;

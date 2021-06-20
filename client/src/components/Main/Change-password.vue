@@ -36,19 +36,29 @@ import axios from 'axios'
         },
         computed: {
       password_state(){
-        return this.form.password.length > 6 && this.form.password.length <14;
+        return this.form.password.length > 6 && this.form.password.length <14
+        && this.hasNumeric(this.form.password);
       },
       repeat_password(){
         return this.form.password.localeCompare(this.r_password) ? false:true
       }
     },
     methods:{
+         hasNumeric(str){
+        var result=false;
+        for (let index = 0; !result&& (index <str.length); index++) {
+                if (!isNaN(str.charAt(index) * 1)) {
+                    result = true;
+                }
+              }
+          return result;   
+    },
       submit(value){
-            axios.patch('http://localhost:3000/users/2', {password:value})
+            axios.patch('http://localhost:3000/users/'+ this.$route.params.userId, {password:value})
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
-            this.$router.push({ path: `/` }) 
+            this.$router.push({ path: `/login` }) 
         },
     }
 }

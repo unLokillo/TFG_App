@@ -3,7 +3,7 @@
     <Header/>
     <div class="top-menu">
         <div class="left-menu-card">
-            <b-img :src="this.img" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
+            <b-img :src="require(`../assets/images/${img}`)" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
             <div class="ls-menu">
             <div class="left-side-menus">
                <router-link :to="{name: 'vu-ranking',params: { userid: $route.params.userid }}" tag="div">
@@ -49,14 +49,13 @@
 
         <div class="options">
             <b-dropdown right text="Opciones" class="m-2">
-            <!--<font-awesome-icon style="font-size:30px;" icon="cog"/>-->
                  <b-dropdown-item :to="{name: 'm-perfil',params: { userid: $route.params.userid}}">Modificar perfil</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item>Cambiar idioma</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item :to="{name: 'n-error',params: { userid: $route.params.userid}}">Notificar error</b-dropdown-item>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item >
+                <b-dropdown-divider v-if="this.admin || this.lingu"></b-dropdown-divider>
+                <b-dropdown-item v-if="this.admin || this.lingu">
                     <download-csv :data   = "neologismes" name    = "filename.csv">
 	                Descargar información neologismos 
                     </download-csv>
@@ -108,7 +107,9 @@ export default {
             this.points = response.data.points;
             this.position = response.data.position;
             this.fav_neo = response.data.fav_neo;
-            this.img = response.data.img;
+            this.img = response.data.image;
+            this.admin = response.data.admin;
+            this.lingu = response.data.lingu;
         });
         axios.get('http://localhost:3000/neologismes')
         .then(response => {
@@ -163,16 +164,21 @@ export default {
           img: '',
           points: 0,
           position: 0,
+          admin: false,
+          lingu: false,
           neologismes: []
       }
 
   },
   methods: {
     deleteData(id) {
-   axios.delete('http://localhost:3000/neologismes/' + id)
+   axios.delete('http://localhost:3000/users/' + id)
         .then(response => {
-      console.log(this.result);
     });
+    axios.patch('http://localhost:3000/login/1',{logged:false})
+        .then(response => {
+    });
+    this.$router.push('/');
     }
   }
 }

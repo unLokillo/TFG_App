@@ -45,7 +45,7 @@
         <div class="selectors-card">
             <h6>Fecha de Nacimiento</h6>
             <b-form-datepicker v-model="form.date" class="mb-2"></b-form-datepicker>
-                <b-button variant="outline-success"  v-on:click="submit('date',form.date)">Modificar</b-button>
+                <b-button variant="outline-success" :show-decade-nav=true v-on:click="submit('date',form.date)">Modificar</b-button>
           </div>  
         <div class="selectors-card">
             <h6>Genero</h6>

@@ -32,7 +32,8 @@ export default {
           logged: false,
           user_id: 0,
           admin: false,
-          linguist: false
+          linguist: false,
+          img: ''
         },
         correct_login: null,
         show: true
@@ -53,10 +54,11 @@ export default {
           if(this.correct_login){
             this.form.user_id = response.data[i].id;
             this.form.logged = true;
-            console.log(response.data[i].admin);
             this.form.admin = response.data[i].admin;
             this.form.linguist = response.data[i].linguist;
             this.form.user_id = response.data[i].id;
+            this.form.img = response.data[i].image;
+            console.log(response.data[i].image);
           axios.put('http://localhost:3000/login/1',this.form)
           .then(response => {      
             });

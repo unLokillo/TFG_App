@@ -2,7 +2,7 @@
   <div class="modify-user-body">
         <div class="close-modal"><router-link to="/">  <font-awesome-icon style="font-size: 140%;" icon="times"/> </router-link></div>
         <h4>Crear cuenta</h4>
-<b-form @submit="submit()">
+      <b-form @submit="submit">
           <b-input-group prepend="* Alias: " class="mt-3" >
             <b-form-input required v-model="form.nickname" ></b-form-input>
           </b-input-group>
@@ -27,6 +27,7 @@
               La contraseña debe de tener entre 6 y 12 caracteres, una mayuscula y un caracter no alfabético.
           </b-form-invalid-feedback>
         </b-input-group>
+
         <b-input-group prepend="* Repite la Contraseña: " class="mt-3" >
             <b-form-input required type="password"  v-model="r_password" :state="repeat_password" aria-describedby="r_password_helper" ></b-form-input>
             <b-form-invalid-feedback id="r_password_helper">
@@ -36,7 +37,7 @@
       </div>
           <div class="selectors-card">
             <h6>Fecha de Nacimiento</h6>
-            <b-form-datepicker v-model="form.date" class="mb-2"></b-form-datepicker>
+            <b-form-datepicker v-model="form.date" class="mb-2" :show-decade-nav=true></b-form-datepicker>
           </div>  
           <div class="selectors-card">
             <h6>Género</h6>
@@ -56,6 +57,7 @@
       <b-form-file 
       v-model="form.image"
       accept=".jpg, .png"
+      webkitdirectory
       plain
     ></b-form-file>
     <div class="mt-3">Archivo seleccionado: {{ form.image ? form.image.name : '' }}</div>
@@ -84,7 +86,7 @@ export default {
           mother_tonge: '',
           image: undefined,
           points: 0,
-          position: 10,
+          position: 4,
           proposals:[],
           accepted_neo: [],
           fav_neo: [],
@@ -108,7 +110,11 @@ export default {
       }
     },
     methods:{
-      submit(){
+      submit(event){
+        event.preventDefault()
+        if(this.form.image!=undefined){
+         this.form.image = this.form.image.name;
+        }
             axios.post('http://localhost:3000/users', this.form)
                 .then(function( response ){
                     // Handle success

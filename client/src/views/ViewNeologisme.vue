@@ -8,7 +8,7 @@
             <div class="neo-likes" v-else ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
-        <div class="rejected-neologisme-admin" v-if="login.admin">
+        <div class="rejected-neologisme-admin" v-if="form.user[0].rejected">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.mssg }}
@@ -60,7 +60,7 @@
             <b-button class="bttn-app" :to="{name: 'r-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}"  style="background-color: var(--fail) !important"> Rechazar propuesta </b-button>
         </div>
 
-        <router-link tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" v-if="seeModify" > Modificar propuesta </router-link>
+        <router-link v-if="form.proposal" tag="b-button" class="bttn-app" :to="{name: 'm-neologismes',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" > Modificar propuesta </router-link>
     </div>
 
 </template>

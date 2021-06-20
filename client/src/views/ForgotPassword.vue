@@ -35,7 +35,7 @@
             submit() {
                 this.correct_code = this.form.code.localeCompare("ASDFG")==0;
                 if(this.correct_code){
-                    this.$router.push({ path: `/forgot-password/reset` }) // -> /user/123
+                    this.$router.push({ name: `forgot-password-cp`,params:{userId: this.$route.params.userId}});
                 }
       },
     }

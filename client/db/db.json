@@ -7,13 +7,14 @@
       "user_id": 2,
       "admin": true,
       "linguist": false,
+      "img": "Under_construction.png",
       "id": 1
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "M4RT1N",
+      "nickname": "Martin",
       "name": "Martin",
       "surname": "Apellidos",
       "email": "email@real.domain.com",
@@ -22,7 +23,7 @@
       "password": "contraseña",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=41",
+      "image": "https://picsum.photos/300/150/?image=41",
       "position": 1,
       "proposals": [],
       "fav_neo": [],
@@ -44,14 +45,10 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "img": "https://picsum.photos/300/150/?image=35",
+      "image": "Under_construction.png",
       "position": 0,
       "proposals": [
-        1,
-        4,
-        5,
-        6,
-        7
+        1
       ],
       "accepted_neo": [
         2
@@ -64,6 +61,94 @@
       "liked_neo": 1,
       "admin": true,
       "linguist": false
+    },
+    {
+      "id": 3,
+      "nickname": "rcbjosa",
+      "name": "Raul",
+      "surname": "Carbajosa Gonzalez",
+      "email": "email@real.domain.com",
+      "date": "2021-06-16",
+      "gender": "hombre",
+      "password": "contraseña",
+      "school": "ETSIINF",
+      "mother_tonge": "Español",
+      "image": "https://picsum.photos/300/150/?image=30",
+      "position": 2,
+      "proposals": [],
+      "fav_neo": [],
+      "accepted_neo": [],
+      "points": 0,
+      "liked_neo": 3,
+      "admin": true,
+      "linguist": true
+    },
+    {
+      "nickname": "OnMax",
+      "name": "Maximo José",
+      "surname": "García Martiniez",
+      "email": "max@max.com",
+      "date": "2021-06-24",
+      "gender": "Femenino",
+      "password": "contraseña1",
+      "school": "ETSIINF",
+      "mother_tonge": "Portugues",
+      "points": 0,
+      "position": 10,
+      "proposals": [],
+      "accepted_neo": [],
+      "fav_neo": [],
+      "admin": false,
+      "linguist": false,
+      "id": 3
+    },
+    {
+      "nickname": "Alejandro",
+      "name": "Aljeandro",
+      "surname": "Garcia",
+      "email": "alejandro@alumnos.upm.es",
+      "date": "2020-04-02",
+      "gender": "Masculino",
+      "password": "contraseña1",
+      "school": "ETSIAE",
+      "mother_tonge": "Portugues",
+      "image": "https://picsum.photos/300/150/?image=30",
+      "points": 0,
+      "position": 4,
+      "proposals": [
+        5
+      ],
+      "accepted_neo": [],
+      "fav_neo": [
+        1
+      ],
+      "admin": false,
+      "linguist": false,
+      "id": 4
+    },
+    {
+      "nickname": "MAr y ano",
+      "name": "MAriano",
+      "surname": "FOrges",
+      "email": "correo@electronico.com",
+      "date": "2001-06-20",
+      "gender": "Femenino",
+      "password": "Contraseña1",
+      "school": "ETSIINF",
+      "mother_tonge": "Ingles",
+      "image": "Li''l_Mohawk_Cat.png",
+      "points": 0,
+      "position": 4,
+      "proposals": [
+        5
+      ],
+      "accepted_neo": [],
+      "fav_neo": [
+        5
+      ],
+      "admin": false,
+      "linguist": false,
+      "id": 6
     }
   ],
   "neologismes": [
@@ -90,7 +175,7 @@
         }
       ],
       "img": "https://picsum.photos/1024/400/?image=36",
-      "liked": 15,
+      "liked": 16,
       "proposal": false,
       "position": 1,
       "mssg": "",
@@ -120,14 +205,6 @@
         {
           "id": 2,
           "value": "ANÁLISIS  DE  DESARROLLO  DE  SOFTWARE  ORIENTADO  A FEATURE - LÍNEA DE PRODUCTO DE SOFTWARE PARA APLICACIONES DE TVDI"
-        },
-        {
-          "id": 3,
-          "value": "ssente 2"
-        },
-        {
-          "id": 4,
-          "value": "Fuente 3"
         }
       ],
       "img": "https://picsum.photos/300/150/?image=21",
@@ -147,7 +224,7 @@
     },
     {
       "neologisme": "Memoria",
-      "descriptions": [
+      "sources": [
         {
           "id": 1,
           "value": "https://www.redalyc.org/pdf/4959/495952431002.pdf"
@@ -157,7 +234,7 @@
           "value": "NEOLOGISMOS TECNOLÓGICOS Y NUEVOSCOMPORTAMIENTOS EN LA SOCIEDAD RED"
         }
       ],
-      "sources": [
+      "descriptions": [
         {
           "id": 1,
           "value": "Los datos se registran en su memoria en código binario como elementos independientes y acontextuales."
@@ -169,6 +246,7 @@
       ],
       "img": null,
       "liked": 1,
+      "position": 3,
       "proposal": false,
       "user": [
         {
@@ -179,6 +257,82 @@
         }
       ],
       "id": 3
+    },
+    {
+      "neologisme": "Front-end",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "El desarrollo web Front-end consiste en la conversión de datos en una interfaz gráfica para que el usuario pueda ver e interactuar"
+        }
+      ],
+      "sources": [
+        {
+          "id": 1,
+          "value": "https://www.theguardian.com/help/insideguardian/2009/sep/28/blogpost"
+        }
+      ],
+      "img": null,
+      "liked": 0,
+      "proposal": false,
+      "user": [
+        {
+          "user": "Alejandro",
+          "date": "14/05/2021",
+          "rejected": false,
+          "mssg": ""
+        }
+      ],
+      "id": 4,
+      "modify": true
+    },
+    {
+      "neologisme": "Neologismo Prueba",
+      "descriptions": [
+        {
+          "id": 1,
+          "value": "ESto es una prueba de Contexto"
+        },
+        {
+          "id": 2,
+          "value": "Voy a poner incluso 2, a ver que pasa CON-TEXTO"
+        },
+        {
+          "id": 3,
+          "value": "Aajajajajsdasdasd"
+        }
+      ],
+      "sources": [
+        {
+          "id": 1,
+          "value": "Para sdfsdfsdf"
+        },
+        {
+          "id": 2,
+          "value": "FElix rodriguez de la FUENTE AJAJAJJAJAJAJA"
+        },
+        {
+          "id": 3,
+          "value": "MIra toma info"
+        },
+        {
+          "id": 4,
+          "value": "asdasd"
+        }
+      ],
+      "img": null,
+      "liked": 1,
+      "proposal": true,
+      "user": [
+        {
+          "user": "MAr y ano",
+          "date": "14/05/2021",
+          "rejected": false,
+          "mssg": ""
+        }
+      ],
+      "id": 5,
+      "modify": true
     }
   ],
   "badges": [

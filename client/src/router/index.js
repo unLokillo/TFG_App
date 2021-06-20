@@ -86,7 +86,7 @@ var route = [
         meta: {
           showModal: true
         },
-        path: 'forgot-password/code',
+        path: 'forgot-password/:userId/code',
         name: 'forgot-password-c',
         component: () => import('@/views/ForgotPassword.vue'),
       },
@@ -94,8 +94,8 @@ var route = [
         meta: {
           showModal: true
         },
-        path: 'forgot-password/reset',
-        name: 'forgot-password',
+        path: 'forgot-password/:userId/reset',
+        name: 'forgot-password-cp',
         component: () => import('@/components/Main/Change-password.vue'),
       },
       {

@@ -32,7 +32,7 @@ export default {
             labels: [,
             { key: 'position', label: 'Posición' },
             { key: 'img', label: 'Imagen' },
-            { key: 'nickname', label: 'Particpante' }, 
+            { key: 'nickname', label: 'Participante' }, 
             { key: 'points', label: 'Puntuación' }
             ],
             items: []

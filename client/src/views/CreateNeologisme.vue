@@ -45,7 +45,7 @@ export default {
           neologisme: '',
           descriptions: '',
           sources: '',
-          img: null,
+          img: undefined,
           liked: 0,
           proposal: true,
           user: [],
@@ -70,7 +70,6 @@ export default {
         month = '0' + month;
     if (day.length < 2) 
         day = '0' + day;
-    console.log("asdas");
     return [year, month, day].join('-');
 },
     submit(){
@@ -80,6 +79,9 @@ export default {
           .then(response_neo => {
             axios.get('http://localhost:3000/users/' + response.data.user_id)
              .then(response_user => {
+               if(this.form.image!=undefined){
+                 this.form.img = this.form.img.name;
+              }
                this.form.user.push({
                  user: response_user.data.nickname,
                  user_id: this.$route.params.userid,
@@ -90,9 +92,7 @@ export default {
                
             axios.post('http://localhost:3000/neologismes', this.form)
               .then(function( response ){}.bind(this));
-            var n_proposal = [];
-            response_user.data.proposals.push(response_neo.data.length +2);
-            n_proposal.push(response_neo.data.length +1);
+            response_user.data.proposals.push(response_neo.data.length +1);
             axios.patch('http://localhost:3000/users/'+response_user.data.id, {proposals:response_user.data.proposals})
               .then(function( response ){
                     // Handle success
@@ -100,7 +100,7 @@ export default {
               });
               });
             });
-        this.$router.push({ path: `/` }) // -> /user/123
+        this.$router.push({ path: `/` });
     }  
   }
 }

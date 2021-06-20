@@ -78,7 +78,7 @@ export default {
           for (let index = 0; index < this.descriptions.length; index++) {
               this.form.descriptions.push({
                 id:this.form.descriptions[this.form.descriptions.length-1].id+(1+index),
-                value:this.descriptions[index].description
+                value:this.descriptions[index].value
                 });    
             }
     },
@@ -86,10 +86,11 @@ export default {
           for (let index = 0; index < this.sources.length; index++) {
               this.form.sources.push({
                 id:this.form.sources[this.form.sources.length-1].id+(1+index),
-                value:this.sources[index].description
+                value:this.sources[index].value
                 });    
             }
     },
+    
     submit(type){
         var payload = {};
         for (let index = 0; index < this.form.user.length; index++) {
@@ -105,6 +106,7 @@ export default {
               break;
               }
           };
+          console.log(this.form.neologisme);
           switch (type){
             case 'neologisme': payload = {
               neologisme:this.form.neologisme,
