@@ -36,7 +36,6 @@ export default {
     axios.get('http://localhost:3000/login/1')
           .then(response => {
               this.logged = response.data;
-              console.log(response.data.logged);
             });
     },
     data(){
@@ -49,7 +48,6 @@ export default {
     methods: {
         asign_color: function(pos){
             var style  = {};
-            console.log(pos);
             switch(pos){
                 default: style.backgroundColor = "var(--buttons)"; break;
                 case 1: style.backgroundColor = "var(--gold) "; break;
@@ -57,15 +55,7 @@ export default {
                 case 2: style.backgroundColor = "var(--silver)"; break;
             }
             return style;
-        },
-        deleteData(result, Memb_ID) {
-        axios
-            .delete("localhost:9000/api/delete/user/" + result.Memb_ID)
-            .then(response => {
-                this.result.splice(Memb_ID, 1);
-                console.log(this.result);
-            });
-},
+        }
     }
 }
 </script>

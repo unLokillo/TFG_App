@@ -109,13 +109,9 @@ export default {
       like(){
           if(!this.form_user.fav_neo.includes(this.form.id)){
           var payload = {liked:this.form.liked+1}; 
-            axios.patch("http://localhost:3000/neologismes/" + this.$route.params.neoId, payload)
-                .then(function( response ){
-                }.bind(this));
+            axios.patch("http://localhost:3000/neologismes/" + this.$route.params.neoId, payload);
           this.form_user.fav_neo.push(this.form.id);
-            axios.patch("http://localhost:3000/users/" + this.login.user_id, {fav_neo: this.form_user.fav_neo})
-                .then(function( response ){
-                }.bind(this));
+            axios.patch("http://localhost:3000/users/" + this.login.user_id, {fav_neo: this.form_user.fav_neo});
         this.form.liked = this.form.liked+1; 
           }
         },
@@ -131,10 +127,7 @@ export default {
                     mssg: "",
                 }],
             }
-            axios.patch('http://localhost:3000/neologismes/' + id, payload)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/neologismes/' + id, payload);
               for (let index = 0; index < this.form_user.proposals.length; index++) {
                   if(this.form_user.proposals[index] == id){
                       this.form_user.proposals.splice(index,1);
@@ -144,10 +137,7 @@ export default {
         var payload2 = {
             proposals: this.form_user.proposals
         }
-            axios.patch('http://localhost:3000/users/' + this.form_user.id, payload2)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/users/' + this.form_user.id, payload2);
 
          axios.get('http://localhost:3000/users/' + this.form.user[0].user_id)
           .then(response_u => {
@@ -162,10 +152,7 @@ export default {
             proposals: this.form_user.proposals,
             accepted_neo: response_u.data.accepted_neo
         }    
-            axios.patch('http://localhost:3000/users/' + this.form.user[0].user_id, payload3)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/users/' + this.form.user[0].user_id, payload3);
           })
             this.$router.push({ path: `/` })
         }

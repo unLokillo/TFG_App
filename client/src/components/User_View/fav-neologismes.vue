@@ -50,10 +50,7 @@ export default {
             case 'accepted': payload = {proposal:false}; break;
             case 'reject': payload = {rejected:true,mssg:n_mssg }; break;
           }
-            axios.patch('http://localhost:3000/neologismes/' + id, payload)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/neologismes/' + id, payload);
         },
 }
 }

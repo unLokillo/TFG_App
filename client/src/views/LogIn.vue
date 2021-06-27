@@ -58,10 +58,7 @@ export default {
             this.form.linguist = response.data[i].linguist;
             this.form.user_id = response.data[i].id;
             this.form.img = response.data[i].image;
-            console.log(response.data[i].image);
-          axios.put('http://localhost:3000/login/1',this.form)
-          .then(response => {      
-            });
+          axios.put('http://localhost:3000/login/1',this.form);
           this.$router.push({ path: `/register`}) 
           this.$router.push({ path: `/`}) 
           };

@@ -99,7 +99,6 @@ export default {
         .then(response_l => {
         axios.get('http://localhost:3000/users/' + response_l.data.user_id)
         .then(response_u => {
-          console.log(response_u.data)
           this.userData = response_u.data;
         axios.get('http://localhost:3000/neologismes')
         .then(response => {

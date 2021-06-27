@@ -172,12 +172,8 @@ export default {
   },
   methods: {
     deleteData(id) {
-   axios.delete('http://localhost:3000/users/' + id)
-        .then(response => {
-    });
-    axios.patch('http://localhost:3000/login/1',{logged:false})
-        .then(response => {
-    });
+    axios.delete('http://localhost:3000/users/' + id);
+    axios.patch('http://localhost:3000/login/1',{logged:false});
     this.$router.push('/');
     }
   }

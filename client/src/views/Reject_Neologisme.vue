@@ -38,8 +38,7 @@ export default {
                     rejected:true,
                     mssg:n_mssg
                   }) 
-            axios.patch('http://localhost:3000/neologismes/'+this.$route.params.neoId, {user:this.f_user})
-                .then(function( response ){}.bind(this));
+            axios.patch('http://localhost:3000/neologismes/'+this.$route.params.neoId, {user:this.f_user});
         this.$router.go(-2) // -> /user/123
         },
 }

@@ -125,7 +125,6 @@ export default {
         methods:{
       submit(type,value){
         var payload = {}; 
-            console.log(value);
           switch (type){
             case 'nickname': payload = {nickname:value}; break;
             case 'name': payload = {name:value}; break;
@@ -138,10 +137,7 @@ export default {
             case 'email': payload = {email:value}; break; 
             case 'password': payload = {password:value}; break; 
           }
-            axios.patch('http://localhost:3000/users/' + this.$route.params.userid, payload)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/users/' + this.$route.params.userid, payload);
         },
       
     }

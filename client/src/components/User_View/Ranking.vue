@@ -67,8 +67,7 @@ export default {
         },
 
     deleteData(id) {
-        axios.delete('http://localhost:3000/users/' + id)
-            .then(response => {});
+        axios.delete('http://localhost:3000/users/' + id);
         },
     addPrivileges(type,id){
         var payload={};
@@ -76,8 +75,7 @@ export default {
             case 'linguist': payload={linguist:true}; break;
             case 'admin': payload={admin:true}; break;
         }
-        axios.patch('http://localhost:3000/users/' + id, payload).then(response_l => {
-      });
+        axios.patch('http://localhost:3000/users/' + id, payload);
     }
     }
 }

@@ -18,7 +18,7 @@
                 <font-awesome-icon style="font-size: 20px;color: darkorange;" icon="question-circle"/> Pendiente 
             </div>
              <b-dropdown text="Acciones" v-if="login.linguist || login.admin">
-                    <b-dropdown-item v-on:click="submit(value.id,'accepted','')">Aceptar propuesta</b-dropdown-item>
+                    <b-dropdown-item v-on:click="submit(value.id)">Aceptar propuesta</b-dropdown-item>
                     <b-dropdown-item :to="{name: 'rp-neologismes',params: { userid: $route.params.userid ,neoId: value.id}}">Rechazar propuesta</b-dropdown-item>
                     <b-dropdown-item v-if="login.admin" style="color: red; !important" v-on:click="deleteData(value.id)">Eliminar propuesta</b-dropdown-item>
                 </b-dropdown>
@@ -39,7 +39,7 @@ export default {
           
         axios.get('http://localhost:3000/users/' + response_l.data.user_id)
           .then(response_u => { 
-
+              this.form_user = response_u.data;
         axios.get('http://localhost:3000/neologismes')
           .then(response => {
             if(response_l.data.admin || response_l.data.linguist){
@@ -50,7 +50,6 @@ export default {
                 }
             }else{
                 for (let index = 0; index < response.data.length; index++) {
-                    console.log(response_u.data.proposals.includes(response.data[index].id));
                     if (response_u.data.proposals.includes(response.data[index].id)) {
                         this.neologismes.push(response.data[index]);
                     }
@@ -63,26 +62,53 @@ export default {
     data() {
         return {
             neologismes: [],
-            login: []
+            login: [],
+            form_user: []
         }
     },
     methods:{
-      submit(id,type,n_mssg){
-        var payload = {}; 
-          switch (type){
-            case 'accepted': payload = {proposal:false}; break;
-            case 'reject': payload = {rejected:true,mssg:n_mssg }; break;
-          }
-            axios.patch('http://localhost:3000/neologismes/' + id, payload)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+      submit(id){
+        var payload = {
+                proposal:false, 
+                user:[{
+                    user_id: this.neologismes.user[0].user_id,
+                    user: this.neologismes.user[0].user,
+                    date: this.neologismes.user[0].date,
+                    rejected: false,
+                    mssg: "",
+                }],
+            }
+            axios.patch('http://localhost:3000/neologismes/' + id, payload);
+              for (let index = 0; index < this.form_user.proposals.length; index++) {
+                  if(this.form_user.proposals[index] == id){
+                      this.form_user.proposals.splice(index,1);
+                      break;
+                  }
+              }
+        var payload2 = {
+            proposals: this.form_user.proposals
+        }
+            axios.patch('http://localhost:3000/users/' + this.form_user.id, payload2);
+
+         axios.get('http://localhost:3000/users/' + this.neologismes.user[0].user_id)
+          .then(response_u => {
+               for (let index = 0; index < response_u.data.proposals.length; index++) {
+            if(response_u.data.proposals[index] == id){
+                response_u.data.proposals.splice(index,1);
+                break;
+            }
+        }
+        response_u.data.accepted_neo.push(id);
+        var payload3 = {
+            proposals: this.form_user.proposals,
+            accepted_neo: response_u.data.accepted_neo
+        }    
+            axios.patch('http://localhost:3000/users/' + this.neologismes.user[0].user_id, payload3);
+          })
+            this.$router.push({ path: `/` })
         },
     deleteData(id) {
-    axios.delete('http://localhost:3000/neologismes/' + id)
-        .then(response => {
-      console.log(this.result);
-    });
+    axios.delete('http://localhost:3000/neologismes/' + id);
     }
 }
 }

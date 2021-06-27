@@ -16,7 +16,6 @@ export default {
         axios.get('http://localhost:3000/login/1')
           .then(response => {
               this.login_info = response.data;
-              console.log(response.data.img);
         axios.get('http://localhost:3000/users/' + response.data.user_id)
           .then(response_u => { 
               this.user_info = response_u.data;

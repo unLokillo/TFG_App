@@ -54,10 +54,7 @@ import axios from 'axios'
           return result;   
     },
       submit(value){
-            axios.patch('http://localhost:3000/users/'+ this.$route.params.userId, {password:value})
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
+            axios.patch('http://localhost:3000/users/'+ this.$route.params.userId, {password:value});
             this.$router.push({ path: `/login` }) 
         },
     }
