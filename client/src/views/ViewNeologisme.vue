@@ -135,6 +135,38 @@ export default {
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
+              for (let index = 0; index < this.form_user.proposals.length; index++) {
+                  if(this.form_user.proposals[index] == id){
+                      this.form_user.proposals.splice(index,1);
+                      break;
+                  }
+              }
+        var payload2 = {
+            proposals: this.form_user.proposals
+        }
+            axios.patch('http://localhost:3000/users/' + this.form_user.id, payload2)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+
+         axios.get('http://localhost:3000/users/' + this.form.user[0].user_id)
+          .then(response_u => {
+               for (let index = 0; index < response_u.data.proposals.length; index++) {
+            if(response_u.data.proposals[index] == id){
+                response_u.data.proposals.splice(index,1);
+                break;
+            }
+        }
+        response_u.data.accepted_neo.push(id);
+        var payload3 = {
+            proposals: this.form_user.proposals,
+            accepted_neo: response_u.data.accepted_neo
+        }    
+            axios.patch('http://localhost:3000/users/' + this.form.user[0].user_id, payload3)
+                .then(function( response ){
+                    // Handle success
+                }.bind(this));
+          })
             this.$router.push({ path: `/` })
         }
     },

@@ -73,7 +73,7 @@ export default {
               }
                this.form.user.push({
                  user: response_user.data.nickname,
-                 user_id: this.$route.params.userid,
+                 user_id: response.data.user_id,
                  date: '14/05/2021',
                  rejected: false,
                  mssg: ''

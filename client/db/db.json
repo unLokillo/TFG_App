@@ -1,7 +1,7 @@
 {
   "login": [
     {
-      "email_or_user": "raul.carbajosa.gonzalez@gmail.com",
+      "email_or_user": "Rcbjo",
       "password": "RAulcb1",
       "logged": true,
       "user_id": 2,
@@ -25,10 +25,7 @@
       "mother_tonge": "Español",
       "image": "default_profile.png",
       "position": 0,
-      "proposals": [
-        3,
-        4
-      ],
+      "proposals": [],
       "accepted_neo": [],
       "fav_neo": [],
       "points": 2000,
@@ -48,9 +45,10 @@
       "image": "default_profile.png",
       "points": 0,
       "position": 4,
-      "proposals": [
+      "proposals": [],
+      "accepted_neo": [
+        3
       ],
-      "accepted_neo": [],
       "fav_neo": [
         1
       ],
@@ -131,17 +129,17 @@
       "id": 2
     },
     {
-      "neologisme": "Prueba",
+      "neologisme": "Prueba 3",
       "descriptions": [
         {
           "id": 1,
-          "value": "Prueba"
+          "value": "Prueba 3"
         }
       ],
       "sources": [
         {
           "id": 1,
-          "value": "Prueba"
+          "value": "Prueba 3"
         }
       ],
       "img": "neologismos.jpg",
@@ -149,40 +147,14 @@
       "proposal": false,
       "user": [
         {
-          "user": "admin",
+          "user_id": 2,
+          "user": "Rcbjo",
           "date": "14/05/2021",
           "rejected": false,
           "mssg": ""
         }
       ],
       "id": 3
-    },
-    {
-      "neologisme": "Prueba2",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "Prueba2"
-        }
-      ],
-      "sources": [
-        {
-          "id": 1,
-          "value": "Prueba2"
-        }
-      ],
-      "img": "neologismos.jpg",
-      "liked": 0,
-      "proposal": true,
-      "user": [
-        {
-          "user": "admin",
-          "date": "14/05/2021",
-          "rejected": false,
-          "mssg": ""
-        }
-      ],
-      "id": 4
     }
   ],
   "badges": [
