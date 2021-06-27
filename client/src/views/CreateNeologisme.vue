@@ -19,7 +19,6 @@
     <h6>Imagen</h6>
     <div>
       <b-form-file v-model="form.img"
-      :state="Boolean(form.img)"
       placeholder="Choose a file or drop it here..."
       drop-placeholder="Drop file here..."
       plain
@@ -60,18 +59,6 @@ export default {
     onSourcesClick (value) {
       this.form.sources = value;
     },
-    formatDate() {
-    var d = Date.now()
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-    return [year, month, day].join('-');
-},
     submit(){
         axios.get('http://localhost:3000/login/1')
           .then(response => {
@@ -79,8 +66,10 @@ export default {
           .then(response_neo => {
             axios.get('http://localhost:3000/users/' + response.data.user_id)
              .then(response_user => {
-               if(this.form.image!=undefined){
+               if(this.form.img!=undefined){
                  this.form.img = this.form.img.name;
+              }else{
+               this.form.img = 'neologismos.jpg';
               }
                this.form.user.push({
                  user: response_user.data.nickname,
@@ -89,18 +78,13 @@ export default {
                  rejected: false,
                  mssg: ''
                })
-               
-            axios.post('http://localhost:3000/neologismes', this.form)
-              .then(function( response ){}.bind(this));
+            axios.post('http://localhost:3000/neologismes', this.form); // Add Neologisme to db
             response_user.data.proposals.push(response_neo.data.length +1);
-            axios.patch('http://localhost:3000/users/'+response_user.data.id, {proposals:response_user.data.proposals})
-              .then(function( response ){
-                    // Handle success
-              }.bind(this));
+            axios.patch('http://localhost:3000/users/'+response_user.data.id, {proposals:response_user.data.proposals}); //Add proposal to user info
+                });
+                });
               });
-              });
-            });
-        this.$router.push({ path: `/` });
+       this.$router.push({ path: `/` });
     }  
   }
 }

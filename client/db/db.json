@@ -1,41 +1,19 @@
 {
   "login": [
     {
-      "email_or_user": "admin",
-      "password": "password",
+      "email_or_user": "raul.carbajosa.gonzalez@gmail.com",
+      "password": "RAulcb1",
       "logged": true,
       "user_id": 2,
-      "admin": true,
+      "admin": false,
       "linguist": false,
-      "img": "Under_construction.png",
+      "img": "default_profile.png",
       "id": 1
     }
   ],
   "users": [
     {
       "id": 1,
-      "nickname": "Martin",
-      "name": "Martin",
-      "surname": "Apellidos",
-      "email": "email@real.domain.com",
-      "date": "2021-06-16",
-      "gender": "non binary",
-      "password": "contraseña",
-      "school": "ETSIINF",
-      "mother_tonge": "Español",
-      "image": "https://picsum.photos/300/150/?image=41",
-      "position": 1,
-      "proposals": [],
-      "fav_neo": [],
-      "accepted_neo": [],
-      "points": 2000,
-      "liked_neo": 3,
-      "admin": false,
-      "linguist": true,
-      "type": true
-    },
-    {
-      "id": 2,
       "nickname": "admin",
       "name": "admin",
       "surname": "admin",
@@ -45,78 +23,32 @@
       "password": "password",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "image": "Under_construction.png",
+      "image": "default_profile.png",
       "position": 0,
       "proposals": [
-        1
+        3,
+        4
       ],
-      "accepted_neo": [
-        2
-      ],
-      "fav_neo": [
-        2,
-        1
-      ],
+      "accepted_neo": [],
+      "fav_neo": [],
       "points": 2000,
-      "liked_neo": 1,
       "admin": true,
       "linguist": false
     },
     {
-      "id": 3,
-      "nickname": "rcbjosa",
+      "nickname": "Rcbjo",
       "name": "Raul",
       "surname": "Carbajosa Gonzalez",
-      "email": "email@real.domain.com",
-      "date": "2021-06-16",
-      "gender": "hombre",
-      "password": "contraseña",
+      "email": "raul.carbajosa.gonzalez@gmail.com",
+      "date": "2000-10-12",
+      "gender": "Masculino",
+      "password": "RAulcb1",
       "school": "ETSIINF",
       "mother_tonge": "Español",
-      "image": "https://picsum.photos/300/150/?image=30",
-      "position": 2,
-      "proposals": [],
-      "fav_neo": [],
-      "accepted_neo": [],
-      "points": 0,
-      "liked_neo": 3,
-      "admin": true,
-      "linguist": true
-    },
-    {
-      "nickname": "OnMax",
-      "name": "Maximo José",
-      "surname": "García Martiniez",
-      "email": "max@max.com",
-      "date": "2021-06-24",
-      "gender": "Femenino",
-      "password": "contraseña1",
-      "school": "ETSIINF",
-      "mother_tonge": "Portugues",
-      "points": 0,
-      "position": 10,
-      "proposals": [],
-      "accepted_neo": [],
-      "fav_neo": [],
-      "admin": false,
-      "linguist": false,
-      "id": 3
-    },
-    {
-      "nickname": "Alejandro",
-      "name": "Aljeandro",
-      "surname": "Garcia",
-      "email": "alejandro@alumnos.upm.es",
-      "date": "2020-04-02",
-      "gender": "Masculino",
-      "password": "contraseña1",
-      "school": "ETSIAE",
-      "mother_tonge": "Portugues",
-      "image": "https://picsum.photos/300/150/?image=30",
+      "image": "default_profile.png",
       "points": 0,
       "position": 4,
       "proposals": [
-        5
       ],
       "accepted_neo": [],
       "fav_neo": [
@@ -124,31 +56,7 @@
       ],
       "admin": false,
       "linguist": false,
-      "id": 4
-    },
-    {
-      "nickname": "MAr y ano",
-      "name": "MAriano",
-      "surname": "FOrges",
-      "email": "correo@electronico.com",
-      "date": "2001-06-20",
-      "gender": "Femenino",
-      "password": "Contraseña1",
-      "school": "ETSIINF",
-      "mother_tonge": "Ingles",
-      "image": "Li''l_Mohawk_Cat.png",
-      "points": 0,
-      "position": 4,
-      "proposals": [
-        5
-      ],
-      "accepted_neo": [],
-      "fav_neo": [
-        5
-      ],
-      "admin": false,
-      "linguist": false,
-      "id": 6
+      "id": 2
     }
   ],
   "neologismes": [
@@ -174,8 +82,8 @@
           "value": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/me-hackearon-la-cuenta-de-Facebook-que-hago"
         }
       ],
-      "img": "https://picsum.photos/1024/400/?image=36",
-      "liked": 16,
+      "img": "neologismos.jpg",
+      "liked": null,
       "proposal": false,
       "position": 1,
       "mssg": "",
@@ -207,7 +115,7 @@
           "value": "ANÁLISIS  DE  DESARROLLO  DE  SOFTWARE  ORIENTADO  A FEATURE - LÍNEA DE PRODUCTO DE SOFTWARE PARA APLICACIONES DE TVDI"
         }
       ],
-      "img": "https://picsum.photos/300/150/?image=21",
+      "img": "neologismos.jpg",
       "liked": 6,
       "proposal": false,
       "position": 2,
@@ -223,30 +131,21 @@
       "id": 2
     },
     {
-      "neologisme": "Memoria",
-      "sources": [
-        {
-          "id": 1,
-          "value": "https://www.redalyc.org/pdf/4959/495952431002.pdf"
-        },
-        {
-          "id": 2,
-          "value": "NEOLOGISMOS TECNOLÓGICOS Y NUEVOSCOMPORTAMIENTOS EN LA SOCIEDAD RED"
-        }
-      ],
+      "neologisme": "Prueba",
       "descriptions": [
         {
           "id": 1,
-          "value": "Los datos se registran en su memoria en código binario como elementos independientes y acontextuales."
-        },
-        {
-          "id": 2,
-          "value": "los ordenadores tienen “memoria” cuando nos referimos a sus sistemas de registro temporal de datos."
+          "value": "Prueba"
         }
       ],
-      "img": null,
-      "liked": 1,
-      "position": 3,
+      "sources": [
+        {
+          "id": 1,
+          "value": "Prueba"
+        }
+      ],
+      "img": "neologismos.jpg",
+      "liked": 0,
       "proposal": false,
       "user": [
         {
@@ -259,80 +158,31 @@
       "id": 3
     },
     {
-      "neologisme": "Front-end",
+      "neologisme": "Prueba2",
       "descriptions": [
         {
           "id": 1,
-          "value": "El desarrollo web Front-end consiste en la conversión de datos en una interfaz gráfica para que el usuario pueda ver e interactuar"
+          "value": "Prueba2"
         }
       ],
       "sources": [
         {
           "id": 1,
-          "value": "https://www.theguardian.com/help/insideguardian/2009/sep/28/blogpost"
+          "value": "Prueba2"
         }
       ],
-      "img": null,
+      "img": "neologismos.jpg",
       "liked": 0,
-      "proposal": false,
-      "user": [
-        {
-          "user": "Alejandro",
-          "date": "14/05/2021",
-          "rejected": false,
-          "mssg": ""
-        }
-      ],
-      "id": 4,
-      "modify": true
-    },
-    {
-      "neologisme": "Neologismo Prueba",
-      "descriptions": [
-        {
-          "id": 1,
-          "value": "ESto es una prueba de Contexto"
-        },
-        {
-          "id": 2,
-          "value": "Voy a poner incluso 2, a ver que pasa CON-TEXTO"
-        },
-        {
-          "id": 3,
-          "value": "Aajajajajsdasdasd"
-        }
-      ],
-      "sources": [
-        {
-          "id": 1,
-          "value": "Para sdfsdfsdf"
-        },
-        {
-          "id": 2,
-          "value": "FElix rodriguez de la FUENTE AJAJAJJAJAJAJA"
-        },
-        {
-          "id": 3,
-          "value": "MIra toma info"
-        },
-        {
-          "id": 4,
-          "value": "asdasd"
-        }
-      ],
-      "img": null,
-      "liked": 1,
       "proposal": true,
       "user": [
         {
-          "user": "MAr y ano",
+          "user": "admin",
           "date": "14/05/2021",
           "rejected": false,
           "mssg": ""
         }
       ],
-      "id": 5,
-      "modify": true
+      "id": 4
     }
   ],
   "badges": [
@@ -399,6 +249,5 @@
       "percentage": 50,
       "completed_date": "X/XX/XXXX"
     }
-  ],
-  "modify": []
+  ]
 }

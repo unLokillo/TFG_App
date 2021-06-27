@@ -123,6 +123,33 @@ var route = [
         name: 'ranking_neo',
         component: () => import('@/components/Main/All_Neologismes_Ranking.vue'),
         props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'faq',
+        name: 'faq',
+        component: () => import('@/components/faq.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'info',
+        name: 'info',
+        component: () => import('@/components/info.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'info_general',
+        name: 'info_general',
+        component: () => import('@/components/general_info.vue'),
+        props: true
       }
     ]
   },
@@ -266,6 +293,33 @@ var route = [
         name: 'fv-neologismes',
         component: View_Neologisme,
         props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'faq',
+        name: 'faq',
+        component: () => import('@/components/faq.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'info',
+        name: 'info',
+        component: () => import('@/components/info.vue'),
+        props: true
+      },
+      {
+        meta: {
+          showModal: true
+        },
+        path: 'info_general',
+        name: 'info_general_s',
+        component: () => import('@/components/general_info.vue'),
+        props: true
       }
     ]
   },
@@ -292,11 +346,38 @@ var route = [
       name: 'info_g2',
       component: () => import('@/components/Games/info_g2.vue'),
       props: true
+    },
+    {
+      meta: {
+        showModal: true
+      },
+      path: 'faq',
+      name: 'faq',
+      component: () => import('@/components/faq.vue'),
+      props: true
+    },
+    {
+      meta: {
+        showModal: true
+      },
+      path: 'info',
+      name: 'info',
+      component: () => import('@/components/info.vue'),
+      props: true
+    },
+    {
+      meta: {
+        showModal: true
+      },
+      path: 'info_general',
+      name: 'info_general',
+      component: () => import('@/components/general_info.vue'),
+      props: true
     }
     ]
   },
   {
-    path: 'swipable-cards',
+    path: '/games/swipable-cards',
     name: 'game_1',
     component: () => import('@/components/Games/Swipable_cards.vue'),
   },

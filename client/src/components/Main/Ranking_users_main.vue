@@ -5,7 +5,7 @@
     </div>
      <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
         <template #cell(img)="data">
-         <b-avatar :src="data.item.img"></b-avatar>   
+         <b-avatar :src="require(`../../assets/images/${data.item.image}`)"></b-avatar>   
     </template>
     </b-table>
     <router-link class="more-bttn" :to="{name: 'ranking',params: { userid: $route.params.userid }}" tag="b-button"> 

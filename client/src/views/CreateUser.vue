@@ -114,12 +114,11 @@ export default {
         event.preventDefault()
         if(this.form.image!=undefined){
          this.form.image = this.form.image.name;
+        }else{
+         this.form.image = 'default_profile.png';
         }
-            axios.post('http://localhost:3000/users', this.form)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
-            this.$router.push({ path: `/login` }) // -> /user/123
+            axios.post('http://localhost:3000/users', this.form);
+            this.$router.push({ path: `/login` }) 
         },
     isUpper(str) {
       var result=false;

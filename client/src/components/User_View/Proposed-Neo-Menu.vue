@@ -5,7 +5,7 @@
     </div>
      <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
-         <b-avatar :src="value.img"></b-avatar>
+         <b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>
          <h5>{{ value.neologisme }}</h5>
             <div v-if="value.user[0].rejected">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado

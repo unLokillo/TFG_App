@@ -6,8 +6,9 @@
        </div> 
        <p>
          ¡Este apartado todavia esta en construcción! Vuelve más adelante porfavor :) </p>
-         <img src="@/assets/images/Under_construction.png" >
-    <!--<b-button :to="{name: 'game_2',params: {}}" > ¡¡ Juega !! </b-button>-->
+         <div>
+          <img style="width:50%;height:100%" src="@/assets/images/Under_construction.jpg" >
+         </div>
     </div>     
 </template>
 

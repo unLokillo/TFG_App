@@ -94,7 +94,6 @@ export default {
   flex-direction: column;
 }
 
-
 .frequent-words{
   display: flex;
   justify-content: space-around;

@@ -30,6 +30,10 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
+            <router-link :to="{ name: 'info_general' }" class="sidebar-button" tag="div" >  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="info-circle" /> Información <div></div>
+            </router-link>
+
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
               <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
           </div>
@@ -56,6 +60,10 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
+            <router-link :to="{ name: 'info_general_s' }" class="sidebar-button" tag="div" >  
+                  <font-awesome-icon style="font-size: 120%; !important" icon="info-circle" /> Información <div></div>
+            </router-link>
+            
             <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
               <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt"/> Salir <div></div>
           </div>

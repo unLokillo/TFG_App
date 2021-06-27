@@ -4,6 +4,7 @@
   <div style="background-color: var(--secondary-color); padding: 5%">
     <h3>Actividades</h3>
     ¡Bienvenido a la zona de Actividades!
+    ¡Aqui encontraras distintas Actividades con las que contribuir al proyecto!
   </div>
 <div class="games-selection">
   <div class="game-selector" style="margin-right:20%">
@@ -66,8 +67,8 @@ export default {
 
 .game-selector{
   width: 25rem;
-  height: 50%;
-  margin-top: 10%;
+  height: 69%;
+  margin-top: 6%;
   background-color: #a6d3f8;
 }
 

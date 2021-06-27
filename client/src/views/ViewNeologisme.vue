@@ -48,7 +48,7 @@
         </div>
 
         <div class="image-card" v-if="form.img!=null">
-            <b-img thumbnail :src="form.img"  alt="Responsive image"></b-img>
+            <b-img thumbnail :src="require(`../assets/images/${form.img}`)"  alt="Responsive image"></b-img>
         </div>
 
         <div class="user-tag" >
@@ -135,6 +135,7 @@ export default {
                 .then(function( response ){
                     // Handle success
                 }.bind(this));
+            this.$router.push({ path: `/` })
         }
     },
 }

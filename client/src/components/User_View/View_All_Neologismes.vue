@@ -7,7 +7,8 @@
 
         <div class="neologisme-cards">
             <div v-for="(value,index) in neologismes" :key="index">
-                <b-avatar :src="value.img"></b-avatar>
+                {{ index+1 }}
+                <b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>
                 <h5>{{ value.neologisme }}</h5>
                 
                 <div>

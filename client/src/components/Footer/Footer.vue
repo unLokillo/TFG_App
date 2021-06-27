@@ -1,8 +1,9 @@
 <template>
     <div class="footer-card">
         <div class="links-menu">
-           <a href="/">F.A.Q</a>
-           <a href="/">Sobre nosotros</a>
+            <router-link class="links" :to="{ name: 'faq',params: {} }"> Preguntas Frecuentes </router-link>
+            <div></div>
+            <router-link class="links" :to="{ name: 'info',params: {} }"> Información </router-link>
         </div>   
            <p> Pescaneo </p>
     </div>
@@ -14,6 +15,10 @@
     border-top: 1px solid var(--border);
     padding: 1% 5% 0 5%;
     justify-content: space-between;
+}
+
+.links{
+    min-width: 158px;
 }
 
 .links-menu{

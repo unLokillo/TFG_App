@@ -7,7 +7,7 @@
         <div class="v-ranking-user" v-for="(value,index) in users" :key="index">
             <div class="position-badge" :style="asign_color(value.position)"> <strong> {{ value.position }} </strong></div>
             <div class="avatar-card">
-                <b-avatar :src="value.img"></b-avatar> 
+                <b-avatar :src="require(`../../assets/images/${value.image}`)"></b-avatar> 
                 {{value.name}}
             </div>
             <div class="v-ranking-points">

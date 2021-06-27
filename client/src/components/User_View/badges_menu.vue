@@ -35,7 +35,6 @@ created() {
               this.badges = new Array(Math.ceil(response.data.length / 4))
                     .fill()
                     .map(_ => response.data.splice(0, 4))
-               console.log(this.badges);
             });
     },
     data(){

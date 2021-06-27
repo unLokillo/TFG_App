@@ -3,7 +3,7 @@
     <div class="ranking-title"><h3> Neologismos destacados </h3></div>
     <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
         <template #cell(img)="data">
-         <b-avatar :src="data.item.img"></b-avatar>   
+         <b-avatar :src="require(`../../assets/images/${data.item.img}`)"></b-avatar>   
     </template>
     </b-table>
      <router-link class="more-bttn" :to="{name: 'ranking_neo',params: { userid: $route.params.userid }}" tag="b-button"> 
