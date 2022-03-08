@@ -1,105 +1,122 @@
 <template>
-<div class="body">
-      <Header/>
-  <div class="menu-1">
-    <p> ¡Os damos la bienvendia a <strong>Pescaneo</strong>! <br>
-    Una aplicación para proponer, definir y valorar nuevos términos en el ámbito del Internet de las Cosas. <br> 
-    Si quieres participar, regístrate y pulsa en <strong> “¡Contribuye!” </strong></p>
-    <p style="color: var(--fail)" v-if="!login_info.logged"> Necesitas haber iniciado sesión para acceder a esta opción</p>
-    <b-button  v-if="!login_info.logged" disabled  variant="primary"> ¡Contribuye! </b-button>
-    <router-link :to="`/create-neologisme`" tag="b-button" v-else> ¡Contribuye! </router-link>  
-  </div>
-  <h4>Neologismos de la semana</h4>
-  <div class="frequent-words">
+  <div class="body">
+    <Header />
+    <div class="menu-1">
+      <p>
+        ¡Os damos la bienvendia a <strong>Pescaneo</strong>! <br />
+        Una aplicación para proponer, definir y valorar nuevos términos en el
+        ámbito del Internet de las Cosas. <br />
+        Si quieres participar, regístrate y pulsa en
+        <strong> “¡Contribuye!” </strong>
+      </p>
+      <p style="color: var(--fail)" v-if="!login_info.logged">
+        Necesitas haber iniciado sesión para acceder a esta opción
+      </p>
+      <b-button v-if="!login_info.logged" disabled variant="primary">
+        ¡Contribuye!
+      </b-button>
+      <router-link :to="`/create-neologisme`" tag="b-button" v-else>
+        ¡Contribuye!
+      </router-link>
+    </div>
+    <h4>Neologismos de la semana</h4>
+    <div class="frequent-words">
       <NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
       <NeologismoCard :neologismeData="neoData[1]"></NeologismoCard>
       <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>
-  </div>
-   <h4>Actividades</h4>
-  <div class="menu-2">
-    <p> ¿Te parecen apropiados estos nuevos términos propuestos por otros usuarios? </p>
-     <router-link :to="{ name: 'games',params: {} }" class="sidebar-button" tag="b-button"> ¡Participa! </router-link>
-  </div>
-  <h4>Clasificaciones</h4>
-  <div class="rankings">
-    <ranking_users/>
-    <ranking_neo/>
-  </div>
-  <div v-if="showModal" class="modal-route">
-        <div class="modal-content">
-            <router-view></router-view>
-        </div>
+    </div>
+    <h4>Actividades</h4>
+    <div class="menu-2">
+      <p>
+        ¿Te parecen apropiados estos nuevos términos propuestos por otros
+        usuarios?
+      </p>
+      <router-link
+        :to="{ name: 'games', params: {} }"
+        class="sidebar-button"
+        tag="b-button"
+      >
+        ¡Participa!
+      </router-link>
+    </div>
+    <h4>Clasificaciones</h4>
+    <div class="rankings">
+      <ranking_users />
+      <ranking_neo />
+    </div>
+    <div v-if="showModal" class="modal-route">
+      <div class="modal-content">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header/Header.vue'
-import NeologismoCard from '@/components/Main/NeologismoCard.vue'
-import ranking_users from '@/components/Main/Ranking_users_main.vue'
-import ranking_neo from '@/components/Main/Ranking_neo_main.vue'
-import axios from 'axios'
+import Header from "@/components/Header/Header.vue";
+import NeologismoCard from "@/components/Main/NeologismoCard.vue";
+import ranking_users from "@/components/Main/Ranking_users_main.vue";
+import ranking_neo from "@/components/Main/Ranking_neo_main.vue";
+import axios from "axios";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Header,
     NeologismoCard,
     ranking_users,
-    ranking_neo
+    ranking_neo,
   },
-  
-  beforeCreate(){
-        axios.get('http://localhost:3000/neologismes')
-        .then(response => {
-            //this.name = response.data[0].name;
-            this.neoData = response.data;
-        })
-    axios.get('http://localhost:3000/login/1')
-        .then(response => {
-            //this.name = response.data[0].name;
-            this.login_info = response.data;
-        })
-    },
-    
+
+  beforeCreate() {
+    axios.get("/neologismes").then((response) => {
+      //this.name = response.data[0].name;
+      this.neoData = response.data;
+    });
+    axios.get("http://localhost:8080/login/1").then((response) => {
+      //this.name = response.data[0].name;
+      this.login_info = response.data;
+    });
+  },
+
   watch: {
     $route: {
       immediate: true,
-      handler: function(newVal, oldVal) {
+      handler: function (newVal, oldVal) {
         this.showModal = newVal.meta && newVal.meta.showModal;
-      }
-    }
+      },
+    },
   },
-  data(){
-    return{
+  data() {
+    return {
       showModal: false,
-      neoData: '',
-      login_info: []
-    }
-  }
-}
+      neoData: "",
+      login_info: [],
+      varparamostrar: ""
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
-.body > h4{
+.body > h4 {
   display: flex;
   margin: 2%;
   border-bottom: 1px solid var(--border);
 }
 
-.menu-1{
+.menu-1 {
   background-color: var(--secondary-color);
   display: flex;
   padding: 4%;
   flex-direction: column;
 }
 
-.frequent-words{
+.frequent-words {
   display: flex;
   justify-content: space-around;
 }
 
-.menu-2{
+.menu-2 {
   margin: 20px;
   padding: 30px;
   display: flex;
@@ -107,13 +124,12 @@ export default {
   background-color: var(--secondary-color);
 }
 
-.menu-2 > p{
+.menu-2 > p {
   margin-bottom: 2%;
 }
 
-.rankings{
+.rankings {
   display: flex;
   justify-content: space-evenly;
 }
-
 </style>

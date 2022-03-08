@@ -9,6 +9,8 @@ import { faInfoCircle,faSignOutAlt,faGamepad, faPlusCircle, faHeart, faAward,faB
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import JsonCSV from 'vue-json-csv'
 
+import { makeServer } from './server'
+
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -20,6 +22,10 @@ Vue.use(IconsPlugin)
 library.add(faInfoCircle,faSignOutAlt,faPlusCircle,faGamepad,faBookOpen,faHeart,faAward,faTrophy,faCog,faTimesCircle,faCheckCircle,faQuestionCircle,faBars,faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
+
+if (process.env.NODE_ENV === "development") {
+  makeServer()
+}
 
 Vue.component('downloadCsv', JsonCSV)
 new Vue({

@@ -3,7 +3,7 @@
     <div class="ranking-title"><h3> Neologismos destacados </h3></div>
     <b-table class="ranking-table" small :fields="labels" :items="items" responsive="sm" >
         <template #cell(img)="data">
-         <b-avatar :src="require(`../../assets/images/${data.item.img}`)"></b-avatar>   
+         <b-avatar :src="require(`@/assets/images/`+data.item.img)"></b-avatar>   
     </template>
     </b-table>
      <router-link class="more-bttn" :to="{name: 'ranking_neo',params: { userid: $route.params.userid }}" tag="b-button"> 
@@ -15,7 +15,7 @@
     import axios from 'axios';
 export default {
     created(){
-        axios.get('http://localhost:3000/neologismes')
+        axios.get('/neologismes')
           .then(response => {
               var i = 0;
               while(i<5 && i<response.data.length){
@@ -31,7 +31,7 @@ export default {
             labels: [,
             { key: 'position', label: 'Posición' },
             { key: 'img', label: 'Imagen' },
-            { key: 'neologisme', label: 'Neologismo' }, 
+            { key: 'neologismo', label: 'Neologismo' }, 
             { key: 'liked', label: 'Puntuación' }],
             items: []
         }

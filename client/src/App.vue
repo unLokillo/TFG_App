@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <!-- <Header/> -->
     <Footer/>
   </div>
 
@@ -9,9 +10,11 @@
 <script>
 // @ is an alias to /src
 import Footer from '@/components/Footer/Footer.vue'
+//import Header from '@/components/Header/Header.vue'
 export default {
   name: 'Home',
   components: {
+    //Header,
     Footer
   }
 }

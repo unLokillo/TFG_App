@@ -1,9 +1,9 @@
 <template>
     <div class="footer-card">
         <div class="links-menu">
-            <router-link class="links" :to="{ name: 'faq',params: {} }"> Preguntas Frecuentes </router-link>
+            <router-link class="links" :to="{ name: 'faq',params: {} }"> Información </router-link>
             <div></div>
-            <router-link class="links" :to="{ name: 'info',params: {} }"> Información </router-link>
+            <router-link class="links" :to="{ name: 'info',params: {} }"> Preguntas Frecuentes </router-link>
         </div>   
            <p> Pescaneo </p>
     </div>
