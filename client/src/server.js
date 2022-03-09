@@ -1,6 +1,11 @@
-import { Server, Model } from "miragejs";
+import {
+  Server,
+  Model
+} from "miragejs";
 
-export function makeServer({ environment = "development" } = {}) {
+export function makeServer({
+  environment = "development"
+} = {}) {
   let server = new Server({
     environment,
 
@@ -11,8 +16,8 @@ export function makeServer({ environment = "development" } = {}) {
 
     seeds(server) {
       server.db.loadData({
-        users: [
-          { id: 1,
+        users: [{
+            id: 1,
             nickname: "admin",
             surname: "admin",
             email: "email@email.com",
@@ -30,7 +35,8 @@ export function makeServer({ environment = "development" } = {}) {
             admin: true,
             linguist: false
           },
-          { id: 2,
+          {
+            id: 2,
             nickname: "Rcbjo",
             name: "Raul",
             surname: "Carbajosa Gonzalez",
@@ -52,13 +58,11 @@ export function makeServer({ environment = "development" } = {}) {
             ],
             admin: false,
             linguist: false
-        }
+          }
         ],
-        neologismes: [
-          {
+        neologismes: [{
             neologismo: "Hackear",
-            descriptions: [
-              {
+            descriptions: [{
                 id: 1,
                 value: "Se hackea una cuenta en las redes sociales o un correo electrónico"
               },
@@ -71,87 +75,72 @@ export function makeServer({ environment = "development" } = {}) {
                 value: "Para vigilar al hackeado y así conocer sus movimientos y rutinas para cometer delitos."
               }
             ],
-            sources: [
-              {
-                id: 1,
-                value: "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/me-hackearon-la-cuenta-de-Facebook-que-hago"
-              }
-            ],
+            sources: [{
+              id: 1,
+              value: "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/me-hackearon-la-cuenta-de-Facebook-que-hago"
+            }],
             img: "neologismos.jpg",
             liked: null,
             proposal: false,
             position: 1,
             mssg: "",
-            user: [
-              {
-                user_id: 2,
-                user: "Martin martin",
-                date: "30/10/1998",
-                rejected: false
-              }
-            ],
+            user: [{
+              user_id: 2,
+              user: "Martin martin",
+              date: "30/10/1998",
+              rejected: false
+            }],
             id: 1
           },
           {
             neologismo: "Feature",
-            descriptions: [
-              {
+            descriptions: [{
                 id: 1,
                 value: "El Desarrollo de Software Orientado a Features (FOSD)..."
               },
               {
                 id: 2,
-                value: "Una  característica  (feature)  es  una  unidadfuncional  de  un  sistema  de  software "
+                value: "Una  característica  (feature)  es  una  unidad funcional  de  un  sistema  de  software "
               }
             ],
-            sources: [
-              {
-                id: 2,
-                value: "ANÁLISIS  DE  DESARROLLO  DE  SOFTWARE  ORIENTADO  A FEATURE - LÍNEA DE PRODUCTO DE SOFTWARE PARA APLICACIONES DE TVDI"
-              }
-            ],
+            sources: [{
+              id: 2,
+              value: "ANÁLISIS  DE  DESARROLLO  DE  SOFTWARE  ORIENTADO  A FEATURE - LÍNEA DE PRODUCTO DE SOFTWARE PARA APLICACIONES DE TVDI"
+            }],
             img: "neologismos.jpg",
             liked: 6,
             proposal: false,
             position: 2,
-            user: [
-              {
-                user_id: 2,
-                user: "Raul Carbajosa",
-                date: "02/06/2021",
-                rejected: false,
-                mssg: ""
-              }
-            ],
+            user: [{
+              user_id: 2,
+              user: "Raul Carbajosa",
+              date: "02/06/2021",
+              rejected: false,
+              mssg: ""
+            }],
             id: 2
           },
           {
             neologismo: "Prueba 3",
-            descriptions: [
-              {
-                id: 1,
-                value: "Prueba 3"
-              }
-            ],
-            sources: [
-              {
-                id: 1,
-                value: "Prueba 3"
-              }
-            ],
+            descriptions: [{
+              id: 1,
+              value: "Prueba 3"
+            }],
+            sources: [{
+              id: 1,
+              value: "Prueba 3"
+            }],
             img: "neologismos.jpg",
             liked: 0,
             proposal: false,
             position: 9,
-            user: [
-              {
-                user_id: 2,
-                user: "Rcbjo",
-                date: "14/05/2021",
-                rejected: false,
-                mssg: ""
-              }
-            ],
+            user: [{
+              user_id: 2,
+              user: "Rcbjo",
+              date: "14/05/2021",
+              rejected: false,
+              mssg: ""
+            }],
             id: 3
           }
         ]
@@ -162,7 +151,9 @@ export function makeServer({ environment = "development" } = {}) {
       //this.namespace = "api";
       this.timing = 750;
 
-      this.get("/users", ({ db }) => {
+      this.get("/users", ({
+        db
+      }) => {
         return db.users;
       });
 
@@ -172,14 +163,41 @@ export function makeServer({ environment = "development" } = {}) {
         return schema.db.todos.update(todo.id, todo);
       });
 
-      this.get("/neologismes", ({ db }) => {
+      this.get("/neologismes", ({
+        db
+      }) => {
         return db.neologismes;
       });
 
-      this.post("/todos", (schema, request) => {
-        let todo = JSON.parse(request.requestBody).data;
+      this.get("/login/1", ({
+        db
+      }) => {
+        return;
+      });
 
-        return schema.db.todos.insert(todo);
+      this.post("/users", (schema) => {
+        //let todo = JSON.parse(request.requestBody).data;
+        server.db.loadData({
+          id: schema.id,
+          nickname: schema.nickname,
+          name: schema.name,
+          surname: schema.surname,
+          email: schema.email,
+          date: schema.date,
+          gender: schema.gender,
+          password: schema.password,
+          school: schema.school,
+          mother_tonge: schema.mother_tonge,
+          image: schema.image,
+          points: 0,
+          position: 0,
+          proposals: [],
+          accepted_neo: [],
+          fav_neo: [],
+          admin: false,
+          linguist: false
+        })
+        //return schema.db.users.insert(schema);
       });
 
       this.delete("/todos/:id", (schema, request) => {

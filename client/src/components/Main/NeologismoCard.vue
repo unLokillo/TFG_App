@@ -72,7 +72,10 @@ watch: {
 }
 .titulito{
     padding: 3%;
-    text-align: center;
+    padding-left: 10%;
+}
+.neo-likes{
+    padding-right: 5%;
 }
 
 </style>

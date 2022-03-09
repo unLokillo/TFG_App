@@ -117,9 +117,10 @@ export default {
         }else{
          this.form.image = 'default_profile.png';
         }
-            axios.post('http://localhost:3000/users', this.form);
+            axios.post('/users', this.form);
+            console.log(axios.get("/users").data)
             console.log("Form: ")
-            console.log(this.form)
+            console.log(JSON.stringify(this.form))
             this.$router.push({ path: `/login` }) 
         },
     isUpper(str) {

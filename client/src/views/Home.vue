@@ -72,7 +72,7 @@ export default {
       //this.name = response.data[0].name;
       this.neoData = response.data;
     });
-    axios.get("http://localhost:8080/login/1").then((response) => {
+    axios.get("/login/1").then((response) => {
       //this.name = response.data[0].name;
       this.login_info = response.data;
     });
