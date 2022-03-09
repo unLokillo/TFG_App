@@ -1,11 +1,11 @@
 <template>
     <div class="card-body">
         <div class="card-neo-header">
-            <h2>{{ neologismeData.neologisme }}</h2>
+            <h2 class="titulito" >{{ neologismeData.neologismo }}</h2>
             <div class="neo-likes" ><font-awesome-icon icon="heart"/> {{ this.neologismeData.liked }}</div> 
         </div>
         <div v-for="(value,index) in neologismeData.descriptions" :key="index" >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value }}</div>
+            <div v-if="index<3" class="descriptions">{{ index + 1 }}.- {{ value.value }}</div>
         </div>
         <div class="user-tag">
             <div>Creado por: {{ neologismeData.user[0].user }} </div> 
@@ -69,6 +69,10 @@ watch: {
     padding-bottom: 5%;
     color: grey;
     font-size: 14px; 
+}
+.titulito{
+    padding: 3%;
+    text-align: center;
 }
 
 </style>
