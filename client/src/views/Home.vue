@@ -21,9 +21,9 @@
     </div>
     <h4>Neologismos de la semana</h4>
     <div class="frequent-words">
-      <NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
+      <!--<NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
       <NeologismoCard :neologismeData="neoData[1]"></NeologismoCard>
-      <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>
+      <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>-->
     </div>
     <h4>Actividades</h4>
     <div class="menu-2">
@@ -68,14 +68,30 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("/neologismes").then((response) => {
+    axios.get("/nothing").then((response) => { // /neologismes
       //this.name = response.data[0].name;
       this.neoData = response.data;
     });
-    axios.get("/login/1").then((response) => {
-      //this.name = response.data[0].name;
-      this.login_info = response.data;
-    });
+    axios
+      .post("http://192.168.1.22:5000/nothing", {
+        username: 'R',
+        password: 'pass1234',
+        email: 'admin@admin.com',
+        name: 'R',
+        surname: 'MR',
+        school: 'ETSIINF',
+        points: 0,
+        privileges: 'admin'
+      })
+      .then((response) => {
+        //this.name = response.data[0].name;
+        console.log(response);
+        this.login_info = response.data;
+      })
+      .catch((err) => {
+        console.log("Ha habido un errorsito de na, mira:")
+        console.log(err);
+      });
   },
 
   watch: {
@@ -91,7 +107,7 @@ export default {
       showModal: false,
       neoData: "",
       login_info: [],
-      varparamostrar: ""
+      varparamostrar: "",
     };
   },
 };
