@@ -68,12 +68,12 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("/nothing").then((response) => { // /neologismes
+    axios.get("http://127.0.0.1:5000/nothing").then((response) => { // /neologismes
       //this.name = response.data[0].name;
       this.neoData = response.data;
     });
     axios
-      .post("http://192.168.1.22:5000/nothing", {
+      .post("http://127.0.0.1:5000/nothing", {
         username: 'R',
         password: 'pass1234',
         email: 'admin@admin.com',
@@ -85,7 +85,6 @@ export default {
       })
       .then((response) => {
         //this.name = response.data[0].name;
-        console.log(response);
         this.login_info = response.data;
       })
       .catch((err) => {

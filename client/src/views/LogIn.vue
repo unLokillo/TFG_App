@@ -66,28 +66,16 @@ export default {
   methods: {
     getUserInfo() {
       this.correct_login = false;
-      var i = -1;
-      axios.get("http://localhost:3000/users").then((response) => {
-        while (!this.correct_login && i < response.data.length) {
-          i++;
-          this.correct_login =
-            (response.data[i].email.localeCompare(this.form.email_or_user) == 0 ||
-            response.data[i].nickname.localeCompare(this.form.email_or_user) == 0) &&
-            response.data[i].password.localeCompare(this.form.password) == 0;
-
-          if (this.correct_login) {
-            this.form.user_id = response.data[i].id;
-            this.form.logged = true;
-            this.form.admin = response.data[i].admin;
-            this.form.linguist = response.data[i].linguist;
-            this.form.user_id = response.data[i].id;
-            this.form.img = response.data[i].image;
-            axios.put("http://localhost:3000/login/1", this.form);
-            this.$router.push({ path: `/register` });
-            this.$router.push({ path: `/` });
-          }
+      axios.post("http://127.0.0.1:5000/login",
+      {
+        username: this.form.email_or_user,
+        password: this.form.password
+      }).then((response) => {
+        if (response.status === 200) {
+          this.correct_login = true
+          this.$router.push({ path: `/` });
         }
-      });
+      })
     },
   },
 };

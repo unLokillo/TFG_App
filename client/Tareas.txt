@@ -1,0 +1,56 @@
+TAREAS
+
+Base de datos SQLite
+	- Diseño ✓
+	- Creación ✓
+	- Poner secuencias en PKs ✓
+	- Enlace (envíos y recibos a la bbdd en las distintas acciones)
+	- Añadir fecha a neologismos para ranking
+	- Cambio de PK a 'id' en todas las tablas
+	- Gestión de posiciones con puntos
+	- Proteger de SQL injection
+
+Autenticación
+	- Búsqueda de info
+	- Implementación
+	- Envío de correo electrónico
+
+Estructuras de datos
+
+FrontEnd
+	- Cambiar enlace info y preg. frecuentes bien
+	- Añadir botón de página principal
+	- Añadir menú en todas las páginas
+	- Mirar que salga la cabecera y error 404
+	- Formatear todos los ficheros
+	
+Registro
+	- Comprobación de existencia de id e email
+	
+Actividades
+	Cartas deslizantes
+		- Añadir sistema de coger neologismos y mostrarlos
+		- Movida de arrastrar
+	Contexto correcto
+		- Todo
+
+Clasificaciones
+	Usuarios
+		- Todo
+	Neologismos (Repetido?)
+		- Todo
+		
+Funciones a añadir
+	Creación de administradores
+	Eliminación de usuarios
+	Eliminación comentario 
+	Eliminación neologismos
+	Descarga de CSV lingüista
+	Notificación de errores por usuario
+	Búsqueda de información por el usuario
+	Sistema de puntuación
+	Cambio de idioma en footer
+
+Logros
+Perfil
+Comentarios

@@ -1,7 +1,7 @@
 <template>
 <div class="header-img">
-    <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.logged">
-        <b-avatar :src="require(`../../assets/images/${login_info.img}`)"></b-avatar> {{ user_info.nickname }} 
+    <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.success=='true'">
+        <!--<b-avatar :src="require(`../../assets/images/${login_info.img}`)"></b-avatar>--> {{ login_info.username }} 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
         Iniciar sesión
@@ -13,19 +13,20 @@
 import axios from 'axios';
 export default {
     created() {
-        axios.get('http://localhost:3000/login/1')
+        axios.get('http://127.0.0.1:5000/login')
           .then(response => {
               this.login_info = response.data;
-        axios.get('http://localhost:3000/users/' + response.data.user_id)
+              console.log(this.login_info)
+        /*axios.get('http://localhost:3000/users/' + response.data.user_id)
           .then(response_u => { 
               this.user_info = response_u.data;
-            });
+            });*/
             });
     },
     data() {
         return {
             filename: 'Under_construction.png',
-            user_info: [],
+            user_info: false,
             showModal: false,
             user_id: '',
             login_info: []

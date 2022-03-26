@@ -22,11 +22,11 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="trophy" /> Ranking Neologismos <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'main-view-all-proposals',params: {} }" class="sidebar-button"  tag="div" v-if="form.logged">  
+            <router-link :to="{ name: 'main-view-all-proposals',params: {} }" class="sidebar-button"  tag="div" v-if="form.success">  
                   <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus propuestas <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div" v-if="form.logged">  
+            <router-link :to="{ name: 'badges',params: {} }" class="sidebar-button" tag="div" v-if="form.success">  
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
@@ -34,7 +34,7 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="info-circle" /> Información <div></div>
             </router-link>
 
-            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.success">
               <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt" /> Salir <div></div>
           </div>
           </div>
@@ -56,7 +56,7 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="book-open" /> Tus Propuestas <div></div>
             </router-link>
 
-            <router-link :to="{ name: 'vu-badges',params: {userid:form.user_id} }" class="sidebar-button" tag="div" v-if="form.logged">  
+            <router-link :to="{ name: 'vu-badges',params: {userid:form.user_id} }" class="sidebar-button" tag="div" v-if="form.success">  
                   <font-awesome-icon style="font-size: 120%; !important" icon="award" /> Logros <div></div>
                 </router-link>
 
@@ -64,7 +64,7 @@
                   <font-awesome-icon style="font-size: 120%; !important" icon="info-circle" /> Información <div></div>
             </router-link>
             
-            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.logged">
+            <div class="sidebar-button" style="  border-left: 10px solid red !important;" v-on:click="logOut" v-if="form.success">
               <font-awesome-icon style="font-size: 120%; !important" icon="sign-out-alt"/> Salir <div></div>
           </div>
           </div>
@@ -80,7 +80,7 @@ import axios from 'axios'
   export default {
     created(){
     this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
-    axios.get('http://localhost:3000/login/1')
+    axios.get('http://127.0.0.1:5000/login')
           .then(response => {
               this.form = response.data;
             });

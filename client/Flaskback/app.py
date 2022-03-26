@@ -1,4 +1,5 @@
 from enum import unique
+from msilib import sequence
 from turtle import position
 from flask import Flask, request, jsonify, json, session
 from flask_api import status
@@ -14,8 +15,6 @@ Cors = CORS(app)
 CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-app.secret_key = b'fmVb@st^jCP7f$uM'
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
@@ -28,12 +27,12 @@ ma = Marshmallow(app)
 
 class Usuario(db.Model):
     __tablename__ = "usuarios"
-    id_user = db.Column(db.Integer, primary_key=True)
+    id_user = db.Column(db.Integer, db.Sequence('id_user'), primary_key=True)
     nickname = db.Column(db.String(20), unique=True, nullable=False)
     name = db.Column(db.String(30), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    birthdate = db.Column(db.Date)
+    birthdate = db.Column(db.DateTime)
     gender = db.Column(db.String(20))
     password = db.Column(db.String(50), nullable=False)
     school = db.Column(db.String(15), nullable=False)
@@ -68,10 +67,10 @@ class UsuarioSchema(ma.Schema):
 
 class Neologismo(db.Model):
     __tablename__ = "neologismos"
-    id_neologisme = db.Column(db.Integer, primary_key=True)
+    id_neologisme = db.Column(db.Integer, db.Sequence('id_neologismo'), primary_key=True)
     name = db.Column(db.String(100))
     likes = db.Column(db.Integer)
-    image = db.Column(db.Binary)
+    image = db.Column(db.LargeBinary)
     state = db.Column(db.String(20))
     position = db.Column(db.Integer, unique=True)
     id_user = db.Column(db.Integer, db.ForeignKey("usuarios.id_user"))
@@ -96,12 +95,12 @@ class NeologismoSchema(ma.Schema):
 
 class Logro(db.Model):
     __tablename__ = "logros"
-    id_achievement = db.Column(db.Integer, primary_key=True)
+    id_achievement = db.Column(db.Integer, db.Sequence('id_logro'), primary_key=True)
     description = db.Column(db.String(100))
     action = db.Column(db.String(100))
     difficulty = db.Column(db.Integer)
     name = db.Column(db.String(30))
-    medal = db.Column(db.Binary)
+    medal = db.Column(db.LargeBinary)
 
     def __init__(self, id_achievement, description, action, difficulty, name, medal):
         self.id_achievement = id_achievement
@@ -120,7 +119,7 @@ class LogroSchema(ma.Schema):
 
 class Source(db.Model):
     __tablename__ = "sources"
-    id_source = db.Column(db.Integer, primary_key=True)
+    id_source = db.Column(db.Integer, db.Sequence('id_source'), primary_key=True)
     link = db.Column(db.String(300))
     id_neologisme = db.Column(
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
@@ -140,7 +139,7 @@ class SourceSchema(ma.Schema):
 
 class Description(db.Model):
     __tablename__ = "descriptions"
-    id_description = db.Column(db.Integer, primary_key=True)
+    id_description = db.Column(db.Integer, db.Sequence('id_description'), primary_key=True)
     text = db.Column(db.String(300))
     id_neologisme = db.Column(
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
@@ -159,14 +158,15 @@ class DescriptionSchema(ma.Schema):
 
 
 class UserGetsAchievement(db.Model):
-    id_uga = db.Column(db.Integer, primary_key=True)
+    __tablename__ = "users_get_achievements"
+    id_uga = db.Column(db.Integer, db.Sequence('id_uga'), primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id_user'))
     id_achievement = db.Column(
         db.Integer, db.ForeignKey('logros.id_achievement'))
     usuario = db.relationship("Usuario", backref='logros')
     logro = db.relationship("Logro", backref='usuarios')
-    date = db.Column(db.Date)
+    date = db.Column(db.DateTime)
 
     def __init__(self, id_uga, id_user, id_achievement, usuario, logro, date):
         self.id_uga = id_uga
@@ -183,7 +183,8 @@ class UGASchema(ma.Schema):
 
 
 class UserlikesNeologisme(db.Model):
-    id_uln = db.Column(db.Integer, primary_key=True)
+    __tablename__ = "users_like_neologismes"
+    id_uln = db.Column(db.Integer, db.Sequence('id_uln'), primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey(
         'usuarios.id_user'))
     id_neologisme = db.Column(
@@ -225,7 +226,7 @@ ugas_schema = UGASchema(many=True)
 uln_schema = ULNSchema()
 ulns_schema = ULNSchema(many=True)
 
-
+# Creación de usuario
 @app.route("/users", methods=["POST"])
 @cross_origin(origin='*', headers=['content-type'])
 def create_user():
@@ -245,9 +246,9 @@ def create_user():
 
     # Busqueda de usuario ya existente
     if Usuario.query.filter_by(username=username).count() > 0 \
-            or Usuario.query.filter_by(email=username).count() > 0:
+            or Usuario.query.filter_by(email=username).count() > 0 \
+            or Usuario.query.filter_by(email=email).count() > 0:
         return "Usuario ya existente", status.HTTP_400_BAD_REQUEST
-        pass  # TODO Devolver error de ya existente
 
         # Creacion y adicion del usuario
     new_user = Usuario(nickname=username,
@@ -282,15 +283,30 @@ def login():
         usuario = Usuario.query.filter(((Usuario.email == request.json[
             'username']) | (Usuario.nickname == request.json['username']))).first()
         pwd = request.json['password']
-        print(usuario)
         if usuario is None or usuario.password != pwd:
             return "Usuario y/o contraseña incorrectos", 400
         else:
-            session['username'] = request.json['nickname']
+            session['username'] = usuario.nickname
+            session['user_id'] = usuario.id_user
+            session['user_image'] = usuario.image
+            app.logger.info('username' in session)
+            #session.permanent = True
             return "Ok", 200
     elif request.method == "GET":
+        app.logger.info('username' in session)
+        res_fields = {
+            'success': False,
+            'username': "",
+            'image': "",
+            'user_id': 0
+        }
         if 'username' in session:
-            return session['username'], 200
+            res_fields['success'] = True
+            res_fields['username'] = session['username']
+            res_fields['image'] = session['user_image']
+            res_fields['user_id'] = session['user_id']
+
+        return res_fields, 200
 
 
 @app.route("/nothing", methods=["POST", "GET"])
@@ -299,4 +315,5 @@ def nothing():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.secret_key = '123' #'fmVb@st^jCP7f$uM'
+    app.run(debug=True) #, host='0.0.0.0')
