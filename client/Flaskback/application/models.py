@@ -1,48 +1,26 @@
-from enum import unique
-from msilib import sequence
-from turtle import position
-from flask import Flask, request, jsonify, json, session
-from flask_api import status
-from flask_cors import CORS, cross_origin
-#import sqlite3
-
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-import os
-
-app = Flask(__name__)
-Cors = CORS(app)
-CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
-app.config['CORS_HEADERS'] = 'Content-Type'
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(basedir, 'db.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+from . import db, ma
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class Usuario(db.Model):
+class Usuario(UserMixin, db.Model):
     __tablename__ = "usuarios"
-    id_user = db.Column(db.Integer, db.Sequence('id_user'), primary_key=True)
+    id = db.Column(db.Integer, db.Sequence('id_user'), primary_key=True)
     nickname = db.Column(db.String(20), unique=True, nullable=False)
     name = db.Column(db.String(30), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     birthdate = db.Column(db.DateTime)
     gender = db.Column(db.String(20))
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
     school = db.Column(db.String(15), nullable=False)
     mother_tongue = db.Column(db.String(20))
     image = db.Column(db.LargeBinary)
     points = db.Column(db.Integer, nullable=False)
-    position = db.Column(db.Integer, unique=True, nullable=False)
+    #position = db.Column(db.Integer, unique=True, nullable=False)
     privileges = db.Column(db.String(15), nullable=False)
 
-    def __init__(self, nickname, name, surname, email, birthdate,
+    '''def __init__(self, nickname, name, surname, email, birthdate,
                  gender, password, school, mother_tongue, image, points, privileges):
         # Add the data to the instance
         self.nickname = nickname
@@ -56,7 +34,21 @@ class Usuario(db.Model):
         self.mother_tongue = mother_tongue
         self.image = image
         self.points = points
-        self.privileges = privileges
+        self.privileges = privileges'''
+
+    def set_password(self, password):
+        """Create hashed password."""
+        self.password = generate_password_hash(
+            password,
+            method='sha256'
+        )
+
+    def check_password(self, password):
+        """Check hashed password."""
+        return check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
 
 
 class UsuarioSchema(ma.Schema):
@@ -74,7 +66,7 @@ class Neologismo(db.Model):
     image = db.Column(db.LargeBinary)
     state = db.Column(db.String(20))
     position = db.Column(db.Integer, unique=True)
-    id_user = db.Column(db.Integer, db.ForeignKey("usuarios.id_user"))
+    id_user = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     user = db.relationship("Usuario", backref="neologismes")
 
     def __init__(self, id_neologisme, name, likes, image, state, position, id_user, user):
@@ -165,7 +157,7 @@ class UserGetsAchievement(db.Model):
     __tablename__ = "users_get_achievements"
     id_uga = db.Column(db.Integer, db.Sequence('id_uga'), primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey(
-        'usuarios.id_user'))
+        'usuarios.id'))
     id_achievement = db.Column(
         db.Integer, db.ForeignKey('logros.id_achievement'))
     usuario = db.relationship("Usuario", backref='logros')
@@ -191,7 +183,7 @@ class UserlikesNeologisme(db.Model):
     __tablename__ = "users_like_neologismes"
     id_uln = db.Column(db.Integer, db.Sequence('id_uln'), primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey(
-        'usuarios.id_user'))
+        'usuarios.id'))
     id_neologisme = db.Column(
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
     usuario = db.relationship("Usuario", backref='likedneologismes')
@@ -230,97 +222,3 @@ ugas_schema = UGASchema(many=True)
 
 uln_schema = ULNSchema()
 ulns_schema = ULNSchema(many=True)
-
-# Creación de usuario
-
-
-@app.route("/users", methods=["POST"])
-@cross_origin(origin='*', headers=['content-type'])
-def create_user():
-
-    username = request.json('username')
-    passw = request.json('password')
-    email = request.json('email')
-    name = request.json('name')
-    surname = request.json('surname')
-    birthdate = request.json('birthdate')
-    gender = request.json('gender')
-    school = request.json('school')
-    mother_tongue = request.json('mother_tongue')
-    image = request.json('image')  # TODO cargar imagen
-    points = request.json('points')
-    privileges = request.json('privileges')
-
-    # Busqueda de usuario ya existente
-    if Usuario.query.filter_by(username=username).count() > 0 \
-            or Usuario.query.filter_by(email=username).count() > 0 \
-            or Usuario.query.filter_by(email=email).count() > 0:
-        return "Usuario ya existente", status.HTTP_400_BAD_REQUEST
-
-        # Creacion y adicion del usuario
-    new_user = Usuario(nickname=username,
-                       password=passw,
-                       email=email,
-                       name=name,
-                       surname=surname,
-                       birthdate=birthdate,
-                       gender=gender,
-                       school=school,
-                       mother_tongue=mother_tongue,
-                       image=image,
-                       points=points,
-                       privileges=privileges)
-    db.session.add(new_user)
-    db.session.commit()
-    return usuario_schema.jsonify(new_user)
-
-
-@app.route("/users", methods=["GET"])
-@cross_origin(origin='*', headers=['content-type'])
-def get_all_users():
-    all_users = Usuario.query.all()
-    res = usuarios_schema.dump(all_users)
-    return jsonify(res)
-
-
-@app.route("/login", methods=["POST", "GET"])
-def login():
-
-    if request.method == "POST":
-        usuario = Usuario.query.filter(((Usuario.email == request.json[
-            'username']) | (Usuario.nickname == request.json['username']))).first()
-        pwd = request.json['password']
-        if usuario is None or usuario.password != pwd:
-            return "Usuario y/o contraseña incorrectos", 400
-        else:
-            session['username'] = usuario.nickname
-            session['user_id'] = usuario.id_user
-            session['user_image'] = usuario.image
-            app.logger.info('username' in session)
-            #session.permanent = True
-            return "Ok", 200
-    elif request.method == "GET":
-        app.logger.info('username' in session)
-        res_fields = {
-            'success': False,
-            'username': "",
-            'image': "",
-            'user_id': 0
-        }
-        if 'username' in session:
-            res_fields['success'] = True
-            res_fields['username'] = session['username']
-            res_fields['image'] = session['user_image']
-            res_fields['user_id'] = session['user_id']
-
-        return res_fields, 200
-
-
-@app.route("/nothing", methods=["POST", "GET"])
-def nothing():
-    return "", 200
-
-
-if __name__ == '__main__':
-    app.secret_key = '123'  # 'fmVb@st^jCP7f$uM'
-    app.run(debug=True)  # , host='0.0.0.0')

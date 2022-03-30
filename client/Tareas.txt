@@ -23,6 +23,9 @@ FrontEnd
 	- Añadir menú en todas las páginas
 	- Mirar que salga la cabecera y error 404
 	- Formatear todos los ficheros
+	- Poner tilde a "Registrate"
+	- No permitir contraseña mal (solo lo avisa)
+	- Cambiar admin y liguist por privileges
 	
 Registro
 	- Comprobación de existencia de id e email
