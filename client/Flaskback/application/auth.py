@@ -5,6 +5,7 @@ from . import login_manager
 from flask_api import status
 from flask_cors import CORS, cross_origin
 from datetime import datetime
+from os import path, pardir, getcwd
 
 
 # Blueprint Configuration
@@ -53,9 +54,6 @@ def login():
 @auth_bp.route('/signup', methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'])
 def signup():
-    usuario_schema = UsuarioSchema()
-    for clave in request.files:
-        print(clave)
     username = request.form['nickname']
     passw = request.form['password']
     email = request.form['email']
@@ -65,7 +63,11 @@ def signup():
     gender = request.form['gender']
     school = request.form['school']
     mother_tongue = request.form['mother_tongue']
-    image = request.files['imagen'].read()  # TODO cargar imagen
+    if request.form['imageno'] == 'default':
+        with open('./assets/default_profile.png', 'rb') as file:
+            image = file.read()
+    else:
+        image = request.files['imagen'].read()
     points = request.form['points']
     privileges = request.form['privileges']
 
@@ -89,9 +91,12 @@ def signup():
                        privileges=privileges)
     new_user.set_password(passw)
     db.session.add(new_user)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
     login_user(new_user)
-    return status.HTTP_201_CREATED
+    return "ok",status.HTTP_201_CREATED
 
 @login_manager.user_loader
 def load_user(user_id):

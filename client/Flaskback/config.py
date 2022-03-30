@@ -33,4 +33,4 @@ class Config:
     CORS_HEADERS = 'Content-Type'
 
     #Files
-    UPLOAD_FOLDER = path.join(basedir, 'assets/')
+    DEFAULT_FOLDER = path.join(basedir, 'assets/')

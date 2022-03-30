@@ -84,16 +84,7 @@
       </div>
       <div>
         <div class="selectors-card">
-          <h6>Avatar</h6>
-          <!--
-          <b-form-file
-            v-model="image"
-            accept=".jpg, .png"
-            webkitdirectory
-            plain
-            name="image"
-          ></b-form-file>
-          <div class="mt-3">Archivo seleccionado: {{ form.image ? form.image.name : '' }}</div>-->
+          <h6>Imagen de perfil</h6>
           <input
             type="file"
             name="image"
@@ -127,7 +118,6 @@ export default {
         mother_tongue: "",
         //image: undefined,
         points: 0,
-        position: 4,
         proposals: [],
         accepted_neo: [],
         fav_neo: [],
@@ -185,9 +175,10 @@ export default {
       var formData = new FormData();
       if (this.image != undefined) {
         formData.append("imagen", this.image, this.image.name);
+        formData.append("imageno", 'yes');
       } else {
         this.image = "default";
-        formData.append("imagen", this.image)
+        formData.append("imageno", 'default');
       }
       
       for (const i in this.form){

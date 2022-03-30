@@ -8,10 +8,11 @@ Base de datos SQLite
 	- Añadir fecha a neologismos para ranking
 	- Cambio de PK a 'id' en todas las tablas
 	- Gestión de posiciones con puntos
-	- Proteger de SQL injection
+	- Proteger de SQL injection ✓
+	- Mirar trailing slash o el / al final de la uri
 
 Autenticación
-	- Búsqueda de info
+	- Búsqueda de info ✓
 	- Implementación
 	- Envío de correo electrónico
 
@@ -28,7 +29,7 @@ FrontEnd
 	- Cambiar admin y liguist por privileges
 	
 Registro
-	- Comprobación de existencia de id e email
+	- Comprobación de existencia de id e email ✓
 	
 Actividades
 	Cartas deslizantes
