@@ -68,7 +68,7 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("http://127.0.0.1:5000/nothing").then((response) => { // /neologismes
+    axios.get("http://127.0.0.1:5000/login", { withCredentials: true }).then((response) => { // /neologismes
       //this.name = response.data[0].name;
       this.neoData = response.data;
     });

@@ -17,24 +17,7 @@ class Usuario(UserMixin, db.Model):
     mother_tongue = db.Column(db.String(20))
     image = db.Column(db.LargeBinary)
     points = db.Column(db.Integer, nullable=False)
-    #position = db.Column(db.Integer, unique=True, nullable=False)
     privileges = db.Column(db.String(15), nullable=False)
-
-    '''def __init__(self, nickname, name, surname, email, birthdate,
-                 gender, password, school, mother_tongue, image, points, privileges):
-        # Add the data to the instance
-        self.nickname = nickname
-        self.name = name
-        self.surname = surname
-        self.email = email
-        self.birthdate = birthdate
-        self.gender = gender
-        self.password = password
-        self.school = school
-        self.mother_tongue = mother_tongue
-        self.image = image
-        self.points = points
-        self.privileges = privileges'''
 
     def set_password(self, password):
         """Create hashed password."""
@@ -48,7 +31,7 @@ class Usuario(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.nickname)
 
 
 class UsuarioSchema(ma.Schema):

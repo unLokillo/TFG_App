@@ -1,10 +1,10 @@
-from flask import Blueprint, redirect, render_template, flash, request, session, url_for
+from flask import Blueprint, redirect, render_template, flash, request, session, url_for, make_response
 from flask_login import login_required, logout_user, current_user, login_user
-from .models import db, Usuario, UsuarioSchema
+from .models import db, Usuario
 from . import login_manager
 from flask_api import status
 from flask_cors import CORS, cross_origin
-from datetime import datetime
+from datetime import datetime, timedelta
 from os import path, pardir, getcwd
 
 
@@ -16,11 +16,12 @@ auth_bp = Blueprint(
 )
 
 
-@auth_bp.route('/login', methods=['POST','GET'])
-@cross_origin(origin='*', headers=['content-type'])
+@auth_bp.route('/login', methods=['POST', 'GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def login():
     if request.method == "POST":
         if current_user.is_authenticated:
+            print('ya estabas logeado tontorron')
             return "Ok", 200
         usuario = Usuario.query.filter(((Usuario.email == request.json[
             'username']) | (Usuario.nickname == request.json['username']))).first()
@@ -28,11 +29,8 @@ def login():
         if usuario is None or not usuario.check_password(password=pwd):
             return "Usuario y/o contraseña incorrectos", 400
         else:
-            '''session['username'] = usuario.nickname
-            session['user_id'] = usuario.id_user
-            session['user_image'] = usuario.image
-            #session.permanent = True'''
-            login_user(usuario)
+            login_user(usuario, remember=True, force=True,
+                       duration=timedelta(days=365))
             return "Ok", 200
     elif request.method == "GET":
         res_fields = {
@@ -42,17 +40,17 @@ def login():
             'user_id': 0
         }
         if current_user.is_authenticated:
-            currUser = Usuario.query(current_user)
             res_fields['success'] = True
-            res_fields['username'] = currUser.nickname
-            res_fields['image'] = currUser.image
-            res_fields['user_id'] = current_user
+            res_fields['username'] = current_user.nickname
+            # res_fields['image'] = current_user.image # TODO insertar imagen
+            res_fields['user_id'] = current_user.id
+            return res_fields, status.HTTP_200_OK
 
-        return res_fields, status.HTTP_200_OK
+        return res_fields, status.HTTP_401_UNAUTHORIZED
 
 
 @auth_bp.route('/signup', methods=['POST'])
-@cross_origin(origin='*', headers=['content-type'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def signup():
     username = request.form['nickname']
     passw = request.form['password']
@@ -82,7 +80,7 @@ def signup():
                        email=email,
                        name=name,
                        surname=surname,
-                       birthdate=datetime.strptime(birthdate,'%Y-%m-%d'),
+                       birthdate=datetime.strptime(birthdate, '%Y-%m-%d'),
                        gender=gender,
                        school=school,
                        mother_tongue=mother_tongue,
@@ -96,7 +94,16 @@ def signup():
     except:
         db.session.rollback()
     login_user(new_user)
-    return "ok",status.HTTP_201_CREATED
+    return "ok", status.HTTP_201_CREATED
+
+
+@auth_bp.route('/users', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def getusers():
+    pass # TODO devolver usuarios
+    return "ahora sí tss", status.HTTP_200_OK
+
 
 @login_manager.user_loader
 def load_user(user_id):

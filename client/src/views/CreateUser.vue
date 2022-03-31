@@ -188,7 +188,7 @@ export default {
       axios.post("http://127.0.0.1:5000/signup", formData).then((res) => {
         console.log(res);
       });
-      console.log(axios.get("http://127.0.0.1:5000/users").data);
+      console.log(axios.get("http://127.0.0.1:5000/login").data);
       console.log("Form: ");
       console.log(JSON.stringify(this.form));
       this.$router.push({ path: `/` });

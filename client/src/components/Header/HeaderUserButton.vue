@@ -13,7 +13,7 @@
 import axios from 'axios';
 export default {
     created() {
-        axios.get('http://127.0.0.1:5000/login')
+        axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
           .then(response => {
               this.login_info = response.data;
               console.log(this.login_info)

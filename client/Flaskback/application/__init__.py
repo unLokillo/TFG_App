@@ -7,19 +7,23 @@ from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager
+from flask_session import Session
 import os
 
 db = SQLAlchemy()
 ma = Marshmallow()
 login_manager = LoginManager()
+s = Session()
+
 
 def create_app():
     # Construct the core app object.
     app = Flask(__name__, instance_relative_config=False)
 
-    #CORS
+    # CORS
     Cors = CORS(app)
-    CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS=True)
+    CORS(app, resources={r'/*': {'origins': '*'}},
+         CORS_SUPPORTS_CREDENTIALS=True)
 
     # Application Configuration
     app.config.from_object('config.Config')
@@ -32,7 +36,6 @@ def create_app():
     with app.app_context():
         from . import routes
         from . import auth
-         # from .assets import compile_assets
 
         # Register Blueprints
         app.register_blueprint(routes.main_bp)
@@ -41,8 +44,6 @@ def create_app():
         # Create Database Models
         db.create_all()
 
-        # Compile static assets
-        '''if app.config['FLASK_ENV'] == 'development':
-            compile_assets(app)'''
+        s.init_app(app)
 
         return app

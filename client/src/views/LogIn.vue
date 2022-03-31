@@ -48,6 +48,14 @@
 <script>
 import axios from "axios";
 export default {
+  beforeCreate(){
+    axios.get('http://127.0.0.1:5000/login', {credentials: 'include'})
+    .then(res => {
+      if(res.status==200){
+        this.$router.push({ path: `/` });
+      }
+    })
+  },
   data() {
     return {
       form: {
@@ -70,7 +78,7 @@ export default {
       {
         username: this.form.email_or_user,
         password: this.form.password
-      }).then((response) => {
+      }, { withCredentials: true }).then((response) => {
         if (response.status === 200) {
           this.correct_login = true
           this.$router.push({ path: `/` });

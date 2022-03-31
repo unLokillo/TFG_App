@@ -1,5 +1,9 @@
 TAREAS
 
+Problemas
+	- Mirar con postman (observar la petición y comprobar si no persiste la sesión) -> la puta clave ✓
+	- Mirar cómo funciona lo de credentials -> la puta clave ✓
+
 Base de datos SQLite
 	- Diseño ✓
 	- Creación ✓
@@ -14,6 +18,10 @@ Base de datos SQLite
 Autenticación
 	- Búsqueda de info ✓
 	- Implementación
+		- Mirar la caducidad de las cookies
+		- logout
+		- cambio en forntend para que aparezca todo diferente
+		- Quitar logs en createuser (front)
 	- Envío de correo electrónico
 
 Estructuras de datos

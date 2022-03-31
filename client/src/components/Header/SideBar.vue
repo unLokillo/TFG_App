@@ -80,7 +80,7 @@ import axios from 'axios'
   export default {
     created(){
     this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
-    axios.get('http://127.0.0.1:5000/login')
+    axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
           .then(response => {
               this.form = response.data;
             });

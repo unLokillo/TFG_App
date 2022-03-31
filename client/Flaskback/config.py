@@ -34,3 +34,10 @@ class Config:
 
     #Files
     DEFAULT_FOLDER = path.join(basedir, 'assets/')
+
+    #Session
+    SESSION_TYPE = 'filesystem'
+    SESSION_COOKIE_PATH = '/'
+    APPLICATION_ROOT = '/'
+    SESSION_COOKIE_SAMESITE = "None"
+    SESSION_COOKIE_SECURE = True
