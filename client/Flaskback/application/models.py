@@ -47,16 +47,18 @@ class Neologismo(db.Model):
     name = db.Column(db.String(100))
     likes = db.Column(db.Integer)
     image = db.Column(db.LargeBinary)
+    date_approved = db.Column(db.DateTime)
     state = db.Column(db.String(20))
     position = db.Column(db.Integer, unique=True)
     id_user = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     user = db.relationship("Usuario", backref="neologismes")
 
-    def __init__(self, id_neologisme, name, likes, image, state, position, id_user, user):
+    def __init__(self, id_neologisme, name, likes, image, date_approved, state, position, id_user, user):
         self.id_neologisme = id_neologisme
         self.name = name
         self.likes = likes
         self.image = image
+        self.date_approved = date_approved
         self.state = state
         self.position = position
         self.id_user = id_user
@@ -66,7 +68,7 @@ class Neologismo(db.Model):
 class NeologismoSchema(ma.Schema):
     class Meta:
         fields = ('id_neologisme', 'name', 'likes', 'image',
-                  'state', 'position', 'id_user', 'user')
+                  'date_approved','state', 'position', 'id_user', 'user')
 
 
 class Logro(db.Model):

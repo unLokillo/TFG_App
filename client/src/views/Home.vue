@@ -68,21 +68,12 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("http://127.0.0.1:5000/login", { withCredentials: true }).then((response) => { // /neologismes
+    axios.get("http://127.0.0.1:5000/nothing", { withCredentials: true }).then((response) => { // /neologismes
       //this.name = response.data[0].name;
       this.neoData = response.data;
     });
     axios
-      .post("http://127.0.0.1:5000/nothing", {
-        username: 'R',
-        password: 'pass1234',
-        email: 'admin@admin.com',
-        name: 'R',
-        surname: 'MR',
-        school: 'ETSIINF',
-        points: 0,
-        privileges: 'admin'
-      })
+      .get("http://127.0.0.1:5000/login", { withCredentials: true })
       .then((response) => {
         //this.name = response.data[0].name;
         this.login_info = response.data;

@@ -102,9 +102,9 @@ import axios from 'axios'
     },
     methods:{
       logOut(){
-         axios.patch('http://localhost:3000/login/1', {logged:false}).then(response_l => {
-            this.$router.push({ path: `/` }) // -> /user/123
-      });
+         axios.get('http://127.0.0.1:5000/logout', { withCredentials: true }).then(response_l => {
+            this.$router.push({ path: `/` })
+         });
       }
     }
   }

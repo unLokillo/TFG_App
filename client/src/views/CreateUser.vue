@@ -185,13 +185,10 @@ export default {
         formData.append(i, this.form[i])
       }
 
-      axios.post("http://127.0.0.1:5000/signup", formData).then((res) => {
+      axios.post("http://127.0.0.1:5000/signup", formData, { withCredentials: true }).then((res) => {
         console.log(res);
       });
-      console.log(axios.get("http://127.0.0.1:5000/login").data);
-      console.log("Form: ");
-      console.log(JSON.stringify(this.form));
-      this.$router.push({ path: `/` });
+      this.$router.push({ path: `/login` });
     },
     isUpper(str) {
       var result = false;
@@ -214,7 +211,6 @@ export default {
     },
     handleUploadImage(event) {
       this.image = event.target.files[0];
-      console.log("Imagen cargada");
     },
   },
 };

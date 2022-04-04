@@ -29,8 +29,7 @@ def login():
         if usuario is None or not usuario.check_password(password=pwd):
             return "Usuario y/o contraseña incorrectos", 400
         else:
-            login_user(usuario, remember=True, force=True,
-                       duration=timedelta(days=365))
+            login_user(usuario) #, remember=True)
             return "Ok", 200
     elif request.method == "GET":
         res_fields = {

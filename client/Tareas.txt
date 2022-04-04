@@ -19,9 +19,10 @@ Autenticación
 	- Búsqueda de info ✓
 	- Implementación
 		- Mirar la caducidad de las cookies
-		- logout
-		- cambio en forntend para que aparezca todo diferente
-		- Quitar logs en createuser (front)
+		- logout ✓
+		- Cambio en frontend para que aparezca todo diferente al hacer login
+		- Quitar logs en createuser (front) ✓
+		- Refrescar al hacer login ✓ o logout
 	- Envío de correo electrónico
 
 Estructuras de datos
@@ -35,6 +36,7 @@ FrontEnd
 	- Poner tilde a "Registrate"
 	- No permitir contraseña mal (solo lo avisa)
 	- Cambiar admin y liguist por privileges
+	- Página 404
 	
 Registro
 	- Comprobación de existencia de id e email ✓
@@ -66,3 +68,7 @@ Funciones a añadir
 Logros
 Perfil
 Comentarios
+
+pip freeze > requirements.txt
+
+"npm run serve" in C:\Users\rober\OneDrive - Universidad Politécnica de Madrid\4º Ingeniería Informática\2º semestre\Trabajo de final de grado\TFG code\client>
