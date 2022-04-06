@@ -1,6 +1,6 @@
 <template>
     <div class="header-card">
-        <Sidebar /> 
+        <Sidebar @actualiza="emitir()"/> 
         <div class="main-section">
            <a href="/" class="title-header">Pescaneo</a>
             </div>
@@ -14,11 +14,17 @@ import UserButton from '@/components/Header/HeaderUserButton.vue'
 import SearchBar from '@/components/Header/SearchBar.vue'
 export default {
   name: 'Home',
+  methods:{
+      emitir(){
+          this.$emit('actualizar')
+      }
+  },
   components: {
       Sidebar,
       UserButton,
       SearchBar
-  }
+  },
+  emits: ['actualizar']
 }
 </script>
 <style>

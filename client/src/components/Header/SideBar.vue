@@ -78,12 +78,19 @@
 <script>
 import axios from 'axios'
   export default {
+    emits: ['actualiza'],
     created(){
     this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
     axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
           .then(response => {
               this.form = response.data;
-            });
+            }).catch((err) => {});
+    },
+    mounted(){
+      axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
+          .then(response => {
+              this.form = response.data;
+            }).catch((err) => {});
     },
     updated(){
        this.screen = this.$router.currentRoute.path.localeCompare('/')==0? true:false;
@@ -103,8 +110,9 @@ import axios from 'axios'
     methods:{
       logOut(){
          axios.get('http://127.0.0.1:5000/logout', { withCredentials: true }).then(response_l => {
-            this.$router.push({ path: `/` })
-         });
+            console.log("Reloading...")
+            this.$emit('actualiza')
+         }).catch((err) => {});
       }
     }
   }

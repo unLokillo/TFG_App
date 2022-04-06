@@ -54,7 +54,7 @@ export default {
       if(res.status==200){
         this.$router.push({ path: `/` });
       }
-    })
+    }).catch((err) => {})
   },
   data() {
     return {

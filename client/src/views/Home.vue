@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <Header />
+    <Header @actualizar="actualizacion()" :key="updateheader"/>
     <div class="menu-1">
       <p>
         ¡Os damos la bienvendia a <strong>Pescaneo</strong>! <br />
@@ -9,10 +9,10 @@
         Si quieres participar, regístrate y pulsa en
         <strong> “¡Contribuye!” </strong>
       </p>
-      <p style="color: var(--fail)" v-if="!login_info.logged">
+      <p style="color: var(--fail)" v-if="!login_info.success">
         Necesitas haber iniciado sesión para acceder a esta opción
       </p>
-      <b-button v-if="!login_info.logged" disabled variant="primary">
+      <b-button v-if="!login_info.success" disabled variant="primary">
         ¡Contribuye!
       </b-button>
       <router-link :to="`/create-neologisme`" tag="b-button" v-else>
@@ -71,17 +71,14 @@ export default {
     axios.get("http://127.0.0.1:5000/nothing", { withCredentials: true }).then((response) => { // /neologismes
       //this.name = response.data[0].name;
       this.neoData = response.data;
-    });
+    }).catch((err) => {});
     axios
       .get("http://127.0.0.1:5000/login", { withCredentials: true })
       .then((response) => {
         //this.name = response.data[0].name;
         this.login_info = response.data;
       })
-      .catch((err) => {
-        console.log("Ha habido un errorsito de na, mira:")
-        console.log(err);
-      });
+      .catch((err) => {});
   },
 
   watch: {
@@ -98,8 +95,15 @@ export default {
       neoData: "",
       login_info: [],
       varparamostrar: "",
+      updateheader: 0
     };
   },
+  methods:{
+    actualizacion(){
+      this.updateheader += 1;
+      this.login_info.success = false;
+    }
+  }
 };
 </script>
 

@@ -1,4 +1,5 @@
 """Flask app configuration."""
+from datetime import timedelta
 from os import environ, path
 from dotenv import load_dotenv
 
@@ -41,3 +42,4 @@ class Config:
     APPLICATION_ROOT = '/'
     SESSION_COOKIE_SAMESITE = "None"
     SESSION_COOKIE_SECURE = True
+    PERMANENT_SESSION_LIFETIME = timedelta(days=1)

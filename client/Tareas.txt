@@ -18,12 +18,12 @@ Base de datos SQLite
 Autenticación
 	- Búsqueda de info ✓
 	- Implementación
-		- Mirar la caducidad de las cookies
+		- Mirar la caducidad de las cookies ✓
 		- logout ✓
-		- Cambio en frontend para que aparezca todo diferente al hacer login
+		- Cambio en frontend para que aparezca todo diferente al hacer login ✓
 		- Quitar logs en createuser (front) ✓
-		- Refrescar al hacer login ✓ o logout
-	- Envío de correo electrónico
+		- Refrescar al hacer login ✓ o logout ✓
+	- Envío de correo electrónico con flask-security
 
 Estructuras de datos
 
@@ -37,6 +37,9 @@ FrontEnd
 	- No permitir contraseña mal (solo lo avisa)
 	- Cambiar admin y liguist por privileges
 	- Página 404
+	- Mirar diferencia entre barra lateral en y fuera de /
+	- Poner enter=submit en login
+	- Eliminar errores en la consola
 	
 Registro
 	- Comprobación de existencia de id e email ✓

@@ -1,6 +1,6 @@
 <template>
 <div class="header-img">
-    <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.success=='true'">
+    <router-link :to="{ name: 'vUser',params: { userid: login_info.user_id } }" class="user-bttn" tag="div" v-if="login_info.success">
         <!--<b-avatar :src="require(`../../assets/images/${login_info.img}`)"></b-avatar>--> {{ login_info.username }} 
     </router-link>
     <router-link :to="`/login`" tag="div" v-else>
@@ -16,12 +16,7 @@ export default {
         axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
           .then(response => {
               this.login_info = response.data;
-              console.log(this.login_info)
-        /*axios.get('http://localhost:3000/users/' + response.data.user_id)
-          .then(response_u => { 
-              this.user_info = response_u.data;
-            });*/
-            });
+        }).catch((err) => {});
     },
     data() {
         return {
