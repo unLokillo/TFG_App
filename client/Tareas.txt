@@ -48,6 +48,7 @@ FrontEnd
 	- Beautyfy changePassword
 	- No mostrar mensajes de error cuando no hay error
 	- Pasar imagen de perfil para home
+	- Cambiar a Newlogisme
 
 General
 	- Actividades
