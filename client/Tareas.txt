@@ -1,35 +1,36 @@
 TAREAS
 
-Problemas
-	- Mirar con postman (observar la petición y comprobar si no persiste la sesión) -> la puta clave ✓
-	- Mirar cómo funciona lo de credentials -> la puta clave ✓
-
-Base de datos SQLite
-	- Diseño ✓
-	- Creación ✓
-	- Poner secuencias en PKs ✓
-	- Enlace (envíos y recibos a la bbdd en las distintas acciones)
-	- Añadir fecha a neologismos para ranking
-	- Cambio de PK a 'id' en todas las tablas
-	- Gestión de posiciones con puntos
-	- Proteger de SQL injection ✓
-	- Mirar trailing slash o el / al final de la uri
-
-Autenticación
-	- Búsqueda de info ✓
-	- Implementación
-		- Mirar la caducidad de las cookies ✓
-		- logout ✓
-		- Cambio en frontend para que aparezca todo diferente al hacer login ✓
-		- Quitar logs en createuser (front) ✓
-		- Refrescar al hacer login ✓ o logout ✓
-	- Envío de correo electrónico ✓
-	- Cuidado con que itsdangerous antiguo no rompa nada
-	- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
-	- Paso de flask-mail a aws SES en envío de email
-	- Hacer más estricta la contraseña en pass reset con validator personalizado
-
-Estructuras de datos
+BackEnd
+	- Base de datos
+		- Diseño ✓
+		- Implementación ✓
+		- Protección ✓
+		- Tareas de perfeccionamiento
+			- Cambio de PK a 'id' en todas las tablas
+	- Autenticación
+		- Registro ✓
+		- Login ✓
+		- Logout ✓
+		- Restablecer contraseña ✓
+		- Tareas de perfeccionamiento
+			- Cuidado con que itsdangerous antiguo no rompa nada
+			- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
+			- Paso de flask-mail a aws SES en envío de email
+			- Hacer más estricta la contraseña en pass reset con validator personalizado
+	- Mostrar datos del usuario en mi perfil
+	- Gestionar puestos
+		- Usuarios
+		- Neologismos
+	- Creación y recogida de base de datos
+		- Neologismos para:
+			- Ranking principal
+			- Ranking secundario
+			- Tus propuestas
+			- Actividad
+		- Logros para:
+			- Tus logros
+	- Tareas de perfeccionamiento
+		- Mirar trailing slash o el / al final de la uri en flask
 
 FrontEnd
 	- Cambiar enlace info y preg. frecuentes bien
@@ -46,37 +47,24 @@ FrontEnd
 	- Eliminar errores en la consola
 	- Beautyfy changePassword
 	- No mostrar mensajes de error cuando no hay error
-	
-Registro
-	- Comprobación de existencia de id e email ✓
-	
-Actividades
-	Cartas deslizantes
-		- Añadir sistema de coger neologismos y mostrarlos
-		- Movida de arrastrar
-	Contexto correcto
-		- Todo
+	- Pasar imagen de perfil para home
 
-Clasificaciones
-	Usuarios
-		- Todo
-	Neologismos (Repetido?)
-		- Todo
-		
-Funciones a añadir
-	Creación de administradores
-	Eliminación de usuarios
-	Eliminación comentario 
-	Eliminación neologismos
-	Descarga de CSV lingüista
-	Notificación de errores por usuario
-	Búsqueda de información por el usuario
-	Sistema de puntuación
-	Cambio de idioma en footer
-
-Logros
-Perfil
-Comentarios
+General
+	- Actividades
+		- Cartas deslizantes
+			- Movida de arrastrar
+		- Contexto correcto
+			- Todo
+	- Creación de administradores
+	- Eliminación de usuarios
+	- Eliminación comentario 
+	- Eliminación neologismos
+	- Descarga de CSV lingüista
+	- Notificación de errores por usuario
+	- Búsqueda de información por el usuario
+	- Sistema de puntuación
+	- Cambio de idioma en footer
+	- Comentarios (?)
 
 pip freeze > requirements.txt
 
