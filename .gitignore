@@ -169,3 +169,4 @@ test/
 node_modules/
 npm-debug.log
 yarn-error.log
+client/Flaskback/flask_session/
