@@ -66,6 +66,8 @@ General
 	- Sistema de puntuación
 	- Cambio de idioma en footer
 	- Comentarios (?)
+	- Tareas de perfeccionamiento
+		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 
 pip freeze > requirements.txt
 
