@@ -29,7 +29,8 @@ def login():
         if usuario is None or not usuario.check_password(password=pwd):
             return "Usuario y/o contraseña incorrectos", 400
         else:
-            login_user(usuario, permanent=True)
+            session.permanent = True
+            login_user(usuario)
             return "Ok", 200
     elif request.method == "GET":
         res_fields = {

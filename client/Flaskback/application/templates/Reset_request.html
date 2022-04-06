@@ -1,0 +1,39 @@
+{% block contentA %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css.css') }}">
+<div class="container w-50">
+    <div> <font-awesome-icon style="font-size: 140%;" icon="times"/></div>
+    <h2>Restablecer contraseña</h2>
+    <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <!--<fieldset class="filse">-->
+            <!--<legend class="border-bottom mb-4">{{legend}}</legend>-->
+
+                <div class="form-group">
+                    {{form.password.label(class="form-control-label")}}
+                    {% if form.password.errors %}
+                        {{form.password(class="form-control form-control-lg is_invalid")}}
+                        {%for error in form.password.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                         {{form.password(class="form-control form-control-lg")}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.confirm_password.label(class="form-control-label")}}
+                    {% if form.confirm_password.errors %}
+                        {{form.confirm_password(class="form-control form-control-lg is_invalid")}}
+                        {%for error in form.confirm_password.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                         {{form.confirm_password(class="form-control form-control-lg")}}
+                    {% endif %}
+                </div>
+        <!--</fieldset>-->
+        <div class="button">
+            {{form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div>
+{% endblock contentA %}

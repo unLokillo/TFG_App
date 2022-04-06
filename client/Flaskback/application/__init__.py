@@ -8,12 +8,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager
 from flask_session import Session
+from flask_mail import Mail
 import os
 
 db = SQLAlchemy()
 ma = Marshmallow()
 login_manager = LoginManager()
 s = Session()
+mail = Mail()
 
 
 def create_app():
@@ -32,6 +34,7 @@ def create_app():
     db.init_app(app)
     ma.init_app(app)
     login_manager.init_app(app)
+    mail.init_app(app)
 
     with app.app_context():
         from . import routes

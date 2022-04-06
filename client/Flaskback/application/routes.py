@@ -3,8 +3,12 @@ from flask import Blueprint, render_template, redirect, request, url_for
 from flask_login import current_user, login_required, logout_user
 from flask_cors import cross_origin
 from flask_api import status
-
-from client.Flaskback.application.models import Usuario
+from . import mail, db
+from flask_mail import Message
+from flask_wtf import FlaskForm
+from wtforms import PasswordField, SubmitField
+from wtforms.validators import DataRequired, Length, EqualTo
+from .models import Usuario
 
 
 # Blueprint Configuration
@@ -27,14 +31,47 @@ def logout():
     logout_user()
     return "logged out succesfully",204
 
-def send_mail():
-    pass
+def send_mail(user):
+    token = user.get_token()
+    msg = Message('Password reset request', recipients=[user.email], sender='noreply@pescaneo.com')
+    msg.body = f"""
+    To reset your password please follow the link below.
+    
+    http://127.0.0.1:5000/reset_password/{token}
 
-@main_bp.route("/resetPass", methods=['GET', 'POST'])
+    If you didn't send a password reset request ignore this.
+    """
+    mail.send(msg)
+
+@main_bp.route("/reset_password", methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-def reset_password():
+def reset_request():
     user = Usuario.query.filter_by(email=request.json['email']).first()
     if user:
-        send_mail()
-        return status.HTTP_200_OK
-    return status.HTTP_401_UNAUTHORIZED
+        send_mail(user)
+        return "bien",status.HTTP_200_OK
+    return "mal",status.HTTP_204_NO_CONTENT
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(label='Nueva contraseña',validators=[
+        DataRequired(),
+        Length(min=8, message='LA contraseña debe tener al menos %(min)d caracteres')])
+    confirm_password = PasswordField(label='Confirma la nueva contraseña',validators=[
+        DataRequired(),
+        EqualTo('password', message='Las contraseñas deben coincidir')])
+    submit = SubmitField(label='Restablecer contraseña', validators=[DataRequired()])
+
+@main_bp.route("/reset_password/<token>", methods=['GET', 'POST'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+def reset_token(token):
+    user = Usuario.verify_token(token)
+    if user is None:
+        return redirect('http://localhost:8080/forgot-password')
+    
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        return redirect('http://localhost:8080/login')
+    return render_template('reset_request.html', title="Change password", legend="Reset password",form=form)
+    

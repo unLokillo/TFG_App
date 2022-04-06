@@ -23,7 +23,11 @@ Autenticación
 		- Cambio en frontend para que aparezca todo diferente al hacer login ✓
 		- Quitar logs en createuser (front) ✓
 		- Refrescar al hacer login ✓ o logout ✓
-	- Envío de correo electrónico con flask-security
+	- Envío de correo electrónico ✓
+	- Cuidado con que itsdangerous antiguo no rompa nada
+	- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
+	- Paso de flask-mail a aws SES en envío de email
+	- Hacer más estricta la contraseña en pass reset con validator personalizado
 
 Estructuras de datos
 
@@ -40,6 +44,8 @@ FrontEnd
 	- Mirar diferencia entre barra lateral en y fuera de /
 	- Poner enter=submit en login
 	- Eliminar errores en la consola
+	- Beautyfy changePassword
+	- No mostrar mensajes de error cuando no hay error
 	
 Registro
 	- Comprobación de existencia de id e email ✓
