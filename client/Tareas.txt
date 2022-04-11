@@ -22,7 +22,7 @@ BackEnd
 		- Usuarios
 		- Neologismos
 	- Creación y recogida de base de datos
-		- Neologismos para:
+		- Neologismos para: ←
 			- Ranking principal
 			- Ranking secundario
 			- Tus propuestas
@@ -31,24 +31,23 @@ BackEnd
 			- Tus logros
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
+		- Cambio de mensajes de error (intentar RESTful)
 
 FrontEnd
-	- Cambiar enlace info y preg. frecuentes bien
+	- Cambiar enlace info y preg. frecuentes bien ✓
+	- Poner tilde a "Registrate" ✓
+	- Beautyfy changePassword ✓
 	- Añadir botón de página principal
-	- Añadir menú en todas las páginas
-	- Mirar que salga la cabecera y error 404
-	- Formatear todos los ficheros
-	- Poner tilde a "Registrate"
+	- Añadir cabecera en todas las páginas / página 404
 	- No permitir contraseña mal (solo lo avisa)
-	- Cambiar admin y liguist por privileges
-	- Página 404
+	- Cambiar admin y linguist por privileges
 	- Mirar diferencia entre barra lateral en y fuera de /
-	- Poner enter=submit en login
+	- Poner enter=submit en login y más pantallas
 	- Eliminar errores en la consola
-	- Beautyfy changePassword
 	- No mostrar mensajes de error cuando no hay error
 	- Pasar imagen de perfil para home
 	- Cambiar a Newlogisme
+	- Añadir mensajes de error y de éxito
 
 General
 	- Actividades
@@ -68,6 +67,7 @@ General
 	- Comentarios (?)
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
+		- Dar formato a todos los ficheros de código
 
 pip freeze > requirements.txt
 

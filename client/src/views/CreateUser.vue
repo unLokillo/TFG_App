@@ -116,7 +116,6 @@ export default {
         password: "",
         school: "",
         mother_tongue: "",
-        //image: undefined,
         points: 0,
         proposals: [],
         accepted_neo: [],

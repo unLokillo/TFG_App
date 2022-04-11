@@ -8,7 +8,7 @@
         <div>
         <div>
           <h6>Contextos</h6>
-            <p style="font-size: 14px"> <i> Incluye la frase completa en la que has encontrado el neologismo</i> </p>
+            <p style="font-size: 14px"> <i> Añade descripciones o definiciones que se le podrían dar al neologismo</i> </p>
           <TodoBox v-on:childToParent="onDescriptionsClick"/>
         </div>
 
@@ -17,13 +17,16 @@
           <TodoBox v-on:childToParent="onSourcesClick"/>
         </div>
     <h6>Imagen</h6>
-    <div>
-      <b-form-file v-model="form.img"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
-      plain
-    ></b-form-file>
-    <div class="mt-3">Archivo seleccionado: {{ form.img ? form.img.name : '' }}</div>
+    <div class="selectors-card">
+          <input
+            type="file"
+            name="image"
+            id="image"
+            class="custom-file-upload-hidden"
+            ref="image"
+            accept=".jpg, .png"
+            @change="handleUploadImage"
+          />
     </div>
     <b-button @click="submit"> Listo </b-button>
     </div>
@@ -40,14 +43,11 @@ export default {
   },
   data(){
   return {
+    image: undefined,
     form:{
           neologisme: '',
           descriptions: '',
           sources: '',
-          img: undefined,
-          liked: 0,
-          proposal: true,
-          user: [],
       }
   }
   },
@@ -59,33 +59,39 @@ export default {
     onSourcesClick (value) {
       this.form.sources = value;
     },
-    submit(){
-        axios.get('http://localhost:3000/login/1')
-          .then(response => {
-          axios.get('http://localhost:3000/neologismes')
-          .then(response_neo => {
-            axios.get('http://localhost:3000/users/' + response.data.user_id)
-             .then(response_user => {
-               if(this.form.img!=undefined){
-                 this.form.img = this.form.img.name;
-              }else{
-               this.form.img = 'neologismos.jpg';
-              }
-               this.form.user.push({
-                 user: response_user.data.nickname,
-                 user_id: response.data.user_id,
-                 date: '14/05/2021',
-                 rejected: false,
-                 mssg: ''
-               })
-            axios.post('http://localhost:3000/neologismes', this.form); // Add Neologisme to db
-            response_user.data.proposals.push(response_neo.data.length +1);
-            axios.patch('http://localhost:3000/users/'+response_user.data.id, {proposals:response_user.data.proposals}); //Add proposal to user info
-                });
-                });
-              });
-       this.$router.push({ path: `/` });
-    }  
+    submit(event){
+      event.preventDefault();
+      var formData = new FormData();
+      if (this.image != undefined) {
+        formData.append("imagen", this.image, this.image.name);
+        formData.append("imageno", 'yes');
+      } else {
+        this.image = "default";
+        formData.append("imageno", 'default');
+      }
+      
+      // Add descriptions
+      for (var i = 0; i<this.form['descriptions'].length;i++){
+        formData.append('description' + i, JSON.parse(JSON.stringify(this.form['descriptions'][i])).value)
+      }
+      formData.append('numDescr',this.form['descriptions'].length)
+
+      // Add sources
+      for (var i = 0; i<this.form['sources'].length;i++){
+        formData.append('source' + i, JSON.parse(JSON.stringify(this.form['sources'][i])).value)
+      }
+      formData.append('numSources',this.form['sources'].length)
+
+      formData.append('neologisme', this.form.neologisme);
+      formData.append("liked", 0);
+      formData.append("state", "pendiente");
+      
+      axios.post("http://127.0.0.1:5000/create-neologisme", formData, { withCredentials: true });
+      this.$router.push({ path: `/` });
+    },
+    handleUploadImage(event) {
+      this.image = event.target.files[0];
+    },  
   }
 }
 </script>
@@ -108,5 +114,9 @@ export default {
   border-bottom: 1px solid var(--border);
   text-align: left;
   margin: 2%;
+}
+
+.selectors-card{
+  margin-bottom: 15px;
 }
 </style>

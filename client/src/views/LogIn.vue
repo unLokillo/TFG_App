@@ -32,7 +32,7 @@
           contraseña?</a
         >
       </p>
-      <p><a href="/create-user" class="blue-text ml-1">Registrate</a></p>
+      <p><a href="/create-user" class="blue-text ml-1">Regístrate</a></p>
     </div>
 
     <b-button

@@ -33,7 +33,7 @@ class Usuario(UserMixin, db.Model):
 
     def get_token(self, expires_sec=900):
         serial = Serializer('fmVb@st^jCP7f$uM', expires_in=expires_sec)
-        return serial.dumps({'user_id':self.id}).decode('utf-8')
+        return serial.dumps({'user_id': self.id}).decode('utf-8')
 
     @staticmethod
     def verify_token(token):
@@ -63,26 +63,14 @@ class Neologismo(db.Model):
     image = db.Column(db.LargeBinary)
     date_approved = db.Column(db.DateTime)
     state = db.Column(db.String(20))
-    position = db.Column(db.Integer, unique=True)
     id_user = db.Column(db.Integer, db.ForeignKey("usuarios.id"))
     user = db.relationship("Usuario", backref="neologismes")
-
-    def __init__(self, id_neologisme, name, likes, image, date_approved, state, position, id_user, user):
-        self.id_neologisme = id_neologisme
-        self.name = name
-        self.likes = likes
-        self.image = image
-        self.date_approved = date_approved
-        self.state = state
-        self.position = position
-        self.id_user = id_user
-        self.user = user
 
 
 class NeologismoSchema(ma.Schema):
     class Meta:
         fields = ('id_neologisme', 'name', 'likes', 'image',
-                  'date_approved','state', 'position', 'id_user', 'user')
+                  'date_approved', 'state', 'id_user', 'user')
 
 
 class Logro(db.Model):
@@ -94,14 +82,6 @@ class Logro(db.Model):
     difficulty = db.Column(db.Integer)
     name = db.Column(db.String(30))
     medal = db.Column(db.LargeBinary)
-
-    def __init__(self, id_achievement, description, action, difficulty, name, medal):
-        self.id_achievement = id_achievement
-        self.description = description
-        self.action = action
-        self.difficulty = difficulty
-        self.name = name
-        self.medal = medal
 
 
 class LogroSchema(ma.Schema):
@@ -119,12 +99,6 @@ class Source(db.Model):
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
     neologisme = db.relationship("Neologismo", backref='sources')
 
-    def __init__(self, id_source, link, id_neologisme, neologisme):
-        self.id_source = id_source
-        self.link = link
-        self.id_neologisme = id_neologisme
-        self.neologisme = neologisme
-
 
 class SourceSchema(ma.Schema):
     class Meta:
@@ -139,12 +113,6 @@ class Description(db.Model):
     id_neologisme = db.Column(
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
     neologisme = db.relationship("Neologismo", backref='descriptions')
-
-    def __init__(self, id_description, text, id_neologisme, neologisme):
-        self.id_description = id_description
-        self.text = text
-        self.id_neologisme = id_neologisme
-        self.neologisme = neologisme
 
 
 class DescriptionSchema(ma.Schema):
@@ -163,14 +131,6 @@ class UserGetsAchievement(db.Model):
     logro = db.relationship("Logro", backref='usuarios')
     date = db.Column(db.DateTime)
 
-    def __init__(self, id_uga, id_user, id_achievement, usuario, logro, date):
-        self.id_uga = id_uga
-        self.id_user = id_user
-        self.id_achievement = id_achievement
-        self.usuario = usuario
-        self.logro = logro
-        self.date = date
-
 
 class UGASchema(ma.Schema):
     class Meta:
@@ -187,13 +147,6 @@ class UserlikesNeologisme(db.Model):
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
     usuario = db.relationship("Usuario", backref='likedneologismes')
     neologismo = db.relationship("Neologismo", backref='usuariosliked')
-
-    def __init__(self, id_uln, id_user, id_neologisme, usuario, logro):
-        self.id_uln = id_uln
-        self.id_user = id_user
-        self.id_neologisme = id_neologisme
-        self.usuario = usuario
-        self.logro = logro
 
 
 class ULNSchema(ma.Schema):
