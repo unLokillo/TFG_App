@@ -17,11 +17,13 @@ BackEnd
 			- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
 			- Paso de flask-mail a aws SES en envío de email
 			- Hacer más estricta la contraseña en pass reset con validator personalizado
+			- Hacer más corto el tiempo de expiración de cookie de inicio de sesión
 	- Mostrar datos del usuario en mi perfil
 	- Gestionar puestos
 		- Usuarios
 		- Neologismos
-	- Creación y recogida de base de datos
+	- Creación neologismos
+	Recogida de base de datos
 		- Neologismos para: ←
 			- Ranking principal
 			- Ranking secundario
@@ -29,9 +31,12 @@ BackEnd
 			- Actividad
 		- Logros para:
 			- Tus logros
+	- Aprovación de neologismos
+	- Movidas de lingüistas y administradores
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)
+		- Eliminar Marshmallow y los Schemas
 
 FrontEnd
 	- Cambiar enlace info y preg. frecuentes bien ✓
@@ -48,8 +53,11 @@ FrontEnd
 	- Pasar imagen de perfil para home
 	- Cambiar a Newlogisme
 	- Añadir mensajes de error y de éxito
+	- Advertir sobre duración de token en recuperación de contraseña
 
 General
+	- Parte de ADMINISTRADORES
+	- Descarga de CSV lingüista y administradores
 	- Actividades
 		- Cartas deslizantes
 			- Movida de arrastrar
@@ -68,6 +76,15 @@ General
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
+
+Despliegue
+	- Creación máquina virtual con todo montado
+	- Mirar servidores o cómo desplegar
+
+Memoria
+	- Añadir referencias a/de imágenes
+	- Añadir apartado de seguridad
+	- Cambiar orden del nombre de autores
 
 pip freeze > requirements.txt
 
