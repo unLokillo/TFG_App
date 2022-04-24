@@ -97,14 +97,6 @@ def signup():
     return "ok", status.HTTP_201_CREATED
 
 
-@auth_bp.route('/users', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def getusers():
-    pass # TODO devolver usuarios
-    return "ahora sí tss", status.HTTP_200_OK
-
-
 @login_manager.user_loader
 def load_user(user_id):
     """Check if user is logged-in on every page load."""

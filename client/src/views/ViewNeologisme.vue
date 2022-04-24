@@ -1,4 +1,4 @@
-<template>
+<template v-if='this.appear'>
     <div class="card-body">
       <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
          
@@ -8,12 +8,12 @@
             <div class="neo-likes" v-else ><font-awesome-icon v-on:click="like" icon="heart"/> {{ form.liked }}</div> 
         </div>
         
-        <div class="rejected-neologisme-admin" v-if="form.user[0].rejected">
+        <div class="rejected-neologisme-admin" v-if="form.state=='rechazado'">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.mssg }}
             <br>
-            <strong>Si usted lo desea puede modificar la informacón requerida, y el neologismo sera evaluado nuevamente.
+            <strong>Si usted lo desea puede modificar la informacón requerida, y el neologismo será evaluado nuevamente.
                 Gracias por su atencón
             </strong>
         </p>
@@ -21,7 +21,7 @@
             <router-link :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" class="bttn-app" style="background-color: var(--fail) !important">Modificar</router-link>
         </div>
 
-        <div class="rejected-neologisme" v-if="form.user[0].rejected">
+        <div class="rejected-neologisme" v-if="form.state=='rechazado'">
             <h4>Su propuesta ha sido rechazada</h4>
             <p>La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong>, ha sido rechazada por la siguiente razón: <br>
             {{ form.user[0].mssg }}
@@ -33,26 +33,26 @@
 
             <router-link :to="{name: 'm-proposal',params: { userid: $route.params.userid ,neoId: $route.params.neoId}}" class="bttn-app" style="background-color: var(--fail) !important">Modificar</router-link>
         </div>
-
+        <br>
         <div class="descriptions-card">
             <h4>Contextos</h4>
         <div v-for="(value,index) in form.descriptions" :key=index >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value}}</div>
+            <div v-if="index<3" class="descriptions">{{ index+1 }}.- {{ value[0] }}</div>
         </div>
         </div>
         <div class="descriptions-card">
             <h4>Fuentes</h4>
         <div v-for="(value,index) in form.sources" :key=index >
-            <div v-if="index<3" class="descriptions">{{ index }}.- {{ value.value }}</div>
+            <div v-if="index<3" class="descriptions">{{ index+1 }}.- {{ value[0] }}</div>
         </div>
         </div>
 
-        <div class="image-card" v-if="form.img!=null">
+        <!--<div class="image-card" v-if="form.img!=null">
             <b-img thumbnail :src="require(`../assets/images/${form.img}`)"  alt="Responsive image"></b-img>
-        </div>
+        </div>-->
 
         <div class="user-tag" >
-            <div>Creado por: {{ form.user[0].user }} </div> 
+            <div>Creado por: {{ form.user }} </div> 
             <div>{{ form.user[0].date }} </div>
         </div>
         <div class="admin-options" v-if="(login.linguist || login.admin)&&form.proposal">
@@ -69,20 +69,21 @@
 import axios from 'axios'
 export default {
     beforeCreate(){
-    axios.get("http://localhost:3000/neologismes/" + this.$route.params.neoId)
+    axios.get("http://127.0.0.1:5000/neologismes/" + this.$route.params.neoId, { withCredentials: true })
         .then(response_neo => {
             this.form = response_neo.data;
 
-    axios.get('http://localhost:3000/login/1')
+    axios.get('http://127.0.0.1:5000/login', { withCredentials: true })
           .then(response_log => {
               this.login = response_log.data;    
     
-    axios.get('http://localhost:3000/users/' + response_log.data.user_id)
+    axios.get('http://127.0.0.1:5000/users/' + response_log.data.user_id, { withCredentials: true })
           .then(response_u => {
               this.form_user = response_u.data;    
           })
           })
          })
+    this.appear = true;
     },
     watch: {
         $route: {
@@ -96,7 +97,8 @@ export default {
             proposals: [],
             login: [],
             form: [],
-            form_user: []
+            form_user: [],
+            appear: null
         };
     },
     methods:{

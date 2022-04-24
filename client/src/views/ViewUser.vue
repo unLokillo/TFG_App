@@ -3,11 +3,11 @@
     <Header/>
     <div class="top-menu">
         <div class="left-menu-card">
-            <b-img :src="require(`../assets/images/${img}`)" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> 
+            <!--<b-img :src="require(`../assets/images/${img}`)" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img> -->
             <div class="ls-menu">
             <div class="left-side-menus">
                <router-link :to="{name: 'vu-ranking',params: { userid: $route.params.userid }}" tag="div">
-                <font-awesome-icon style="font-size:20px;" icon="trophy"/> 
+                <font-awesome-icon style="font-size:80px;" icon="trophy"/> <br> <br>
                 <strong>Posición: {{ position }}</strong> <br>
                 <strong>Puntuación: {{ points }}</strong>
                </router-link> 
@@ -16,14 +16,14 @@
             <div class="left-side-menus">
                 <router-link :to="{name: 'vu-badges',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;" icon="award" />
-                    15/20
+                    Mis logros (15/20)
                 </router-link>
             </div>
 
             <div class="left-side-menus">
                 <router-link :to="{name: 'f-neo',params: { userid: $route.params.userid }}" tag="div">
                 <font-awesome-icon style="font-size:20px;color:red;" icon="heart" />
-                    {{ fav_neo.length }}
+                   Neologismos favoritos ({{ fav_neo.length }})
                 </router-link>
             </div>
         </div>
@@ -31,19 +31,19 @@
 
         <div class="main-info-card">
             <div class="info-card">
-                <strong> Nombre y Apellidos: </strong> {{ name }} {{ surname }}
+                <strong> Nombre y Apellidos: </strong> {{ this.name }} {{ this.surname }}
             </div>
             <div class="info-card">
-                <strong> Fecha Nacimiento: </strong> {{ date }}
+                <strong> Fecha Nacimiento: </strong> {{ this.date }}
             </div>
             <div class="info-card">
-                <strong> Correo Electrónico: </strong> {{ email }}
+                <strong> Correo Electrónico: </strong> {{ this.email }}
             </div>
             <div class="info-card">
-                <strong> Género: </strong> {{ gender }}
+                <strong> Género: </strong> {{ this.gender }}
             </div>
             <div class="info-card">
-                <strong> Escuela UPM: </strong> {{ school }}
+                <strong> Escuela UPM: </strong> {{ this.school }}
             </div>
         </div>
 
@@ -96,8 +96,9 @@ export default {
       Header
     },
     created(){
-        axios.get('http://localhost:3000/users/' + this.$route.params.userid)
+        axios.get('http://127.0.0.1:5000/user', { withCredentials: true })// + this.$route.params.userid)
         .then(response => {
+            console.log(response.data)
             this.name = response.data.name;
             this.surname = response.data.surname;
             this.email = response.data.email;
@@ -111,14 +112,14 @@ export default {
             this.admin = response.data.admin;
             this.lingu = response.data.lingu;
         });
-        axios.get('http://localhost:3000/neologismes')
+        /*axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
         .then(response => {
             this.neologismes = response.data;
-        });
+        });*/
     },
     methods: {
-      toCSV: function(){  
-          axios.get('http://localhost:3000/neologismes')
+      /*toCSV: function(){  
+          axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
         .then(response => {
             var array = typeof response.data != 'object' ? JSON.parse(response.data) : response.data;
             var str = '';
@@ -139,7 +140,7 @@ export default {
             link.click();
             document.body.removeChild(link);
         });
-        }
+        }*/
     },
     watch: {
     $route: {
@@ -225,6 +226,7 @@ export default {
     text-align: left;
 }
 .user-rankings{
+    border-top: 0px;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr 1fr;

@@ -5,9 +5,9 @@
     </div>
      <div class="neo-card" v-for="(value,index) in neologismes" :key="index" >
          <div v-if="index<5">
-         <b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>
+         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
          <h5>{{ value.neologisme }}</h5>
-            <div v-if="value.user[0].rejected">
+            <div v-if="value.status=='rechazado'">
             <font-awesome-icon style="font-size: 20px;color: darkred;" icon="times-circle"/> Rechazado
             </div>
             <div class="neo_card_pendent" v-else>
@@ -32,7 +32,12 @@ export default {
     }
   },
     created(){
-        axios.get('http://localhost:3000/login/1')
+        axios.get('http://127.0.0.1:5000/user-neo', { withCredentials: true })
+        .then(response => {
+            this.neologismes = response.data.proposed;
+        }
+        )
+        /*axios.get('http://localhost:3000/login/1')
         .then(response_l => {
             this.login = response_l.data;
           axios.get('http://localhost:3000/users/' + response_l.data.user_id)
@@ -54,7 +59,7 @@ export default {
             }
             })
             })
-          })
+          })*/
     },
     data() {
         return {

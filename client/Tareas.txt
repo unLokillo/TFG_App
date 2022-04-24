@@ -18,15 +18,15 @@ BackEnd
 			- Paso de flask-mail a aws SES en envío de email
 			- Hacer más estricta la contraseña en pass reset con validator personalizado
 			- Hacer más corto el tiempo de expiración de cookie de inicio de sesión
-	- Mostrar datos del usuario en mi perfil
-	- Gestionar puestos
-		- Usuarios
-		- Neologismos
-	- Creación neologismos
+	- Mostrar datos del usuario en mi perfil ✓
+	- Gestionar puestos ✓
+		- Usuarios ✓
+		- Neologismos ✓
+	- Creación neologismos ✓
 	Recogida de base de datos
 		- Neologismos para: ←
 			- Ranking principal
-			- Ranking secundario
+			- Ranking secundario ✓
 			- Tus propuestas
 			- Actividad
 		- Logros para:

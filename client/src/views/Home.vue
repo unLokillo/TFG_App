@@ -3,7 +3,7 @@
     <Header @actualizar="actualizacion()" :key="updateheader"/>
     <div class="menu-1">
       <p>
-        ¡Os damos la bienvendia a <strong>Pescaneo</strong>! <br />
+        ¡Te damos la bienvendia a <strong>Pescaneo</strong>! <br />
         Una aplicación para proponer, definir y valorar nuevos términos en el
         ámbito del Internet de las Cosas. <br />
         Si quieres participar, regístrate y pulsa en
@@ -21,9 +21,11 @@
     </div>
     <h4>Neologismos de la semana</h4>
     <div class="frequent-words">
-      <!--<NeologismoCard :neologismeData="neoData[0]"></NeologismoCard>
-      <NeologismoCard :neologismeData="neoData[1]"></NeologismoCard>
-      <NeologismoCard :neologismeData="neoData[2]"></NeologismoCard>-->
+      <template v-if="this.appear">
+      <NeologismoCard :neologismeData="neoData[0]" v-if='neoData[0]'></NeologismoCard>
+      <NeologismoCard :neologismeData="neoData[1]" v-if='neoData[1]'></NeologismoCard>
+      <NeologismoCard :neologismeData="neoData[2]" v-if='neoData[2]'></NeologismoCard>
+      </template>
     </div>
     <h4>Actividades</h4>
     <div class="menu-2">
@@ -68,14 +70,13 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("http://127.0.0.1:5000/nothing", { withCredentials: true }).then((response) => { // /neologismes
-      //this.name = response.data[0].name;
-      this.neoData = response.data;
-    }).catch((err) => {});
-    axios
-      .get("http://127.0.0.1:5000/login", { withCredentials: true })
+    axios.get("http://127.0.0.1:5000/week-neologismes", { withCredentials: true }).then((response) => {
+      for (var i = 0; i < 3 & i < response.data.length; i++)
+        this.neoData.push(response.data[i]);
+      this.appear = true;
+    });
+    axios.get("http://127.0.0.1:5000/login", { withCredentials: true })
       .then((response) => {
-        //this.name = response.data[0].name;
         this.login_info = response.data;
       })
       .catch((err) => {});
@@ -92,10 +93,11 @@ export default {
   data() {
     return {
       showModal: false,
-      neoData: "",
+      neoData: [],
       login_info: [],
       varparamostrar: "",
-      updateheader: 0
+      updateheader: 0,
+      appear: null
     };
   },
   methods:{

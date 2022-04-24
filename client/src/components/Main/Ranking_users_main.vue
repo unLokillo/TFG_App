@@ -19,7 +19,7 @@
       :to="{ name: 'ranking', params: { userid: $route.params.userid } }"
       tag="b-button"
     >
-      Ver mas</router-link
+      Ver más</router-link
     >
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
     return {
       labels: [
         { key: "position", label: "Posición" },
-        { key: "image", label: "Imagen" },
+        //{ key: "image", label: "Imagen" },
         { key: "nickname", label: "Participante" },
         { key: "points", label: "Puntuación" },
       ],
