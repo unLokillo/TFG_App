@@ -25,13 +25,13 @@ BackEnd
 	- Creación neologismos ✓
 	Recogida de base de datos
 		- Neologismos para: ←
-			- Ranking principal
+			- Ranking principal ✓
 			- Ranking secundario ✓
-			- Tus propuestas
+			- Tus propuestas ✓
 			- Actividad
 		- Logros para:
 			- Tus logros
-	- Aprovación de neologismos
+	- Aprobación de neologismos
 	- Movidas de lingüistas y administradores
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
@@ -73,6 +73,11 @@ General
 	- Sistema de puntuación
 	- Cambio de idioma en footer
 	- Comentarios (?)
+	- Reparar vista de neologismo
+	- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
+	- Hacer RESTful la API
+	- Likes
+	- Logros
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código

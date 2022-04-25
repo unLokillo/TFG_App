@@ -48,13 +48,15 @@
 <script>
 import axios from "axios";
 export default {
-  beforeCreate(){
-    axios.get('http://127.0.0.1:5000/login', {credentials: 'include'})
-    .then(res => {
-      if(res.status==200){
-        this.$router.push({ path: `/` });
-      }
-    }).catch((err) => {})
+  beforeCreate() {
+    axios
+      .get("http://127.0.0.1:5000/login", { credentials: "include" })
+      .then((res) => {
+        if (res.status == 200) {
+          this.$router.push({ path: `/` });
+        }
+      })
+      .catch((err) => {});
   },
   data() {
     return {
@@ -74,16 +76,21 @@ export default {
   methods: {
     getUserInfo() {
       this.correct_login = false;
-      axios.post("http://127.0.0.1:5000/login",
-      {
-        username: this.form.email_or_user,
-        password: this.form.password
-      }, { withCredentials: true }).then((response) => {
-        if (response.status === 200) {
-          this.correct_login = true
-          this.$router.push({ path: `/` });
-        }
-      })
+      axios
+        .post(
+          "http://127.0.0.1:5000/login",
+          {
+            username: this.form.email_or_user,
+            password: this.form.password,
+          },
+          { withCredentials: true }
+        )
+        .then((response) => {
+          if (response.status === 200) {
+            this.correct_login = true;
+            this.$router.push({ path: `/` });
+          }
+        });
     },
   },
 };

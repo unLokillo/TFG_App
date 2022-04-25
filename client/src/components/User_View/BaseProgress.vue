@@ -1,13 +1,17 @@
 <template>
   <div
     class="w-full bg-gray-200 h-2 relative overflow-hidden"
-    :class="[{'rounded-full': rounded}, { indeterminate: indeterminate}]"
+    :class="[{ 'rounded-full': rounded }, { indeterminate: indeterminate }]"
   >
     <div
       class="h-full progressbar"
-      :class="[`bg-${color}-500`, {'absolute top-0': indeterminate}, {'rounded-full': rounded}]"
+      :class="[
+        `bg-${color}-500`,
+        { 'absolute top-0': indeterminate },
+        { 'rounded-full': rounded },
+      ]"
       role="progressbar"
-      :style="{width: `${percentage}%`}"
+      :style="{ width: `${percentage}%` }"
       :aria-valuenow="percentage"
       aria-valuemin="0"
       aria-valuemax="100"
@@ -24,18 +28,18 @@ export default {
   props: {
     color: {
       type: String,
-      default: "teal"
+      default: "teal",
     },
     percentage: {
       type: Number,
-      default: 0
+      default: 0,
     },
     rounded: {
       type: Boolean,
-      default: true
+      default: true,
     },
-    indeterminate: Boolean
-  }
+    indeterminate: Boolean,
+  },
 };
 </script>
 <style scoped>

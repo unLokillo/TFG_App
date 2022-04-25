@@ -1,56 +1,56 @@
 <template>
-    <div class="header-card">
-        <Sidebar @actualiza="emitir()"/> 
-        <div class="main-section">
-           <a href="/" class="title-header">Pescaneo</a>
-            </div>
-        <UserButton/>
+  <div class="header-card">
+    <Sidebar @actualiza="emitir()" />
+    <div class="main-section">
+      <a href="/" class="title-header">Pescaneo</a>
     </div>
+    <UserButton />
+  </div>
 </template>
 <script>
 // @ is an alias to /src
-import Sidebar from '@/components/Header/SideBar.vue'
-import UserButton from '@/components/Header/HeaderUserButton.vue'
-import SearchBar from '@/components/Header/SearchBar.vue'
+import Sidebar from "@/components/Header/SideBar.vue";
+import UserButton from "@/components/Header/HeaderUserButton.vue";
+import SearchBar from "@/components/Header/SearchBar.vue";
 export default {
-  name: 'Home',
-  methods:{
-      emitir(){
-          this.$emit('actualizar')
-      }
+  name: "Home",
+  methods: {
+    emitir() {
+      this.$emit("actualizar");
+    },
   },
   components: {
-      Sidebar,
-      UserButton,
-      SearchBar
+    Sidebar,
+    UserButton,
+    SearchBar,
   },
-  emits: ['actualizar']
-}
+  emits: ["actualizar"],
+};
 </script>
 <style>
-.header-card{
-    min-height: 60px;
-    background: var(--main-color);
-    border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr 5fr 1fr;
+.header-card {
+  min-height: 60px;
+  background: var(--main-color);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr 5fr 1fr;
 }
 
-.main-section{
+.main-section {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.title-header{
-    color: black !important;
-    text-decoration: none !important;
-    letter-spacing: 7px;
-    font-size: 23px;
+.title-header {
+  color: black !important;
+  text-decoration: none !important;
+  letter-spacing: 7px;
+  font-size: 23px;
 }
 
-.title-header:hover{
-   pointer-events: none;
+.title-header:hover {
+  pointer-events: none;
 }
 </style>

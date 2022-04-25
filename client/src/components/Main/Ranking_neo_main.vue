@@ -30,7 +30,7 @@ export default {
       .get("http://127.0.0.1:5000/neologismes", { withCredentials: true })
       .then((response) => {
         var i = 0;
-        while (i < 5 & i < response.data.length) {
+        while ((i < 5) & (i < response.data.length)) {
           this.items.push(response.data[i]);
           i++;
         }
@@ -60,7 +60,7 @@ export default {
 .ranking-title {
   text-align: left;
   padding-left: 20px;
-  color: black;
+  color: rgb(255, 255, 255);
   background-color: var(--buttons);
 }
 

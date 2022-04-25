@@ -11,7 +11,9 @@
       responsive="sm"
     >
       <template #cell(image)="data">
-        <b-avatar :src="require(`@/assets/images/` + data.item.image)"></b-avatar>
+        <b-avatar
+          :src="require(`@/assets/images/` + data.item.image)"
+        ></b-avatar>
       </template>
     </b-table>
     <router-link
@@ -28,13 +30,19 @@
 import axios from "axios";
 export default {
   created() {
-    axios.get("http://127.0.0.1:5000/users", { withCredentials: true }).then((response) => {
-      for (let index = 0; index < 5 && index < response.data.length; index++) {
-        if (!response.data[index].admin) {
-          this.items.push(response.data[index]);
+    axios
+      .get("http://127.0.0.1:5000/users", { withCredentials: true })
+      .then((response) => {
+        for (
+          let index = 0;
+          index < 5 && index < response.data.length;
+          index++
+        ) {
+          if (!response.data[index].admin) {
+            this.items.push(response.data[index]);
+          }
         }
-      }
-    });
+      });
   },
 
   data() {

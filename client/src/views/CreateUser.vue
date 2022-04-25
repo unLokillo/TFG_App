@@ -174,19 +174,23 @@ export default {
       var formData = new FormData();
       if (this.image != undefined) {
         formData.append("imagen", this.image, this.image.name);
-        formData.append("imageno", 'yes');
+        formData.append("imageno", "yes");
       } else {
         this.image = "default";
-        formData.append("imageno", 'default');
-      }
-      
-      for (const i in this.form){
-        formData.append(i, this.form[i])
+        formData.append("imageno", "default");
       }
 
-      axios.post("http://127.0.0.1:5000/signup", formData, { withCredentials: true }).then((res) => {
-        console.log(res);
-      });
+      for (const i in this.form) {
+        formData.append(i, this.form[i]);
+      }
+
+      axios
+        .post("http://127.0.0.1:5000/signup", formData, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res);
+        });
       this.$router.push({ path: `/login` });
     },
     isUpper(str) {

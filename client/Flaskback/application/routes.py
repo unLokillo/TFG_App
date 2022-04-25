@@ -25,22 +25,26 @@ main_bp = Blueprint(
     static_folder='static'
 )
 
+
 @main_bp.route('/nothing', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def nothing():
     return "", 200
 
+
 @main_bp.route("/logout", methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def logout():
     logout_user()
-    return "logged out succesfully",204
+    return "logged out succesfully", 204
+
 
 def send_mail(user):
     token = user.get_token()
-    msg = Message('Password reset request', recipients=[user.email], sender='noreply@pescaneo.com')
+    msg = Message('Password reset request', recipients=[
+                  user.email], sender='noreply@pescaneo.com')
     msg.body = f"""
     To reset your password please follow the link below.
     
@@ -50,23 +54,27 @@ def send_mail(user):
     """
     mail.send(msg)
 
+
 @main_bp.route("/reset_password", methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def reset_request():
     user = Usuario.query.filter_by(email=request.json['email']).first()
     if user:
         send_mail(user)
-        return "ok",status.HTTP_200_OK
+        return "ok", status.HTTP_200_OK
     return "no user found", status.HTTP_204_NO_CONTENT
 
+
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField(label='Nueva contraseña',validators=[
+    password = PasswordField(label='Nueva contraseña', validators=[
         DataRequired(),
         Length(min=8, message='LA contraseña debe tener al menos %(min)d caracteres')])
-    confirm_password = PasswordField(label='Confirma la nueva contraseña',validators=[
+    confirm_password = PasswordField(label='Confirma la nueva contraseña', validators=[
         DataRequired(),
         EqualTo('password', message='Las contraseñas deben coincidir')])
-    submit = SubmitField(label='Restablecer contraseña', validators=[DataRequired()])
+    submit = SubmitField(label='Restablecer contraseña',
+                         validators=[DataRequired()])
+
 
 @main_bp.route("/reset_password/<token>", methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
@@ -74,14 +82,15 @@ def reset_token(token):
     user = Usuario.verify_token(token)
     if user is None:
         return redirect('http://localhost:8080/forgot-password')
-    
+
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
         return redirect('http://localhost:8080/login')
-    return render_template('reset_request.html', title="Change password", legend="Reset password",form=form)
-    
+    return render_template('reset_request.html', title="Change password", legend="Reset password", form=form)
+
+
 @main_bp.route("/create-neologisme", methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
@@ -106,7 +115,8 @@ def create_neologisme():
     else:
         image = request.files['imagen'].read()
 
-    new_neo = Neologismo(name=name,likes=likes,image=image,id_user=user,state=state,date_approved=date)
+    new_neo = Neologismo(name=name, likes=likes, image=image,
+                         id_user=user, state=state, date_approved=date)
     db.session.add(new_neo)
     try:
         db.session.commit()
@@ -116,11 +126,13 @@ def create_neologisme():
     db.session.refresh(new_neo)
 
     for i in range(len(sources)):
-        new_source = Source(link=sources[i],id_neologisme=new_neo.id_neologisme)
+        new_source = Source(
+            link=sources[i], id_neologisme=new_neo.id_neologisme)
         db.session.add(new_source)
 
     for i in range(len(descriptions)):
-        new_description = Description(text=descriptions[i],id_neologisme=new_neo.id_neologisme)
+        new_description = Description(
+            text=descriptions[i], id_neologisme=new_neo.id_neologisme)
         db.session.add(new_description)
 
     try:
@@ -128,7 +140,7 @@ def create_neologisme():
     except:
         db.session.rollback()
 
-    return "Neologisme created",status.HTTP_201_CREATED
+    return "Neologisme created", status.HTTP_201_CREATED
 
 
 @main_bp.route('/user', methods=['GET'])
@@ -144,26 +156,83 @@ def getuser():
     gender = current_user.gender
     school = current_user.school
     points = current_user.points
-    query = db.session.query(Usuario, func.rank().over(order_by=Usuario.points.desc()).label('rankins')).all()
+    query = db.session.query(Usuario, func.rank().over(
+        order_by=Usuario.points.desc()).label('rankins')).all()
     for (user, i) in query:
-        if user == current_user: # TODO: comporbar que esto funciona bien
+        if user == current_user:  # TODO: comporbar que esto funciona bien
             position = i
-    fav_neo = [1,2]
-    #img
+    fav_neo = [1, 2]
+    # img
     privileges = current_user.privileges
-    res = dict_of(iduser, nickname, name, surname, email, date, gender, school, points, position, fav_neo, privileges)
+    res = dict_of(iduser, nickname, name, surname, email, date,
+                  gender, school, points, position, fav_neo, privileges)
     return res, status.HTTP_200_OK
-    
+
+
+@main_bp.route('/users/<iduser>', methods=['PUT'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def putuser(iduser):
+    user = Usuario.query.get(iduser)
+    try:
+        user.privileges = request.form['privileges']
+    except:
+        pass
+    try:
+        user.privileges = request.form['nickname']
+    except:
+        pass
+    try:
+        user.privileges = request.form['name']
+    except:
+        pass
+    try:
+        user.privileges = request.form['surname']
+    except:
+        pass
+    try:
+        user.privileges = request.form['email']
+    except:
+        pass
+    try:
+        user.privileges = request.form['birthdate']
+    except:
+        pass
+    try:
+        user.privileges = request.form['gender']
+    except:
+        pass
+    try:
+        user.privileges = request.form['password']
+    except:
+        pass
+    try:
+        user.privileges = request.form['school']
+    except:
+        pass
+    try:
+        user.privileges = request.form['mother_tongue']
+    except:
+        pass
+    try:
+        user.privileges = request.form['points']
+    except:
+        pass
+    db.session.commit()
+    return "modified", status.HTTP_201_CREATED
+
+
 @main_bp.route('/user-neo', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getneosuser():
     query = Neologismo.query.filter_by(id_user=current_user.id)
-    accepted = query.filter_by(state='aceptado').with_entities(Neologismo.name, Neologismo.likes).all()
-    proposed = query.filter((Neologismo.state=='pendiente') | (Neologismo.state=='rechazado'))\
+    accepted = query.filter_by(state='aceptado').with_entities(
+        Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
+    proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state == 'rechazado'))\
         .with_entities(Neologismo.name, Neologismo.state, Neologismo.id_neologisme).all()
     for i, neo in enumerate(accepted):
-        accepted[i] = {'neologisme': neo[0], 'liked': neo[1]}
+        accepted[i] = {'neologisme': neo[0], 'liked': neo[1], 'id': neo[2]}
     for i, neo in enumerate(proposed):
         proposed[i] = {'neologisme': neo[0], 'state': neo[1], 'id': neo[2]}
     res = {'accepted': accepted, 'proposed': proposed}
@@ -174,39 +243,43 @@ def getneosuser():
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getusers():
-    res = Usuario.query.order_by(Usuario.points).filter_by(privileges='user').limit(5).all()
+    res = Usuario.query.order_by(Usuario.points.desc()).filter_by(
+        privileges='user').limit(5).all()
     usuario = {}
     users = []
     images = []
     for i, user in enumerate(res):
-        usuario['nickname']= user.nickname
-        usuario['position']= i+1
-        usuario['points']= user.points
+        usuario['nickname'] = user.nickname
+        usuario['position'] = i+1
+        usuario['points'] = user.points
         users.append(usuario)
         images.append(user.image)
     return jsonify(users), status.HTTP_200_OK
+
 
 @main_bp.route('/neologismes', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getneos():
-    res = Neologismo.query.order_by(Neologismo.likes).filter_by(state='aceptado')\
-        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state).limit(5).all()
-    neologismo = {}
+    res = Neologismo.query.order_by(Neologismo.likes.desc()).filter_by(state='aceptado')\
+        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).limit(5).all()
     neos = []
     images = []
     for i, neo in enumerate(res):
+        neologismo = {}
         neologismo['user'] = Usuario.query.get(neo[0]).nickname
         neologismo['neologismo'] = neo[1]
         neologismo['position'] = i+1
         neologismo['liked'] = neo[2]
         neologismo['state'] = neo[3]
+        neologismo['id'] = neo[4]
         neos.append(neologismo)
     return jsonify(neos), status.HTTP_200_OK
 
+
 def getmonday():
     today = datetime.date.today().weekday()
-    monday={
+    monday = {
         0: 1,
         1: 2,
         2: 3,
@@ -222,27 +295,29 @@ def getmonday():
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getweekneos():
-    res = Neologismo.query.order_by(Neologismo.likes)\
-        .filter((Neologismo.date_approved>(datetime.date.today()-datetime.timedelta(days=getmonday()))))\
+    res = Neologismo.query.order_by(Neologismo.likes.desc())\
+        .filter((Neologismo.date_approved > (datetime.date.today()-datetime.timedelta(days=getmonday()))))\
         .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.date_approved, Neologismo.id_neologisme, Neologismo.state)\
         .all()
     neos = []
     images = []
     for i, neo in enumerate(res):
         neologismo = {}
-        neologismo['descriptions'] = Description.query.filter_by(id_neologisme=neo[4]).with_entities(Description.text).all()
+        neologismo['descriptions'] = Description.query.filter_by(
+            id_neologisme=neo[4]).with_entities(Description.text).all()
         neologismo['user'] = Usuario.query.get(neo[0]).nickname
         neologismo['neologismo'] = neo[1]
         neologismo['position'] = i+1
         neologismo['liked'] = neo[2]
         neologismo['date'] = neo[3]
         neologismo['id'] = neo[4]
-        if neo[5]=='aceptado':
+        if neo[5] == 'aceptado':
             neos.append(neologismo)
         if len(neo) == 5:
             break
 
     return jsonify(neos), status.HTTP_200_OK
+
 
 @main_bp.route('/neologismes/<neoid>', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
@@ -252,10 +327,38 @@ def getneo(neoid):
         .first()
     neologismo = {}
     neologismo['user'] = Usuario.query.get(neo[0]).nickname
-    neologismo['descriptions'] = Description.query.filter_by(id_neologisme=neo[4]).with_entities(Description.text).all()
-    neologismo['sources'] = Source.query.filter_by(id_neologisme=neo[4]).with_entities(Source.link).all()
+    neologismo['descriptions'] = Description.query.filter_by(
+        id_neologisme=neo[4]).with_entities(Description.text).all()
+    neologismo['sources'] = Source.query.filter_by(
+        id_neologisme=neo[4]).with_entities(Source.link).all()
     neologismo['neologisme'] = neo[1]
     neologismo['liked'] = neo[2]
     neologismo['state'] = neo[3]
     neologismo['date'] = neo[5]
     return neologismo, status.HTTP_200_OK
+
+
+@main_bp.route('/allusers', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def getallusers():
+    if current_user.privileges == 'admin':
+        res = Usuario.query.order_by(Usuario.points.desc()).all()
+    elif current_user.privileges == 'linguist':
+        res = Usuario.query.order_by(Usuario.points.desc()).filter(
+            Usuario.privileges != 'admin').all()
+    else:
+        res = Usuario.query.order_by(
+            Usuario.points.desc()).filter_by(privileges='user').all()
+    users = []
+    #images = []
+    for i, user in enumerate(res):
+        usuario = {}
+        usuario['nickname'] = user.nickname
+        usuario['position'] = i+1
+        usuario['points'] = user.points
+        usuario['id'] = user.id
+        usuario['privileges'] = user.privileges
+        users.append(usuario)
+        # images.append(user.image)
+    return jsonify(users), status.HTTP_200_OK

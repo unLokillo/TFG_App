@@ -44,6 +44,7 @@ def login():
             res_fields['username'] = current_user.nickname
             # res_fields['image'] = current_user.image # TODO insertar imagen
             res_fields['user_id'] = current_user.id
+            res_fields['privileges'] = current_user.privileges
             return res_fields, status.HTTP_200_OK
 
         return res_fields, status.HTTP_401_UNAUTHORIZED

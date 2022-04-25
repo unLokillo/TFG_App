@@ -14,7 +14,7 @@
             name: 'v-neologisme',
             params: { userid: $route.params.userid, neoId: value.id },
           }"
-          >+</b-button
+          >+ info</b-button
         >
       </div>
     </div>
@@ -53,7 +53,7 @@ export default {
     return {
       neologismes: [],
       login: [],
-      appear: null
+      appear: null,
     };
   },
 };

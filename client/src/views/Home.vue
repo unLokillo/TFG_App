@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <Header @actualizar="actualizacion()" :key="updateheader"/>
+    <Header @actualizar="actualizacion()" :key="updateheader" />
     <div class="menu-1">
       <p>
         ¡Te damos la bienvendia a <strong>Pescaneo</strong>! <br />
@@ -22,9 +22,18 @@
     <h4>Neologismos de la semana</h4>
     <div class="frequent-words">
       <template v-if="this.appear">
-      <NeologismoCard :neologismeData="neoData[0]" v-if='neoData[0]'></NeologismoCard>
-      <NeologismoCard :neologismeData="neoData[1]" v-if='neoData[1]'></NeologismoCard>
-      <NeologismoCard :neologismeData="neoData[2]" v-if='neoData[2]'></NeologismoCard>
+        <NeologismoCard
+          :neologismeData="neoData[0]"
+          v-if="neoData[0]"
+        ></NeologismoCard>
+        <NeologismoCard
+          :neologismeData="neoData[1]"
+          v-if="neoData[1]"
+        ></NeologismoCard>
+        <NeologismoCard
+          :neologismeData="neoData[2]"
+          v-if="neoData[2]"
+        ></NeologismoCard>
       </template>
     </div>
     <h4>Actividades</h4>
@@ -70,12 +79,15 @@ export default {
   },
 
   beforeCreate() {
-    axios.get("http://127.0.0.1:5000/week-neologismes", { withCredentials: true }).then((response) => {
-      for (var i = 0; i < 3 & i < response.data.length; i++)
-        this.neoData.push(response.data[i]);
-      this.appear = true;
-    });
-    axios.get("http://127.0.0.1:5000/login", { withCredentials: true })
+    axios
+      .get("http://127.0.0.1:5000/week-neologismes", { withCredentials: true })
+      .then((response) => {
+        for (var i = 0; (i < 3) & (i < response.data.length); i++)
+          this.neoData.push(response.data[i]);
+        this.appear = true;
+      });
+    axios
+      .get("http://127.0.0.1:5000/login", { withCredentials: true })
       .then((response) => {
         this.login_info = response.data;
       })
@@ -97,15 +109,15 @@ export default {
       login_info: [],
       varparamostrar: "",
       updateheader: 0,
-      appear: null
+      appear: null,
     };
   },
-  methods:{
-    actualizacion(){
+  methods: {
+    actualizacion() {
       this.updateheader += 1;
       this.login_info.success = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -2,26 +2,25 @@
   <div id="app">
     <router-view :key="$route.fullPath"></router-view>
     <!-- <Header/> -->
-    <Footer/>
+    <Footer />
   </div>
-
 </template>
 
 <script>
 // @ is an alias to /src
-import Footer from '@/components/Footer/Footer.vue'
+import Footer from "@/components/Footer/Footer.vue";
 //import Header from '@/components/Header/Header.vue'
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     //Header,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
 
 <style lang="scss">
-:root{
+:root {
   --main-color: #e0e5eb;
   --secondary-color: #c5cece;
   --third-color: rgb(245, 245, 245);
@@ -57,20 +56,20 @@ export default {
     }
   }
 }
-.bttn-app{
+.bttn-app {
   background-color: var(--buttons) !important;
   border-radius: none !important;
   border: none !important;
- // padding: 2% !important; 
- height: 100% !important;
+  // padding: 2% !important;
+  height: 100% !important;
   color: var(--letter-color) !important;
 }
 
-button{
+button {
   background-color: var(--buttons) !important;
   border-radius: none !important;
   border: none !important;
-  //padding: 2% !important; 
+  //padding: 2% !important;
   color: var(--letter-color) !important;
 }
 
@@ -78,12 +77,12 @@ input {
   border-radius: 0px !important;
 }
 
-textarea{
+textarea {
   border-radius: none !important;
   max-height: 3rem;
 }
 
-header{
+header {
   width: 100%;
 }
 
@@ -91,10 +90,9 @@ a {
   color: black !important;
 }
 
-a:hover{
+a:hover {
   color: #42b983 !important;
 }
-
 
 .modal-route {
   width: 100%;
@@ -102,7 +100,7 @@ a:hover{
   position: fixed;
   top: 0;
   left: 0;
-    border-radius: 0px !important;
+  border-radius: 0px !important;
   background: rgba($color: #000000, $alpha: 0.5);
   .modal-content {
     width: 50%;
@@ -112,8 +110,8 @@ a:hover{
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    min-height: 50% ;
-    max-height: 80% ;
+    min-height: 50%;
+    max-height: 80%;
     min-width: 65% !important;
     max-width: 65% !important;
     overflow-y: auto;
@@ -124,16 +122,15 @@ a:hover{
   }
 }
 
-  .close-modal{
-margin-right: 10%;
-display: flex;
-flex-direction: row-reverse;
-width: 100%;
-  }
-  .modal-content > div{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
-
+.close-modal {
+  margin-right: 10%;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+.modal-content > div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
 </style>
