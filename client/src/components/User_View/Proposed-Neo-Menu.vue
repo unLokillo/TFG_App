@@ -36,9 +36,7 @@
         name: 'view-all-proposals',
         params: { userid: $route.params.userid },
       }"
-      class="more-bttn"
-      tag="b-button"
-      >Ver mas</router-link
+      ><b-button class="more-bttn">Ver más</b-button></router-link
     >
   </div>
 </template>

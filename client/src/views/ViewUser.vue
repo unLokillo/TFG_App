@@ -11,12 +11,13 @@
                 name: 'vu-ranking',
                 params: { userid: $route.params.userid },
               }"
-              tag="div"
             >
+            <div>
               <font-awesome-icon style="font-size: 80px" icon="trophy" /> <br />
               <br />
               <strong>Posición: {{ position }}</strong> <br />
               <strong>Puntuación: {{ points }}</strong>
+            </div>
             </router-link>
           </div>
 
@@ -26,23 +27,25 @@
                 name: 'vu-badges',
                 params: { userid: $route.params.userid },
               }"
-              tag="div"
             >
+            <div>
               <font-awesome-icon style="font-size: 20px" icon="award" />
               Mis logros (15/20)
+            </div>
             </router-link>
           </div>
 
           <div class="left-side-menus">
             <router-link
               :to="{ name: 'f-neo', params: { userid: $route.params.userid } }"
-              tag="div"
             >
+            <div>
               <font-awesome-icon
                 style="font-size: 20px; color: red"
                 icon="heart"
               />
               Neologismos favoritos ({{ fav_neo.length }})
+            </div>
             </router-link>
           </div>
         </div>
@@ -130,7 +133,6 @@ export default {
     axios
       .get("http://127.0.0.1:5000/user", { withCredentials: true }) // + this.$route.params.userid)
       .then((response) => {
-        console.log(response.data);
         this.name = response.data.name;
         this.surname = response.data.surname;
         this.email = response.data.email;
@@ -237,6 +239,11 @@ export default {
 .left-side-menus {
   padding: 2%;
   background-color: var(--third-color);
+}
+
+.left-side-menus:hover{
+  color:#3481C0;
+  cursor: pointer;
 }
 
 .main-info-card {

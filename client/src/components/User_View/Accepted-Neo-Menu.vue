@@ -23,9 +23,7 @@
         name: 'view-all-neologismes',
         params: { userid: $route.params.userid },
       }"
-      class="more-bttn"
-      tag="b-button"
-      >Ver más</router-link
+      ><b-button class="more-bttn">Ver más</b-button></router-link
     >
   </div>
 </template>

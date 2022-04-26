@@ -22,7 +22,6 @@
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
-              tag="div"
             >
               <div>
                 <font-awesome-icon
@@ -37,7 +36,6 @@
             <router-link
               :to="{ name: 'ranking', params: {} }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -50,7 +48,6 @@
             <router-link
               :to="{ name: 'ranking_neo', params: { userid: form.user_id } }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -63,7 +60,6 @@
             <router-link
               :to="{ name: 'main-view-all-proposals', params: {} }"
               class="sidebar-button"
-              tag="div"
               v-if="form.success"
             >
               <font-awesome-icon
@@ -77,7 +73,6 @@
             <router-link
               :to="{ name: 'badges', params: {} }"
               class="sidebar-button"
-              tag="div"
               v-if="form.success"
             >
               <font-awesome-icon
@@ -91,7 +86,6 @@
             <router-link
               :to="{ name: 'info_general' }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -120,7 +114,6 @@
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
-              tag="div"
             >
               <div>
                 <font-awesome-icon
@@ -135,7 +128,6 @@
             <router-link
               :to="{ name: 'vu-ranking', params: { userid: form.user_id } }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -148,7 +140,6 @@
             <router-link
               :to="{ name: 'vu-ranking_neo', params: { userid: form.user_id } }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -164,8 +155,7 @@
                 params: { userid: form.user_id },
               }"
               class="sidebar-button"
-              tag="div"
-              v-if="form.logged"
+              v-if="form.success"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -178,7 +168,6 @@
             <router-link
               :to="{ name: 'vu-badges', params: { userid: form.user_id } }"
               class="sidebar-button"
-              tag="div"
               v-if="form.success"
             >
               <font-awesome-icon
@@ -192,7 +181,6 @@
             <router-link
               :to="{ name: 'info_general_s' }"
               class="sidebar-button"
-              tag="div"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -297,6 +285,7 @@ export default {
 }
 
 .sidebar-button {
+  text-decoration: none;
   padding: 8%;
   display: flex;
   font-size: 130%;
