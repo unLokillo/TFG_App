@@ -13,7 +13,7 @@ from flask_mail import Message
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
-from .models import Description, Neologismo, Source, Usuario
+from .models import Description, Neologismo, Source, UserlikesNeologisme, Usuario
 from sorcery import dict_of
 from sqlalchemy import func
 
@@ -157,7 +157,7 @@ def getuser():
     school = current_user.school
     points = current_user.points
     query = db.session.query(Usuario, func.rank().over(
-        order_by=Usuario.points.desc()).label('rankins')).all()
+        order_by=Usuario.points.desc()).label('rankins')).filter_by(privileges=current_user.privileges).all()
     for (user, i) in query:
         if user == current_user:  # TODO: comporbar que esto funciona bien
             position = i
@@ -245,10 +245,10 @@ def getneosuser():
 def getusers():
     res = Usuario.query.order_by(Usuario.points.desc()).filter_by(
         privileges='user').limit(5).all()
-    usuario = {}
     users = []
     images = []
     for i, user in enumerate(res):
+        usuario = {}
         usuario['nickname'] = user.nickname
         usuario['position'] = i+1
         usuario['points'] = user.points
@@ -261,8 +261,8 @@ def getusers():
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getneos():
-    res = Neologismo.query.order_by(Neologismo.likes.desc()).filter_by(state='aceptado')\
-        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).limit(5).all()
+    res = Neologismo.query.order_by(Neologismo.likes.desc())\
+        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).all()
     neos = []
     images = []
     for i, neo in enumerate(res):
@@ -362,3 +362,41 @@ def getallusers():
         users.append(usuario)
         # images.append(user.image)
     return jsonify(users), status.HTTP_200_OK
+
+
+@main_bp.route('/neologismes/<neoid>/likes', methods=['GET', 'POST', 'DELETE'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def neolikes(neoid):
+    if request.method == 'GET':
+        users = UserlikesNeologisme.query.filter(
+            UserlikesNeologisme.id_neologisme == neoid).all()
+        res = []
+        for i, user in enumerate(users):
+            usuario = {}
+            usuario['nickname'] = user.usuario.nickname
+            res.append(usuario)
+        return jsonify(res), status.HTTP_200_OK
+    elif request.method == 'POST':
+        like = UserlikesNeologisme(
+            id_user=current_user.id, id_neologisme=neoid)
+        db.session.add(like)
+        neo = Neologismo.query.get(neoid)
+        neo.likes += 1
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {'id_neologisme': neo.id_neologisme, 'id_user': neo.id_user}, status.HTTP_201_CREATED
+    else:  # DELETE
+        UserlikesNeologisme.query.filter(
+            (UserlikesNeologisme.id_neologisme == neoid) & (UserlikesNeologisme.id_user == current_user.id)).delete()
+        neo = Neologismo.query.get(neoid)
+        neo.likes -= 1
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "Removed succesfully", status.HTTP_204_NO_CONTENT

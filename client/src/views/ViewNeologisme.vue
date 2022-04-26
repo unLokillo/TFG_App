@@ -8,16 +8,22 @@
 
     <div class="card-neo-header">
       <h2>{{ form.neologisme }}</h2>
-      <div class="neo-likes" v-if="seeLiked">
+      <div class="neo-likes" v-if="this.liked">
         <font-awesome-icon
           v-on:click="like"
           style="color: red; font-size: 35px"
           icon="heart"
         />
-        {{ form.liked }}
+        {{ this.likes  }}
+        {{ this.liked  }}
       </div>
       <div class="neo-likes" v-else>
-        <font-awesome-icon v-on:click="like" icon="heart" /> {{ form.liked }}
+        <font-awesome-icon
+          v-on:click="like"
+          icon="heart"
+          style="font-size: 35px; color: grey"
+        />
+        {{ this.likes }}
       </div>
     </div>
 
@@ -96,7 +102,7 @@
     </div>
     <div
       class="admin-options"
-      v-if="(login.linguist || login.admin) && form.proposal"
+      v-if="(login.privileges=='linguist' || login.privileges=='admin') || form.state=='proposal'"
     >
       <b-button
         class="bttn-app"
@@ -118,7 +124,7 @@
     </div>
 
     <router-link
-      v-if="form.proposal"
+      v-if="form.state=='proposal'"
       tag="b-button"
       class="bttn-app"
       :to="{
@@ -141,20 +147,36 @@ export default {
       })
       .then((response_neo) => {
         this.form = response_neo.data;
-
-        axios
-          .get("http://127.0.0.1:5000/login", { withCredentials: true })
-          .then((response_log) => {
-            this.login = response_log.data;
-
-            axios
-              .get("http://127.0.0.1:5000/users/" + response_log.data.user_id, {
-                withCredentials: true,
-              })
-              .then((response_u) => {
-                this.form_user = response_u.data;
-              });
-          });
+      });
+    axios
+      .get("http://127.0.0.1:5000/login", { withCredentials: true })
+      .then((response_log) => {
+        this.login = response_log.data;
+        this.username=response_log.data.username;
+        console.log('username: ', this.username)
+      });
+    axios
+      .get("http://127.0.0.1:5000/user", { withCredentials: true })
+      .then((response_u) => {
+        this.form_user = response_u.data;
+      });
+    axios
+      .get(
+        "http://127.0.0.1:5000/neologismes/" +
+          this.$route.params.neoId +
+          "/likes",
+        { withCredentials: true }
+      )
+      .then((response) => {
+        this.liked = false;
+        var i = 0
+        for (i; i < response.data.length; i++)
+          if (this.login.username == response.data[i].nickname) {
+            console.log(this.login.username, response.data[i].nickname)
+            console.log(this.login.username == response.data[i].nickname)
+            this.liked = true;
+          }
+        this.likes = i
       });
     this.appear = true;
   },
@@ -173,6 +195,9 @@ export default {
       form: [],
       form_user: [],
       appear: null,
+      liked: false,
+      likes: 0,
+      username: null
     };
   },
   methods: {
@@ -188,19 +213,57 @@ export default {
       return this.form_user.fav_neo.includes(this.form.id);
     },
     like() {
-      if (!this.form_user.fav_neo.includes(this.form.id)) {
-        var formData = new FormData();
-        formData.append("likes", this.form.liked + 1);
-        axios.put(
-          "http://127.0.0.1:5000/neologismes/" + this.$route.params.neoId,
-          formData
-        );
-        this.form_user.fav_neo.push(this.form.id);
-        axios.patch("http://localhost:3000/users/" + this.login.user_id, {
-          fav_neo: this.form_user.fav_neo,
+      var userid = null;
+      axios
+        .get("http://127.0.0.1:5000/login", { withCredentials: true })
+        .then((res) => {
+          if (res.status != 200) {
+            this.$router.push("/login");
+          }
+          this.username = res.data.username;
         });
-        this.form.liked = this.form.liked + 1;
-      }
+      axios
+        .get(
+          "http://127.0.0.1:5000/neologismes/" +
+            this.$route.params.neoId +
+            "/likes",
+          { withCredentials: true }
+        )
+        .then((response) => {
+          this.liked = false;
+          for (var i = 0; i < response.data.length; i++)
+            if (this.username == response.data[i].nickname) {
+              this.liked = true;
+              break;
+            }
+          this.likes = response.data.length
+        });
+      
+      var formData = new FormData();
+      formData.append("userid", userid);
+      if (this.liked)
+        axios.delete(
+          "http://127.0.0.1:5000/neologismes/" +
+            this.$route.params.neoId +
+            "/likes",
+          { withCredentials: true }
+        ).then(res => {
+          if(res.status==204)
+            this.liked = false;
+            this.likes -= 1;
+        });
+      else
+        axios.post(
+          "http://127.0.0.1:5000/neologismes/" +
+            this.$route.params.neoId +
+            "/likes",
+          formData,
+          { withCredentials: true }
+        ).then(res => {
+          if(res.status==201)
+            this.liked = true;
+            this.likes += 1;
+        });
     },
 
     submit(id) {
