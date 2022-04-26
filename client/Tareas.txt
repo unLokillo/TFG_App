@@ -39,6 +39,7 @@ BackEnd
 		- Eliminar Marshmallow y los Schemas
 
 FrontEnd
+	- Actualización de elementos cuando cambian
 	- Cambiar enlace info y preg. frecuentes bien ✓
 	- Poner tilde a "Registrate" ✓
 	- Beautyfy changePassword ✓
@@ -57,6 +58,8 @@ FrontEnd
 
 General
 	- Parte de ADMINISTRADORES
+	- Arreglar partes que solo funcionan con sesión iniciada
+	- Arreglar partes que fallan con plain user
 	- Descarga de CSV lingüista y administradores
 	- Actividades
 		- Cartas deslizantes
@@ -76,11 +79,13 @@ General
 	- Reparar vista de neologismo
 	- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Hacer RESTful la API
-	- Likes
+	- Arreglar likes
 	- Logros
+	- Mirar que es baseprogress.vue
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
+		- Reducir llamadas a backend duplicadas
 
 Despliegue
 	- Creación máquina virtual con todo montado

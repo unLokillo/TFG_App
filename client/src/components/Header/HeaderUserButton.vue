@@ -3,13 +3,17 @@
     <router-link
       :to="{ name: 'vUser', params: { userid: login_info.user_id } }"
       class="user-bttn"
-      tag="div"
+      style="text-decoration: none"
       v-if="login_info.success"
     >
       <!--<b-avatar :src="require(`../../assets/images/${login_info.img}`)"></b-avatar>-->
-      {{ login_info.username }}
+      <div style="color: white">
+        {{ login_info.username }}
+      </div>
     </router-link>
-    <router-link :to="`/login`" tag="div" v-else> Iniciar sesión </router-link>
+    <router-link :to="`/login`" v-else style="text-decoration: none"
+      ><div style="color: white">Iniciar sesión</div></router-link
+    >
   </div>
 </template>
 

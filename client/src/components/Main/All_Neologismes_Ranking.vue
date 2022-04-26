@@ -40,20 +40,29 @@ import axios from "axios";
 export default {
   created() {
     axios
-      .get("http://127.0.0.1:5000/neologismes", { withCredentials: true })
-      .then((response) => {
-        for (let index = 0; index < response.data.length; index++) {
-          if (!response.data[index].proposal) {
-            this.neologismes.push(response.data[index]);
-          }
-        }
-      });
-
-    axios
       .get("http://127.0.0.1:5000/login", { withCredentials: true })
       .then((response) => {
         this.logged = response.data;
       });
+    axios
+      .get("http://127.0.0.1:5000/neologismes", { withCredentials: true })
+      .then((response) => {
+        if(this.logged.privileges == 'admin' || this.logged.privileges == 'linguist')
+          for (let index = 0; index < response.data.length; index++) {
+            this.neologismes.push(response.data[index]);
+          }
+        else {
+          var pos = 1
+          for (let index = 0; index < response.data.length; index++) {
+            if(response.data[index].state=='aceptado'){
+              response.data[index].position = pos;
+              pos++;
+              this.neologismes.push(response.data[index]);
+            }
+          }
+        }
+      });
+
   },
   data() {
     return {

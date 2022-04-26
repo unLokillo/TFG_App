@@ -2,7 +2,14 @@
   <div class="header-card">
     <Sidebar @actualiza="emitir()" />
     <div class="main-section">
-      <a href="/" class="title-header">Pescaneo</a>
+      <router-link
+              :to="{ name: 'Home' }"
+              class="title-header"
+            >
+            <div class="title-header">
+            PESCANEO
+            </div>
+      </router-link>
     </div>
     <UserButton />
   </div>
@@ -44,13 +51,13 @@ export default {
 }
 
 .title-header {
-  color: black !important;
   text-decoration: none !important;
   letter-spacing: 7px;
   font-size: 23px;
 }
 
 .title-header:hover {
-  pointer-events: none;
+  color:#3481C0;
+  cursor: pointer;
 }
 </style>

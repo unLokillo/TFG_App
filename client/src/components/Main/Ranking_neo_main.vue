@@ -31,6 +31,7 @@ export default {
       .then((response) => {
         var i = 0;
         while ((i < 5) & (i < response.data.length)) {
+          if(response.data[i].state=='aceptado')
           this.items.push(response.data[i]);
           i++;
         }

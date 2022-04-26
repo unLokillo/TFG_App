@@ -38,7 +38,7 @@ export default {
           index < 5 && index < response.data.length;
           index++
         ) {
-          if (!response.data[index].admin) {
+          if (response.data[index].privileges!='admin') {
             this.items.push(response.data[index]);
           }
         }
