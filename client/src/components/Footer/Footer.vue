@@ -1,9 +1,21 @@
 <template>
     <div class="footer-card">
         <div class="links-menu">
-            <router-link class="links" :to="{ name: 'info',params: {} }"> Información </router-link>
-            <div></div>
-            <router-link class="links" :to="{ name: 'faq',params: {} }"> Preguntas Frecuentes </router-link>
+            <div class="links-menu" v-if="this.$router.currentRoute.path=='/games'">
+                <router-link class="links" :to="{ name: 'gamesinfo',params: {} }"> Información </router-link>
+                <div></div>
+                <router-link class="links" :to="{ name: 'gamesfaq',params: {} }"> Preguntas Frecuentes </router-link>
+            </div>
+            <div class="links-menu" v-else-if="this.$router.currentRoute.path.includes('view-user')">
+                <router-link class="links" :to="{ name: 'userinfo',params: {} }"> Información </router-link>
+                
+                <router-link class="links" :to="{ name: 'userfaq',params: {} }"> Preguntas Frecuentes </router-link>
+            </div>
+            <div class="links-menu" v-else >
+                <router-link class="links" :to="{ name: 'info',params: {} }"> Información </router-link>
+                <div></div>
+                <router-link class="links" :to="{ name: 'faq',params: {} }"> Preguntas Frecuentes </router-link>
+            </div>
         </div>   
            <p> Pescaneo </p>
     </div>

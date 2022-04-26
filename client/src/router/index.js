@@ -283,7 +283,7 @@ var route = [
           showModal: true
         },
         path: 'faq',
-        name: 'faq',
+        name: 'userfaq',
         component: () => import('@/components/faq.vue'),
         props: true
       },
@@ -292,7 +292,7 @@ var route = [
           showModal: true
         },
         path: 'info',
-        name: 'info',
+        name: 'userinfo',
         component: () => import('@/components/info.vue'),
         props: true
       },
@@ -336,7 +336,7 @@ var route = [
         showModal: true
       },
       path: 'faq',
-      name: 'faq',
+      name: 'gamesfaq',
       component: () => import('@/components/faq.vue'),
       props: true
     },
@@ -345,17 +345,8 @@ var route = [
         showModal: true
       },
       path: 'info',
-      name: 'info',
+      name: 'gamesinfo',
       component: () => import('@/components/info.vue'),
-      props: true
-    },
-    {
-      meta: {
-        showModal: true
-      },
-      path: 'info_general',
-      name: 'info_general',
-      component: () => import('@/components/general_info.vue'),
       props: true
     }
     ]
