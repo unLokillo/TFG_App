@@ -109,13 +109,13 @@ def create_neologisme():
     for i in range(int(request.form['numSources'])):
         sources.append(request.form['source'+str(i)])
 
-    if request.form['imageno'] == 'default':
+    '''if request.form['imageno'] == 'default':
         with open('./assets/default_profile.png', 'rb') as file:
             image = file.read()
     else:
-        image = request.files['imagen'].read()
+        image = request.files['imagen'].read()'''
 
-    new_neo = Neologismo(name=name, likes=likes, image=image,
+    new_neo = Neologismo(name=name, likes=likes,# image=image,
                          id_user=user, state=state, date_approved=date)
     db.session.add(new_neo)
     try:
@@ -218,7 +218,10 @@ def putuser(iduser):
         user.privileges = request.form['points']
     except:
         pass
-    db.session.commit()
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
     return "modified", status.HTTP_201_CREATED
 
 
@@ -226,10 +229,10 @@ def putuser(iduser):
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getneosuser():
-    query = Neologismo.query.filter_by(id_user=current_user.id)
+    query = Neologismo.query.filter_by(id_user=current_user.id).order_by(Neologismo.likes.desc())
     accepted = query.filter_by(state='aceptado').with_entities(
         Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
-    proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state == 'rechazado'))\
+    proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state.contains('rechazado')))\
         .with_entities(Neologismo.name, Neologismo.state, Neologismo.id_neologisme).all()
     for i, neo in enumerate(accepted):
         accepted[i] = {'neologisme': neo[0], 'liked': neo[1], 'id': neo[2]}
@@ -319,23 +322,68 @@ def getweekneos():
     return jsonify(neos), status.HTTP_200_OK
 
 
-@main_bp.route('/neologismes/<neoid>', methods=['GET'])
+@main_bp.route('/neologismes/<neoid>', methods=['GET', 'PUT'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-def getneo(neoid):
-    neo = Neologismo.query.filter_by(id_neologisme=neoid)\
-        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme, Neologismo.date_approved)\
-        .first()
-    neologismo = {}
-    neologismo['user'] = Usuario.query.get(neo[0]).nickname
-    neologismo['descriptions'] = Description.query.filter_by(
-        id_neologisme=neo[4]).with_entities(Description.text).all()
-    neologismo['sources'] = Source.query.filter_by(
-        id_neologisme=neo[4]).with_entities(Source.link).all()
-    neologismo['neologisme'] = neo[1]
-    neologismo['liked'] = neo[2]
-    neologismo['state'] = neo[3]
-    neologismo['date'] = neo[5]
-    return neologismo, status.HTTP_200_OK
+def neo(neoid):
+    if request.method == 'GET':
+        neo = Neologismo.query.filter_by(id_neologisme=neoid)\
+            .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme, Neologismo.date_approved)\
+            .first()
+        neologismo = {}
+        neologismo['user'] = Usuario.query.get(neo[0]).nickname
+        neologismo['descriptions'] = Description.query.filter_by(
+            id_neologisme=neo[4]).with_entities(Description.text).all()
+        neologismo['sources'] = Source.query.filter_by(
+            id_neologisme=neo[4]).with_entities(Source.link).all()
+        neologismo['neologisme'] = neo[1]
+        neologismo['liked'] = neo[2]
+        neologismo['state'] = neo[3]
+        neologismo['date'] = neo[5].strftime("%d/%m/%y")
+        return neologismo, status.HTTP_200_OK
+    
+    elif request.method == 'PUT':
+        neo = Neologismo.query.get(neoid)
+        try:
+            method = request.form['do']
+            if method == 'accept':
+                neo.state = 'aceptado'
+                neo.date_approved = datetime.date.today()
+            elif method == 'reject':
+                neo.state = 'rechazado: ' + request.form['message']
+            elif method == 'modify':
+                neo.name = request.form['name']
+                neo.state = 'pendiente'
+
+                descriptions = []
+                for i in range(int(request.form['numDescr'])):
+                    descriptions.append(request.form['description'+str(i)])
+
+                sources = []
+                for i in range(int(request.form['numSourc'])):
+                    sources.append(request.form['source'+str(i)])
+
+                Description.query.filter_by(id_neologisme=neoid).delete()
+                Source.query.filter_by(id_neologisme=neoid).delete()
+                print('Sources: ', sources, ' descrs: ', descriptions, ' name: ', request.form['name'])
+                for i in range(len(sources)):
+                    new_source = Source(
+                        link=sources[i], id_neologisme=neoid)
+                    db.session.add(new_source)
+
+                for i in range(len(descriptions)):
+                    new_description = Description(
+                        text=descriptions[i], id_neologisme=neoid)
+                    db.session.add(new_description)
+            try:
+                db.session.commit()
+            except Exception as e:
+                print('Committing: ', e)
+                db.session.rollback()
+                return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+        except Exception as e:
+            print('Modifying: ', e)
+            return "Something went wrong", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "neologism succesfully modified", status.HTTP_201_CREATED
 
 
 @main_bp.route('/allusers', methods=['GET'])

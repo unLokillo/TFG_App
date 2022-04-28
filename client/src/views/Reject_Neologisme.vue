@@ -6,10 +6,10 @@
       </a>
     </div>
     <h2>Rechazar neologismo</h2>
-    <p>Por favor, cuéntanos por qué has rechazado este neologismo</p>
+    <p>Por favor, cuéntanos por qué rechazas este neologismo</p>
     <b-form-textarea
       v-model="mssg"
-      placeholder="¿Por qué lo has rechazado?"
+      placeholder="¿Por qué no es adecuado?"
       rows="5"
       max-rows="150"
       class="reject-info"
@@ -27,13 +27,13 @@
 import axios from "axios";
 export default {
   created() {
-    var uri = "http://localhost:3000/neologismes/" + this.$route.params.neoId;
+    /*var uri = "http://localhost:3000/neologismes/" + this.$route.params.neoId;
     axios.get(uri).then((response_neo) => {
       this.f_user = response_neo.data.user;
     });
     axios.get("http://localhost:3000/login/1").then((response_log) => {
       this.login = response_log.data;
-    });
+    });*/
   },
   data() {
     return {
@@ -44,7 +44,20 @@ export default {
   },
   methods: {
     submit(n_mssg) {
-      this.f_user.splice(0, 1, {
+      var formData = new FormData();
+      formData.append('do', 'reject');
+      formData.append('message', n_mssg);
+      axios.put("http://127.0.0.1:5000/neologismes/" +
+        this.$route.params.neoId,
+        formData,
+        { withCredentials: true }
+        ).then( res => {
+          if(res.status==201)
+            this.$router.go(-1)
+          else console.log("El servidor ha devuelto una respuesta inesperada: ", res.status)
+        });
+
+      /*this.f_user.splice(0, 1, {
         user_id: this.f_user[0].user_id,
         user: this.f_user[0].user,
         date: this.f_user[0].date,
@@ -55,7 +68,7 @@ export default {
         "http://localhost:3000/neologismes/" + this.$route.params.neoId,
         { user: this.f_user }
       );
-      this.$router.go(-2); // -> /user/123
+      this.$router.go(-2); // -> /user/123*/
     },
   },
 };

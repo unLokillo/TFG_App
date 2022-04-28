@@ -1,5 +1,5 @@
 <template>
-  <div class="modify-user-body">
+  <div class="modify-user-body" v-if="this.mostrar">
     <div class="close-modal">
       <a @click="$router.go(-1)">
         <font-awesome-icon style="font-size: 140%" icon="times" />
@@ -8,29 +8,18 @@
     <h4>Modificar Propuesta de Neologismo</h4>
     <p style="font-size: 14px">
       <i>
-        Un neologismo es una palabra del ámbito del Internet de las Cosas que te
+        Tu neologismo debe ser una palabra del ámbito del Internet de las Cosas que te
         parezca novedosa.</i
       >
     </p>
     <b-input-group prepend="Neologismo: " class="mt-3">
       <b-form-input v-model="form.neologisme"></b-form-input>
-      <b-input-group-append>
-        <b-button variant="outline-success" v-on:click="submit('neologisme')"
-          >Modificar</b-button
-        >
-      </b-input-group-append>
     </b-input-group>
-
-    <h6>Modificar Contextos</h6>
+    <h6 v-if="this.mostrar && this.ndes>0">Modificar Contextos</h6>
     <div v-for="(value, index) in form.descriptions" :key="index">
       <b-input-group prepend="Descripción: " class="mt-3">
-        <b-form-input v-model="form.descriptions[index].value"></b-form-input>
+        <b-form-input v-model="form.descriptions[index][0]"></b-form-input>
         <b-input-group-append>
-          <b-button
-            variant="outline-success"
-            v-on:click="submit('description_single')"
-            >Modificar</b-button
-          >
           <b-button
             style="background-color: darkred !important"
             v-on:click="del('description_single', index)"
@@ -41,20 +30,15 @@
     </div>
     <h6>Añadir Contextos</h6>
     <p style="font-size: 14px">
-      <i> Incluye la frase completa en la que has encontrado el neologismo</i>
+      <i> Incluye la frase completa en la que has encontrado el neologismo o descripciones que se le puedan dar</i>
     </p>
     <TodoBox v-on:childToParent="onDescriptionsClick" />
 
-    <h6>Modificar Fuentes</h6>
+    <h6 v-if="this.mostrar && this.nsour>0">Modificar Fuentes</h6>
     <div v-for="(value, index) in form.sources" :key="'A' + index">
       <b-input-group prepend="Fuente: " class="mt-3">
-        <b-form-input v-model="form.sources[index].value"></b-form-input>
+        <b-form-input v-model="form.sources[index][0]"></b-form-input>
         <b-input-group-append>
-          <b-button
-            variant="outline-success"
-            v-on:click="submit('source_single')"
-            >Modificar</b-button
-          >
           <b-button
             style="background-color: darkred !important"
             v-on:click="del('source_single', index)"
@@ -72,7 +56,7 @@
       class="mt-3"
       type="submit"
       variant="primary"
-      v-on:click="submit('all')"
+      v-on:click="submit()"
       >Modificar</b-button
     >
   </div>
@@ -87,13 +71,14 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:3000/neologismes/" + this.$route.params.neoId)
+      .get("http://127.0.0.1:5000/neologismes/" +
+      this.$route.params.neoId,
+      { withCredentials: true })
       .then((response_neo) => {
         this.form = response_neo.data;
-      }),
-      axios.get("http://localhost:3000/login/1").then((response) => {
-        this.login = response.data;
-      });
+        this.ndes = this.form.descriptions.length;
+        this.nsour = this.form.sources.length;
+      })
   },
   data() {
     return {
@@ -103,7 +88,13 @@ export default {
       sources: [],
       name: "",
       neo_aux: "",
+      mostrar: false,
+      ndes: 0,
+      nsour: 0
     };
+  },
+  mounted(){
+    this.mostrar=true
   },
   methods: {
     onDescriptionsClick(value) {
@@ -114,20 +105,18 @@ export default {
     },
     addDescriptions() {
       for (let index = 0; index < this.descriptions.length; index++) {
-        this.form.descriptions.push({
-          id:
-            this.form.descriptions[this.form.descriptions.length - 1].id +
-            (1 + index),
-          value: this.descriptions[index].value,
-        });
+        this.form.descriptions.push(
+          this.descriptions[index].value
+        );
+        this.ndes++;
       }
     },
     addSources() {
       for (let index = 0; index < this.sources.length; index++) {
-        this.form.sources.push({
-          id: this.form.sources[this.form.sources.length - 1].id + (1 + index),
-          value: this.sources[index].value,
-        });
+        this.form.sources.push(
+          this.sources[index].value
+        );
+        this.nsour++;
       }
     },
     del(type, index) {
@@ -135,76 +124,46 @@ export default {
       switch (type) {
         case "description_single":
           this.form.descriptions.splice(index, 1);
+          this.ndes--;
           payload = {
             descriptions: this.form.descriptions,
           };
           break;
         case "source_single":
           this.form.sources.splice(index, 1);
+          this.nsour--;
           payload = {
             sources: this.form.sources,
           };
           break;
       }
-      axios.patch(
-        "http://localhost:3000/neologismes/" + this.$route.params.neoId,
-        payload
-      );
     },
-    submit(type) {
-      var payload = {};
-      for (let index = 0; index < this.form.user.length; index++) {
-        if (this.login.user_id == this.form.user[index].user_id) {
-          this.form.user.splice(index, 1, {
-            user_id: this.form.user[index].user_id,
-            user: this.form.user[index].user,
-            date: this.form.user[index].date,
-            rejected: false,
-            mssg: "",
-            modify_elements: this.mod_elements,
-          });
-          break;
-        }
+    submit() {
+      this.addDescriptions();
+      this.addSources();
+      var formData = new FormData();
+      formData.append('do', 'modify');
+      formData.append('name', this.form.neologisme);
+      for(var i = 0; i < this.form.descriptions.length; i++){
+        formData.append('description' + i, this.form.descriptions[i]);
       }
-      switch (type) {
-        case "neologisme":
-          payload = {
-            neologisme: this.form.neologisme,
-            user: this.form.user,
-          };
-          break;
-        case "description_single":
-          payload = {
-            descriptions: this.form.descriptions,
-            user: this.form.user,
-          };
-          break;
-        case "source_single":
-          payload = {
-            sources: this.form.sources,
-            user: this.form.user,
-          };
-          break;
-        case "all":
-          this.addDescriptions();
-          this.addSources();
-          payload = {
-            neologisme: this.form.neologisme,
-            descriptions: this.form.descriptions,
-            sources: this.form.sources,
-            user: this.form.user,
-          };
-          axios.patch(
-            "http://localhost:3000/neologismes/" + this.$route.params.neoId,
-            payload
-          );
-          this.$router.push({ path: `/` });
-          break;
+      formData.append('numDescr', this.form.descriptions.length);
+      for(var i = 0; i < this.form.sources.length; i++){
+        formData.append('source' + i, this.form.sources[i]);
       }
-      axios.patch(
-        "http://localhost:3000/neologismes/" + this.$route.params.neoId,
-        payload
-      );
+      formData.append('numSourc', this.form.sources.length);
+
+      axios.put("http://127.0.0.1:5000/neologismes/" +
+        this.$route.params.neoId,
+        formData,
+        { withCredentials: true }
+        ).then(res => {
+          if(res.status==201){
+            this.$router.push({ path: `/` });
+          } else {
+            console.log("Something went wrong: ", res.status);
+          }
+        });
     },
   },
 };

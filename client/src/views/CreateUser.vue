@@ -82,7 +82,7 @@
           required
         ></b-form-select>
       </div>
-      <div>
+      <!--<div>
         <div class="selectors-card">
           <h6>Imagen de perfil</h6>
           <input
@@ -95,7 +95,7 @@
             @change="handleUploadImage"
           />
         </div>
-      </div>
+      </div>-->
       <b-button class="mt-3" type="submit" variant="primary">Enviar</b-button>
     </b-form>
   </div>
@@ -172,13 +172,13 @@ export default {
     submit(event) {
       event.preventDefault();
       var formData = new FormData();
-      if (this.image != undefined) {
+      /*if (this.image != undefined) {
         formData.append("imagen", this.image, this.image.name);
         formData.append("imageno", "yes");
       } else {
         this.image = "default";
         formData.append("imageno", "default");
-      }
+      }*/
 
       for (const i in this.form) {
         formData.append(i, this.form[i]);

@@ -37,8 +37,8 @@
         <i> Indica con detalle dónde lo has encontrado </i>
       </p>
       <TodoBox v-on:childToParent="onSourcesClick" />
-    </div>
-    <h6>Imagen</h6>
+    </div><br>
+    <!--<h6>Imagen</h6>
     <div class="selectors-card">
       <input
         type="file"
@@ -49,7 +49,7 @@
         accept=".jpg, .png"
         @change="handleUploadImage"
       />
-    </div>
+    </div>-->
     <b-button @click="submit"> Listo </b-button>
   </div>
 </template>
@@ -83,13 +83,13 @@ export default {
     submit(event) {
       event.preventDefault();
       var formData = new FormData();
-      if (this.image != undefined) {
+      /*if (this.image != undefined) {
         formData.append("imagen", this.image, this.image.name);
         formData.append("imageno", "yes");
       } else {
         this.image = "default";
         formData.append("imageno", "default");
-      }
+      }*/
 
       // Add descriptions
       for (var i = 0; i < this.form["descriptions"].length; i++) {

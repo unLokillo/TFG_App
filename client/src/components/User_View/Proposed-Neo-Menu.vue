@@ -7,19 +7,19 @@
       <div v-if="index < 5">
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
         <h5>{{ value.neologisme }}</h5>
-        <div v-if="value.status == 'rechazado'">
-          <font-awesome-icon
-            style="font-size: 20px; color: darkred"
-            icon="times-circle"
-          />
-          Rechazado
-        </div>
-        <div class="neo_card_pendent" v-else>
+        <div class="neo_card_pendent" v-if="value.state == 'pendiente'">
           <font-awesome-icon
             style="font-size: 20px; color: darkorange"
             icon="question-circle"
           />
           Pendiente
+        </div>
+        <div v-else >
+          <font-awesome-icon
+            style="font-size: 20px; color: darkred"
+            icon="times-circle"
+          />
+          Rechazado
         </div>
         <b-button
           class="bttn-app"

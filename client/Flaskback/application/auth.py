@@ -62,11 +62,11 @@ def signup():
     gender = request.form['gender']
     school = request.form['school']
     mother_tongue = request.form['mother_tongue']
-    if request.form['imageno'] == 'default':
+    '''if request.form['imageno'] == 'default':
         with open('./assets/default_profile.png', 'rb') as file:
             image = file.read()
     else:
-        image = request.files['imagen'].read()
+        image = request.files['imagen'].read()'''
     points = request.form['points']
     privileges = request.form['privileges']
 
@@ -85,7 +85,7 @@ def signup():
                        gender=gender,
                        school=school,
                        mother_tongue=mother_tongue,
-                       image=image,
+#                       image=image,
                        points=points,
                        privileges=privileges)
     new_user.set_password(passw)
