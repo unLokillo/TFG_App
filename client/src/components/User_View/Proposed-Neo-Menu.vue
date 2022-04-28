@@ -31,13 +31,13 @@
         >
       </div>
     </div>
-    <router-link
+    <!--<router-link
       :to="{
         name: 'view-all-proposals',
         params: { userid: $route.params.userid },
       }"
       ><b-button class="more-bttn">Ver más</b-button></router-link
-    >
+    >-->
   </div>
 </template>
 

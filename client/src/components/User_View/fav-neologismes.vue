@@ -6,14 +6,15 @@
       </a>
     </div>
     <div class="top-all-neologismes">
-      <h5>Neologismos favortios</h5>
+      <h5>Neologismos favoritos</h5>
     </div>
 
     <div class="neologisme-cards">
       <div v-for="(value, index) in neologismes" :key="index">
-        <b-avatar :src="value.img"></b-avatar>
-        <h5>{{ value.neologisme }}</h5>
-        <div><font-awesome-icon icon="heart" /> {{ value.liked }}</div>
+        <!--<b-avatar :src="value.img"></b-avatar>-->
+        <h5>{{ value.name }}</h5>
+        De: {{ value.user }}
+        <div><font-awesome-icon icon="heart" /> {{ value.likes }}</div>
         <b-button
           class="bttn-app"
           :to="{
@@ -21,8 +22,23 @@
             params: { userid: $route.params.userid, neoId: value.id },
           }"
         >
-          +</b-button
+          + info</b-button
         >
+        <font-awesome-icon
+            style="font-size: 20px; color: darkred"
+            icon="times-circle"
+            v-if="value.state.includes('rechazado')"
+          />
+        <font-awesome-icon
+            style="font-size: 20px; color: darkorange"
+            icon="question-circle"
+            v-else-if="value.state == 'pendiente'"
+          />
+        <font-awesome-icon
+            style="font-size: 20px; color: lightgreen"
+            icon="circle-check"
+            v-else-if="value.state == 'aceptado'"
+          />
       </div>
     </div>
   </div>
@@ -32,7 +48,12 @@
 import axios from "axios";
 export default {
   created() {
-    axios.get("http://localhost:3000/login/1").then((response_log) => {
+    axios.get('http://127.0.0.1:5000/users/' + this.$route.params.userid + '/favs', { withCredentials: true })
+    .then(res => {
+      this.neologismes = res.data;
+    });
+    
+    /*axios.get("http://localhost:3000/login/1").then((response_log) => {
       this.login = response_log.data;
       axios
         .get("http://localhost:3000/users/" + this.$route.params.userid)
@@ -51,7 +72,7 @@ export default {
               }
             });
         });
-    });
+    });*/
   },
   data() {
     return {

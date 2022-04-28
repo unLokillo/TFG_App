@@ -450,3 +450,23 @@ def neolikes(neoid):
             db.session.rollback()
             return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
         return "Removed succesfully", status.HTTP_204_NO_CONTENT
+
+
+@main_bp.route('/users/<userid>/favs', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def userlikes(userid):
+    neoids = UserlikesNeologisme.query.filter_by(id_user=userid).with_entities(UserlikesNeologisme.id_neologisme).all()
+    for i, neo in enumerate(neoids):
+        neoids[i] = neoids[i][0]
+    neos = Neologismo.query.filter(Neologismo.id_neologisme.in_(neoids)).all()
+    res = []
+    for i, neo in enumerate(neos):
+        neologismo = {}
+        neologismo['id'] = neo.id_neologisme
+        neologismo['likes'] = neo.likes
+        neologismo['name'] = neo.name
+        neologismo['state'] = neo.state
+        neologismo['user'] = Usuario.query.get(neo.id_user).nickname
+        res.append(neologismo)
+    return jsonify(res), status.HTTP_200_OK

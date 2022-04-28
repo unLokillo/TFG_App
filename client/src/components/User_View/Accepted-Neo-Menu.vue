@@ -18,13 +18,13 @@
         >
       </div>
     </div>
-    <router-link
+    <!--<router-link
       :to="{
         name: 'view-all-neologismes',
         params: { userid: $route.params.userid },
       }"
       ><b-button class="more-bttn">Ver más</b-button></router-link
-    >
+    >-->
   </div>
 </template>
 
@@ -63,7 +63,6 @@ export default {
   margin: 40px 10px 40px 10px;
   background-color: var(--third-color);
 
-  border: 1px solid var(--border);
 }
 .ranking-title {
   text-align: left;
