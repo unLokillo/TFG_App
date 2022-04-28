@@ -1,13 +1,13 @@
 TAREAS
 
 BackEnd
-	- Base de datos
+	- Base de datos ✓
 		- Diseño ✓
 		- Implementación ✓
 		- Protección ✓
 		- Tareas de perfeccionamiento
 			- Cambio de PK a 'id' en todas las tablas
-	- Autenticación
+	- Autenticación ✓
 		- Registro ✓
 		- Login ✓
 		- Logout ✓
@@ -23,7 +23,7 @@ BackEnd
 		- Usuarios ✓
 		- Neologismos ✓
 	- Creación neologismos ✓
-	Recogida de base de datos
+	Recogida de base de datos ✓
 		- Neologismos para: ←
 			- Ranking principal ✓
 			- Ranking secundario ✓
@@ -31,8 +31,11 @@ BackEnd
 			- Actividad
 		- Logros para:
 			- Tus logros
-	- Aprobación de neologismos
-	- Movidas de lingüistas y administradores
+	- Aprobación de neologismos ✓
+	- Movidas de lingüistas y administradores ✓
+	- Implementación de logros
+	- Gestión de imágenes
+	- Hacer RESTful la API
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)
@@ -43,15 +46,14 @@ FrontEnd
 	- Cambiar enlace info y preg. frecuentes bien ✓
 	- Poner tilde a "Registrate" ✓
 	- Beautyfy changePassword ✓
-	- Añadir botón de página principal
+	- Añadir botón de página principal ✓
 	- Añadir cabecera en todas las páginas / página 404
 	- No permitir contraseña mal (solo lo avisa)
-	- Cambiar admin y linguist por privileges
+	- Cambiar admin y linguist por privileges ✓
 	- Mirar diferencia entre barra lateral en y fuera de /
 	- Poner enter=submit en login y más pantallas
 	- Eliminar errores en la consola
 	- No mostrar mensajes de error cuando no hay error
-	- Pasar imagen de perfil para home
 	- Cambiar a Newlogisme
 	- Añadir mensajes de error y de éxito
 	- Advertir sobre duración de token en recuperación de contraseña
@@ -68,18 +70,15 @@ General
 			- Todo
 	- Creación de administradores
 	- Eliminación de usuarios
-	- Eliminación comentario 
 	- Eliminación neologismos
 	- Descarga de CSV lingüista
 	- Notificación de errores por usuario
 	- Búsqueda de información por el usuario
-	- Sistema de puntuación
 	- Cambio de idioma en footer
 	- Comentarios (?)
-	- Reparar vista de neologismo
+	- Reparar vista de neologismo ✓
 	- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
-	- Hacer RESTful la API
-	- Arreglar likes
+	- Arreglar likes ✓
 	- Logros
 	- Mirar que es baseprogress.vue
 	- Tareas de perfeccionamiento
