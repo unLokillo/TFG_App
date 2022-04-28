@@ -6,42 +6,19 @@
       </a>
     </div>
     <h4>Modificar Información de usuario</h4>
-
     <b-input-group prepend="Alias: " class="mt-3">
       <b-form-input
         v-model="form.nickname"
         :value="form.nickname"
       ></b-form-input>
-      <b-input-group-append>
-        <b-button
-          variant="outline-success"
-          v-on:click="submit('nickname', form.nickname)"
-          >Modificar</b-button
-        >
-      </b-input-group-append>
     </b-input-group>
 
     <b-input-group prepend="Nombre: " class="mt-3">
       <b-form-input v-model="form.name" :value="form.name"></b-form-input>
-      <b-input-group-append>
-        <b-button
-          variant="outline-success"
-          v-on:click="submit('name', form.name)"
-        >
-          Modificar</b-button
-        >
-      </b-input-group-append>
     </b-input-group>
 
     <b-input-group prepend="Apellidos: " class="mt-3">
-      <b-form-input v-model="form.surname" :value="form.surname"></b-form-input>
-      <b-input-group-append>
-        <b-button
-          variant="outline-success"
-          v-on:click="submit('surname', form.surname)"
-          >Modificar</b-button
-        >
-      </b-input-group-append>
+      <b-form-input v-model="form.surname"></b-form-input>
     </b-input-group>
 
     <b-input-group prepend="Correo electrónico: " class="mt-3">
@@ -50,13 +27,6 @@
         :value="form.email"
         type="email"
       ></b-form-input>
-      <b-input-group-append>
-        <b-button
-          v-on:click="submit('email', form.email)"
-          variant="outline-success"
-          >Modificar</b-button
-        >
-      </b-input-group-append>
     </b-input-group>
 
     <div class="password-box">
@@ -71,22 +41,11 @@
       <b-input-group prepend="Repite la Contraseña: " class="mt-3">
         <b-form-input type="password" v-model="r_password"></b-form-input>
       </b-input-group>
-      <b-button
-        variant="outline-success"
-        v-on:click="submit('password', form.password)"
-        >Modificar</b-button
-      >
     </div>
 
     <div class="selectors-card">
-      <h6>Fecha de Nacimiento</h6>
-      <b-form-datepicker v-model="form.date" class="mb-2"></b-form-datepicker>
-      <b-button
-        variant="outline-success"
-        :show-decade-nav="true"
-        v-on:click="submit('date', form.date)"
-        >Modificar</b-button
-      >
+      <h6>Fecha de Nacimiento: {{form.date}}</h6>
+      <b-form-datepicker v-model="form.date" class="mb-2">{{form.date}}</b-form-datepicker>
     </div>
     <div class="selectors-card">
       <h6>Genero</h6>
@@ -96,26 +55,16 @@
         :options="genders"
         required
       ></b-form-select>
-      <b-button
-        variant="outline-success"
-        v-on:click="submit('gender', form.gender)"
-        >Modificar</b-button
-      >
     </div>
     <div class="selectors-card">
       <h6>Lengua materna</h6>
       <b-form-select
         class="mt-3"
-        v-model="form.mother_tonge"
-        :value="form.mother_tonge"
+        v-model="form.mother_tongue"
+        :value="form.mother_tongue"
         :options="mother_tonges"
         required
       ></b-form-select>
-      <b-button
-        variant="outline-success"
-        v-on:click="submit('mother_tonge', form.mother_tonge)"
-        >Modificar</b-button
-      >
     </div>
     <div class="selectors-card">
       <h6>Escuela UPM</h6>
@@ -126,14 +75,16 @@
         :options="schools"
         required
       ></b-form-select>
-      <b-button
-        variant="outline-success"
-        v-on:click="submit('school', form.school)"
-        >Modificar</b-button
-      >
     </div>
     <div>
-      <div class="selectors-card">
+    <b-button
+        class="mt-3"
+        type="submit"
+        v-on:click="submit()"
+        variant="primary"
+        >Guardar</b-button
+      ><br><br><br>
+      <!--<div class="selectors-card">
         <h6>Avatar</h6>
         <b-form-file
           v-model="form.img"
@@ -152,7 +103,7 @@
           variant="primary"
           >Modificar imagen</b-button
         >
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -162,8 +113,7 @@ import axios from "axios";
 export default {
   created() {
     axios
-      .get("http://localhost:3000/users/" + this.$route.params.userid)
-
+      .get("http://127.0.0.1:5000/user", { withCredentials: true })
       .then((response) => {
         //this.name = response.data[0].name;
         this.form.nickname = response.data.nickname;
@@ -171,10 +121,11 @@ export default {
         this.form.surname = response.data.surname;
         this.form.email = response.data.email;
         this.form.date = response.data.date;
+        this.firstdate = response.data.date;
         this.form.gender = response.data.gender;
         this.form.password = response.data.password;
         this.form.school = response.data.school;
-        this.form.mother_tonge = response.data.mother_tonge;
+        this.form.mother_tongue = response.data.mother_tongue;
         this.form.image = response.data.image;
       });
   },
@@ -204,61 +155,56 @@ export default {
       ],
       schools: [
         { text: "Select One", value: null },
+        "ETSAM",
+        "ETSE",
         "ETSIINF",
         "ETSII",
         "ETSIAE",
         "INEF",
+        "ETSISI",
+        "ETSIST",
+        "ETSME",
       ],
       mother_tonges: [
         { text: "Select One", value: null },
         "Español",
-        "Ingles",
-        "Frances",
+        "Inglés",
+        "Portugués",
+        "Alemán",
+        "Francés",
         "Chino",
       ],
       show: true,
       r_password: "",
+      firstdate: ""
     };
   },
   methods: {
-    submit(type, value) {
-      var payload = {};
-      switch (type) {
-        case "nickname":
-          payload = { nickname: value };
-          break;
-        case "name":
-          payload = { name: value };
-          break;
-        case "surname":
-          payload = { surname: value };
-          break;
-        case "date":
-          payload = { date: value };
-          break;
-        case "gender":
-          payload = { gender: value };
-          break;
-        case "school":
-          payload = { school: value };
-          break;
-        case "mother_tonge":
-          payload = { mother_tonge: value };
-          break;
-        case "image":
-          payload = { image: value };
-          break;
-        case "email":
-          payload = { email: value };
-          break;
-        case "password":
-          payload = { password: value };
-          break;
+    submit() {
+      var formData = new FormData();
+      formData.append('do', 'modify');
+      formData.append('nickname', this.form.nickname);
+      formData.append('name', this.form.name);
+      formData.append('surname', this.form.surname);
+      formData.append('email', this.form.email);
+      if(this.firstdate!=this.form.date){
+        formData.append('date', this.form.date);
       }
-      axios.patch(
-        "http://localhost:3000/users/" + this.$route.params.userid,
-        payload
-      );
+      formData.append('gender', this.form.gender);
+      formData.append('password', this.form.password);
+      formData.append('school', this.form.school);
+      formData.append('mother_tongue', this.form.mother_tongue);
+      axios.put("http://127.0.0.1:5000/users/" +
+        this.$route.params.userid,
+        formData,
+        { withCredentials: true }
+        ).then(res => {
+          if(res.status==201){
+            this.$router.go(-1);
+          } else {
+            console.log("Something went wrong: ", res.status);
+          }
+        });
     },
   },
 };

@@ -206,7 +206,6 @@ export default {
       this.liked = false;
       var i = 0
       for (i; i < this.response.data.length; i++){
-        console.log(this.username, this.response.data[i].nickname, this.appear)
         if (this.username == this.response.data[i].nickname) {
           this.liked = true;
         }

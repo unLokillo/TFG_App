@@ -152,7 +152,8 @@ def getuser():
     name = current_user.name
     surname = current_user.surname
     email = current_user.email
-    date = current_user.birthdate
+    date = current_user.birthdate.strftime("%d/%m/%y")
+    mother_tongue = current_user.mother_tongue
     gender = current_user.gender
     school = current_user.school
     points = current_user.points
@@ -164,7 +165,7 @@ def getuser():
     fav_neo = [1, 2]
     # img
     privileges = current_user.privileges
-    res = dict_of(iduser, nickname, name, surname, email, date,
+    res = dict_of(iduser, nickname, name, surname, email, date, mother_tongue,
                   gender, school, points, position, fav_neo, privileges)
     return res, status.HTTP_200_OK
 
@@ -179,49 +180,50 @@ def putuser(iduser):
     except:
         pass
     try:
-        user.privileges = request.form['nickname']
+        user.nickname = request.form['nickname']
     except:
         pass
     try:
-        user.privileges = request.form['name']
+        user.name = request.form['name']
     except:
         pass
     try:
-        user.privileges = request.form['surname']
+        user.surname = request.form['surname']
     except:
         pass
     try:
-        user.privileges = request.form['email']
+        user.email = request.form['email']
     except:
         pass
     try:
-        user.privileges = request.form['birthdate']
+        user.birthdate = request.form['date']
     except:
         pass
     try:
-        user.privileges = request.form['gender']
+        user.gender = request.form['gender']
     except:
         pass
     try:
-        user.privileges = request.form['password']
+        user.password = request.form['password']
     except:
         pass
     try:
-        user.privileges = request.form['school']
+        user.school = request.form['school']
     except:
         pass
     try:
-        user.privileges = request.form['mother_tongue']
+        user.mother_tongue = request.form['mother_tongue']
     except:
         pass
     try:
-        user.privileges = request.form['points']
+        user.points = request.form['points']
     except:
         pass
     try:
         db.session.commit()
     except:
         db.session.rollback()
+        return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
     return "modified", status.HTTP_201_CREATED
 
 
