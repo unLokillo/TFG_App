@@ -20,6 +20,9 @@
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
         {{ value.neologismo }}
       </div>
+      <div class="author">
+        De: {{value.user}}
+      </div>
       <div class="v-ranking-points">
         <font-awesome-icon style="font-size: 15px; margin-right: 7px" icon="heart" />
         {{ value.liked }}
@@ -104,6 +107,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  padding-left: 70%;
+}
+
+.author {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding-left: 0%;
 }
 
 .v-ranking-user {
@@ -125,9 +137,12 @@ export default {
   font-size: 20px;
 }
 .avatar-card {
-  width: 30%;
+  width: 20%;
   display: flex;
   justify-content: inherit;
   align-items: center;
+  position: fixed;
+  padding-left: 25%;
+  font-weight: bold;
 }
 </style>
