@@ -6,7 +6,12 @@
       </a>
     </div>
     <div class="top-badges_menu-section">
-      <h3>Mis logros</h3>
+      <h3 style="display:flex; justify-content: space-between; width:60%">
+        <font-awesome-icon style="font-size: 40px; text-align: left;" icon="trophy" />
+        Mis logros
+        <font-awesome-icon style="font-size: 40px; text-align: right;" icon="trophy" />
+      </h3>
+      
     </div>
     <div>
       <b-table hover striped :items="badges" :fields="fields"></b-table>
@@ -61,7 +66,7 @@ export default {
 <style>
 .top-badges_menu-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: column;
   padding: 2%;
   border-bottom: 1px solid var(--border);
