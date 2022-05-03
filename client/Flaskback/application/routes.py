@@ -223,6 +223,7 @@ def putuser(iduser):
     elif request.method == 'DELETE':
         user = Usuario.query.get(iduser)
         user.set_password(str(uuid.uuid4()))
+        user.privileges = 'removed'
         try:
             db.session.commit()
         except:
@@ -406,10 +407,10 @@ def neo(neoid):
 @login_required
 def getallusers():
     if current_user.privileges == 'admin':
-        res = Usuario.query.order_by(Usuario.points.desc()).all()
+        res = Usuario.query.order_by(Usuario.points.desc()).filter(Usuario.privileges != 'removed').all()
     elif current_user.privileges == 'linguist':
         res = Usuario.query.order_by(Usuario.points.desc()).filter(
-            Usuario.privileges != 'admin').all()
+            Usuario.privileges != 'admin' and Usuario.privileges != 'removed').all()
     else:
         res = Usuario.query.order_by(
             Usuario.points.desc()).filter_by(privileges='user').all()
