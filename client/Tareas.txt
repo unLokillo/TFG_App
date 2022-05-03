@@ -1,89 +1,98 @@
 TAREAS
 
 BackEnd
-	- Base de datos ✓
-		- Diseño ✓
-		- Implementación ✓
-		- Protección ✓
-		- Tareas de perfeccionamiento
-			- Cambio de PK a 'id' en todas las tablas
-	- Autenticación ✓
-		- Registro ✓
-		- Login ✓
-		- Logout ✓
-		- Restablecer contraseña ✓
-		- Tareas de perfeccionamiento
-			- Cuidado con que itsdangerous antiguo no rompa nada
-			- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
-			- Paso de flask-mail a aws SES en envío de email
-			- Hacer más estricta la contraseña en pass reset con validator personalizado
-			- Hacer más corto el tiempo de expiración de cookie de inicio de sesión
-	- Mostrar datos del usuario en mi perfil ✓
-	- Gestionar puestos ✓
-		- Usuarios ✓
-		- Neologismos ✓
-	- Creación neologismos ✓
-	Recogida de base de datos ✓
-		- Neologismos para: ←
-			- Ranking principal ✓
-			- Ranking secundario ✓
-			- Tus propuestas ✓
-			- Actividad
-		- Logros para:
-			- Tus logros ✓
-	- Aprobación de neologismos ✓
-	- Movidas de lingüistas y administradores ✓
-	- Implementación de logros
-	- Gestión de imágenes
-	- Hacer RESTful la API
+	- Funciones necesarias
+		- Añadir logros a base de datos
+		- Implementación de logros
+	- Funciones deseadas
+		- Gestión de imágenes
+		- Hacer RESTful la API
+	- Completado
+		- Base de datos ✓
+			- Diseño ✓
+			- Implementación ✓
+			- Protección ✓
+			- Tareas de perfeccionamiento
+				- Cambio de PK a 'id' en todas las tablas
+		- Autenticación ✓
+			- Registro ✓
+			- Login ✓
+			- Logout ✓
+			- Restablecer contraseña ✓
+			- Tareas de perfeccionamiento
+				- Cuidado con que itsdangerous antiguo no rompa nada
+				- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
+				- Paso de flask-mail a aws SES en envío de email
+				- Hacer más estricta la contraseña en pass reset con validator personalizado
+				- Hacer más corto el tiempo de expiración de cookie de inicio de sesión
+		- Mostrar datos del usuario en mi perfil ✓
+		- Gestionar puestos ✓
+			- Usuarios ✓
+			- Neologismos ✓
+		- Creación neologismos ✓
+		- Recogida de base de datos ✓
+			- Neologismos para: ←
+				- Ranking principal ✓
+				- Ranking secundario ✓
+				- Tus propuestas ✓
+				- Actividad
+			- Logros para:
+				- Tus logros ✓
+		- Aprobación de neologismos ✓
+		- Movidas de lingüistas y administradores ✓
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)
 		- Eliminar Marshmallow y los Schemas
 
 FrontEnd
-	- Actualización de elementos cuando cambian
-	- Cambiar enlace info y preg. frecuentes bien ✓
-	- Poner tilde a "Registrate" ✓
-	- Beautyfy changePassword ✓
-	- Añadir botón de página principal ✓
-	- Añadir cabecera en todas las páginas / página 404
-	- No permitir contraseña mal (solo lo avisa)
-	- Cambiar admin y linguist por privileges ✓
-	- Mirar diferencia entre barra lateral en y fuera de /
-	- Poner enter=submit en login y más pantallas
-	- Eliminar errores en la consola
-	- No mostrar mensajes de error cuando no hay error
-	- Cambiar a Newlogisme
-	- Añadir mensajes de error y de éxito
-	- Advertir sobre duración de token en recuperación de contraseña
+	- Funciones necesarias
+		- Advertir sobre duración de token en recuperación de contraseña
+		- No permitir contraseña mal (solo lo avisa)
+		- Actualización de elementos cuando cambian
+	- Funciones deseadas
+		- Añadir cabecera en todas las páginas / página 404
+		- Eliminar errores en la consola
+		- Añadir mensajes de error y de éxito
+		- No mostrar mensajes de error cuando no hay error
+	- Tareas de perfeccionamiento
+		- Cambiar a Newlogisme
+		- Mirar diferencia entre barra lateral en y fuera de /
+		- Poner enter=submit en login y más pantallas
+	- Completado
+		- Cambiar enlace info y preg. frecuentes bien ✓
+		- Poner tilde a "Registrate" ✓
+		- Beautyfy changePassword ✓
+		- Añadir botón de página principal ✓
+		- Cambiar admin y linguist por privileges ✓
 
 General
-	- Parte de ADMINISTRADORES
-	- Arreglar partes que solo funcionan con sesión iniciada
-	- Arreglar partes que fallan con plain user y sin iniciar sesión
-	- Descarga de CSV lingüista y administradores
-	- Actividades
-		- Cartas deslizantes ✓
-		- Contexto correcto
-			- Todo
-	- Creación de administradores
-	- Eliminación de usuarios
-	- Eliminación neologismos
-	- Descarga de CSV lingüista
-	- Notificación de errores por usuario
-	- Búsqueda de información por el usuario
-	- Cambio de idioma en footer
-	- Comentarios (?)
-	- Reparar vista de neologismo ✓
-	- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
-	- Arreglar likes ✓
-	- Logros
-	- Mirar que es baseprogress.vue
+	- Funciones necesarias
+		- Botón de revisar neologismos
+		- Visualizar notificaciones de error de usuarios
+		- Descarga de CSV
+		- Eliminación neologismos
+	- Errores
+		- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
+		- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
+	- Funciones futuras
+		- Notificación de errores por usuario
+		- Búsqueda de información por el usuario
+		- Cambio de idioma en footer
+		- Comentarios
+		- Actividad contexto correcto
+	- Completado
+		- Actividad cartas deslizantes ✓
+		- Creación de administradores ✓
+		- Eliminación de usuarios ✓
+		- Reparar vista de neologismo ✓
+		- Arreglar likes ✓
+		- Logros ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
 		- Reducir llamadas a backend duplicadas
+		- Mirar que es baseprogress.vue
 
 Despliegue
 	- Creación máquina virtual con todo montado
