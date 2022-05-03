@@ -97,13 +97,13 @@
     <br>
     <div class="user-tag">
       <div>Creado por: {{ form.user }}</div>
-      <div>Aprobado el {{ form.date }}</div>
+      <div v-if="form.date!='None'">Aprobado el {{ form.date }}</div>
     </div>
     <div
       class="admin-options"
       v-if="(login.privileges=='linguist' || login.privileges=='admin') & form.state=='pendiente'"
       :key="updateneo"
-    >
+    > 
       <b-button
         class="bttn-app"
         v-on:click="accept()"
@@ -152,7 +152,7 @@ export default {
     axios
       .get("http://127.0.0.1:5000/user", { withCredentials: true })
       .then((response_u) => {
-        this.form_user = response_u.data;
+        this.login = response_u.data;
       });
       axios
       .get(
@@ -164,13 +164,6 @@ export default {
       .then((response) => {
         this.response = response;
         this.loging();
-        // this.appear=true
-        // this.loging().then(res =>{
-        //   theuser=res;
-        //   this.appear = true;
-        // })
-        // this.response = response;
-        // console.log(response)
         
       });
   },
@@ -212,20 +205,6 @@ export default {
       }
       this.likes = i;
       this.appear = true;
-        // .then((response_log) => {
-        //   console.log(response_log.data.username)
-        //   // this.login = response_log.data;
-        //   // this.username=response_log.data.username;
-        //   // console.log(this.username)
-        //   // this.appear = true;
-        // });
-      
-    },
-    async func(){
-      return await this.loging();
-    },
-    seeLiked() {
-      return this.form_user.fav_neo.includes(this.form.id);
     },
     like() {
       axios
@@ -289,55 +268,6 @@ export default {
         { withCredentials: true }
         );
       this.updateneo += 1
-      /*
-      var payload = {
-        proposal: false,
-        user: [
-          {
-            user_id: this.form.user[0].user_id,
-            user: this.form.user[0].user,
-            date: this.form.user[0].date,
-            rejected: false,
-            mssg: "",
-          },
-        ],
-      };
-      axios.patch("http://localhost:3000/neologismes/" + id, payload);
-      for (let index = 0; index < this.form_user.proposals.length; index++) {
-        if (this.form_user.proposals[index] == id) {
-          this.form_user.proposals.splice(index, 1);
-          break;
-        }
-      }
-      var payload2 = {
-        proposals: this.form_user.proposals,
-      };
-      axios.patch("http://localhost:3000/users/" + this.form_user.id, payload2);
-
-      axios
-        .get("http://localhost:3000/users/" + this.form.user[0].user_id)
-        .then((response_u) => {
-          for (
-            let index = 0;
-            index < response_u.data.proposals.length;
-            index++
-          ) {
-            if (response_u.data.proposals[index] == id) {
-              response_u.data.proposals.splice(index, 1);
-              break;
-            }
-          }
-          response_u.data.accepted_neo.push(id);
-          var payload3 = {
-            proposals: this.form_user.proposals,
-            accepted_neo: response_u.data.accepted_neo,
-          };
-          axios.patch(
-            "http://localhost:3000/users/" + this.form.user[0].user_id,
-            payload3
-          );
-        });
-      this.$router.push({ path: `/` });*/
     },
   },
 };

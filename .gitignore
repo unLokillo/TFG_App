@@ -171,3 +171,4 @@ npm-debug.log
 yarn-error.log
 client/Flaskback/flask_session/
 .vscode/
+client/Flaskback/db.sqlite
