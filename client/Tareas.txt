@@ -30,7 +30,7 @@ BackEnd
 			- Tus propuestas ✓
 			- Actividad
 		- Logros para:
-			- Tus logros
+			- Tus logros ✓
 	- Aprobación de neologismos ✓
 	- Movidas de lingüistas y administradores ✓
 	- Implementación de logros
@@ -61,11 +61,10 @@ FrontEnd
 General
 	- Parte de ADMINISTRADORES
 	- Arreglar partes que solo funcionan con sesión iniciada
-	- Arreglar partes que fallan con plain user
+	- Arreglar partes que fallan con plain user y sin iniciar sesión
 	- Descarga de CSV lingüista y administradores
 	- Actividades
-		- Cartas deslizantes
-			- Movida de arrastrar
+		- Cartas deslizantes ✓
 		- Contexto correcto
 			- Todo
 	- Creación de administradores
