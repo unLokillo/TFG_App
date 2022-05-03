@@ -6,51 +6,10 @@
       </a>
     </div>
     <div class="top-badges_menu-section">
-      <h3>Logros</h3>
+      <h3>Mis logros</h3>
     </div>
-    <div class="main-section-badges">
-      <h5>Logros del participante</h5>
-      <div
-        v-for="(value, index) in badges"
-        :key="index"
-        class="neologismes-badges"
-      >
-        <div
-          v-for="(value2, index2) in value"
-          :key="index2"
-          class="neologismes-badges-card"
-        >
-          <h6>{{ value2.name }}</h6>
-          <b-img
-            :src="value2.img"
-            v-bind="mainProps"
-            rounded
-            alt="Badge Img"
-            v-if="!value2.completed"
-          ></b-img>
-          <b-img
-            :src="value2.img"
-            v-bind="mainProps"
-            style="opacity: 0.5"
-            rounded
-            alt="Badge Img"
-            v-else
-          ></b-img>
-          <p>{{ value2.description }}</p>
-          <div class="progress-bar-div">
-            <b-progress max="100" v-if="!value2.completed">
-              <b-progress-bar
-                :value="value2.percentage"
-                variant="success"
-              ></b-progress-bar>
-            </b-progress>
-            <p v-if="!value2.completed">{{ value2.percentage / 10 }}/10</p>
-            <p v-else style="font-size: 14px">
-              Completado el día: {{ value2.completed_date }}
-            </p>
-          </div>
-        </div>
-      </div>
+    <div>
+      <b-table hover striped :items="badges" :fields="fields"></b-table>
     </div>
   </div>
 </template>
@@ -60,17 +19,40 @@ import axios from "axios";
 export default {
   name: "View-User",
   created() {
-    axios.get("http://localhost:3000/badges").then((response) => {
-      this.badges = new Array(Math.ceil(response.data.length / 4))
-        .fill()
-        .map((_) => response.data.splice(0, 4));
-    });
+    axios
+      .get("http://127.0.0.1:5000/badges", { withCredentials: true })
+      .then((response) => {
+        this.badges = response.data;
+        // this.badges = new Array(Math.ceil(response.data.length / 4))
+        //   .fill()
+        //   .map((_) => response.data.splice(0, 4));
+      });
   },
   data() {
     return {
       mainProps: { width: 75, height: 75, class: "m1" },
       badges: [],
       labels: ["Usuarios", "Neologismos"],
+      fields: [
+          {
+            key: 'Nombre',
+            label: 'Logro',
+            sortable: false
+          },
+          {
+            key: 'Acción',
+            sortable: false
+          },
+          {
+            key: 'Fecha',
+            sortable: true,
+          },
+          {
+            key: 'Puntos',
+            label: 'Puntuación',
+            sortable: true
+          }
+        ],
     };
   },
 };

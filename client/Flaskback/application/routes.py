@@ -13,7 +13,7 @@ from flask_mail import Message
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
-from .models import Description, Neologismo, Source, UserlikesNeologisme, Usuario
+from .models import Description, Logro, Neologismo, Source, UserGetsAchievement, UserlikesNeologisme, Usuario
 from sorcery import dict_of
 from sqlalchemy import func
 
@@ -99,7 +99,6 @@ def create_neologisme():
     likes = request.form['liked']
     state = request.form['state']
     user = current_user.id
-    date = datetime.date.today()
 
     descriptions = []
     for i in range(int(request.form['numDescr'])):
@@ -116,7 +115,7 @@ def create_neologisme():
         image = request.files['imagen'].read()'''
 
     new_neo = Neologismo(name=name, likes=likes,# image=image,
-                         id_user=user, state=state, date_approved=date)
+                         id_user=user, state=state)
     db.session.add(new_neo)
     try:
         db.session.commit()
@@ -278,6 +277,10 @@ def getneos():
         neologismo['liked'] = neo[2]
         neologismo['state'] = neo[3]
         neologismo['id'] = neo[4]
+        neologismo['descriptions'] = Description.query.filter_by(
+            id_neologisme=neo[4]).with_entities(Description.text).all()
+        neologismo['sources'] = Source.query.filter_by(
+            id_neologisme=neo[4]).with_entities(Source.link).all()
         neos.append(neologismo)
     return jsonify(neos), status.HTTP_200_OK
 
@@ -340,7 +343,10 @@ def neo(neoid):
         neologismo['neologisme'] = neo[1]
         neologismo['liked'] = neo[2]
         neologismo['state'] = neo[3]
-        neologismo['date'] = neo[5].strftime("%d/%m/%y")
+        if neo[5] is not None:
+            neologismo['date'] = neo[5].strftime("%d/%m/%y")
+        else:
+            neologismo['date'] = 'None'
         return neologismo, status.HTTP_200_OK
     
     elif request.method == 'PUT':
@@ -350,6 +356,10 @@ def neo(neoid):
             if method == 'accept':
                 neo.state = 'aceptado'
                 neo.date_approved = datetime.date.today()
+                uga = UserGetsAchievement(id_user=neo.id_user, id_achievement=1, date=datetime.date.today())
+                db.session.add(uga)
+                user = Usuario.query.get(neo.id_user)
+                user.points += 50
             elif method == 'reject':
                 neo.state = 'rechazado: ' + request.form['message']
             elif method == 'modify':
@@ -366,7 +376,6 @@ def neo(neoid):
 
                 Description.query.filter_by(id_neologisme=neoid).delete()
                 Source.query.filter_by(id_neologisme=neoid).delete()
-                print('Sources: ', sources, ' descrs: ', descriptions, ' name: ', request.form['name'])
                 for i in range(len(sources)):
                     new_source = Source(
                         link=sources[i], id_neologisme=neoid)
@@ -470,3 +479,20 @@ def userlikes(userid):
         neologismo['user'] = Usuario.query.get(neo.id_user).nickname
         res.append(neologismo)
     return jsonify(res), status.HTTP_200_OK
+
+
+@main_bp.route('/badges', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def badges():
+    uga = UserGetsAchievement.query.filter_by(id_user=current_user.id).all()
+    ugas = []
+    for ugach in uga:
+        logro = Logro.query.get(ugach.id_achievement)
+        achiev = {}
+        achiev['Nombre'] = logro.description
+        achiev['Acción'] = logro.action
+        achiev['Puntos'] = logro.difficulty*10
+        achiev['Fecha'] = ugach.date.strftime("%d/%m/%y")
+        ugas.append(achiev)
+    return jsonify(ugas), status.HTTP_200_OK
