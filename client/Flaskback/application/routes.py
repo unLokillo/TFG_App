@@ -1,6 +1,7 @@
 import datetime
 import email
 from posixpath import supports_unicode_filenames
+from random import random
 from turtle import position
 from unicodedata import name
 from flask import Blueprint, jsonify, render_template, redirect, request, url_for
@@ -16,6 +17,7 @@ from wtforms.validators import DataRequired, Length, EqualTo
 from .models import Description, Logro, Neologismo, Source, UserGetsAchievement, UserlikesNeologisme, Usuario
 from sorcery import dict_of
 from sqlalchemy import func
+import uuid
 
 
 # Blueprint Configuration
@@ -24,13 +26,6 @@ main_bp = Blueprint(
     template_folder='templates',
     static_folder='static'
 )
-
-
-@main_bp.route('/nothing', methods=['GET', 'POST'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def nothing():
-    return "", 200
 
 
 @main_bp.route("/logout", methods=['GET', 'POST'])
@@ -169,61 +164,71 @@ def getuser():
     return res, status.HTTP_200_OK
 
 
-@main_bp.route('/users/<iduser>', methods=['PUT'])
+@main_bp.route('/users/<iduser>', methods=['PUT', 'DELETE'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def putuser(iduser):
-    user = Usuario.query.get(iduser)
-    try:
-        user.privileges = request.form['privileges']
-    except:
-        pass
-    try:
-        user.nickname = request.form['nickname']
-    except:
-        pass
-    try:
-        user.name = request.form['name']
-    except:
-        pass
-    try:
-        user.surname = request.form['surname']
-    except:
-        pass
-    try:
-        user.email = request.form['email']
-    except:
-        pass
-    try:
-        user.birthdate = request.form['date']
-    except:
-        pass
-    try:
-        user.gender = request.form['gender']
-    except:
-        pass
-    try:
-        user.password = request.form['password']
-    except:
-        pass
-    try:
-        user.school = request.form['school']
-    except:
-        pass
-    try:
-        user.mother_tongue = request.form['mother_tongue']
-    except:
-        pass
-    try:
-        user.points = request.form['points']
-    except:
-        pass
-    try:
-        db.session.commit()
-    except:
-        db.session.rollback()
-        return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
-    return "modified", status.HTTP_201_CREATED
+    if request.method == 'PUT':
+        user = Usuario.query.get(iduser)
+        try:
+            user.privileges = request.form['privileges']
+        except:
+            pass
+        try:
+            user.nickname = request.form['nickname']
+        except:
+            pass
+        try:
+            user.name = request.form['name']
+        except:
+            pass
+        try:
+            user.surname = request.form['surname']
+        except:
+            pass
+        try:
+            user.email = request.form['email']
+        except:
+            pass
+        try:
+            user.birthdate = request.form['date']
+        except:
+            pass
+        try:
+            user.gender = request.form['gender']
+        except:
+            pass
+        try:
+            user.password = request.form['password']
+        except:
+            pass
+        try:
+            user.school = request.form['school']
+        except:
+            pass
+        try:
+            user.mother_tongue = request.form['mother_tongue']
+        except:
+            pass
+        try:
+            user.points = request.form['points']
+        except:
+            pass
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "modified", status.HTTP_201_CREATED
+    elif request.method == 'DELETE':
+        user = Usuario.query.get(iduser)
+        user.set_password(str(uuid.uuid4()))
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR  
+        return "deleted", status.HTTP_204_NO_CONTENT    
 
 
 @main_bp.route('/user-neo', methods=['GET'])
@@ -387,8 +392,7 @@ def neo(neoid):
                     db.session.add(new_description)
             try:
                 db.session.commit()
-            except Exception as e:
-                print('Committing: ', e)
+            except:
                 db.session.rollback()
                 return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
         except Exception as e:

@@ -206,8 +206,8 @@ export default {
   },
   methods: {
     deleteData(id) {
-      axios.delete("http://localhost:3000/users/" + id);
-      axios.patch("http://localhost:3000/login/1", { logged: false });
+      axios.delete("http://127.0.0.1:5000/users/" + id, { withCredentials: true });
+      axios.get("http://127.0.0.1:5000/logout", { withCredentials: true });
       this.$router.push("/");
     },
   },
