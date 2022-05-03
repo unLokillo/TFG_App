@@ -1,126 +1,154 @@
-<template>
-<div>
-  <Header/>
-  <section class="container">
-    <div
-      v-if="current"
-      class="fixed fixed--center"
-      style="z-index: 3"
-      :class="{ 'transition': isVisible }">
-      <Vue2InteractDraggable
-        v-if="isVisible"
-        :interact-out-of-sight-x-coordinate="500"
-        :interact-max-rotation="15"
-        :interact-x-threshold="200"
-        :interact-y-threshold="200"
-        :interact-event-bus-events="interactEventBus"
-        interact-block-drag-down
-        @draggedRight="emitAndNext('match',current.id)"
-        @draggedLeft="emitAndNext('reject',current.id)"
-        style="display: flex;justify-content: center"
-        class="rounded-borders card card--one">
-        <div >
-        <div class="image_container">
-          <img
-            style="width:40%"
-            v-if="current.src!=null"
-            :src="require(`../../assets/images/${current.src}`)"
-            class="rounded-borders"/>
-        </div>
-        <div class="info">
-          <div class="game-card">
-          <h5>Contexto</h5>
-            <div v-if="current.descriptions.length>0">
-              <p> 1 - {{ current.descriptions[0].value }}</p>
-            </div>
+<template v-if="appear">
+  <div>
+    <Header />
+    <section class="container">
+      <div
+        class="fixed fixed--center"
+        style="z-index: 3"
+        :class="{ transition: isVisible }"
+      >
+        <Vue2InteractDraggable
+          v-if="isVisible & !finished"
+          :interact-out-of-sight-x-coordinate="500"
+          :interact-max-rotation="15"
+          :interact-x-threshold="200"
+          :interact-y-threshold="200"
+          :interact-event-bus-events="interactEventBus"
+          interact-block-drag-down
+          @draggedRight="emitAndNext('match', current.id)"
+          @draggedLeft="emitAndNext('reject', current.id)"
+          style="display: flex; justify-content: center; margin-top:-70px; background-color: lightblue;"
+          class="rounded-borders card card--one"
+        >
+          <div>
+            <!--<div class="image_container">
+              <img
+                style="width: 40%"
+                v-if="current.src != null"
+                :src="require(`../../assets/images/${current.src}`)"
+                class="rounded-borders"
+              />
+            </div>-->
+            <div class="image_container" style="color: black; margin-bottom:70px" v-if="appear & !finished"><h1>{{current.name}}</h1></div>
+            <div class="info">
+              <div class="game-card" v-if="appear">
+                <h5>Contexto</h5>
+                <div v-for="(value, index) in current.descriptions" :key="index" >
+                  <p>{{index+1}} - {{ value[0] }}</p>
+                </div>
 
-            <h5>Fuentes</h5>
-            <div v-if="current.sources.length>0">
-              <p> 1 - {{ current.sources[0].value }}</p>
+                <h5>Fuentes</h5>
+                <div>
+                <div v-for="(value, index) in current.sources" :key="index">
+                  <p>{{index+1}} - {{ value[0] }}</p>
+                </div>
+                </div>
+              </div>
             </div>
-
+            <div class="text" v-if="appear">
+              <h2>{{ current.name }}</h2>
+            </div>
           </div>
-        </div>
+        </Vue2InteractDraggable>
+      </div>
+      <div
+        v-if="next"
+        class="rounded-borders card card--two fixed fixed--center"
+        style="z-index: 2; margin-top:-30px; background-color: lightblue"
+      >
+        <div style="height: 100%">
+          <!-- <img :src="next.src" class="rounded-borders" /> -->
+          <div class="image_container" style="color: black; margin-bottom:70px; margin-top: 120px"><h1>{{next.name}}</h1></div>
+          <div class="info">
+              <div class="game-card" v-if="appear">
+                <h5>Contexto</h5>
+                <div v-for="(value, index2) in next.descriptions" :key="index2" >
+                  <p>{{index2+1}} - {{ value[0] }}</p>
+                </div>
+
+                <h5>Fuentes</h5>
+                <div>
+                <div v-for="(value, index3) in next.sources" :key="index3">
+                  <p>{{index3+1}} - {{ value[0] }}</p>
+                </div>
+                </div>
+              </div>
+          </div>
           <div class="text">
-            <h2>{{current.name}}</h2>
+            <h2>
+              {{ next.name }}
+            </h2>
           </div>
-          </div>
-      </Vue2InteractDraggable>
-    </div>
-    <div
-      v-if="next"
-      class="rounded-borders card card--two fixed fixed--center"
-      style="z-index: 2">
-      <div style="height: 100%">
-        <img
-          :src="next.src"
-          class="rounded-borders"/>
-        <div class="text">
-            <h2>{{next.name}}, <span>{{next.age}}</span></h2>
-          </div>
+        </div>
       </div>
-    </div>
-    <div
-      v-if="index + 2 < cards.length"
-      class="rounded-borders card card--three fixed fixed--center"
-      style="z-index: 1">
-      <div style="height: 100%">
+      <div
+        v-if="index + 2 < cards.length"
+        class="rounded-borders card card--three fixed fixed--center"
+        style="z-index: 1; margin-top: -30px"
+      >
+        <div style="height: 100%"></div>
       </div>
-    </div>
-    <!--
-    <div class="footer fixed">
-      <div class="btn btn--decline" @click="reject">
-       <font-awesome-icon icon="times"/>
+      <div v-if="finished" style="justify-content: space-around; align-items: center; padding:20%;">
+        <h1>HAS TERMINADO, ¡ENHORABUENA!</h1>
+        <br>
+        <b-button
+        style="width:200px; background-color:var(--buttons); color: white !important; border: none; padding:12px; text-decoration: none;"
+        class="rounded-borders"
+        :to="`/`"
+        >
+          Volver a inicio
+        </b-button>
       </div>
-      <div class="btn btn--like" @click="match()">
-          <font-awesome-icon icon="heart"/>
+      <div style="display: flex; padding-top:20%" v-if="!finished">
+        <font-awesome-icon
+          style="color: red; font-size: 50px; padding-left:10%"
+          icon="circle-xmark"
+        />
+        <font-awesome-icon
+          style="color: #50cd5d; font-size: 50px; padding-left:70%"
+          icon="heart"
+        />
       </div>
-    </div>
-    -->
-  </section>
- </div> 
+    </section>
+  </div>
 </template>
 <script>
-import axios from 'axios'
-import Header from '@/components/Header/Header.vue'
-import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
+import axios from "axios";
+import Header from "@/components/Header/Header.vue";
+import { Vue2InteractDraggable, InteractEventBus } from "vue2-interact";
 const EVENTS = {
-  MATCH: 'match',
-  REJECT: 'reject'
-}
+  MATCH: "match",
+  REJECT: "reject",
+};
 export default {
-  components: 
-  { Vue2InteractDraggable,
-  Header },
-    created(){
-      var nData = [];
-      var card = [];
-        axios.get('http://localhost:3000/login/1')
-        .then(response_l => {
-        axios.get('http://localhost:3000/users/' + response_l.data.user_id)
-        .then(response_u => {
-          this.userData = response_u.data;
-        axios.get('http://localhost:3000/neologismes')
-        .then(response => {
-            //this.name = response.data[0].name;
-          for (let i = 0; i < response.data.length; i++) {
-          if(!response_u.data.fav_neo.includes(response.data[i].id)){
+  components: { Vue2InteractDraggable, Header },
+  async created() {
+    var nData = [];
+    var card = [];
+    await axios.get("http://127.0.0.1:5000/login", { withCredentials: true })
+    .then(res => {
+      this.userData = res.data;
+    });
+    await axios.get("http://127.0.0.1:5000/users/"+ this.userData.user_id + "/favs", { withCredentials: true })
+    .then(res => {
+      this.favs = res.data;
+    });
+    axios.get("http://127.0.0.1:5000/neologismes", { withCredentials: true })
+    .then(res => {
+      for(let i = 0; i < res.data.length; i++) {
+        if(!this.isfav(res.data[i].id)){
           card.push({
-            id: response.data[i].id,
-            src: response.data[i].img,
-            name: response.data[i].neologisme,
-            descriptions: response.data[i].descriptions,
-            sources: response.data[i].sources
-          });
+                  id: res.data[i].id,
+                  name: res.data[i].neologismo,
+                  descriptions: res.data[i].descriptions,
+                  sources: res.data[i].sources,
+                });
         }
       }
-          this.nData = response.data; 
-        })
-        })
-        })
       this.cards = card;
-      this.neoData = nData;   
-    },
+      this.nData = res.data;
+    });
+  },
   data() {
     return {
       neoData: [],
@@ -131,51 +159,69 @@ export default {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
       },
-      cards: []
-    }
+      cards: [],
+      favs: [],
+    };
   },
   computed: {
     current() {
-      return this.cards[this.index]
+      return this.cards[this.index];
     },
     next() {
-      return this.cards[this.index + 1]
+      return this.cards[this.index + 1];
+    },
+    appear(){
+      return this.cards.length>0
+    },
+    finished(){
+      return this.index>=this.cards.length
     }
   },
   methods: {
-    match(id) {
-      InteractEventBus.$emit(EVENTS.MATCH);
-      axios.patch('http://localhost:3000/neologismes/' + id,{liked: this.nData.liked+1}).then(response_l => {
-      });
+    isfav(id){
+      var is = false;
+      for(var i = 0; i < this.favs.length; i++){
+        if(this.favs[i].id == id){
+          is = true;
+          break;
+        }
+      }
+      return is;
     },
     reject() {
-      InteractEventBus.$emit(EVENTS.REJECT)
+      InteractEventBus.$emit(EVENTS.REJECT);
     },
-    emitAndNext(event,id) {
-      if(event.localeCompare('match')==0){
-         axios.patch('http://localhost:3000/neologismes/' + id,{liked: this.nData.liked+1}).then(response_l => {
-      });
-      this.userData.fav_neo.push(id);
-       axios.patch('http://localhost:3000/users/' + this.userData.id,{fav_neo: this.userData.fav_neo}).then(response_l => {
-      });
+    emitAndNext(event, id) {
+      if (event.localeCompare("match") == 0) {
+        axios
+        .get("http://127.0.0.1:5000/login", { withCredentials: true })
+        .then((res) => {
+          if (res.status != 200)
+            this.$router.push("/login");
+        });
+        axios.post(
+            "http://127.0.0.1:5000/neologismes/" +
+              id + "/likes", "carga",
+            { withCredentials: true }
+          );
       }
-      this.$emit(event, this.index)
-      setTimeout(() => this.isVisible = false, 200)
+      this.$emit(event, this.index);
+      setTimeout(() => (this.isVisible = false), 200);
       setTimeout(() => {
-        this.index++
-        this.isVisible = true
-      }, 200)
-    }
-  }
-}
+        this.index++;
+        this.isVisible = true;
+      }, 200);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 .container {
   background: #eceff1;
   width: 100%;
-  height: 52rem;
+  height: 37.5rem;/*52rem;*/
+  color:#50cd5d
 }
 
 .footer {
@@ -192,14 +238,15 @@ export default {
   position: relative;
   width: 50px;
   height: 50px;
-  padding: .2rem;
+  padding: 0.2rem;
   border-radius: 50%;
   background-color: white;
-  box-shadow: 0 6px 6px -3px rgba(0,0,0,0.02), 0 10px 14px 1px rgba(0,0,0,0.02), 0 4px 18px 3px rgba(0,0,0,0.02);
+  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02),
+    0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   user-select: none;
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color: transparent;
   &:active {
     transform: translateY(4px);
   }
@@ -209,20 +256,21 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     &::before {
-      content: '';
+      content: "";
     }
   }
   &--like {
     background-color: red;
-    padding: .75rem;
+    padding: 0.75rem;
     color: white;
-    box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
+    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2),
+      0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
     i {
       font-size: 32px;
     }
   }
   &--decline {
-        padding: .75rem;
+    padding: 0.75rem;
     color: red;
   }
 }
@@ -255,23 +303,26 @@ export default {
     height: 100%;
   }
   &--one {
-    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14),
+      0 2px 1px -1px rgba(0, 0, 0, 0.12);
   }
   &--two {
     transform: translate(-48%, -48%);
-    box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
+      0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
   }
   &--three {
-    background: rgba(black, .8);
+    background: rgba(black, 0.8);
     transform: translate(-46%, -46%);
-    box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
+    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2),
+      0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
   }
   .text {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background:black;
-    background:rgba(0,0,0,0.5);
+    background: black;
+    background: rgba(0, 0, 0, 0.5);
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
     text-indent: 20px;
@@ -281,8 +332,8 @@ export default {
   }
 }
 
-.image_container{
-  width: 80%; 
+.image_container {
+  width: 80%;
   margin: 10px auto;
   display: flex;
   justify-content: center;
@@ -301,18 +352,17 @@ export default {
   }
 }
 
-.info{
-    width: 80%;
-    margin-bottom: 2%;
-    margin: 10px auto;
-    color: black  ;
-  .game-card{
-
+.info {
+  width: 80%;
+  margin-bottom: 2%;
+  margin: 10px auto;
+  color: black;
+  .game-card {
     text-align: left;
     border-left: 10px solid var(--border-left);
     padding: 0 10%;
     font-size: 14px;
-    overflow: scroll;
+    // overflow: scroll;
   }
 }
 </style>

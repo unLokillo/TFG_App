@@ -1,18 +1,18 @@
 <template>
   <div class="body-games">
     <Header />
-    <div style="background-color: var(--secondary-color); padding: 5%">
+    <div style="background-color: var(--secondary-color); padding: 5%; height:25%">
       <h3>Actividades</h3>
-      ¡Bienvenido a la zona de Actividades! ¡Aqui encontraras distintas
+      ¡Bienvenido a la zona de Actividades! ¡Aquí encontraras distintas
       Actividades con las que contribuir al proyecto!
     </div>
     <div class="games-selection">
-      <div class="game-selector" style="margin-right: 20%">
+      <div class="game-selector">
         <router-link :to="{ name: 'info_g1', params: {} }" tag="div">
           <strong> Cartas deslizantes </strong>
         </router-link>
       </div>
-      <div class="game-selector">
+      <!--<div class="game-selector">
         <router-link
           :to="{ name: 'info_g2', params: {} }"
           class="game-selector-1"
@@ -20,7 +20,7 @@
         >
           <strong> El contexto correcto </strong>
         </router-link>
-      </div>
+      </div>-->
     </div>
     <div v-if="showModal" class="modal-route">
       <div class="modal-content">
@@ -66,7 +66,7 @@ export default {
   background-color: var(--main-color);
   display: flex;
   justify-content: center;
-  height: 67%;
+  height: 58.7%;
 }
 
 .game-selector {

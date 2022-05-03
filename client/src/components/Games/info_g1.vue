@@ -6,7 +6,7 @@
        </div> 
        <h5 style="border-bottom:1px solid var(--border);padding-bottom: 2%">¡Bienvenido a la Actividad: <strong>Cartas deslizantes</strong>!</h5>
        <p> 
-         En esta actividad podras seleccionar cuales Neologismos, de entre todos los Neologismos que tenemos te gustan más.
+         En esta actividad podrás seleccionar cuáles son los Neologismos que te gustan más.
        <br>
        Para jugar sigue estas reglas:
        - Desliza la carta derecha si el Neologismo te gusta.
