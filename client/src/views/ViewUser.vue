@@ -30,7 +30,7 @@
             >
             <div>
               <font-awesome-icon style="font-size: 20px" icon="award" />
-              Mis logros (15/20)
+              Mis logros ({{nbadges}})
             </div>
             </router-link>
           </div>
@@ -44,7 +44,7 @@
                 style="font-size: 20px; color: red"
                 icon="heart"
               />
-              Neologismos favoritos ({{ fav_neo.length }})
+              Neologismos favoritos ({{ fav_neo }})
             </div>
             </router-link>
           </div>
@@ -141,10 +141,17 @@ export default {
         this.school = response.data.school;
         this.points = response.data.points;
         this.position = response.data.position;
-        this.fav_neo = response.data.fav_neo;
         this.img = response.data.image;
         this.admin = response.data.admin;
         this.lingu = response.data.lingu;
+      });
+    axios.get("http://127.0.0.1:5000/badges", { withCredentials: true }) // + this.$route.params.userid)
+      .then((response) => {
+        this.nbadges = response.data.length;
+      });
+    axios.get("http://127.0.0.1:5000/users/" + this.$route.params.userid + "/favs", { withCredentials: true }) // + this.$route.params.userid)
+      .then((response) => {
+        this.fav_neo = response.data.length;
       });
     /*axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
         .then(response => {
@@ -202,6 +209,7 @@ export default {
       admin: false,
       lingu: false,
       neologismes: [],
+      nbadges: 0
     };
   },
   methods: {
