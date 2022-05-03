@@ -95,6 +95,7 @@
         style="width:200px; background-color:var(--buttons); color: white !important; border: none; padding:12px; text-decoration: none;"
         class="rounded-borders"
         :to="`/`"
+        @click="get_achievement"
         >
           Volver a inicio
         </b-button>
@@ -178,6 +179,11 @@ export default {
     }
   },
   methods: {
+    get_achievement(){
+      var formData = new FormData();
+      formData.append("achiev", 5);
+      axios.post("http://127.0.0.1:5000/badges", formData, { withCredentials: true });
+    },
     isfav(id){
       var is = false;
       for(var i = 0; i < this.favs.length; i++){

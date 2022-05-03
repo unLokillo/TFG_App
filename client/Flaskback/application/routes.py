@@ -112,6 +112,12 @@ def create_neologisme():
     new_neo = Neologismo(name=name, likes=likes,# image=image,
                          id_user=user, state=state)
     db.session.add(new_neo)
+    
+    uga = UserGetsAchievement(id_user=user, id_achievement=2, date=datetime.date.today())
+    db.session.add(uga)
+    userp = Usuario.query.get(user)
+    userp.points += 10
+
     try:
         db.session.commit()
     except:
@@ -447,6 +453,12 @@ def neolikes(neoid):
         db.session.add(like)
         neo = Neologismo.query.get(neoid)
         neo.likes += 1
+
+        uga = UserGetsAchievement(id_user=neo.id_user, id_achievement=4, date=datetime.date.today())
+        db.session.add(uga)
+        user = Usuario.query.get(neo.id_user)
+        user.points += 10
+
         try:
             db.session.commit()
         except:
@@ -486,18 +498,43 @@ def userlikes(userid):
     return jsonify(res), status.HTTP_200_OK
 
 
-@main_bp.route('/badges', methods=['GET'])
+@main_bp.route('/badges', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def badges():
-    uga = UserGetsAchievement.query.filter_by(id_user=current_user.id).all()
-    ugas = []
-    for ugach in uga:
-        logro = Logro.query.get(ugach.id_achievement)
-        achiev = {}
-        achiev['Nombre'] = logro.description
-        achiev['Acción'] = logro.action
-        achiev['Puntos'] = logro.difficulty*10
-        achiev['Fecha'] = ugach.date.strftime("%d/%m/%y")
-        ugas.append(achiev)
-    return jsonify(ugas), status.HTTP_200_OK
+    if request.method == 'GET':
+        uga = UserGetsAchievement.query.filter_by(id_user=current_user.id).all()
+        ugas = []
+        for ugach in uga:
+            logro = Logro.query.get(ugach.id_achievement)
+            achiev = {}
+            achiev['Nombre'] = logro.description
+            achiev['Acción'] = logro.action
+            achiev['Puntos'] = logro.difficulty*10
+            achiev['Fecha'] = ugach.date.strftime("%d/%m/%y")
+            ugas.append(achiev)
+        return jsonify(ugas), status.HTTP_200_OK
+    elif request.method == 'POST':
+        uga = UserGetsAchievement(id_user=current_user.id)
+        if request.form['achiev'] == '5':
+            ugaquery = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement==5) &
+                (UserGetsAchievement.id_user==current_user.id)).all()
+            exists = False
+            for uga in ugaquery:
+                if uga.date.date() == datetime.date.today():
+                    exists=True
+            if not exists:
+                uga.id_achievement = 5
+                uga.date = datetime.date.today()
+                db.session.add(uga)
+
+                userp = Usuario.query.get(current_user.id)
+                userp.points += 40
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+                return "Added succesfully", status.HTTP_201_CREATED
+            else:
+                return "Badge already given", status.HTTP_204_NO_CONTENT
