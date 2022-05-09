@@ -109,11 +109,12 @@ def create_neologisme():
     else:
         image = request.files['imagen'].read()'''
 
-    new_neo = Neologismo(name=name, likes=likes,# image=image,
+    new_neo = Neologismo(name=name, likes=likes,  # image=image,
                          id_user=user, state=state)
     db.session.add(new_neo)
-    
-    uga = UserGetsAchievement(id_user=user, id_achievement=2, date=datetime.date.today())
+
+    uga = UserGetsAchievement(
+        id_user=user, id_achievement=2, date=datetime.date.today())
     db.session.add(uga)
     userp = Usuario.query.get(user)
     userp.points += 10
@@ -234,15 +235,16 @@ def putuser(iduser):
             db.session.commit()
         except:
             db.session.rollback()
-            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR  
-        return "deleted", status.HTTP_204_NO_CONTENT    
+            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "deleted", status.HTTP_204_NO_CONTENT
 
 
 @main_bp.route('/user-neo', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def getneosuser():
-    query = Neologismo.query.filter_by(id_user=current_user.id).order_by(Neologismo.likes.desc())
+    query = Neologismo.query.filter_by(
+        id_user=current_user.id).order_by(Neologismo.likes.desc())
     accepted = query.filter_by(state='aceptado').with_entities(
         Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
     proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state.contains('rechazado')))\
@@ -360,7 +362,7 @@ def neo(neoid):
         else:
             neologismo['date'] = 'None'
         return neologismo, status.HTTP_200_OK
-    
+
     elif request.method == 'PUT':
         neo = Neologismo.query.get(neoid)
         try:
@@ -368,7 +370,8 @@ def neo(neoid):
             if method == 'accept':
                 neo.state = 'aceptado'
                 neo.date_approved = datetime.date.today()
-                uga = UserGetsAchievement(id_user=neo.id_user, id_achievement=1, date=datetime.date.today())
+                uga = UserGetsAchievement(
+                    id_user=neo.id_user, id_achievement=1, date=datetime.date.today())
                 db.session.add(uga)
                 user = Usuario.query.get(neo.id_user)
                 user.points += 50
@@ -413,7 +416,8 @@ def neo(neoid):
 @login_required
 def getallusers():
     if current_user.privileges == 'admin':
-        res = Usuario.query.order_by(Usuario.points.desc()).filter(Usuario.privileges != 'removed').all()
+        res = Usuario.query.order_by(Usuario.points.desc()).filter(
+            Usuario.privileges != 'removed').all()
     elif current_user.privileges == 'linguist':
         res = Usuario.query.order_by(Usuario.points.desc()).filter(
             Usuario.privileges != 'admin' and Usuario.privileges != 'removed').all()
@@ -454,7 +458,8 @@ def neolikes(neoid):
         neo = Neologismo.query.get(neoid)
         neo.likes += 1
 
-        uga = UserGetsAchievement(id_user=neo.id_user, id_achievement=4, date=datetime.date.today())
+        uga = UserGetsAchievement(
+            id_user=neo.id_user, id_achievement=4, date=datetime.date.today())
         db.session.add(uga)
         user = Usuario.query.get(neo.id_user)
         user.points += 10
@@ -482,7 +487,8 @@ def neolikes(neoid):
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
 def userlikes(userid):
-    neoids = UserlikesNeologisme.query.filter_by(id_user=userid).with_entities(UserlikesNeologisme.id_neologisme).all()
+    neoids = UserlikesNeologisme.query.filter_by(
+        id_user=userid).with_entities(UserlikesNeologisme.id_neologisme).all()
     for i, neo in enumerate(neoids):
         neoids[i] = neoids[i][0]
     neos = Neologismo.query.filter(Neologismo.id_neologisme.in_(neoids)).all()
@@ -503,7 +509,8 @@ def userlikes(userid):
 @login_required
 def badges():
     if request.method == 'GET':
-        uga = UserGetsAchievement.query.filter_by(id_user=current_user.id).all()
+        uga = UserGetsAchievement.query.filter_by(
+            id_user=current_user.id).all()
         ugas = []
         for ugach in uga:
             logro = Logro.query.get(ugach.id_achievement)
@@ -515,17 +522,17 @@ def badges():
             ugas.append(achiev)
         return jsonify(ugas), status.HTTP_200_OK
     elif request.method == 'POST':
-        uga = UserGetsAchievement(id_user=current_user.id)
         if request.form['achiev'] == '5':
-            ugaquery = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement==5) &
-                (UserGetsAchievement.id_user==current_user.id)).all()
+            ugaquery = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement == 5) &
+                                                        (UserGetsAchievement.id_user == current_user.id)).all()
             exists = False
-            for uga in ugaquery:
-                if uga.date.date() == datetime.date.today():
-                    exists=True
+            for ugaq in ugaquery:
+                if ugaq.date.date() == datetime.date.today():
+                    exists = True
+                    break
             if not exists:
-                uga.id_achievement = 5
-                uga.date = datetime.date.today()
+                uga = UserGetsAchievement(
+                    id_user=current_user.id, id_achievement=5, date=datetime.date.today())
                 db.session.add(uga)
 
                 userp = Usuario.query.get(current_user.id)
@@ -538,3 +545,142 @@ def badges():
                 return "Added succesfully", status.HTTP_201_CREATED
             else:
                 return "Badge already given", status.HTTP_204_NO_CONTENT
+        elif request.form['achiev'] == 'login':
+            qtoday = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement == 5) &
+                                                        (UserGetsAchievement.id_user == current_user.id)).all()
+            days = {}
+            for ugaq in qtoday:
+                if ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=0):
+                    days[0] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=1):
+                    days[1] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=2):
+                    days[2] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=3):
+                    days[3] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=4):
+                    days[4] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=5):
+                    days[5] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=6):
+                    days[6] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=7):
+                    days[7] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=8):
+                    days[8] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=9):
+                    days[9] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=10):
+                    days[10] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=11):
+                    days[11] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=12):
+                    days[12] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=13):
+                    days[13] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=14):
+                    days[14] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=15):
+                    days[15] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=16):
+                    days[16] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=17):
+                    days[17] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=18):
+                    days[18] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=19):
+                    days[19] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=20):
+                    days[20] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=21):
+                    days[21] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=22):
+                    days[22] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=23):
+                    days[23] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=24):
+                    days[24] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=25):
+                    days[25] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=26):
+                    days[26] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=27):
+                    days[27] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=28):
+                    days[28] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=29):
+                    days[29] = True
+                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=30):
+                    days[30] = True
+                
+            if 0 in days:
+                return "No badge given", status.HTTP_204_NO_CONTENT
+            
+            uga = UserGetsAchievement(
+                    id_user=current_user.id, id_achievement=6, date=datetime.date.today())
+            db.session.add(uga)
+
+            userp = Usuario.query.get(current_user.id)
+            userp.points += 10
+            if 1 not in days:
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting one login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+                return "One login badge given", status.HTTP_201_CREATED
+
+            if 2 not in days:
+                uga = UserGetsAchievement(
+                    id_user=current_user.id, id_achievement=7, date=datetime.date.today())
+                db.session.add(uga)
+                userp.points += 20
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+                return "One and two logins badges given", status.HTTP_201_CREATED
+            
+            if 3 not in days or 4 not in days:
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+                return "One login badge given", status.HTTP_201_CREATED
+
+            if 5 not in days:
+                uga = UserGetsAchievement(
+                    id_user=current_user.id, id_achievement=8, date=datetime.date.today())
+                db.session.add(uga)
+                userp.points += 50
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+                return "Five logins badge given", status.HTTP_201_CREATED
+            
+            if 6 not in days or 7 not in days or 8 not in days or 9 not in days or 10 not in days or \
+                11 not in days or 12 not in days or 13 not in days or 14 not in days or 15 not in days or \
+                16 not in days or 17 not in days or 18 not in days or 19 not in days or 20 not in days or \
+                21 not in days or 22 not in days or 23 not in days or 24 not in days or 25 not in days or \
+                26 not in days or 27 not in days or 28 not in days or 29 not in days:
+                    try:
+                        db.session.commit()
+                    except:
+                        db.session.rollback()
+                        return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+                    return "One login badge given", status.HTTP_201_CREATED
+            
+            uga = UserGetsAchievement(
+                id_user=current_user.id, id_achievement=9, date=datetime.date.today())
+            db.session.add(uga)
+            userp.points += 100
+            try:
+                db.session.commit()
+            except:
+                db.session.rollback()
+                return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
+            return "A month of logins badge given", status.HTTP_201_CREATED

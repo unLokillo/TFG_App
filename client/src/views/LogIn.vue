@@ -87,6 +87,9 @@ export default {
         )
         .then((response) => {
           if (response.status === 200) {
+            var formData = new FormData();
+            formData.append("achiev", "login");
+            axios.post("http://127.0.0.1:5000/badges", formData, { withCredentials: true })
             this.correct_login = true;
             this.$router.push({ path: `/` });
           }
