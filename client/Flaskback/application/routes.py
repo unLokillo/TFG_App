@@ -398,6 +398,24 @@ def neo(neoid):
                 db.session.add(uga)
                 user = Usuario.query.get(neo.id_user)
                 user.points += 50
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+                
+                ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neo.id_user) &
+                                                        (UserGetsAchievement.id_achievement==1)).all()
+                if len(ugaq) == 3:
+                    uga = UserGetsAchievement(
+                        id_user=neo.id_user, id_achievement=18, date=datetime.date.today())
+                    db.session.add(uga)
+                    user.points += 80
+                elif len(ugaq) == 6:
+                    uga = UserGetsAchievement(
+                        id_user=neo.id_user, id_achievement=19, date=datetime.date.today())
+                    db.session.add(uga)
+                    user.points += 100
             elif method == 'reject':
                 neo.state = 'rechazado: ' + request.form['message']
             elif method == 'modify':
