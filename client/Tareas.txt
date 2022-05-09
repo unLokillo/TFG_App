@@ -3,9 +3,9 @@ TAREAS
 BackEnd
 	- Funciones necesarias
 		- Implementación de logros
-			- 3, 10-20
+			- 3, 16-20
 		- Cambiar duración del token de inicio de sesión
-		- Comprobar funcionamiento correcto de los logros de inicio de sesión, de me gustas conseguidos
+		- Comprobar funcionamiento correcto de los logros de inicio de sesión, de me gustas conseguidos y dados
 	- Funciones deseadas
 		- Gestión de imágenes
 		- Hacer RESTful la API

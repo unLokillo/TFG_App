@@ -458,6 +458,46 @@ def neolikes(neoid):
         neo = Neologismo.query.get(neoid)
         neo.likes += 1
 
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+
+        ugaquery0 = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neo.id_user) & (
+                                                        (UserGetsAchievement.id_achievement==13) |
+                                                        (UserGetsAchievement.id_achievement==14) |
+                                                        (UserGetsAchievement.id_achievement==15))).all()
+
+        ugas0 = {}
+        for uga in ugaquery0:
+            if uga.id_achievement == 13:
+                ugas0[13] = True
+            elif uga.id_achievement == 14:
+                ugas0[14] = True
+            elif uga.id_achievement == 15:
+                ugas0[15] = True
+        
+        likesquery = UserlikesNeologisme.query.filter(UserlikesNeologisme.id_user == current_user.id).all()
+        if len(likesquery) == 5 and not 13 in ugas0:
+            uga = UserGetsAchievement(
+                id_user=current_user.id, id_achievement=13, date=datetime.date.today())
+            db.session.add(uga)
+            userr = Usuario.query.get(current_user.id)
+            userr.points += 10
+        elif len(likesquery) == 20 and not 14 in ugas0:
+            uga = UserGetsAchievement(
+                id_user=current_user.id, id_achievement=14, date=datetime.date.today())
+            db.session.add(uga)
+            userr = Usuario.query.get(current_user.id)
+            userr.points += 30
+        elif len(likesquery) == 100 and not 15 in ugas0:
+            uga = UserGetsAchievement(
+                id_user=current_user.id, id_achievement=15, date=datetime.date.today())
+            db.session.add(uga)
+            userr = Usuario.query.get(current_user.id)
+            userr.points += 70
+
         uga = UserGetsAchievement(
             id_user=neo.id_user, id_achievement=4, date=datetime.date.today())
         db.session.add(uga)
