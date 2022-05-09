@@ -452,23 +452,26 @@ def neolikes(neoid):
             res.append(usuario)
         return jsonify(res), status.HTTP_200_OK
     elif request.method == 'POST':
+
+        # Añadimos el like a la base de datos y al neologismo
         like = UserlikesNeologisme(
             id_user=current_user.id, id_neologisme=neoid)
         db.session.add(like)
         neo = Neologismo.query.get(neoid)
         neo.likes += 1
-
+        # Lo guardamos para hacer la siguiente consulta
         try:
             db.session.commit()
         except:
             db.session.rollback()
             return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
 
+        # Pedimos los logros sobre likes dados
         ugaquery0 = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neo.id_user) & (
                                                         (UserGetsAchievement.id_achievement==13) |
                                                         (UserGetsAchievement.id_achievement==14) |
                                                         (UserGetsAchievement.id_achievement==15))).all()
-
+        # Apuntamos los que hay
         ugas0 = {}
         for uga in ugaquery0:
             if uga.id_achievement == 13:
@@ -477,7 +480,8 @@ def neolikes(neoid):
                 ugas0[14] = True
             elif uga.id_achievement == 15:
                 ugas0[15] = True
-        
+
+        # Damos el logro que corresponda de likes dados
         likesquery = UserlikesNeologisme.query.filter(UserlikesNeologisme.id_user == current_user.id).all()
         if len(likesquery) == 5 and not 13 in ugas0:
             uga = UserGetsAchievement(
@@ -498,12 +502,14 @@ def neolikes(neoid):
             userr = Usuario.query.get(current_user.id)
             userr.points += 70
 
+        # Añadimos el logro de like recibido
         uga = UserGetsAchievement(
             id_user=neo.id_user, id_achievement=4, date=datetime.date.today())
         db.session.add(uga)
         user = Usuario.query.get(neo.id_user)
         user.points += 10
 
+        # Pedimos los logros de likes recibidos
         ugaquery = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neo.id_user) & (
                                                         (UserGetsAchievement.id_achievement==10) |
                                                         (UserGetsAchievement.id_achievement==11) |
@@ -516,6 +522,7 @@ def neolikes(neoid):
                 ugas[11] = True
             elif uga.id_achievement == 12:
                 ugas[12] = True
+        # Damos el logro que corresponda de likes recibidos
         if neo.likes == 5 and not 10 in ugas:
             uga = UserGetsAchievement(
                 id_user=neo.id_user, id_achievement=10, date=datetime.date.today())
@@ -532,6 +539,7 @@ def neolikes(neoid):
             db.session.add(uga)
             user.points += 100
 
+        # Hacemos commit y devolvemos
         try:
             db.session.commit()
         except:
