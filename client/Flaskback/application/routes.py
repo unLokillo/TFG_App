@@ -464,6 +464,34 @@ def neolikes(neoid):
         user = Usuario.query.get(neo.id_user)
         user.points += 10
 
+        ugaquery = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neo.id_user) & (
+                                                        (UserGetsAchievement.id_achievement==10) |
+                                                        (UserGetsAchievement.id_achievement==11) |
+                                                        (UserGetsAchievement.id_achievement==12))).all()
+        ugas = {}
+        for uga in ugaquery:
+            if uga.id_achievement == 10:
+                ugas[10] = True
+            elif uga.id_achievement == 11:
+                ugas[11] = True
+            elif uga.id_achievement == 12:
+                ugas[12] = True
+        if neo.likes == 5 and not 10 in ugas:
+            uga = UserGetsAchievement(
+                id_user=neo.id_user, id_achievement=10, date=datetime.date.today())
+            db.session.add(uga)
+            user.points += 20
+        elif neo.likes == 20 and not 11 in ugas:
+            uga = UserGetsAchievement(
+                id_user=neo.id_user, id_achievement=11, date=datetime.date.today())
+            db.session.add(uga)
+            user.points += 50
+        elif neo.likes == 100 and not 12 in ugas:
+            uga = UserGetsAchievement(
+                id_user=neo.id_user, id_achievement=12, date=datetime.date.today())
+            db.session.add(uga)
+            user.points += 100
+
         try:
             db.session.commit()
         except:
