@@ -39,7 +39,7 @@ def logout():
 def send_mail(user):
     token = user.get_token()
     msg = Message('Password reset request', recipients=[
-                  user.email], sender='noreply@pescaneo.com')
+                  user.email], sender='pescaneoapp@gmail.com')
     msg.body = f"""
     To reset your password please follow the link below.
     

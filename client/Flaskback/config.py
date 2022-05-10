@@ -45,8 +45,9 @@ class Config:
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=20)
 
     # Email
-    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_SERVER='smtp.sendgrid.net'
     MAIL_PORT = 587
+    MAIL_USERNAME = 'apikey'
+    MAIL_PASSWORD = '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'
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'pescaneoapp@gmail.com'
-    MAIL_PASSWORD = 'pescaneopass'
+    MAIL_USE_SSL = False
