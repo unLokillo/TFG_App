@@ -78,7 +78,6 @@ General
 		- Botón de revisar neologismos
 		- Visualizar notificaciones de error de usuarios
 		- Descarga de CSV
-		- Eliminación neologismos
 	- Funciones deseadas
 		- Eliminación de propuesta por usuario
 		- Elemento de propuestas (Sidebar)
@@ -99,6 +98,7 @@ General
 		- Reparar vista de neologismo ✓
 		- Arreglar likes ✓
 		- Logros ✓
+		- Eliminación neologismos ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código

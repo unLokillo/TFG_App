@@ -399,7 +399,7 @@ def getweekneos():
     return jsonify(neos), status.HTTP_200_OK
 
 
-@main_bp.route('/neologismes/<neoid>', methods=['GET', 'PUT'])
+@main_bp.route('/neologismes/<neoid>', methods=['GET', 'PUT', 'DELETE'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def neo(neoid):
     if request.method == 'GET':
@@ -485,6 +485,19 @@ def neo(neoid):
             print('Modifying: ', e)
             return "Something went wrong", status.HTTP_500_INTERNAL_SERVER_ERROR
         return "neologism succesfully modified", status.HTTP_201_CREATED
+
+    elif request.method == 'DELETE':
+        neo = Neologismo.query.get(neoid)
+        neo.state = 'rechazado: Este neologismo ha sido eliminado. Para recuperarlo como propuesta use el botón: Modificar'
+        neo.likes = 0
+        UserlikesNeologisme.query.filter_by(id_neologisme=neoid).delete()
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "Neologisme deleted", status.HTTP_204_NO_CONTENT
+
 
 
 @main_bp.route('/allusers', methods=['GET'])

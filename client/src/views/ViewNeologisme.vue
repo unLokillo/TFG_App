@@ -134,6 +134,16 @@
     >
       Modificar propuesta
     </router-link>
+
+    <div v-if="form.state == 'aceptado' && (username == form.user || login.privileges == 'admin' || login.privileges == 'linguist')">
+      <b-button
+        class="bttn-app"
+        @click="deleteneo"
+        style="background-color: var(--fail) !important"
+      >
+        Eliminar neologismo
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -269,6 +279,16 @@ export default {
         );
       this.updateneo += 1
     },
+    deleteneo() {
+      axios.delete("http://127.0.0.1:5000/neologismes/" +
+        this.$route.params.neoId,
+        { withCredentials: true }
+        ).then(res => {
+          if (res.status==204){
+            this.$router.go(-1)
+          } else console.log("Something went wrong while deleting")
+        });
+    }
   },
 };
 </script>
