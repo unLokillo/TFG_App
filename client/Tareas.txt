@@ -2,7 +2,6 @@ TAREAS
 
 BackEnd
 	- Funciones necesarias
-		- Cambiar duración del token de inicio de sesión
 		- Comprobar funcionamiento correcto de los logros de inicio de sesión,
 			de me gustas conseguidos y dados,
 			de neos propuestos y aceptados,
@@ -46,6 +45,7 @@ BackEnd
 		- Movidas de lingüistas y administradores ✓
 		- Añadir logros a base de datos ✓
 		- Implementación de logros ✓
+		- Cambiar duración del token de inicio de sesión ✓
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)

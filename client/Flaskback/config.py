@@ -42,7 +42,7 @@ class Config:
     APPLICATION_ROOT = '/'
     SESSION_COOKIE_SAMESITE = "None"
     SESSION_COOKIE_SECURE = True
-    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=20)
 
     # Email
     MAIL_SERVER = 'smtp.gmail.com'
