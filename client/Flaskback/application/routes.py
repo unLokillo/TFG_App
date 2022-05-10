@@ -229,7 +229,7 @@ def putuser(iduser):
         except:
             pass
         try:
-            user.password = request.form['password']
+            user.set_password(request.form['password'])
         except:
             pass
         try:
