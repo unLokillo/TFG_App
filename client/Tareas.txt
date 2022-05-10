@@ -75,7 +75,6 @@ FrontEnd
 
 General
 	- Funciones necesarias
-		- Botón de revisar neologismos
 		- Visualizar notificaciones de error de usuarios
 		- Descarga de CSV
 	- Funciones deseadas
@@ -99,6 +98,7 @@ General
 		- Arreglar likes ✓
 		- Logros ✓
 		- Eliminación neologismos ✓
+		- Botón de revisar neologismos ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
