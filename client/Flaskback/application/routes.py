@@ -711,11 +711,11 @@ def badges():
             else:
                 return "Badge already given", status.HTTP_204_NO_CONTENT
         elif request.form['achiev'] == 'login':
-            qtoday = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement == 5) &
+            qtoday = UserGetsAchievement.query.filter((UserGetsAchievement.id_achievement == 6) &
                                                         (UserGetsAchievement.id_user == current_user.id)).all()
             days = {}
             for ugaq in qtoday:
-                if ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=0):
+                if ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day):
                     days[0] = True
                 elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=1):
                     days[1] = True
