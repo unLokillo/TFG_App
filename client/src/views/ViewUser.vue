@@ -77,21 +77,36 @@
             >Modificar perfil</b-dropdown-item
           >
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item>Cambiar idioma</b-dropdown-item>
-          <b-dropdown-divider></b-dropdown-divider>
+          <!-- <b-dropdown-item>Cambiar idioma</b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider> -->
           <b-dropdown-item
             :to="{ name: 'n-error', params: { userid: $route.params.userid } }"
             >Notificar error</b-dropdown-item
           >
           <b-dropdown-divider
-            v-if="this.admin || this.lingu"
+           v-if="this.privileges=='admin' || this.privileges=='linguist'"
           ></b-dropdown-divider>
-          <b-dropdown-item v-if="this.admin || this.lingu">
-            <download-csv :data="neologismes" name="filename.csv">
-              Descargar información neologismos
+          <b-dropdown-text v-if="this.privileges=='admin' || this.privileges=='linguist'" style="font-style: italic; font-weight: 300">
+            Descargar CSV de:
+          </b-dropdown-text>
+          <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
+            <download-csv :data="proposed" name="Proposed.csv">
+              - Propuestas de neologismos
             </download-csv>
           </b-dropdown-item>
-          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
+            <download-csv :data="accepted" name="Accepted.csv">
+              - Neologismos aceptados
+            </download-csv>
+          </b-dropdown-item>
+          <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
+            <download-csv :data="neologismes" name="All_neologismes.csv">
+              - Todos los neologismos
+            </download-csv>
+          </b-dropdown-item>
+          <b-dropdown-divider
+           v-if="this.privileges=='admin' || this.privileges=='linguist'"
+          ></b-dropdown-divider>
           <b-dropdown-item v-on:click="deleteData($route.params.userid)">
             <div style="color: red !important">
               Eliminar cuenta
@@ -142,21 +157,32 @@ export default {
         this.points = response.data.points;
         this.position = response.data.position;
         this.img = response.data.image;
-        this.admin = response.data.admin;
+        this.privileges = response.data.privileges;
         this.lingu = response.data.lingu;
       });
-    axios.get("http://127.0.0.1:5000/badges", { withCredentials: true }) // + this.$route.params.userid)
+    axios
+      .get("http://127.0.0.1:5000/badges", { withCredentials: true }) // + this.$route.params.userid)
       .then((response) => {
         this.nbadges = response.data.length;
       });
-    axios.get("http://127.0.0.1:5000/users/" + this.$route.params.userid + "/favs", { withCredentials: true }) // + this.$route.params.userid)
+    axios
+      .get(
+        "http://127.0.0.1:5000/users/" + this.$route.params.userid + "/favs",
+        { withCredentials: true }
+      ) // + this.$route.params.userid)
       .then((response) => {
         this.fav_neo = response.data.length;
       });
-    /*axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
+    axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
         .then(response => {
             this.neologismes = response.data;
-        });*/
+            for(let i = 0; i<this.neologismes.length; i++){
+              if(this.neologismes[i].state == 'aceptado')
+                this.accepted.push(this.neologismes[i]);
+              else if(this.neologismes[i].state == 'pendiente')
+                this.proposed.push(this.neologismes[i]);
+            }
+        });
   },
   methods: {
     /*toCSV: function(){  
@@ -209,12 +235,17 @@ export default {
       admin: false,
       lingu: false,
       neologismes: [],
-      nbadges: 0
+      nbadges: 0,
+      privileges: "",
+      accepted: [],
+      proposed: []
     };
   },
   methods: {
     deleteData(id) {
-      axios.delete("http://127.0.0.1:5000/users/" + id, { withCredentials: true });
+      axios.delete("http://127.0.0.1:5000/users/" + id, {
+        withCredentials: true,
+      });
       axios.get("http://127.0.0.1:5000/logout", { withCredentials: true });
       this.$router.push("/");
     },
@@ -249,8 +280,8 @@ export default {
   background-color: var(--third-color);
 }
 
-.left-side-menus:hover{
-  color:#3481C0;
+.left-side-menus:hover {
+  color: #3481c0;
   cursor: pointer;
 }
 
