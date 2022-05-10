@@ -62,6 +62,7 @@ FrontEnd
 		- Eliminar errores en la consola
 		- Añadir mensajes de error y de éxito
 		- No mostrar mensajes de error cuando no hay error
+		- Alinear todas las listas como la de neologismos
 	- Tareas de perfeccionamiento
 		- Cambiar a Newlogisme
 		- Mirar diferencia entre barra lateral en y fuera de /
@@ -76,14 +77,13 @@ FrontEnd
 General
 	- Funciones necesarias
 		- Visualizar notificaciones de error de usuarios
-		- Descarga de CSV
+		- Errores
+			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
+			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
 		- Eliminación de propuesta por usuario
 		- Elemento de propuestas (Sidebar)
 		- Informar de logro conseguido
-	- Errores
-		- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
-		- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones futuras
 		- Notificación de errores por usuario
 		- Búsqueda de información por el usuario
@@ -99,6 +99,7 @@ General
 		- Logros ✓
 		- Eliminación neologismos ✓
 		- Botón de revisar neologismos ✓
+		- Descarga de CSV ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
