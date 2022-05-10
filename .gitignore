@@ -172,3 +172,4 @@ yarn-error.log
 client/Flaskback/flask_session/
 .vscode/
 client/Flaskback/db.sqlite
+client/Flaskback/config.py
