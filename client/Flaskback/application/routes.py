@@ -359,7 +359,7 @@ def getmonday():
 @login_required
 def getweekneos():
     res = Neologismo.query.order_by(Neologismo.likes.desc())\
-        .filter((Neologismo.date_approved > (datetime.date.today()-datetime.timedelta(days=getmonday()))))\
+        .filter((Neologismo.date_approved > (datetime.date.today()-datetime.timedelta(days=getmonday()))) & (Neologismo.state=='aceptado'))\
         .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.date_approved, Neologismo.id_neologisme, Neologismo.state)\
         .all()
     neos = []
@@ -715,67 +715,67 @@ def badges():
                                                         (UserGetsAchievement.id_user == current_user.id)).all()
             days = {}
             for ugaq in qtoday:
-                if ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=0):
+                if ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=0):
                     days[0] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=1):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=1):
                     days[1] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=2):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=2):
                     days[2] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=3):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=3):
                     days[3] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=4):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=4):
                     days[4] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=5):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=5):
                     days[5] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=6):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=6):
                     days[6] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=7):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=7):
                     days[7] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=8):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=8):
                     days[8] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=9):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=9):
                     days[9] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=10):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=10):
                     days[10] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=11):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=11):
                     days[11] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=12):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=12):
                     days[12] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=13):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=13):
                     days[13] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=14):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=14):
                     days[14] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=15):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=15):
                     days[15] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=16):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=16):
                     days[16] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=17):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=17):
                     days[17] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=18):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=18):
                     days[18] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=19):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=19):
                     days[19] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=20):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=20):
                     days[20] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=21):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=21):
                     days[21] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=22):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=22):
                     days[22] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=23):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=23):
                     days[23] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=24):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=24):
                     days[24] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=25):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=25):
                     days[25] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=26):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=26):
                     days[26] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=27):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=27):
                     days[27] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=28):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=28):
                     days[28] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=29):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=29):
                     days[29] = True
-                elif ugaq.date == datetime(datetime.today().year, datetime.today().month, datetime.today().day) - datetime.timedelta(days=30):
+                elif ugaq.date == datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day) - datetime.timedelta(days=30):
                     days[30] = True
                 
             if 0 in days:
