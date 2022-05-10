@@ -10,6 +10,11 @@ BackEnd
 	- Funciones deseadas
 		- Gestión de imágenes
 		- Hacer RESTful la API
+	- Tareas de perfeccionamiento
+		- Mirar trailing slash o el / al final de la uri en flask
+		- Cambio de mensajes de error (intentar RESTful)
+		- Eliminar Marshmallow y los Schemas
+		- Hacer más estricta la contraseña en pass reset con validator personalizado
 	- Completado
 		- Base de datos ✓
 			- Diseño ✓
@@ -22,12 +27,6 @@ BackEnd
 			- Login ✓
 			- Logout ✓
 			- Restablecer contraseña ✓
-			- Tareas de perfeccionamiento
-				- Cuidado con que itsdangerous antiguo no rompa nada
-				- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo
-				- Paso de flask-mail a aws SES en envío de email
-				- Hacer más estricta la contraseña en pass reset con validator personalizado
-				- Hacer más corto el tiempo de expiración de cookie de inicio de sesión
 		- Mostrar datos del usuario en mi perfil ✓
 		- Gestionar puestos ✓
 			- Usuarios ✓
@@ -46,10 +45,9 @@ BackEnd
 		- Añadir logros a base de datos ✓
 		- Implementación de logros ✓
 		- Cambiar duración del token de inicio de sesión ✓
-	- Tareas de perfeccionamiento
-		- Mirar trailing slash o el / al final de la uri en flask
-		- Cambio de mensajes de error (intentar RESTful)
-		- Eliminar Marshmallow y los Schemas
+		- Cuidado con que itsdangerous antiguo no rompa nada ✓
+		- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo ✓
+		- Paso de flask-mail a otro servicio en envío de email ✓
 
 FrontEnd
 	- Funciones necesarias
@@ -81,6 +79,7 @@ General
 			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
+		- Añadir botón de contribuir en sidebar
 		- Eliminación de propuesta por usuario
 		- Elemento de propuestas (Sidebar)
 		- Informar de logro conseguido
