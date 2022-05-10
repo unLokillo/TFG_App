@@ -1,4 +1,4 @@
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import TimestampSigner
 from . import db, ma
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -31,15 +31,15 @@ class Usuario(UserMixin, db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
-    def get_token(self, expires_sec=900):
-        serial = Serializer('fmVb@st^jCP7f$uM', expires_in=expires_sec)
-        return serial.dumps({'user_id': self.id}).decode('utf-8')
+    def get_token(self):
+        serial = TimestampSigner('fmVb@st^jCP7f$uM')
+        return serial.sign(str(self.id)).decode('utf-8')
 
     @staticmethod
     def verify_token(token):
-        serial = Serializer('fmVb@st^jCP7f$uM')
+        serial = TimestampSigner('fmVb@st^jCP7f$uM')
         try:
-            user_id = serial.loads(token)['user_id']
+            user_id = int(serial.unsign(token, max_age=600).decode('utf-8'))
         except:
             return None
         return Usuario.query.get(user_id)
