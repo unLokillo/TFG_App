@@ -307,8 +307,26 @@ def getneos():
     neos = []
     images = []
     for i, neo in enumerate(res):
+        neouser = Usuario.query.get(neo[0])
+
+        # Logro neo de la semana
+        if i == 0 or i == 1 or i == 2 or i == 3 or i == 4:
+            ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neouser.id) &
+                                                    (UserGetsAchievement.id_achievement==20)).all()
+            if len(ugaq) == 0:
+                uga = UserGetsAchievement(
+                    id_user=neouser.id, id_achievement=20, date=datetime.date.today())
+                db.session.add(uga)
+                neouser.points += 200
+                try:
+                    db.session.commit()
+                except:
+                    db.session.rollback()
+                    return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+
+
         neologismo = {}
-        neologismo['user'] = Usuario.query.get(neo[0]).nickname
+        neologismo['user'] = neouser.nickname
         neologismo['neologismo'] = neo[1]
         neologismo['position'] = i+1
         neologismo['liked'] = neo[2]
