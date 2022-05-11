@@ -16,11 +16,12 @@ ma = Marshmallow()
 login_manager = LoginManager()
 s = Session()
 mail = Mail()
+app = Flask(__name__, instance_relative_config=False)
 
 
 def create_app():
     # Construct the core app object.
-    app = Flask(__name__, instance_relative_config=False)
+    # app = Flask(__name__, instance_relative_config=False)
 
     # CORS
     Cors = CORS(app)
