@@ -70,6 +70,7 @@ FrontEnd
 		- Beautyfy changePassword ✓
 		- Añadir botón de página principal ✓
 		- Cambiar admin y linguist por privileges ✓
+		- Añadir botón home ✓
 
 General
 	- Funciones necesarias
@@ -77,8 +78,8 @@ General
 			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
-		- Informar de logro conseguido
 	- Funciones futuras
+		- Informar de logro conseguido
 		- Búsqueda de información por el usuario
 		- Cambio de idioma en footer
 		- Comentarios
