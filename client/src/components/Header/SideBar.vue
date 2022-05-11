@@ -20,6 +20,19 @@
 
           <div class="all-sidebar-buttons" v-if="screen">
             <router-link
+              :to="{ name: 'Create Neologisme', params: {} }"
+              class="sidebar-button"
+            >
+              <div>
+                <font-awesome-icon
+                  style="font-size: 120%; !important"
+                  icon="plus"
+                />
+              </div>
+              Contribuye
+              <div></div>
+            </router-link>
+            <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
             >
