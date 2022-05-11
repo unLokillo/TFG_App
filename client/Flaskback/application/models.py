@@ -154,6 +154,15 @@ class ULNSchema(ma.Schema):
         fields = ('id_uln', 'id_user', 'id_neologisme', 'usuario', 'logro')
 
 
+class ErrorNotification(db.Model):
+    __tablename__ = "error_notifications"
+    id = db.Column(db.Integer, db.Sequence('id_uln'), primary_key=True)
+    id_user = db.Column(db.Integer, db.ForeignKey(
+        'usuarios.id'))
+    title = db.Column(db.String(90))
+    description = db.Column(db.String(500))
+    usuario = db.relationship("Usuario", backref='errores')
+
 usuario_schema = UsuarioSchema()
 usuarios_schema = UsuarioSchema(many=True)
 

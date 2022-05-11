@@ -62,7 +62,6 @@ FrontEnd
 		- No mostrar mensajes de error cuando no hay error
 		- Alinear todas las listas como la de neologismos
 	- Tareas de perfeccionamiento
-		- Cambiar a Newlogisme
 		- Mirar diferencia entre barra lateral en y fuera de /
 		- Poner enter=submit en login y más pantallas
 	- Completado

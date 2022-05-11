@@ -14,7 +14,7 @@ from flask_mail import Message
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
-from .models import Description, Logro, Neologismo, Source, UserGetsAchievement, UserlikesNeologisme, Usuario
+from .models import Description, ErrorNotification, Logro, Neologismo, Source, UserGetsAchievement, UserlikesNeologisme, Usuario
 from sorcery import dict_of
 from sqlalchemy import func
 import uuid
@@ -92,6 +92,7 @@ def create_email(user):
             html=html
             )
 
+
 @main_bp.route("/reset_password", methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def reset_request():
@@ -105,7 +106,7 @@ def reset_request():
 class ResetPasswordForm(FlaskForm):
     password = PasswordField(label='Nueva contraseña', validators=[
         DataRequired(),
-        Length(min=8, message='LA contraseña debe tener al menos %(min)d caracteres')])
+        Length(min=8, message='La contraseña debe tener al menos %(min)d caracteres')])
     confirm_password = PasswordField(label='Confirma la nueva contraseña', validators=[
         DataRequired(),
         EqualTo('password', message='Las contraseñas deben coincidir')])
@@ -891,3 +892,28 @@ def badges():
                 db.session.rollback()
                 return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
             return "A month of logins badge given", status.HTTP_201_CREATED
+
+
+@main_bp.route('/error', methods=['GET', 'POST'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def error():
+    if request.method == 'POST':
+        text = request.form['description']
+        error = ErrorNotification(id_user=current_user.id, description=text)
+        db.session.add(error)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "Error notification created", status.HTTP_201_CREATED
+    elif request.method == 'GET':
+        errors = ErrorNotification.query.all()
+        erres = []
+        for i, error in enumerate(errors):
+            err = {}
+            err['user'] = Usuario.query.get(error.id_user).nickname
+            err['text'] = error.description
+            erres.append(err)
+        return jsonify(erres), status.HTTP_200_OK

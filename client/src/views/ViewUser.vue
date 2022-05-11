@@ -103,6 +103,10 @@
             <download-csv :data="neologismes" name="All_neologismes.csv">
               - Todos los neologismos
             </download-csv>
+          </b-dropdown-item><b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
+            <download-csv style="color: darkred" :data="errores" name="error_notifications.csv">
+              - Errores notificados
+            </download-csv>
           </b-dropdown-item>
           <b-dropdown-divider
            v-if="this.privileges=='admin' || this.privileges=='linguist'"
@@ -183,6 +187,10 @@ export default {
                 this.proposed.push(this.neologismes[i]);
             }
         });
+    axios.get('http://127.0.0.1:5000/error', { withCredentials: true })
+      .then(res => {
+        this.errores = res.data;
+      })
   },
   methods: {
     /*toCSV: function(){  
@@ -238,7 +246,8 @@ export default {
       nbadges: 0,
       privileges: "",
       accepted: [],
-      proposed: []
+      proposed: [],
+      errores: []
     };
   },
   methods: {
