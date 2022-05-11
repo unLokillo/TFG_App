@@ -77,12 +77,10 @@ General
 			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
-		- Añadir botón de contribuir en sidebar
 		- Eliminación de propuesta por usuario
 		- Elemento de propuestas (Sidebar)
 		- Informar de logro conseguido
 	- Funciones futuras
-		- Notificación de errores por usuario
 		- Búsqueda de información por el usuario
 		- Cambio de idioma en footer
 		- Comentarios
@@ -97,7 +95,9 @@ General
 		- Eliminación neologismos ✓
 		- Botón de revisar neologismos ✓
 		- Descarga de CSV ✓
+		- Notificación de errores por usuario ✓
 		- Visualizar notificaciones de error de usuarios ✓
+		- Añadir botón de contribuir en sidebar ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
