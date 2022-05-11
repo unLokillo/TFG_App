@@ -2,13 +2,17 @@
   <div class="body">
     <Header @actualizar="actualizacion()" :key="updateheader" />
     <div class="menu-1">
-      <p>
-        ¡Te damos la bienvendia a <strong>Pescaneo</strong>! <br />
+      <h2>Te damos la bienvenida a <br /></h2>
+      <div id="box">
+        <p id="flashlight">
+          <span id="flash">Pesca</span>
+          <span id="light">Neo</span>
+        </p>
+      </div>
+      <h4>
         Una aplicación para proponer, definir y valorar nuevos términos en el
-        ámbito del Internet de las Cosas. <br />
-        Si quieres participar, regístrate y pulsa en
-        <strong> “¡Contribuye!” </strong>
-      </p>
+        ámbito de la <strong>descarbonización</strong>. <br />
+      </h4>
       <p style="color: var(--fail)" v-if="!login_info.success">
         Necesitas haber iniciado sesión para acceder a esta opción
       </p>
@@ -42,10 +46,22 @@
         ¿Te parecen apropiados estos nuevos términos propuestos por otros
         usuarios?
       </p>
+      <p style="color: var(--fail)" v-if="!login_info.success">
+        Necesitas haber iniciado sesión para acceder a esta opción
+      </p>
+      <b-button
+        disabled
+        class="sidebar-button"
+        tag="b-button"
+        v-if="!login_info.success"
+      >
+        ¡Participa!
+      </b-button>
       <router-link
         :to="{ name: 'games', params: {} }"
         class="sidebar-button"
         tag="b-button"
+        v-else
       >
         ¡Participa!
       </router-link>
@@ -122,6 +138,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* box ------------------------------------------------------ */
+
+#box {
+  text-align: center;
+  font-size: 3em;
+  font-weight: bold;
+  // -webkit-backface-visibility: hidden; /* fixes flashing */
+}
+
+
+/* flashlight ------------------------------------------------------ */
+
+#flashlight {
+  color: hsla(0,0%,0%,0);
+  perspective: 80px;
+  outline: none;
+}
+
+
+/* flash ------------------------------------------------------ */
+
+#flash {
+  display: inline-block;
+  text-shadow: #3481C0 0 0 1px, #fff 0 -1px 2px, #fff 0 -3px 2px, rgba(0,0,0,0.8) 0 0px 25px;
+  transition: margin-left 1s cubic-bezier(0, 1, 0, 1);
+}
+    
+#box:hover #flash {
+   text-shadow: #3481C0 0 0 1px, rgba(255,255,255,0.1) 0 1px 3px;
+  margin-left: 20px;
+  transition: margin-left 1s cubic-bezier(0, 0.75, 0, 1);
+}
+
+
+/* light ------------------------------------------------------ */
+
+#light {
+  display: inline-block;
+  text-shadow: #1f4d74 0 0 1px, rgba(255,255,255,0.1) 0 1px 3px;
+}
+
+#box:hover #light {
+  text-shadow: #fff 0 0 4px, #3481C0 0 0 20px;
+  transform: rotateY(-60deg);
+  transition:         transform 1s cubic-bezier(0, 0.75, 0, 1), text-shadow 0.1s ease-out;
+}
+
+// -------------------------------
 .body > h4 {
   display: flex;
   margin: 2%;

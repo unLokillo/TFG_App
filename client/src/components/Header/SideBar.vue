@@ -22,6 +22,7 @@
             <router-link
               :to="{ name: 'Create Neologisme', params: {} }"
               class="sidebar-button"
+              v-if="form.success"
             >
               <div>
                 <font-awesome-icon
@@ -35,6 +36,7 @@
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
+              v-if="form.success"
             >
               <div>
                 <font-awesome-icon
@@ -140,6 +142,7 @@
             <router-link
               :to="{ name: 'Create Neologisme', params: {} }"
               class="sidebar-button"
+              v-if="form.success"
             >
               <div>
                 <font-awesome-icon
@@ -153,6 +156,7 @@
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
+              v-if="form.success"
             >
               <div>
                 <font-awesome-icon

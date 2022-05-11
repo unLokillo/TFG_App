@@ -325,7 +325,6 @@ def getneosuser():
 
 @main_bp.route('/users', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
 def getusers():
     res = Usuario.query.order_by(Usuario.points.desc()).filter_by(
         privileges='user').limit(5).all()
@@ -343,7 +342,6 @@ def getusers():
 
 @main_bp.route('/neologismes', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
 def getneos():
     res = Neologismo.query.order_by(Neologismo.likes.desc())\
         .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).all()
@@ -399,7 +397,6 @@ def getmonday():
 
 @main_bp.route('/week-neologismes', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
 def getweekneos():
     res = Neologismo.query.order_by(Neologismo.likes.desc())\
         .filter((Neologismo.date_approved > (datetime.date.today()-datetime.timedelta(days=getmonday()))) & (Neologismo.state=='aceptado'))\

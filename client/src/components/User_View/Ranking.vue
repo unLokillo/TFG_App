@@ -8,6 +8,9 @@
     <div class="v-ranking-title">
       <h3>Participantes destacados</h3>
     </div>
+    <p style="color: var(--fail)" v-if="!logged.success">
+        Necesitas haber iniciado sesión para acceder a esta opción
+      </p>
     <div class="v-ranking-user" v-for="(value, index) in users" :key="index">
       <div class="position-badge" :style="asign_color(value.position)">
         <strong> {{ value.position }} </strong>
