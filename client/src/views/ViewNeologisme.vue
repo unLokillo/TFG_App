@@ -124,7 +124,7 @@
     </div>
 
     <router-link
-      v-if="form.state=='pendiente'"
+      v-if="form.state=='pendiente' && (username == form.user || login.privileges == 'admin' || login.privileges == 'linguist')"
       tag="b-button"
       class="bttn-app"
       :to="{
@@ -134,6 +134,14 @@
     >
       Modificar propuesta
     </router-link>
+    <b-button
+      v-if="form.user == username && form.state == 'pendiente'"
+      class="bttn-app"
+      @click="deleteneo"
+      style="background-color: var(--fail) !important; margin-top:1rem;"
+    >
+      Eliminar propuesta
+    </b-button>
 
     <div v-if="form.state == 'aceptado' && (username == form.user || login.privileges == 'admin' || login.privileges == 'linguist')">
       <b-button
