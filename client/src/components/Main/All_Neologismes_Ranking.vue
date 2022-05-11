@@ -77,7 +77,7 @@
         {{value.user}}
       </div>
       <div class="v-ranking-points">
-        <font-awesome-icon style="font-size: 15px; margin-right: 7px" icon="heart" />
+        <font-awesome-icon style="font-size: 15px;" icon="heart" />
         {{ value.liked }}
       </div>
       <router-link
@@ -164,12 +164,11 @@ export default {
 
 .v-ranking-points {
   /* background-color: aqua; */
-  text-align: left;
   /* display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  padding-left: 70%; */
+  position: fixed;*/
+  padding-right: 70%; 
 }
 
 /* .author {
