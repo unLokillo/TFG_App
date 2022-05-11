@@ -69,7 +69,7 @@
     sistematizar la información, las intuiciones y las preferencias de los
     especialistas, con el fin de devolvérselos a estos en forma de recursos
     útiles para su comunicación profesional, como glosarios y diccionarios
-    especializados en diversos formatos.
+    especializados en diversos formatos. <br><br>
   </div>
 </template>
 
