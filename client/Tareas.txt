@@ -73,7 +73,6 @@ FrontEnd
 
 General
 	- Funciones necesarias
-		- Visualizar notificaciones de error de usuarios
 		- Errores
 			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
@@ -98,6 +97,7 @@ General
 		- Eliminación neologismos ✓
 		- Botón de revisar neologismos ✓
 		- Descarga de CSV ✓
+		- Visualizar notificaciones de error de usuarios ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
