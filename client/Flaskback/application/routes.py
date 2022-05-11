@@ -9,7 +9,7 @@ from flask_login import current_user, login_required, logout_user
 from flask_cors import cross_origin
 from flask_api import status
 from numpy import source
-from . import mail, db
+from . import mail, db, app
 from flask_mail import Message
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
@@ -18,6 +18,8 @@ from .models import Description, Logro, Neologismo, Source, UserGetsAchievement,
 from sorcery import dict_of
 from sqlalchemy import func
 import uuid
+import boto3
+# from ..wsgi import app
 
 
 # Blueprint Configuration
@@ -36,26 +38,66 @@ def logout():
     return "logged out succesfully", 204
 
 
-def send_mail(user):
+def send_mail(recipients, sender=None, subject='', text='', html=''):
+    ses = boto3.client(
+        'ses',
+        region_name=app.config['SES_REGION_NAME'],
+        aws_access_key_id=app.config['AWS_ACCESS_KEY_ID'],
+        aws_secret_access_key=app.config['AWS_SECRET_ACCESS_KEY']
+    )
+    if not sender:
+        sender = app.config['SES_EMAIL_SOURCE']
+
+    ses.send_email(
+        Source=sender,
+        Destination={'ToAddresses': recipients},
+        Message={
+            'Subject': {'Data': subject},
+            'Body': {
+                'Text': {'Data': text},
+                'Html': {'Data': html}
+            }
+        }
+    )
+
+
+def create_email(user):
+    recipients = [user.email]
+    subject = 'Password recovery'
     token = user.get_token()
-    msg = Message('Password reset request', recipients=[
-                  user.email], sender='pescaneoapp@gmail.com')
-    msg.body = f"""
+
+    text = """
     To reset your password please follow the link below.
     
-    http://127.0.0.1:5000/reset_password/{token}
+    http://127.0.0.1:5000/reset_password/""" + token + """
 
     If you didn't send a password reset request ignore this.
     """
-    mail.send(msg)
+    html = """
+    <head><h3>Pescaneo password recovery</h3></head>
+    <body>
+    <p>
+    To reset your password please follow the link below. <br>
+    
+    http://127.0.0.1:5000/reset_password/""" + token + """ <br>
 
+    If you didn't send a password reset request ignore this.
+    </p>
+    </body>
+    """
+
+    send_mail(recipients=recipients,
+            subject=subject,
+            text=text,
+            html=html
+            )
 
 @main_bp.route("/reset_password", methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def reset_request():
     user = Usuario.query.filter_by(email=request.json['email']).first()
     if user:
-        send_mail(user)
+        create_email(user)
         return "ok", status.HTTP_200_OK
     return "no user found", status.HTTP_204_NO_CONTENT
 
