@@ -77,7 +77,6 @@ General
 			- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user y sin iniciar sesión
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
-		- Elemento de propuestas (Sidebar)
 		- Informar de logro conseguido
 	- Funciones futuras
 		- Búsqueda de información por el usuario
@@ -98,6 +97,7 @@ General
 		- Visualizar notificaciones de error de usuarios ✓
 		- Añadir botón de contribuir en sidebar ✓
 		- Eliminación de propuesta por usuario ✓
+		- Elemento de propuestas (Sidebar) ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
