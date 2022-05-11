@@ -125,6 +125,19 @@
 
           <div class="all-sidebar-buttons" v-else>
             <router-link
+              :to="{ name: 'Home', params: {} }"
+              class="sidebar-button"
+            >
+              <div>
+                <font-awesome-icon
+                  style="font-size: 120%; !important"
+                  icon="house"
+                />
+              </div>
+              Inicio
+              <div></div>
+            </router-link>
+            <router-link
               :to="{ name: 'Create Neologisme', params: {} }"
               class="sidebar-button"
             >
@@ -312,7 +325,7 @@ export default {
 
 .sidebar-button {
   text-decoration: none;
-  padding: 8%;
+  padding: 6%;
   display: flex;
   font-size: 130%;
   justify-content: center;
