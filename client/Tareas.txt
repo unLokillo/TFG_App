@@ -2,11 +2,6 @@ TAREAS
 
 BackEnd
 	- Funciones necesarias
-		- Comprobar funcionamiento correcto de los logros de inicio de sesión,
-			de me gustas conseguidos y dados,
-			de neos propuestos y aceptados,
-			de neo de la semana y
-			de mejor neo
 	- Funciones deseadas
 		- Gestión de imágenes
 		- Hacer RESTful la API
@@ -48,13 +43,15 @@ BackEnd
 		- Cuidado con que itsdangerous antiguo no rompa nada ✓
 		- Mirar posible cambio de serializer actual a Timed serializer para token de reseteo ✓
 		- Paso de flask-mail a otro servicio en envío de email ✓
+		- Comprobar funcionamiento correcto de los logros de inicio de sesión,
+			de me gustas conseguidos y dados,
+			de neos propuestos y aceptados,
+			de neo de la semana y
+			de mejor neo ✓
 
 FrontEnd
 	- Funciones necesarias
-		- Advertir sobre duración de token en recuperación de contraseña
-		- No permitir contraseña mal (solo lo avisa)
-		- Actualización de elementos cuando cambian (logout fuera de home, aceptar neologismo...)
-		- Cambiar Internet of Things por descarbonización (también en FAQ e info)
+		- Cambiar Internet of Things por descarbonización (también en FAQ e info) - después de reunión
 	- Funciones deseadas
 		- Añadir cabecera en todas las páginas / página 404
 		- Eliminar errores en la consola
@@ -71,6 +68,8 @@ FrontEnd
 		- Añadir botón home ✓
 		- Mirar diferencia entre barra lateral en y fuera de / ✓
 		- Poner enter=submit en login y más pantallas ✓
+		- Advertir sobre duración de token en recuperación de contraseña ✓
+		- Actualización de elementos cuando cambian (logout fuera de home, aceptar neologismo...) ✓
 
 General
 	- Funciones necesarias
@@ -101,6 +100,7 @@ General
 		- Elemento de propuestas (Sidebar) ✓
 		- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user ✓
 		- Informar de logro conseguido ✓
+		- No permitir contraseña mal (solo lo avisa) ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código
