@@ -14,20 +14,27 @@
         {{ index + 1 }}
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
         <h5>{{ value.neologisme }}</h5>
-
-        <div v-if="value.state.includes('rechazado')">
-          <font-awesome-icon
-            style="font-size: 20px; color: darkred"
-            icon="times-circle"
-          />
-          Rechazado
-        </div>
-        <div class="neo_card_pendent" v-else>
+        
+        <div class="neo_card_pendent" v-if="value.state=='pendiente'">
           <font-awesome-icon
             style="font-size: 20px; color: darkorange"
             icon="question-circle"
           />
           Pendiente
+        </div>
+        <div class="neo_card_pendent" v-else-if="value.state=='aceptado'">
+          <font-awesome-icon
+            style="font-size: 20px; color: green"
+            icon="circle-check"
+          />
+          Aceptado
+        </div>
+        <div v-else>
+          <font-awesome-icon
+            style="font-size: 20px; color: darkred"
+            icon="times-circle"
+          />
+          Rechazado
         </div>
         <b-button
           class="bttn-app"
@@ -54,8 +61,7 @@ export default {
     await axios
       .get("http://127.0.0.1:5000/user-neo", { withCredentials: true })
       .then((response) => {
-        this.neologismes = response.data.proposed;
-        console.log(this.neologismes)
+        this.neologismes = response.data.allneos;
       });
   },
   data() {

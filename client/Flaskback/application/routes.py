@@ -232,8 +232,9 @@ def getuser():
     fav_neo = [1, 2]
     # img
     privileges = current_user.privileges
+    success = current_user.is_authenticated
     res = dict_of(iduser, nickname, name, surname, email, date, mother_tongue,
-                  gender, school, points, position, fav_neo, privileges)
+                  gender, school, points, position, fav_neo, privileges, success)
     return res, status.HTTP_200_OK
 
 
@@ -311,6 +312,8 @@ def putuser(iduser):
 def getneosuser():
     query = Neologismo.query.filter_by(
         id_user=current_user.id).order_by(Neologismo.likes.desc())
+    allneos = query.with_entities(
+        Neologismo.name, Neologismo.likes, Neologismo.state).all()
     accepted = query.filter_by(state='aceptado').with_entities(
         Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
     proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state.contains('rechazado')))\
@@ -319,7 +322,9 @@ def getneosuser():
         accepted[i] = {'neologisme': neo[0], 'liked': neo[1], 'id': neo[2]}
     for i, neo in enumerate(proposed):
         proposed[i] = {'neologisme': neo[0], 'state': neo[1], 'id': neo[2]}
-    res = {'accepted': accepted, 'proposed': proposed}
+    for i, neo in enumerate(allneos):
+        allneos[i] = {'neologisme': neo[0], 'liked': neo[1], 'state': neo[2]}
+    res = {'accepted': accepted, 'proposed': proposed, 'allneos': allneos}
     return res, status.HTTP_200_OK
 
 
@@ -344,7 +349,7 @@ def getusers():
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def getneos():
     res = Neologismo.query.order_by(Neologismo.likes.desc())\
-        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).all()
+        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme, Neologismo.date_approved).all()
     neos = []
     images = []
     for i, neo in enumerate(res):
@@ -372,6 +377,8 @@ def getneos():
         neologismo['position'] = i+1
         neologismo['liked'] = neo[2]
         neologismo['state'] = neo[3]
+        if neo[3] == 'aceptado':
+            neologismo['date'] = neo[5].strftime("%d/%m/%y")
         neologismo['id'] = neo[4]
         neologismo['descriptions'] = Description.query.filter_by(
             id_neologisme=neo[4]).with_entities(Description.text).all()
@@ -429,7 +436,7 @@ def getweekneos():
         neologismo['neologismo'] = neo[1]
         neologismo['position'] = i+1
         neologismo['liked'] = neo[2]
-        neologismo['date'] = neo[3]
+        neologismo['date'] = neo[3].strftime("%d/%m/%y")
         neologismo['id'] = neo[4]
         if neo[5] == 'aceptado':
             neos.append(neologismo)

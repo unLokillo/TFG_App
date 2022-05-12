@@ -1,30 +1,49 @@
 <template>
-    <div class="card-body">
-        <div>
-      <div class="close-modal"><a @click="$router.go(-1)"> <font-awesome-icon style="font-size: 140%;" icon="times"/> </a></div>
-       <h2>Cartas deslizantes</h2>
-       </div> 
-       <h5 style="border-bottom:1px solid var(--border);padding-bottom: 2%">¡Bienvenido a la actividad!</h5>
-       <p> 
-         Jugando podrás seleccionar cuáles son los Neologismos que te gustan más.
-       <br>
-       Para ello, sigue estas reglas: <br><br><strong>
-       <p style="color:darkgreen; text-align: left; margin-left: 13%;">- Desliza la carta derecha si el Neologismo te gusta. </p><br>
-       <p style="color:darkred; text-align: left; margin-left: 13%;">- Desliza la carta a la izquierda si el Neologismo no te interesa.</p>
-        </strong>
-       </p>
-       <h5>       ¡Eso es todo, esperamos que disfrutes!</h5>
-    <router-link :to="{name: 'game_1'}" tag="b-button"> ¡ A jugar ! </router-link>
-    </div>     
+  <div class="card-body">
+    <div>
+      <div class="close-modal">
+        <a @click="$router.go(-1)">
+          <font-awesome-icon style="font-size: 140%" icon="times" />
+        </a>
+      </div>
+      <h1 style="color: #3481c0; margin-bottom: -5%">Cartas deslizantes</h1>
+    </div>
+    <h5
+      style="
+        border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+        padding-bottom: 1%;
+        padding-top: 2%;
+        font-size: 20px;
+      "
+    >
+      ¡Bienvenido a la actividad!<br />
+      <p style="font-size: 15px; padding-top: 1%">
+        Aquí podrás seleccionar cuáles son los Neologismos que te gustan más.
+      </p>
+    </h5>
+    <strong style="margin-top: -30px">
+      <p style="color: darkgreen; text-align: left; padding-left: 13%;">
+        - Desliza la carta hacia la derecha si <strong> TE GUSTA</strong>.
+      </p>
+      <br />
+      <p style="color: darkred; text-align: left; padding-left: 13%">
+        - Desliza la carta hacia la izquierda si
+        <strong> NO TE INTERESA</strong>.
+      </p>
+    </strong>
+    <router-link :to="{ name: 'game_1' }" tag="b-button">
+      ¡ A jugar !
+    </router-link>
+  </div>
 </template>
 
 <style scoped>
-.card-body{
+.card-body {
   background-color: var(--secondary-color);
   display: flex;
   padding: 4%;
   flex-direction: column;
   justify-content: space-between;
 }
-
 </style>

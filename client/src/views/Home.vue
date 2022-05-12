@@ -11,7 +11,12 @@
       </div>
       <h4>
         Una aplicación para proponer, definir y valorar nuevos términos en el
-        ámbito de la <strong>descarbonización</strong>. <br />
+        ámbito de la <strong>descarbonización</strong>. <br>
+        Si quieres saber más pulsa 
+        <strong>
+          <router-link :to="`/info_general`" style="text-decoration:none;color: #3481c0;">aquí</router-link>
+        </strong>.
+          <br><br>
       </h4>
       <p style="color: var(--fail)" v-if="!login_info.success">
         Necesitas haber iniciado sesión para acceder a esta opción
@@ -23,6 +28,9 @@
         ¡Contribuye!
       </router-link>
     </div>
+
+    <FlashMessage></FlashMessage>
+
     <h4>Neologismos de la semana</h4>
     <div class="frequent-words">
       <template v-if="this.appear">
@@ -147,43 +155,42 @@ export default {
   // -webkit-backface-visibility: hidden; /* fixes flashing */
 }
 
-
 /* flashlight ------------------------------------------------------ */
 
 #flashlight {
-  color: hsla(0,0%,0%,0);
+  color: hsla(0, 0%, 0%, 0);
   perspective: 80px;
   outline: none;
 }
-
 
 /* flash ------------------------------------------------------ */
 
 #flash {
   display: inline-block;
-  text-shadow: #3481C0 0 0 1px, #fff 0 -1px 2px, #fff 0 -3px 2px, rgba(0,0,0,0.8) 0 0px 25px;
+  text-shadow: #3481c0 0 0 1px, #fff 0 -1px 2px, #fff 0 -3px 2px,
+    rgba(0, 0, 0, 0.8) 0 0px 25px;
   transition: margin-left 1s cubic-bezier(0, 1, 0, 1);
 }
-    
-#box:hover #flash {
-   text-shadow: #3481C0 0 0 1px, rgba(255,255,255,0.1) 0 1px 3px;
-  margin-left: 20px;
-  transition: margin-left 1s cubic-bezier(0, 0.75, 0, 1);
-}
 
+// #box:hover #flash {
+//   text-shadow: #3481c0 0 0 1px, rgba(255, 255, 255, 0.1) 0 1px 3px;
+//   margin-left: 20px;
+//   transition: margin-left 1s cubic-bezier(0, 0.75, 0, 1);
+// }
 
 /* light ------------------------------------------------------ */
 
 #light {
   display: inline-block;
-  text-shadow: #1f4d74 0 0 1px, rgba(255,255,255,0.1) 0 1px 3px;
+  text-shadow: #1f4d74 0 0 1px, rgba(255, 255, 255, 0.1) 0 1px 3px;
 }
 
-#box:hover #light {
-  text-shadow: #fff 0 0 4px, #3481C0 0 0 20px;
-  transform: rotateY(-60deg);
-  transition:         transform 1s cubic-bezier(0, 0.75, 0, 1), text-shadow 0.1s ease-out;
-}
+// #box:hover #light {
+//   text-shadow: #fff 0 0 4px, #3481c0 0 0 20px;
+//   transform: rotateY(-60deg);
+//   transition: transform 1s cubic-bezier(0, 0.75, 0, 1),
+//     text-shadow 0.1s ease-out;
+// }
 
 // -------------------------------
 .body > h4 {

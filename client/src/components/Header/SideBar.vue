@@ -23,6 +23,7 @@
               :to="{ name: 'Create Neologisme', params: {} }"
               class="sidebar-button"
               v-if="form.success"
+              style="border-left: 10px solid #de38e0 !important"
             >
               <div>
                 <font-awesome-icon
@@ -33,9 +34,25 @@
               Contribuye
               <div></div>
             </router-link>
+
+            <router-link
+              :to="{ name: 'badges', params: {} }"
+              class="sidebar-button"
+              v-if="form.success"
+              style="border-left: 10px solid #E3CF6C !important"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="award"
+              />
+              Logros
+              <div></div>
+            </router-link>
+
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
+              style="border-left: 10px solid palegreen !important"
               v-if="form.success"
             >
               <div>
@@ -49,8 +66,37 @@
             </router-link>
 
             <router-link
+              :to="{ name: 'main-view-all-proposals', params: {} }"
+              class="sidebar-button"
+              style="border-left: 10px solid #12e6de !important"
+              v-if="form.success"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="book-open"
+              />
+              Tus propuestas
+              <div></div>
+            </router-link>
+
+            <router-link
+              :to="{ name: 'f-neo', params: { userid: form.user_id } }"
+              class="sidebar-button"
+              style="border-left: 10px solid darkorchid !important"
+              v-if="form.success"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="heart"
+              />
+              Neologismos favoritos
+              <div></div>
+            </router-link>
+
+            <router-link
               :to="{ name: 'ranking', params: {} }"
               class="sidebar-button"
+              style="border-left: 10px solid gold !important"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -63,38 +109,13 @@
             <router-link
               :to="{ name: 'ranking_neo', params: { userid: form.user_id } }"
               class="sidebar-button"
+              style="border-left: 10px solid gold !important"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
               Ranking Neologismos
-              <div></div>
-            </router-link>
-
-            <router-link
-              :to="{ name: 'main-view-all-proposals', params: {} }"
-              class="sidebar-button"
-              v-if="form.success"
-            >
-              <font-awesome-icon
-                style="font-size: 120%; !important"
-                icon="book-open"
-              />
-              Tus propuestas
-              <div></div>
-            </router-link>
-
-            <router-link
-              :to="{ name: 'badges', params: {} }"
-              class="sidebar-button"
-              v-if="form.success"
-            >
-              <font-awesome-icon
-                style="font-size: 120%; !important"
-                icon="award"
-              />
-              Logros
               <div></div>
             </router-link>
 
@@ -129,6 +150,7 @@
             <router-link
               :to="{ name: 'Home', params: {} }"
               class="sidebar-button"
+              style="border-left: 10px solid black !important"
             >
               <div>
                 <font-awesome-icon
@@ -139,10 +161,12 @@
               Inicio
               <div></div>
             </router-link>
+
             <router-link
               :to="{ name: 'Create Neologisme', params: {} }"
               class="sidebar-button"
               v-if="form.success"
+              style="border-left: 10px solid #de38e0 !important"
             >
               <div>
                 <font-awesome-icon
@@ -153,9 +177,25 @@
               Contribuye
               <div></div>
             </router-link>
+
+            <router-link
+              :to="{ name: 'vu-badges', params: { userid: form.user_id } }"
+              class="sidebar-button"
+              v-if="form.success"
+              style="border-left: 10px solid #E3CF6C !important"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="award"
+              />
+              Logros
+              <div></div>
+            </router-link>
+
             <router-link
               :to="{ name: 'games', params: {} }"
               class="sidebar-button"
+              style="border-left: 10px solid palegreen !important"
               v-if="form.success"
             >
               <div>
@@ -169,8 +209,40 @@
             </router-link>
 
             <router-link
+              :to="{
+                name: 'view-all-proposals',
+                params: { userid: form.user_id },
+              }"
+              class="sidebar-button"
+              style="border-left: 10px solid #12e6de !important"
+              v-if="form.success"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="book-open"
+              />
+              Tus Propuestas
+              <div></div>
+            </router-link>
+
+            <router-link
+              :to="{ name: 'f-neo', params: { userid: form.user_id } }"
+              class="sidebar-button"
+              style="border-left: 10px solid darkorchid !important"
+              v-if="form.success"
+            >
+              <font-awesome-icon
+                style="font-size: 120%; !important"
+                icon="heart"
+              />
+              Neologismos favoritos
+              <div></div>
+            </router-link>
+
+            <router-link
               :to="{ name: 'vu-ranking', params: { userid: form.user_id } }"
               class="sidebar-button"
+              style="border-left: 10px solid gold !important"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
@@ -183,41 +255,13 @@
             <router-link
               :to="{ name: 'vu-ranking_neo', params: { userid: form.user_id } }"
               class="sidebar-button"
+              style="border-left: 10px solid gold !important"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
               Ranking Neologismos
-              <div></div>
-            </router-link>
-
-            <router-link
-              :to="{
-                name: 'view-all-proposals',
-                params: { userid: form.user_id },
-              }"
-              class="sidebar-button"
-              v-if="form.success"
-            >
-              <font-awesome-icon
-                style="font-size: 120%; !important"
-                icon="book-open"
-              />
-              Tus Propuestas
-              <div></div>
-            </router-link>
-
-            <router-link
-              :to="{ name: 'vu-badges', params: { userid: form.user_id } }"
-              class="sidebar-button"
-              v-if="form.success"
-            >
-              <font-awesome-icon
-                style="font-size: 120%; !important"
-                icon="award"
-              />
-              Logros
               <div></div>
             </router-link>
 
@@ -296,7 +340,15 @@ export default {
       axios
         .get("http://127.0.0.1:5000/logout", { withCredentials: true })
         .then((response_l) => {
-          console.log("Reloading...");
+          if(response_l.status==204){
+            this.flashMessage.show({
+                  status: "error",
+                  title: "Has cerrado sesión, ¡hasta pronto!",
+                  message: "Para volver a tener acceso a todas las funcionalidades, inicia sesión en la esquina superior derecha.",
+                  time: 10000,
+                  position: 'left top'
+                });
+          }
           this.$emit("actualiza");
         })
         .catch((err) => {});
@@ -338,6 +390,7 @@ export default {
   border-left: 10px solid var(--border-left);
   cursor: pointer;
   justify-content: space-between;
+  color: p;
 }
 
 .sidemenu-top {

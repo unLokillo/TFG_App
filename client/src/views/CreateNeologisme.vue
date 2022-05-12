@@ -1,5 +1,6 @@
 <template>
   <div class="create-neologisme-body">
+    <FlashMessage :position="'left top'"></FlashMessage>
     <div class="close-modal">
       <router-link to="/">
         <font-awesome-icon style="font-size: 140%" icon="times" />
@@ -115,6 +116,13 @@ export default {
 
       axios.post("http://127.0.0.1:5000/create-neologisme", formData, {
         withCredentials: true,
+      });
+      this.flashMessage.show({
+        status: "success",
+        title: "Neologismo creado",
+        message: "¡Has conseguido un nuevo LOGRO! Para ver tus logros busca en el panel lateral",
+        time: 8000,
+        position: "left top"
       });
       this.$router.push({ path: `/` });
     },

@@ -44,13 +44,14 @@
         {{value.user}}
       </div>
       <div class="v-ranking-points">
-        <font-awesome-icon style="font-size: 15px; margin-right: 7px" icon="heart" />
+        <font-awesome-icon style="font-size: 15px;" icon="heart" />
         {{ value.liked }}
       </div>
       <router-link
         :to="`/fav-neo/${value.id}`"
         tag="b-button"
         style="margin-right: 2rem"
+        v-if="logged.success"
       >
         + info
       </router-link>
@@ -168,7 +169,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   position: fixed;*/
-  padding-right: 70%; 
+  padding-right: 60%; 
 }
 
 /* .author {

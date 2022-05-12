@@ -1,17 +1,23 @@
 <template>
   <div class="header-img">
-    <router-link
+    <b-button
       :to="{ name: 'vUser', params: { userid: login_info.user_id } }"
-      class="user-bttn"
-      style="text-decoration: none"
+      class="header-img"
+      style="text-decoration: none; height: 100%; border-width:0px"
       v-if="login_info.success"
     >
       <!--<b-avatar :src="require(`../../assets/images/${login_info.img}`)"></b-avatar>-->
-      <div style="color: white">
-        {{ login_info.username }}
-      </div>
-    </router-link>
-    <router-link :to="`/login`" v-else style="text-decoration: none"
+      <font-awesome-icon
+                style="font-size: 120%; !important; color: white; padding-right:10%; padding-bottom:4%"
+                icon="user"
+              />
+      <strong style="color: white; justify-content: center"><h5> {{login_info.username}} </h5></strong>
+      <!-- <font-awesome-icon
+                style="font-size: 120%; !important; color: black; padding-left:10%; padding-right:10%; transform: rotate(90deg);"
+                icon="play"
+              /> -->
+    </b-button>
+    <router-link :to="`/login`" class="header-img" v-else style="text-decoration: none; border-width:0px"
       ><div style="color: white">Iniciar sesión</div></router-link
     >
   </div>

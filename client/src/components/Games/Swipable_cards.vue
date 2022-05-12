@@ -137,7 +137,7 @@ export default {
     axios.get("http://127.0.0.1:5000/neologismes", { withCredentials: true })
     .then(res => {
       for(let i = 0; i < res.data.length; i++) {
-        if(!this.isfav(res.data[i].id)){
+        if(!this.isfav(res.data[i].id)&&res.data[i].state=='aceptado'){
           card.push({
                   id: res.data[i].id,
                   name: res.data[i].neologismo,
@@ -182,7 +182,19 @@ export default {
     get_achievement(){
       var formData = new FormData();
       formData.append("achiev", 5);
-      axios.post("http://127.0.0.1:5000/badges", formData, { withCredentials: true });
+      axios.post("http://127.0.0.1:5000/badges", formData, { withCredentials: true })
+      .then(res => {
+        if(res.status == 201){
+          this.flashMessage.show({
+                  status: "success",
+                  title: "¡Has conseguido un nuevo logro!",
+                  message: "Para verlo, ve a la sección de tus logros",
+                  time: 5000,
+                  position: 'left top',
+                  contentClass: 'flashnotif'
+                });
+        }
+      });
     },
     isfav(id){
       var is = false;
@@ -370,5 +382,8 @@ export default {
     font-size: 14px;
     // overflow: scroll;
   }
+}
+.flashnotif {
+  font-size: 20px;
 }
 </style>

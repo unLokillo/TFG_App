@@ -15,13 +15,14 @@
       </div>
     </div>
     <div class="user-tag">
-      <div>Creado por: {{ this.neologismeData.user }}</div>
-      <div>{{ this.neologismeData.user[0].date }}</div>
+      <div>Creado por {{ this.neologismeData.user }}</div>
+      <div>{{ this.neologismeData.date }}</div>
     </div>
     <router-link
       :to="`/fav-neo/${this.neologismeData.id}`"
       tag="b-button"
       style="width: 100%"
+      v-if="login"
     >
       Ver más
     </router-link>
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: {
     neologismeData: Object,
@@ -42,6 +44,13 @@ export default {
       }
     }*/
   },
+  created() {
+    axios.get("http://127.0.0.1:5000/login", { withCredentials: true })
+    .catch((err) => {
+      console.log(err)
+      this.login=false
+    });
+  },
   data() {
     return {
       showModal: false,
@@ -51,6 +60,7 @@ export default {
       date: "",
       likes: "",
       descriptions: "",
+      login: true
     };
   },
 };
@@ -69,6 +79,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border-width: 3px;
+  border-radius: 10px;
+  border: solid #3481c0;
 }
 .card-neo-header {
   display: flex;

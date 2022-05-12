@@ -7,7 +7,7 @@
     </div>
     <h4>Crear cuenta</h4>
     <b-form @submit="submit">
-      <b-input-group prepend="* Alias: " class="mt-3">
+      <b-input-group prepend="* Nombre de usuario: " class="mt-3">
         <b-form-input required v-model="form.nickname"></b-form-input>
       </b-input-group>
 

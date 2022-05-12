@@ -53,7 +53,7 @@ FrontEnd
 	- Funciones necesarias
 		- Advertir sobre duración de token en recuperación de contraseña
 		- No permitir contraseña mal (solo lo avisa)
-		- Actualización de elementos cuando cambian
+		- Actualización de elementos cuando cambian (logout fuera de home, aceptar neologismo...)
 		- Cambiar Internet of Things por descarbonización (también en FAQ e info)
 	- Funciones deseadas
 		- Añadir cabecera en todas las páginas / página 404
@@ -62,8 +62,6 @@ FrontEnd
 		- No mostrar mensajes de error cuando no hay error
 		- Alinear todas las listas como la de neologismos
 	- Tareas de perfeccionamiento
-		- Mirar diferencia entre barra lateral en y fuera de /
-		- Poner enter=submit en login y más pantallas
 	- Completado
 		- Cambiar enlace info y preg. frecuentes bien ✓
 		- Poner tilde a "Registrate" ✓
@@ -71,19 +69,20 @@ FrontEnd
 		- Añadir botón de página principal ✓
 		- Cambiar admin y linguist por privileges ✓
 		- Añadir botón home ✓
+		- Mirar diferencia entre barra lateral en y fuera de / ✓
+		- Poner enter=submit en login y más pantallas ✓
 
 General
 	- Funciones necesarias
-		- Errores
-			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Funciones deseadas
 	- Funciones futuras
-		- Informar de logro conseguido
 		- Búsqueda de información por el usuario
 		- Cambio de idioma en footer
 		- Comentarios
 		- Actividad contexto correcto
 		- Logros sobre posición en ranking de usuarios
+		- Errores
+			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Completado
 		- Actividad cartas deslizantes ✓
 		- Creación de administradores ✓
@@ -100,6 +99,7 @@ General
 		- Eliminación de propuesta por usuario ✓
 		- Elemento de propuestas (Sidebar) ✓
 		- Arreglar partes que solo funcionan con sesión iniciada y que fallan con plain user ✓
+		- Informar de logro conseguido ✓
 	- Tareas de perfeccionamiento
 		- Coger readme.md de https://github.com/othneildrew/Best-README-Template
 		- Dar formato a todos los ficheros de código

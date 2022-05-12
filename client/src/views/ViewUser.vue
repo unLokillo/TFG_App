@@ -111,8 +111,13 @@
           <b-dropdown-divider
            v-if="this.privileges=='admin' || this.privileges=='linguist'"
           ></b-dropdown-divider>
-          <b-dropdown-item v-on:click="deleteData($route.params.userid)">
+          <b-dropdown-item v-on:click="logout">
             <div style="color: red !important">
+              Cerrar sesión
+            </div></b-dropdown-item
+          ><b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item v-on:click="deleteData($route.params.userid)">
+            <div style="color: darkred !important">
               Eliminar cuenta
             </div></b-dropdown-item
           >
@@ -192,31 +197,6 @@ export default {
         this.errores = res.data;
       })
   },
-  methods: {
-    /*toCSV: function(){  
-          axios.get('http://127.0.0.1:5000/neologismes', { withCredentials: true })
-        .then(response => {
-            var array = typeof response.data != 'object' ? JSON.parse(response.data) : response.data;
-            var str = '';
-           for (var i = 0; i < array.length; i++) {
-                var line = '';
-                for (var index in array[i]) {
-                    if (line != '') line += ','
-                    line += array[i][index];
-                }
-                str += line + '\r\n';
-            }
-            // Convert Object to JSON
-            var encodedUri = encodeURI(str);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "my_data.csv");
-            document.body.appendChild(link); // Required for FF
-            link.click();
-            document.body.removeChild(link);
-        });
-        }*/
-  },
   watch: {
     $route: {
       immediate: true,
@@ -258,6 +238,14 @@ export default {
       axios.get("http://127.0.0.1:5000/logout", { withCredentials: true });
       this.$router.push("/");
     },
+    logout(){
+      axios.get('http://127.0.0.1:5000/logout', { withCredentials: true })
+      .then(res => {
+        if(res.status==204){
+          this.$router.push({ path: `/`})
+        }
+      })
+    }
   },
 };
 </script>
