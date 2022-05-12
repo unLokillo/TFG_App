@@ -122,6 +122,7 @@
         Rechazar propuesta
       </b-button>
     </div>
+    <FlashMessage></FlashMessage>
 
     <router-link
       v-if="form.state=='pendiente' && (username == form.user || login.privileges == 'admin' || login.privileges == 'linguist')"
@@ -286,6 +287,14 @@ export default {
         { withCredentials: true }
         );
       this.updateneo += 1
+      this.flashMessage.show({
+              status: "success",
+              title: "Neologismo aceptado",
+              message: "Has marcado este neologismo como aceptado. Ahora aparecerá en el ranking para todos los usuarios.",
+              time: 6000,
+              position: 'right bottom',
+              //html: '<h3>ey</h3>'
+            });
     },
     deleteneo() {
       axios.delete("http://127.0.0.1:5000/neologismes/" +
@@ -294,6 +303,14 @@ export default {
         ).then(res => {
           if (res.status==204){
             this.$router.go(-1)
+            this.flashMessage.show({
+              status: "error",
+              title: "Neologismo eliminado",
+              message: "Has marcado este neologismo como no válido o rechazado. Para volver a marcarlo como propuesta habrá que modificarlo",
+              time: 6000,
+              position: 'right bottom',
+              //html: '<h3>ey</h3>'
+            });
           } else console.log("Something went wrong while deleting")
         });
     }
