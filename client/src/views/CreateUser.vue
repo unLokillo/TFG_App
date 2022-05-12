@@ -54,10 +54,11 @@
         </b-input-group>
       </div>
       <div class="selectors-card">
-        <h6>Fecha de Nacimiento</h6>
+        <h6>* Fecha de Nacimiento</h6>
         <b-form-datepicker
           v-model="form.date"
           class="mb-2"
+          :state="form.date!=''"
           :show-decade-nav="true"
         ></b-form-datepicker>
       </div>
@@ -183,15 +184,32 @@ export default {
       for (const i in this.form) {
         formData.append(i, this.form[i]);
       }
-
-      axios
-        .post("http://127.0.0.1:5000/signup", formData, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      this.$router.push({ path: `/login` });
+      if(this.password_state && this.repeat_password && this.form.date != ""){
+        axios
+          .post("http://127.0.0.1:5000/signup", formData, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if(res.status==201){
+              this.flashMessage.show({
+                  status: "success",
+                  title: "¡Registro completado!",
+                  message: "Ahora, inicia sesión para comenzar tu experiencia",
+                  time: 5000,
+                  position: 'right bottom'
+                });
+            }
+            this.$router.push({ path: `/login` });
+          });
+      } else {
+        this.flashMessage.show({
+                  status: "error",
+                  title: "Error al registrarse",
+                  message: "Comprueba los campos de contraseña",
+                  time: 5000,
+                  position: 'left top'
+                });
+      }
     },
     isUpper(str) {
       var result = false;
