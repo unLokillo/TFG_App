@@ -277,19 +277,20 @@
               <div></div>
             </router-link>
 
-            <div
+            <b-button
               class="sidebar-button"
+              v-on:click="logOutgoHome"
+              :to="{ name: 'Home', params: {} }"
               style="border-left: 10px solid red !important"
-              v-on:click="logOut"
               v-if="form.success"
             >
               <font-awesome-icon
                 style="font-size: 120%; !important"
                 icon="sign-out-alt"
               />
-              Salir
+              Cerrar sesión
               <div></div>
-            </div>
+            </b-button>
           </div>
         </div>
       </template>
@@ -350,6 +351,23 @@ export default {
                 });
           }
           this.$emit("actualiza");
+        })
+        .catch((err) => {});
+    },
+    async logOutgoHome() {
+      await axios
+        .get("http://127.0.0.1:5000/logout", { withCredentials: true })
+        .then((response_l) => {
+          if(response_l.status==204){
+            this.flashMessage.show({
+                  status: "error",
+                  title: "Has cerrado sesión, ¡hasta pronto!",
+                  message: "Para volver a tener acceso a todas las funcionalidades, inicia sesión en la esquina superior derecha.",
+                  time: 10000,
+                  position: 'left top'
+                });
+          }
+           // this.$router.push({name: `Home`})
         })
         .catch((err) => {});
     },
