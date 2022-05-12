@@ -57,6 +57,14 @@ export default {
         )
         .then((response) => {
           if (response.status == 200) {
+            this.flashMessage.show({
+              status: "warning",
+              title: "Recuperación de contraseña",
+              message: "Se te ha enviado un enlace por correo electrónico para cambiar tu contraseña que tiene validez hasta dentro de 10 minutos.",
+              time: 8000,
+              position: 'left top',
+              //html: '<h3>ey</h3>'
+            });
             this.$router.push(`/login`);
           } else {
             this.correct_email = false;
