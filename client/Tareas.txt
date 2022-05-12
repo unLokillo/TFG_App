@@ -81,6 +81,7 @@ General
 		- Comentarios
 		- Actividad contexto correcto
 		- Logros sobre posición en ranking de usuarios
+		- Poder ver todos los logros posibles
 		- Errores
 			- Hay un error cuando le das a la X de la creación de neologismos en descripciones, no se borra
 	- Completado
