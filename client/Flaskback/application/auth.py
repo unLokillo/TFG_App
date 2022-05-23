@@ -94,7 +94,7 @@ def signup():
         db.session.commit()
     except:
         db.session.rollback()
-    login_user(new_user)
+    #login_user(new_user)
     return "ok", status.HTTP_201_CREATED
 
 
