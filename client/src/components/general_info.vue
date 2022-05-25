@@ -10,7 +10,7 @@
     </div>
     <p>
       Pescaneo es una aplicación que permite la captura y valoración de
-      neologismos en el ámbito del Internet de las Cosas (IoT). Se enmarca en el
+      neologismos en el ámbito de la descarbonización. Se enmarca en el
       proyecto IoTerm, desarrollado por profesoras del Departamento de
       Lingüística Aplicada a la Ciencia y la Tecnología de la Universidad
       Politécnica de Madrid en colaboración con el grupo de investigación
@@ -23,7 +23,7 @@
       <br /><br />
       Con ayuda de esta flota de “pescadoras y pescadores de términos”
       pretendemos detectar, analizar, valorar y recopilar los neologismos
-      terminológicos que surgen en el ámbito del IoT en inglés y en español.
+      terminológicos que surgen en el ámbito de la descarbonización en inglés y en español.
       <br />
       <br />
       <strong style="align-content: center"> ¿Te vienes de pesca? </strong>
@@ -41,7 +41,8 @@
     <h4>¿Qué es un término?</h4>
     Un término puede estar formado por una sola o por varias palabras, y se
     utiliza para referirse a un concepto especializado en un ámbito de
-    especialidad. Por ejemplo, sensor, en el ámbito del IoT, es un término.
+    especialidad. Por ejemplo, emisión, en el ámbito de la descarbonización,
+    es un término.
     <h4>
       ¿Por qué es importante desarrollar una terminología propia en español?
     </h4>
@@ -53,8 +54,8 @@
     un ámbito de especialidad en nuestra propia lengua nos ayuda a comprenderlo
     mejor y nos permite avanzar e innovar con más autonomía y garantías.
     <h4>
-      ¿Por qué es importante que los especialistas en IoT propongan y opinen
-      sobre las palabras que usan?
+      ¿Por qué es importante que los especialistas en descarbonización propongan
+      y opinen sobre las palabras que usan?
     </h4>
     Creemos que si los especialistas se implican en el proceso de detección y
     generación de los neologismos propios de su ámbito tendrán muchas más

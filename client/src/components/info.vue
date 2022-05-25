@@ -10,7 +10,7 @@
     </div>
     <p>
       Pescaneo es una aplicación que permite la captura y valoración de
-      neologismos en el ámbito del Internet de las Cosas (IoT). Se enmarca en el
+      neologismos en el ámbito de la descarbonización. Se enmarca en el
       proyecto IoTerm, desarrollado por profesoras del Departamento de
       Lingüística Aplicada a la Ciencia y la Tecnología de la Universidad
       Politécnica de Madrid en colaboración con el grupo de investigación
@@ -23,7 +23,7 @@
       <br /><br />
       Con ayuda de esta flota de “pescadoras y pescadores de términos”
       pretendemos detectar, analizar, valorar y recopilar los neologismos
-      terminológicos que surgen en el ámbito del IoT en inglés y en español.
+      terminológicos que surgen en el ámbito de la descarbonización en inglés y en español.
       <br />
       <br />
 

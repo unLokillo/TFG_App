@@ -18,7 +18,7 @@
     <h4>¿Qué es un término?</h4>
     Un término puede estar formado por una sola o por varias palabras, y se
     utiliza para referirse a un concepto especializado en un ámbito de
-    especialidad. Por ejemplo, sensor, en el ámbito del IoT, es un término.
+    especialidad. Por ejemplo, emisión, en el ámbito de la descarbonización, es un término.
     <h4>
       ¿Por qué es importante desarrollar una terminología propia en español?
     </h4>
@@ -30,7 +30,7 @@
     un ámbito de especialidad en nuestra propia lengua nos ayuda a comprenderlo
     mejor y nos permite avanzar e innovar con más autonomía y garantías.
     <h4>
-      ¿Por qué es importante que los especialistas en IoT propongan y opinen
+      ¿Por qué es importante que los especialistas en descarbonización propongan y opinen
       sobre las palabras que usan?
     </h4>
     Creemos que si los especialistas se implican en el proceso de detección y
