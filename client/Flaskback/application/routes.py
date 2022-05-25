@@ -29,6 +29,9 @@ def logout():
     logout_user()
     return "logged out succesfully", 204
 
+######################################################
+#################### CONTRASEÑAS #####################
+######################################################
 
 def send_mail(recipients, sender=None, subject='', text='', html=''):
     ses = boto3.client(
@@ -119,6 +122,10 @@ def reset_token(token):
         db.session.commit()
         return redirect('http://localhost:8080/login')
     return render_template('reset_request.html', title="Change password", legend="Reset password", form=form)
+
+######################################################
+#################### NEOLOGISMOS #####################
+######################################################
 
 # /neologismes GET, POST
 @main_bp.route('/neologismes', methods=['GET','POST'])
@@ -519,6 +526,11 @@ def neolikes(neoid):
             return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
         return "Removed succesfully", status.HTTP_204_NO_CONTENT
 
+
+###################################################
+#################### USUARIOS #####################
+###################################################
+
 # /users/<id_user> GET, PUT, DELETE
 @main_bp.route('/users/<iduser>', methods=['GET', 'PUT', 'DELETE'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
@@ -696,6 +708,11 @@ def userlikes(userid):
         neologismo['user'] = Usuario.query.get(neo.id_user).nickname
         res.append(neologismo)
     return jsonify(res), status.HTTP_200_OK
+
+
+#################################################
+#################### LOGROS #####################
+#################################################
 
 # /badges GET, POST
 @main_bp.route('/badges', methods=['GET', 'POST'])
@@ -878,6 +895,11 @@ def badges():
                 db.session.rollback()
                 return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
             return "A month of logins badge given", status.HTTP_201_CREATED
+
+
+##################################################################
+#################### NOTIFICACIONES DE ERROR #####################
+##################################################################
 
 # /errors GET, POST
 @main_bp.route('/error', methods=['GET', 'POST'])
