@@ -120,6 +120,7 @@ Memoria
 	- Añadir entradas del índice
 	- Comprobar referencias con X roja
 	- Añadir descripciones de imágenes
+	- Añadir requisitos
 
 pip freeze > requirements.txt
 
