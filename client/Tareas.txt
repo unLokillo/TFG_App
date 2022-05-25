@@ -5,6 +5,8 @@ BackEnd
 	- Funciones deseadas
 		- Gestión de imágenes
 		- Hacer RESTful la API
+			- Añadir returns de error correctos
+			- Combinar métodos ✓
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)
