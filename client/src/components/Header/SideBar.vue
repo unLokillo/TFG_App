@@ -280,7 +280,6 @@
             <b-button
               class="sidebar-button"
               v-on:click="logOutgoHome"
-              :to="{ name: 'Home', params: {} }"
               style="border-left: 10px solid red !important"
               v-if="form.success"
             >
@@ -370,6 +369,7 @@ export default {
            // this.$router.push({name: `Home`})
         })
         .catch((err) => {});
+        this.$router.push({name: `Home`})
     },
   },
 };
