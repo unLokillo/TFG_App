@@ -1,16 +1,9 @@
 import datetime
-import email
-from posixpath import supports_unicode_filenames
-from random import random
-from turtle import position
-from unicodedata import name
 from flask import Blueprint, jsonify, render_template, redirect, request, url_for
 from flask_login import current_user, login_required, logout_user
 from flask_cors import cross_origin
 from flask_api import status
-from numpy import source
-from . import mail, db, app
-from flask_mail import Message
+from . import db, app
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
@@ -19,7 +12,6 @@ from sorcery import dict_of
 from sqlalchemy import func
 import uuid
 import boto3
-# from ..wsgi import app
 
 
 # Blueprint Configuration
@@ -128,264 +120,125 @@ def reset_token(token):
         return redirect('http://localhost:8080/login')
     return render_template('reset_request.html', title="Change password", legend="Reset password", form=form)
 
-
-@main_bp.route("/create-neologisme", methods=['POST'])
+# /neologismes GET, POST
+@main_bp.route('/neologismes', methods=['GET','POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def create_neologisme():
-    name = request.form['neologisme']
-    likes = request.form['liked']
-    state = request.form['state']
-    user = current_user.id
+def neos():
+    if request.method == 'POST':
+        name = request.form['neologisme']
+        likes = request.form['liked']
+        state = request.form['state']
+        user = current_user.id
 
-    descriptions = []
-    for i in range(int(request.form['numDescr'])):
-        descriptions.append(request.form['description'+str(i)])
+        descriptions = []
+        for i in range(int(request.form['numDescr'])):
+            descriptions.append(request.form['description'+str(i)])
 
-    sources = []
-    for i in range(int(request.form['numSources'])):
-        sources.append(request.form['source'+str(i)])
+        sources = []
+        for i in range(int(request.form['numSources'])):
+            sources.append(request.form['source'+str(i)])
 
-    '''if request.form['imageno'] == 'default':
-        with open('./assets/default_profile.png', 'rb') as file:
-            image = file.read()
-    else:
-        image = request.files['imagen'].read()'''
+        '''if request.form['imageno'] == 'default':
+            with open('./assets/default_profile.png', 'rb') as file:
+                image = file.read()
+        else:
+            image = request.files['imagen'].read()'''
 
-    new_neo = Neologismo(name=name, likes=likes,  # image=image,
-                         id_user=user, state=state)
-    db.session.add(new_neo)
+        new_neo = Neologismo(name=name, likes=likes,  # image=image,
+                            id_user=user, state=state)
+        db.session.add(new_neo)
 
-    uga = UserGetsAchievement(
-        id_user=user, id_achievement=2, date=datetime.date.today())
-    db.session.add(uga)
-    userp = Usuario.query.get(user)
-    userp.points += 10
+        uga = UserGetsAchievement(
+            id_user=user, id_achievement=2, date=datetime.date.today())
+        db.session.add(uga)
+        userp = Usuario.query.get(user)
+        userp.points += 10
 
-    try:
-        db.session.commit()
-    except:
-        db.session.rollback()
-
-    db.session.refresh(new_neo)
-
-    for i in range(len(sources)):
-        new_source = Source(
-            link=sources[i], id_neologisme=new_neo.id_neologisme)
-        db.session.add(new_source)
-
-    for i in range(len(descriptions)):
-        new_description = Description(
-            text=descriptions[i], id_neologisme=new_neo.id_neologisme)
-        db.session.add(new_description)
-
-    # Logro de neologismos propuestos
-    neoq = Neologismo.query.filter(Neologismo.id_user==current_user.id).all()
-    if len(neoq)==5 or len(neoq)==20:
-        ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==current_user.id) &
-                                                ((UserGetsAchievement.id_achievement==16) |
-                                                (UserGetsAchievement.id_achievement==17))).all()
-        ugaqs = {}
-        for uga in ugaq:
-            if uga.id_achievement == 16:
-                ugaqs[16] = True
-            if uga.id_achievement == 17:
-                ugaqs[17] = True
-        if len(neoq) == 5 and 16 not in ugaqs:
-            uga = UserGetsAchievement(
-                id_user=current_user.id, id_achievement=16, date=datetime.date.today())
-            db.session.add(uga)
-            userp.points += 50
-        elif len(neoq) == 20 and 17 not in ugaqs:
-            uga = UserGetsAchievement(
-                id_user=current_user.id, id_achievement=17, date=datetime.date.today())
-            db.session.add(uga)
-            userp.points += 100
-
-    try:
-        db.session.commit()
-    except:
-        db.session.rollback()
-
-    return "Neologisme created", status.HTTP_201_CREATED
-
-
-@main_bp.route('/user', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def getuser():
-    iduser = current_user.id
-    nickname = current_user.nickname
-    name = current_user.name
-    surname = current_user.surname
-    email = current_user.email
-    date = current_user.birthdate.strftime("%d/%m/%y")
-    mother_tongue = current_user.mother_tongue
-    gender = current_user.gender
-    school = current_user.school
-    points = current_user.points
-    query = db.session.query(Usuario, func.rank().over(
-        order_by=Usuario.points.desc()).label('rankins')).filter_by(privileges=current_user.privileges).all()
-    for (user, i) in query:
-        if user == current_user:  # TODO: comporbar que esto funciona bien
-            position = i
-    fav_neo = [1, 2]
-    # img
-    privileges = current_user.privileges
-    success = current_user.is_authenticated
-    res = dict_of(iduser, nickname, name, surname, email, date, mother_tongue,
-                  gender, school, points, position, fav_neo, privileges, success)
-    return res, status.HTTP_200_OK
-
-
-@main_bp.route('/users/<iduser>', methods=['PUT', 'DELETE'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def putuser(iduser):
-    if request.method == 'PUT':
-        user = Usuario.query.get(iduser)
-        try:
-            user.privileges = request.form['privileges']
-        except:
-            pass
-        try:
-            user.nickname = request.form['nickname']
-        except:
-            pass
-        try:
-            user.name = request.form['name']
-        except:
-            pass
-        try:
-            user.surname = request.form['surname']
-        except:
-            pass
-        try:
-            user.email = request.form['email']
-        except:
-            pass
-        try:
-            user.birthdate = request.form['date']
-        except:
-            pass
-        try:
-            user.gender = request.form['gender']
-        except:
-            pass
-        try:
-            user.set_password(request.form['password'])
-        except:
-            pass
-        try:
-            user.school = request.form['school']
-        except:
-            pass
-        try:
-            user.mother_tongue = request.form['mother_tongue']
-        except:
-            pass
-        try:
-            user.points = request.form['points']
-        except:
-            pass
         try:
             db.session.commit()
         except:
             db.session.rollback()
-            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
-        return "modified", status.HTTP_201_CREATED
-    elif request.method == 'DELETE':
-        user = Usuario.query.get(iduser)
-        user.set_password(str(uuid.uuid4()))
-        user.privileges = 'removed'
-        try:
-            db.session.commit()
-        except:
-            db.session.rollback()
-            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
-        return "deleted", status.HTTP_204_NO_CONTENT
 
+        db.session.refresh(new_neo)
 
-@main_bp.route('/user-neo', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def getneosuser():
-    query = Neologismo.query.filter_by(
-        id_user=current_user.id).order_by(Neologismo.likes.desc())
-    allneos = query.with_entities(
-        Neologismo.name, Neologismo.likes, Neologismo.state).all()
-    accepted = query.filter_by(state='aceptado').with_entities(
-        Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
-    proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state.contains('rechazado')))\
-        .with_entities(Neologismo.name, Neologismo.state, Neologismo.id_neologisme).all()
-    for i, neo in enumerate(accepted):
-        accepted[i] = {'neologisme': neo[0], 'liked': neo[1], 'id': neo[2]}
-    for i, neo in enumerate(proposed):
-        proposed[i] = {'neologisme': neo[0], 'state': neo[1], 'id': neo[2]}
-    for i, neo in enumerate(allneos):
-        allneos[i] = {'neologisme': neo[0], 'liked': neo[1], 'state': neo[2]}
-    res = {'accepted': accepted, 'proposed': proposed, 'allneos': allneos}
-    return res, status.HTTP_200_OK
+        for i in range(len(sources)):
+            new_source = Source(
+                link=sources[i], id_neologisme=new_neo.id_neologisme)
+            db.session.add(new_source)
 
+        for i in range(len(descriptions)):
+            new_description = Description(
+                text=descriptions[i], id_neologisme=new_neo.id_neologisme)
+            db.session.add(new_description)
 
-@main_bp.route('/users', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-def getusers():
-    res = Usuario.query.order_by(Usuario.points.desc()).filter_by(
-        privileges='user').limit(5).all()
-    users = []
-    images = []
-    for i, user in enumerate(res):
-        usuario = {}
-        usuario['nickname'] = user.nickname
-        usuario['position'] = i+1
-        usuario['points'] = user.points
-        users.append(usuario)
-        images.append(user.image)
-    return jsonify(users), status.HTTP_200_OK
-
-
-@main_bp.route('/neologismes', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-def getneos():
-    res = Neologismo.query.order_by(Neologismo.likes.desc())\
-        .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme, Neologismo.date_approved).all()
-    neos = []
-    images = []
-    for i, neo in enumerate(res):
-        neouser = Usuario.query.get(neo[0])
-
-        # Logro neo de la semana
-        if i == 0 or i == 1 or i == 2 or i == 3 or i == 4:
-            ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neouser.id) &
-                                                    (UserGetsAchievement.id_achievement==20)).all()
-            if len(ugaq) == 0:
+        # Logro de neologismos propuestos
+        neoq = Neologismo.query.filter(Neologismo.id_user==current_user.id).all()
+        if len(neoq)==5 or len(neoq)==20:
+            ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==current_user.id) &
+                                                    ((UserGetsAchievement.id_achievement==16) |
+                                                    (UserGetsAchievement.id_achievement==17))).all()
+            ugaqs = {}
+            for uga in ugaq:
+                if uga.id_achievement == 16:
+                    ugaqs[16] = True
+                if uga.id_achievement == 17:
+                    ugaqs[17] = True
+            if len(neoq) == 5 and 16 not in ugaqs:
                 uga = UserGetsAchievement(
-                    id_user=neouser.id, id_achievement=20, date=datetime.date.today())
+                    id_user=current_user.id, id_achievement=16, date=datetime.date.today())
                 db.session.add(uga)
-                neouser.points += 200
-                try:
-                    db.session.commit()
-                except:
-                    db.session.rollback()
-                    return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
+                userp.points += 50
+            elif len(neoq) == 20 and 17 not in ugaqs:
+                uga = UserGetsAchievement(
+                    id_user=current_user.id, id_achievement=17, date=datetime.date.today())
+                db.session.add(uga)
+                userp.points += 100
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+
+        return "Neologisme created", status.HTTP_201_CREATED
+    elif request.method == 'GET':
+        res = Neologismo.query.order_by(Neologismo.likes.desc())\
+            .with_entities(Neologismo.id_user, Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme, Neologismo.date_approved).all()
+        neos = []
+        images = []
+        for i, neo in enumerate(res):
+            neouser = Usuario.query.get(neo[0])
+
+            # Logro neo de la semana
+            if i == 0 or i == 1 or i == 2 or i == 3 or i == 4:
+                ugaq = UserGetsAchievement.query.filter((UserGetsAchievement.id_user==neouser.id) &
+                                                        (UserGetsAchievement.id_achievement==20)).all()
+                if len(ugaq) == 0:
+                    uga = UserGetsAchievement(
+                        id_user=neouser.id, id_achievement=20, date=datetime.date.today())
+                    db.session.add(uga)
+                    neouser.points += 200
+                    try:
+                        db.session.commit()
+                    except:
+                        db.session.rollback()
+                        return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
 
 
-        neologismo = {}
-        neologismo['user'] = neouser.nickname
-        neologismo['neologismo'] = neo[1]
-        neologismo['position'] = i+1
-        neologismo['liked'] = neo[2]
-        neologismo['state'] = neo[3]
-        if neo[3] == 'aceptado':
-            neologismo['date'] = neo[5].strftime("%d/%m/%y")
-        neologismo['id'] = neo[4]
-        neologismo['descriptions'] = Description.query.filter_by(
-            id_neologisme=neo[4]).with_entities(Description.text).all()
-        neologismo['sources'] = Source.query.filter_by(
-            id_neologisme=neo[4]).with_entities(Source.link).all()
-        neos.append(neologismo)
-    return jsonify(neos), status.HTTP_200_OK
+            neologismo = {}
+            neologismo['user'] = neouser.nickname
+            neologismo['neologismo'] = neo[1]
+            neologismo['position'] = i+1
+            neologismo['liked'] = neo[2]
+            neologismo['state'] = neo[3]
+            if neo[3] == 'aceptado':
+                neologismo['date'] = neo[5].strftime("%d/%m/%y")
+            neologismo['id'] = neo[4]
+            neologismo['descriptions'] = Description.query.filter_by(
+                id_neologisme=neo[4]).with_entities(Description.text).all()
+            neologismo['sources'] = Source.query.filter_by(
+                id_neologisme=neo[4]).with_entities(Source.link).all()
+            neos.append(neologismo)
+        return jsonify(neos), status.HTTP_200_OK
 
 
 def getmonday():
@@ -401,8 +254,8 @@ def getmonday():
     }
     return monday[today]
 
-
-@main_bp.route('/week-neologismes', methods=['GET'])
+# /neologismes/week-neologismes GET
+@main_bp.route('/neologismes/week-neologismes', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def getweekneos():
     res = Neologismo.query.order_by(Neologismo.likes.desc())\
@@ -445,7 +298,7 @@ def getweekneos():
 
     return jsonify(neos), status.HTTP_200_OK
 
-
+# /neologismes/<neoid> GET, PUT, DELETE
 @main_bp.route('/neologismes/<neoid>', methods=['GET', 'PUT', 'DELETE'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def neo(neoid):
@@ -545,35 +398,7 @@ def neo(neoid):
             return "Something went wrong while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
         return "Neologisme deleted", status.HTTP_204_NO_CONTENT
 
-
-
-@main_bp.route('/allusers', methods=['GET'])
-@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
-@login_required
-def getallusers():
-    if current_user.privileges == 'admin':
-        res = Usuario.query.order_by(Usuario.points.desc()).filter(
-            Usuario.privileges != 'removed').all()
-    elif current_user.privileges == 'linguist':
-        res = Usuario.query.order_by(Usuario.points.desc()).filter(
-            Usuario.privileges != 'admin' and Usuario.privileges != 'removed').all()
-    else:
-        res = Usuario.query.order_by(
-            Usuario.points.desc()).filter_by(privileges='user').all()
-    users = []
-    #images = []
-    for i, user in enumerate(res):
-        usuario = {}
-        usuario['nickname'] = user.nickname
-        usuario['position'] = i+1
-        usuario['points'] = user.points
-        usuario['id'] = user.id
-        usuario['privileges'] = user.privileges
-        users.append(usuario)
-        # images.append(user.image)
-    return jsonify(users), status.HTTP_200_OK
-
-
+# neologismes/<neoid>/likes GET, POST, DELETE
 @main_bp.route('/neologismes/<neoid>/likes', methods=['GET', 'POST', 'DELETE'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
@@ -694,7 +519,164 @@ def neolikes(neoid):
             return "Something bad happened while commiting", status.HTTP_500_INTERNAL_SERVER_ERROR
         return "Removed succesfully", status.HTTP_204_NO_CONTENT
 
+# /users/<id_user> GET, PUT, DELETE
+@main_bp.route('/users/<iduser>', methods=['GET', 'PUT', 'DELETE'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def user(iduser):
+    if request.method == 'GET' and iduser == '0':
+        iduser = current_user.id
+        nickname = current_user.nickname
+        name = current_user.name
+        surname = current_user.surname
+        email = current_user.email
+        date = current_user.birthdate.strftime("%d/%m/%y")
+        mother_tongue = current_user.mother_tongue
+        gender = current_user.gender
+        school = current_user.school
+        points = current_user.points
+        query = db.session.query(Usuario, func.rank().over(
+            order_by=Usuario.points.desc()).label('rankins')).filter_by(privileges=current_user.privileges).all()
+        for (user, i) in query:
+            if user == current_user:  # TODO: comporbar que esto funciona bien
+                position = i
+        fav_neo = [1, 2]
+        # img
+        privileges = current_user.privileges
+        success = current_user.is_authenticated
+        res = dict_of(iduser, nickname, name, surname, email, date, mother_tongue,
+                    gender, school, points, position, fav_neo, privileges, success)
+        return res, status.HTTP_200_OK
+    elif request.method == 'PUT':
+        user = Usuario.query.get(iduser)
+        try:
+            user.privileges = request.form['privileges']
+        except:
+            pass
+        try:
+            user.nickname = request.form['nickname']
+        except:
+            pass
+        try:
+            user.name = request.form['name']
+        except:
+            pass
+        try:
+            user.surname = request.form['surname']
+        except:
+            pass
+        try:
+            user.email = request.form['email']
+        except:
+            pass
+        try:
+            user.birthdate = request.form['date']
+        except:
+            pass
+        try:
+            user.gender = request.form['gender']
+        except:
+            pass
+        try:
+            user.set_password(request.form['password'])
+        except:
+            pass
+        try:
+            user.school = request.form['school']
+        except:
+            pass
+        try:
+            user.mother_tongue = request.form['mother_tongue']
+        except:
+            pass
+        try:
+            user.points = request.form['points']
+        except:
+            pass
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "modified", status.HTTP_201_CREATED
+    elif request.method == 'DELETE':
+        user = Usuario.query.get(iduser)
+        user.set_password(str(uuid.uuid4()))
+        user.privileges = 'removed'
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return "Something went wrong while committing", status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "deleted", status.HTTP_204_NO_CONTENT
 
+# /users/<id_user>/neologismes GET
+@main_bp.route('/users/<userid>/neologismes', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def getneosuser(userid):
+    query = Neologismo.query.filter_by(
+        id_user=current_user.id).order_by(Neologismo.likes.desc())
+    allneos = query.with_entities(
+        Neologismo.name, Neologismo.likes, Neologismo.state, Neologismo.id_neologisme).all()
+    accepted = query.filter_by(state='aceptado').with_entities(
+        Neologismo.name, Neologismo.likes, Neologismo.id_neologisme).all()
+    proposed = query.filter((Neologismo.state == 'pendiente') | (Neologismo.state.contains('rechazado')))\
+        .with_entities(Neologismo.name, Neologismo.state, Neologismo.id_neologisme).all()
+    for i, neo in enumerate(accepted):
+        accepted[i] = {'neologisme': neo[0], 'liked': neo[1], 'id': neo[2]}
+    for i, neo in enumerate(proposed):
+        proposed[i] = {'neologisme': neo[0], 'state': neo[1], 'id': neo[2]}
+    for i, neo in enumerate(allneos):
+        allneos[i] = {'neologisme': neo[0], 'liked': neo[1], 'state': neo[2], 'id': neo[3]}
+    res = {'accepted': accepted, 'proposed': proposed, 'allneos': allneos}
+    return res, status.HTTP_200_OK
+
+# /users/ranking-five GET
+@main_bp.route('/users/ranking-five', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+def getusers():
+    res = Usuario.query.order_by(Usuario.points.desc()).filter_by(
+        privileges='user').limit(5).all()
+    users = []
+    images = []
+    for i, user in enumerate(res):
+        usuario = {}
+        usuario['nickname'] = user.nickname
+        usuario['position'] = i+1
+        usuario['points'] = user.points
+        users.append(usuario)
+        images.append(user.image)
+    return jsonify(users), status.HTTP_200_OK
+
+# /users GET
+@main_bp.route('/users', methods=['GET'])
+@cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
+@login_required
+def getallusers():
+    if current_user.privileges == 'admin':
+        res = Usuario.query.order_by(Usuario.points.desc()).filter(
+            Usuario.privileges != 'removed').all()
+    elif current_user.privileges == 'linguist':
+        res = Usuario.query.order_by(Usuario.points.desc()).filter(
+            Usuario.privileges != 'admin' and Usuario.privileges != 'removed').all()
+    else:
+        res = Usuario.query.order_by(
+            Usuario.points.desc()).filter_by(privileges='user').all()
+    users = []
+    #images = []
+    for i, user in enumerate(res):
+        usuario = {}
+        usuario['nickname'] = user.nickname
+        usuario['position'] = i+1
+        usuario['points'] = user.points
+        usuario['id'] = user.id
+        usuario['privileges'] = user.privileges
+        users.append(usuario)
+        # images.append(user.image)
+    return jsonify(users), status.HTTP_200_OK
+
+# /users/<userid>/favs GET
 @main_bp.route('/users/<userid>/favs', methods=['GET'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
@@ -715,7 +697,7 @@ def userlikes(userid):
         res.append(neologismo)
     return jsonify(res), status.HTTP_200_OK
 
-
+# /badges GET, POST
 @main_bp.route('/badges', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required
@@ -897,7 +879,7 @@ def badges():
                 return "Something went wrong while commiting two login badge", status.HTTP_500_INTERNAL_SERVER_ERROR
             return "A month of logins badge given", status.HTTP_201_CREATED
 
-
+# /errors GET, POST
 @main_bp.route('/error', methods=['GET', 'POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 @login_required

@@ -39,7 +39,7 @@
         <b-button
           class="bttn-app"
           :to="{
-            name: 'v-neologismes',
+            name: 'v-neologisme',
             params: { userid: $route.params.userid, neoId: value.id },
           }"
         >
@@ -59,7 +59,7 @@ export default {
       this.login = response_l.data;
     });
     await axios
-      .get("http://127.0.0.1:5000/user-neo", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users/0/neologismes", { withCredentials: true })
       .then((response) => {
         this.neologismes = response.data.allneos;
       });

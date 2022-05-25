@@ -31,7 +31,7 @@ import axios from "axios";
 export default {
   created() {
     axios
-      .get("http://127.0.0.1:5000/users", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users/ranking-five", { withCredentials: true })
       .then((response) => {
         for (
           let index = 0;

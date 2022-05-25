@@ -1,11 +1,10 @@
-from flask import Blueprint, redirect, render_template, flash, request, session, url_for, make_response
-from flask_login import login_required, logout_user, current_user, login_user
+from flask import Blueprint, request, session
+from flask_login import current_user, login_user
 from .models import db, Usuario
 from . import login_manager
 from flask_api import status
 from flask_cors import CORS, cross_origin
-from datetime import datetime, timedelta
-from os import path, pardir, getcwd
+from datetime import datetime
 
 
 # Blueprint Configuration
@@ -50,7 +49,7 @@ def login():
         return res_fields, status.HTTP_401_UNAUTHORIZED
 
 
-@auth_bp.route('/signup', methods=['POST'])
+@auth_bp.route('/users', methods=['POST'])
 @cross_origin(origin='*', headers=['content-type'], supports_credentials=True)
 def signup():
     username = request.form['nickname']

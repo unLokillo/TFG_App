@@ -169,7 +169,7 @@ export default {
         this.rech = this.form.state.includes('rechazado')
       });
     axios
-      .get("http://127.0.0.1:5000/user", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users/0", { withCredentials: true })
       .then((response_u) => {
         this.login = response_u.data;
       });

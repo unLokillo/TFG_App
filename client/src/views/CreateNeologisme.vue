@@ -114,7 +114,7 @@ export default {
       formData.append("liked", 0);
       formData.append("state", "pendiente");
 
-      axios.post("http://127.0.0.1:5000/create-neologisme", formData, {
+      axios.post("http://127.0.0.1:5000/neologismes", formData, {
         withCredentials: true,
       });
       this.flashMessage.show({

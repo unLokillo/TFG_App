@@ -155,7 +155,7 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:5000/user", { withCredentials: true }) // + this.$route.params.userid)
+      .get("http://127.0.0.1:5000/users/0", { withCredentials: true }) // + this.$route.params.userid)
       .then((response) => {
         this.name = response.data.name;
         this.surname = response.data.surname;

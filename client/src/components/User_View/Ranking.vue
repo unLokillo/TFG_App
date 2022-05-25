@@ -92,7 +92,7 @@ import axios from "axios";
 export default {
   created() {
     axios
-      .get("http://127.0.0.1:5000/allusers", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users", { withCredentials: true })
       .then((response) => {
         for (let index = 0; index < response.data.length; index++) {
           if (!response.data[index].admin) {

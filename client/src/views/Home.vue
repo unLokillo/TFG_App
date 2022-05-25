@@ -104,7 +104,7 @@ export default {
 
   beforeCreate() {
     axios
-      .get("http://127.0.0.1:5000/week-neologismes", { withCredentials: true })
+      .get("http://127.0.0.1:5000/neologismes/week-neologismes", { withCredentials: true })
       .then((response) => {
         for (var i = 0; (i < 3) & (i < response.data.length); i++)
           this.neoData.push(response.data[i]);

@@ -48,6 +48,7 @@ BackEnd
 			de neos propuestos y aceptados,
 			de neo de la semana y
 			de mejor neo ✓
+		- Arreglar error de + en tus propuestas ✓
 
 FrontEnd
 	- Funciones necesarias
@@ -113,8 +114,10 @@ Despliegue
 
 Memoria
 	- Añadir referencias a/de imágenes
-	- Añadir apartado de seguridad
 	- Cambiar orden del nombre de autores
+	- Añadir entradas del índice
+	- Comprobar referencias con X roja
+	- Añadir descripciones de imágenes
 
 pip freeze > requirements.txt
 

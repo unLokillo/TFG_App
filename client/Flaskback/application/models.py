@@ -1,5 +1,5 @@
 from itsdangerous import TimestampSigner
-from . import db, ma
+from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -48,12 +48,6 @@ class Usuario(UserMixin, db.Model):
         return '<User {}>'.format(self.nickname)
 
 
-class UsuarioSchema(ma.Schema):
-    class Meta:
-        fields = ('nickname', 'name', 'surname', 'email', 'birthdate',
-                  'gender', 'password', 'school', 'mother_tongue', 'image', 'points', 'privileges')
-
-
 class Neologismo(db.Model):
     __tablename__ = "neologismos"
     id_neologisme = db.Column(db.Integer, db.Sequence(
@@ -67,12 +61,6 @@ class Neologismo(db.Model):
     user = db.relationship("Usuario", backref="neologismes")
 
 
-class NeologismoSchema(ma.Schema):
-    class Meta:
-        fields = ('id_neologisme', 'name', 'likes', 'image',
-                  'date_approved', 'state', 'id_user', 'user')
-
-
 class Logro(db.Model):
     __tablename__ = "logros"
     id_achievement = db.Column(
@@ -82,12 +70,6 @@ class Logro(db.Model):
     difficulty = db.Column(db.Integer)
     name = db.Column(db.String(30))
     medal = db.Column(db.LargeBinary)
-
-
-class LogroSchema(ma.Schema):
-    class Meta:
-        fields = ('id_achievement', 'description',
-                  'action', 'difficulty', 'name', 'medal')
 
 
 class Source(db.Model):
@@ -100,11 +82,6 @@ class Source(db.Model):
     neologisme = db.relationship("Neologismo", backref='sources')
 
 
-class SourceSchema(ma.Schema):
-    class Meta:
-        fields = ('id_source', 'link', 'id_neologisme', 'neologisme')
-
-
 class Description(db.Model):
     __tablename__ = "descriptions"
     id_description = db.Column(db.Integer, db.Sequence(
@@ -113,11 +90,6 @@ class Description(db.Model):
     id_neologisme = db.Column(
         db.Integer, db.ForeignKey('neologismos.id_neologisme'))
     neologisme = db.relationship("Neologismo", backref='descriptions')
-
-
-class DescriptionSchema(ma.Schema):
-    class Meta:
-        fields = ('id_description', 'text', 'id_neologisme', 'neologisme')
 
 
 class UserGetsAchievement(db.Model):
@@ -132,12 +104,6 @@ class UserGetsAchievement(db.Model):
     date = db.Column(db.DateTime)
 
 
-class UGASchema(ma.Schema):
-    class Meta:
-        fields = ('id_uga', 'id_user', 'id_achievement',
-                  'usuario', 'logro', 'date')
-
-
 class UserlikesNeologisme(db.Model):
     __tablename__ = "users_like_neologismes"
     id_uln = db.Column(db.Integer, db.Sequence('id_uln'), primary_key=True)
@@ -149,11 +115,6 @@ class UserlikesNeologisme(db.Model):
     neologismo = db.relationship("Neologismo", backref='usuariosliked')
 
 
-class ULNSchema(ma.Schema):
-    class Meta:
-        fields = ('id_uln', 'id_user', 'id_neologisme', 'usuario', 'logro')
-
-
 class ErrorNotification(db.Model):
     __tablename__ = "error_notifications"
     id = db.Column(db.Integer, db.Sequence('id_uln'), primary_key=True)
@@ -162,24 +123,3 @@ class ErrorNotification(db.Model):
     title = db.Column(db.String(90))
     description = db.Column(db.String(500))
     usuario = db.relationship("Usuario", backref='errores')
-
-usuario_schema = UsuarioSchema()
-usuarios_schema = UsuarioSchema(many=True)
-
-neologismo_schema = NeologismoSchema()
-neologismos_schema = NeologismoSchema(many=True)
-
-logro_schema = LogroSchema()
-logros_schema = LogroSchema(many=True)
-
-source_schema = SourceSchema()
-sources_schema = SourceSchema(many=True)
-
-description_schema = DescriptionSchema()
-descriptions_schema = DescriptionSchema(many=True)
-
-uga_schema = UGASchema()
-ugas_schema = UGASchema(many=True)
-
-uln_schema = ULNSchema()
-ulns_schema = ULNSchema(many=True)

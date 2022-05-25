@@ -113,7 +113,7 @@ import axios from "axios";
 export default {
   created() {
     axios
-      .get("http://127.0.0.1:5000/user", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users/0", { withCredentials: true })
       .then((response) => {
         //this.name = response.data[0].name;
         this.form.nickname = response.data.nickname;

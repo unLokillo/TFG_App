@@ -186,7 +186,7 @@ export default {
       }
       if(this.password_state && this.repeat_password && this.form.date != ""){
         axios
-          .post("http://127.0.0.1:5000/signup", formData, {
+          .post("http://127.0.0.1:5000/users", formData, {
             withCredentials: true,
           })
           .then((res) => {

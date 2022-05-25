@@ -54,7 +54,7 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:5000/user-neo", { withCredentials: true })
+      .get("http://127.0.0.1:5000/users/0/neologismes", { withCredentials: true })
       .then((response) => {
         this.neologismes = response.data.proposed;
       });
