@@ -13,14 +13,22 @@
         parezca novedosa.</i
       >
     </p>
-    <h6>Neologismo</h6>
+    <!-- <h6>Término en inglés</h6>
+    <b-form-input
+      id="input-1"
+      v-model="form.name_eng"
+      type="text"
+      placeholder="Introduce el término en inglés"
+      required
+    ></b-form-input>
+    <h6>Término en español</h6> -->
     <b-form-input
       id="input-1"
       v-model="form.neologisme"
       type="text"
       placeholder="Introduce el Neologismo"
       required
-    ></b-form-input>
+    ></b-form-input> <!--  término en español -->
     <div>
       <div>
         <h6>Contextos</h6>
@@ -68,6 +76,7 @@ export default {
       image: undefined,
       form: {
         neologisme: "",
+        // name_eng: "",
         descriptions: "",
         sources: "",
       },
@@ -111,6 +120,7 @@ export default {
       formData.append("numSources", this.form["sources"].length);
 
       formData.append("neologisme", this.form.neologisme);
+      // formData.append("name_eng", this.form.name_eng);
       formData.append("liked", 0);
       formData.append("state", "pendiente");
 

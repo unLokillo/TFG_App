@@ -53,6 +53,7 @@ class Neologismo(db.Model):
     id_neologisme = db.Column(db.Integer, db.Sequence(
         'id_neologismo'), primary_key=True)
     name = db.Column(db.String(100))
+    # name_eng = db.Column(db.String(100))
     likes = db.Column(db.Integer)
     image = db.Column(db.LargeBinary)
     date_approved = db.Column(db.DateTime)

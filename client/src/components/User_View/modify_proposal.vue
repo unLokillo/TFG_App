@@ -12,9 +12,12 @@
         parezca novedosa.</i
       >
     </p>
-    <b-input-group prepend="Neologismo: " class="mt-3">
+    <b-input-group prepend="Neologismo: " class="mt-3"> <!-- Término en español -->
       <b-form-input v-model="form.neologisme"></b-form-input>
     </b-input-group>
+    <!-- <b-input-group prepend="Término en inglés: " class="mt-3">
+      <b-form-input v-model="form.name_eng"></b-form-input>
+    </b-input-group> -->
     <h6 v-if="this.mostrar && this.ndes>0">Modificar Contextos</h6>
     <div v-for="(value, index) in form.descriptions" :key="index">
       <b-input-group prepend="Descripción: " class="mt-3">
@@ -144,6 +147,7 @@ export default {
       var formData = new FormData();
       formData.append('do', 'modify');
       formData.append('name', this.form.neologisme);
+      // formData.append('name_eng', this.form.name_eng);
       for(var i = 0; i < this.form.descriptions.length; i++){
         formData.append('description' + i, this.form.descriptions[i]);
       }
