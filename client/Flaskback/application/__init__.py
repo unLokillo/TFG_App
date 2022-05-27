@@ -1,15 +1,10 @@
-from enum import unique
-from msilib import sequence
-from turtle import position
-from flask import Flask, request, jsonify, json, session
-from flask_api import status
-from flask_cors import CORS, cross_origin
+from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager
 from flask_session import Session
 from flask_mail import Mail
-import os
 
 db = SQLAlchemy()
 ma = Marshmallow()

@@ -1,5 +1,5 @@
 from itsdangerous import TimestampSigner
-from . import db
+from . import db, app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -32,12 +32,12 @@ class Usuario(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def get_token(self):
-        serial = TimestampSigner('fmVb@st^jCP7f$uM')
+        serial = TimestampSigner(app.config.get('SECRET_KEY'))
         return serial.sign(str(self.id)).decode('utf-8')
 
     @staticmethod
     def verify_token(token):
-        serial = TimestampSigner('fmVb@st^jCP7f$uM')
+        serial = TimestampSigner(app.config.get('SECRET_KEY'))
         try:
             user_id = int(serial.unsign(token, max_age=600).decode('utf-8'))
         except:
