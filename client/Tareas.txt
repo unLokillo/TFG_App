@@ -121,6 +121,8 @@ Memoria
 	- Comprobar referencias con X roja
 	- Añadir descripciones de imágenes
 	- Añadir requisitos
+	- Comprobar la plantilla para formato texto
+	- Mirar si se puede poner sangría
 
 pip freeze > requirements.txt
 
