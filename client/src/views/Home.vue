@@ -11,7 +11,7 @@
       </div>
       <h4>
         Una aplicación para proponer, definir y valorar nuevos términos en el
-        ámbito de la <strong>descarbonización</strong>. <br>
+        ámbito del <strong>internet de las cosas</strong>. <br>
         Si quieres saber más pulsa 
         <strong>
           <router-link :to="`/info_general`" style="text-decoration:none;color: #3481c0;">aquí</router-link>

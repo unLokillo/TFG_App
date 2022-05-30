@@ -10,8 +10,6 @@ BackEnd
 	- Tareas de perfeccionamiento
 		- Mirar trailing slash o el / al final de la uri en flask
 		- Cambio de mensajes de error (intentar RESTful)
-		- Eliminar Marshmallow y los Schemas
-		- Hacer más estricta la contraseña en pass reset con validator personalizado
 	- Completado
 		- Base de datos ✓
 			- Diseño ✓
@@ -51,6 +49,8 @@ BackEnd
 			de neo de la semana y
 			de mejor neo ✓
 		- Arreglar error de + en tus propuestas ✓
+		- Eliminar Marshmallow y los Schemas ✓
+		- Hacer más estricta la contraseña en pass reset con validator personalizado ✓
 
 FrontEnd
 	- Funciones necesarias
@@ -58,7 +58,6 @@ FrontEnd
 	- Funciones deseadas
 		- Añadir cabecera en todas las páginas / página 404
 		- Eliminar errores en la consola
-		- Añadir mensajes de error y de éxito
 		- No mostrar mensajes de error cuando no hay error
 		- Alinear todas las listas como la de neologismos
 	- Tareas de perfeccionamiento
@@ -73,6 +72,7 @@ FrontEnd
 		- Poner enter=submit en login y más pantallas ✓
 		- Advertir sobre duración de token en recuperación de contraseña ✓
 		- Actualización de elementos cuando cambian (logout fuera de home, aceptar neologismo...) ✓
+		- Añadir mensajes de error y de éxito ✓
 
 General
 	- Funciones necesarias
@@ -123,6 +123,16 @@ Memoria
 	- Añadir requisitos
 	- Comprobar la plantilla para formato texto
 	- Mirar si se puede poner sangría
+	- Poner el repositorio en anexo y quitarlo de bibliografía
+	- Revisión
+		- Espacios después y antes de párrafos
+		- Palabras importantes en negrita
+		- Corrección gramatical
+		- Sentido general
+		- Descripciones de imágenes
+		- Referencias
+		- Añadir apartados que faltan
+	- Poner índice bonito
 
 pip freeze > requirements.txt
 
