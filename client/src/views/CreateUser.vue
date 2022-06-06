@@ -5,26 +5,26 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </router-link>
     </div>
-    <h4>Crear cuenta</h4>
+    <h4>Create account</h4>
     <b-form @submit="submit">
-      <b-input-group prepend="* Nombre de usuario: " class="mt-3">
+      <b-input-group prepend="* Username: " class="mt-3">
         <b-form-input required v-model="form.nickname"></b-form-input>
       </b-input-group>
 
-      <b-input-group prepend="* Nombre: " class="mt-3">
+      <b-input-group prepend="* Name: " class="mt-3">
         <b-form-input required v-model="form.name"></b-form-input>
       </b-input-group>
 
-      <b-input-group prepend="* Apellidos: " class="mt-3">
+      <b-input-group prepend="* Surname: " class="mt-3">
         <b-form-input required v-model="form.surname"></b-form-input>
       </b-input-group>
 
-      <b-input-group prepend="* Correo electrónico: " class="mt-3">
+      <b-input-group prepend="* Email: " class="mt-3">
         <b-form-input required v-model="form.email" type="email"></b-form-input>
       </b-input-group>
 
       <div class="password-box">
-        <b-input-group prepend="* Contraseña: " class="mt-3">
+        <b-input-group prepend="* Password: " class="mt-3">
           <b-form-input
             required
             type="password"
@@ -35,8 +35,7 @@
             trim
           ></b-form-input>
           <b-form-invalid-feedback id="input-live-feedback">
-            La contraseña debe de tener entre 6 y 12 caracteres, una mayuscula y
-            un caracter no alfabético.
+            Password must contain between 6 and 12 characters, one uppercas letter and a non alphabetic character.
           </b-form-invalid-feedback>
         </b-input-group>
 
@@ -49,12 +48,12 @@
             aria-describedby="r_password_helper"
           ></b-form-input>
           <b-form-invalid-feedback id="r_password_helper">
-            Las contraseñas deben coincidir.
+            Passwords need to match.
           </b-form-invalid-feedback>
         </b-input-group>
       </div>
       <div class="selectors-card">
-        <h6>* Fecha de Nacimiento</h6>
+        <h6>* Birthdate:</h6>
         <b-form-datepicker
           v-model="form.date"
           class="mb-2"
@@ -63,11 +62,11 @@
         ></b-form-datepicker>
       </div>
       <div class="selectors-card">
-        <h6>Género</h6>
+        <h6>Gender:</h6>
         <b-form-select v-model="form.gender" :options="genders"></b-form-select>
       </div>
       <div class="selectors-card">
-        <h6>Lengua materna</h6>
+        <h6>Mother tongue</h6>
         <b-form-select
           class="mt-3"
           v-model="form.mother_tongue"
@@ -75,7 +74,7 @@
         ></b-form-select>
       </div>
       <div class="selectors-card">
-        <h6>* Escuela UPM</h6>
+        <h6>* UPM school</h6>
         <b-form-select
           class="mt-3"
           v-model="form.school"
@@ -126,10 +125,10 @@ export default {
       image: undefined,
       genders: [
         { text: "Select One", value: null },
-        "Masculino",
-        "Femenino",
-        "No binario",
-        "Prefiero no decirlo",
+        "Masculine",
+        "Femenine",
+        "Non binary",
+        "Prefer not to say",
       ],
       schools: [
         { text: "Select One", value: null },
@@ -145,12 +144,12 @@ export default {
       ],
       mother_tongue: [
         { text: "Select One", value: null },
-        "Español",
-        "Inglés",
-        "Portugués",
-        "Alemán",
-        "Francés",
-        "Chino",
+        "Spanish",
+        "English",
+        "Portuguese",
+        "German",
+        "French",
+        "Chinese",
       ],
       show: true,
       r_password: "",
@@ -193,8 +192,8 @@ export default {
             if(res.status==201){
               this.flashMessage.show({
                   status: "success",
-                  title: "¡Registro completado!",
-                  message: "Ahora, inicia sesión para comenzar tu experiencia",
+                  title: "¡Registation complete!",
+                  message: "Log in now to starat your experience",
                   time: 5000,
                   position: 'right bottom'
                 });
@@ -204,8 +203,8 @@ export default {
       } else {
         this.flashMessage.show({
                   status: "error",
-                  title: "Error al registrarse",
-                  message: "Comprueba los campos de contraseña",
+                  title: "Error while signing in",
+                  message: "Review the fields with red warnings",
                   time: 5000,
                   position: 'left top'
                 });

@@ -1,7 +1,7 @@
 <template>
   <div class="all-neologismes-card">
     <div class="top-all-neologismes">
-      <h5>Neologismos Aceptados</h5>
+      <h5>Accepted terms</h5>
       <font-awesome-icon icon="times" />
     </div>
 

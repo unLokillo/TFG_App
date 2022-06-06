@@ -3,13 +3,13 @@
     <div class="todo-card">
       <b-form-textarea
         v-model="newItem"
-        placeholder="Introduce la información"
+        placeholder="Introduce the information"
         rows="3"
         max-rows="6"
         v-on:keyup="emitToParent"
         maxlength="500"
       ></b-form-textarea>
-      <b-button @click="addItem" class="bttn-todo">Añadir</b-button>
+      <b-button @click="addItem" class="bttn-todo">Click to add</b-button>
     </div>
 
     <b-list-group>

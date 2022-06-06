@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="user-tag">
-      <div>Creado por {{ this.neologismeData.user }}</div>
+      <div>Created by {{ this.neologismeData.user }}</div>
       <div>{{ this.neologismeData.date }}</div>
     </div>
     <router-link
@@ -24,7 +24,7 @@
       style="width: 100%"
       v-if="login"
     >
-      Ver más
+      See more
     </router-link>
   </div>
 </template>

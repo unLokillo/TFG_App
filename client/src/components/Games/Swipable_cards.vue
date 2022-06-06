@@ -89,7 +89,7 @@
         <div style="height: 100%"></div>
       </div>
       <div v-if="finished" style="justify-content: space-around; align-items: center; padding:20%;">
-        <h1>HAS TERMINADO, ¡ENHORABUENA!</h1>
+        <h1>GAME FINISHED, CONGRATULATIONS!</h1>
         <br>
         <b-button
         style="width:200px; background-color:var(--buttons); color: white !important; border: none; padding:12px; text-decoration: none;"
@@ -97,7 +97,7 @@
         :to="`/`"
         @click="get_achievement"
         >
-          Volver a inicio
+          Go home
         </b-button>
       </div>
       <div style="display: flex; padding-top:20%" v-if="!finished">
@@ -187,8 +187,8 @@ export default {
         if(res.status == 201){
           this.flashMessage.show({
                   status: "success",
-                  title: "¡Has conseguido un nuevo logro!",
-                  message: "Para verlo, ve a la sección de tus logros",
+                  title: "You have earned a new badge!",
+                  message: "Go to your badges section to check it out",
                   time: 5000,
                   position: 'left top',
                   contentClass: 'flashnotif'

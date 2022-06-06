@@ -2,22 +2,22 @@
     <div class="footer-card">
         <div class="links-menu">
             <div class="links-menu" v-if="this.$router.currentRoute.path=='/games'">
-                <router-link class="links" :to="{ name: 'gamesinfo',params: {} }"> Información </router-link>
+                <router-link class="links" :to="{ name: 'gamesinfo',params: {} }"> Information </router-link>
                 <div></div>
-                <router-link class="links" :to="{ name: 'gamesfaq',params: {} }"> Preguntas Frecuentes </router-link>
+                <router-link class="links" :to="{ name: 'gamesfaq',params: {} }"> FAQ </router-link>
             </div>
             <div class="links-menu" v-else-if="this.$router.currentRoute.path.includes('view-user')">
-                <router-link class="links" :to="{ name: 'userinfo',params: {} }"> Información </router-link>
+                <router-link class="links" :to="{ name: 'userinfo',params: {} }"> Information </router-link>
                 
-                <router-link class="links" :to="{ name: 'userfaq',params: {} }"> Preguntas Frecuentes </router-link>
+                <router-link class="links" :to="{ name: 'userfaq',params: {} }"> FAQ </router-link>
             </div>
             <div class="links-menu" v-else >
-                <router-link class="links" :to="{ name: 'info',params: {} }"> Información </router-link>
+                <router-link class="links" :to="{ name: 'info',params: {} }"> Information </router-link>
                 <div></div>
-                <router-link class="links" :to="{ name: 'faq',params: {} }"> Preguntas Frecuentes </router-link>
+                <router-link class="links" :to="{ name: 'faq',params: {} }"> FAQ </router-link>
             </div>
         </div>   
-           <p> Pescaneo </p>
+           <p> GreenTerms </p>
     </div>
 </template>
 <style>

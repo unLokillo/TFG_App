@@ -2,36 +2,36 @@
   <div class="body">
     <Header @actualizar="actualizacion()" :key="updateheader" />
     <div class="menu-1">
-      <h2>Te damos la bienvenida a <br /></h2>
+      <h3>Welcome to <br /></h3>
       <div id="box">
         <p id="flashlight">
-          <span id="flash">Pesca</span>
-          <span id="light">Neo</span>
+          <span id="flash">Green</span>
+          <span id="light">Terms</span>
         </p>
       </div>
       <h4>
-        Una aplicación para proponer, definir y valorar nuevos términos en el
-        ámbito del <strong>internet de las cosas</strong>. <br>
-        Si quieres saber más pulsa 
+        Una application for proposing, defining and learning terms in the area of
+        <strong>sustainability</strong>. <br>
+        For more info click
         <strong>
-          <router-link :to="`/info_general`" style="text-decoration:none;color: #3481c0;">aquí</router-link>
+          <router-link :to="`/info_general`" style="text-decoration:none;color: #3481c0;">here</router-link>
         </strong>.
           <br><br>
       </h4>
       <p style="color: var(--fail)" v-if="!login_info.success">
-        Necesitas haber iniciado sesión para acceder a esta opción
+        You need to be logged in to use this functionality
       </p>
       <b-button v-if="!login_info.success" disabled variant="primary">
-        ¡Contribuye!
+        Contribute!
       </b-button>
       <router-link :to="`/create-neologisme`" tag="b-button" v-else>
-        ¡Contribuye!
+        Contribute!
       </router-link>
     </div>
 
     <FlashMessage></FlashMessage>
 
-    <h4>Neologismos de la semana</h4>
+    <h4>Terms of the week</h4>
     <div class="frequent-words">
       <template v-if="this.appear">
         <NeologismoCard
@@ -48,14 +48,13 @@
         ></NeologismoCard>
       </template>
     </div>
-    <h4>Actividades</h4>
+    <h4>Activities</h4>
     <div class="menu-2">
       <p>
-        ¿Te parecen apropiados estos nuevos términos propuestos por otros
-        usuarios?
+        Do you like these terms proposed by other users?
       </p>
       <p style="color: var(--fail)" v-if="!login_info.success">
-        Necesitas haber iniciado sesión para acceder a esta opción
+        You need to be logged in to use this functionality
       </p>
       <b-button
         disabled
@@ -63,7 +62,7 @@
         tag="b-button"
         v-if="!login_info.success"
       >
-        ¡Participa!
+        Play!
       </b-button>
       <router-link
         :to="{ name: 'games', params: {} }"
@@ -71,10 +70,10 @@
         tag="b-button"
         v-else
       >
-        ¡Participa!
+        Play!
       </router-link>
     </div>
-    <h4>Clasificaciones</h4>
+    <h4>Rankings</h4>
     <div class="rankings">
       <ranking_users />
       <ranking_neo />
@@ -167,7 +166,7 @@ export default {
 
 #flash {
   display: inline-block;
-  text-shadow: #3481c0 0 0 1px, #fff 0 -1px 2px, #fff 0 -3px 2px,
+  text-shadow: #89c448 0 0 1px, rgb(0, 0, 0) 0 -1px 2px, #288141 0 -3px 2px,
     rgba(0, 0, 0, 0.8) 0 0px 25px;
   transition: margin-left 1s cubic-bezier(0, 1, 0, 1);
 }
@@ -182,7 +181,7 @@ export default {
 
 #light {
   display: inline-block;
-  text-shadow: #1f4d74 0 0 1px, rgba(255, 255, 255, 0.1) 0 1px 3px;
+  text-shadow: #3e8a20 0 0 1px, rgba(255, 255, 255, 0.1) 0 1px 3px;
 }
 
 // #box:hover #light {

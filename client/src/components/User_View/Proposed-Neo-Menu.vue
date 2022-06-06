@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-card">
     <div class="ranking-title">
-      <h3>Neologismos propuestos</h3>
+      <h3>Proposed terms</h3>
     </div>
     <div class="neo-card" v-for="(value, index) in neologismes" :key="index">
       <div v-if="index < 5">
@@ -12,14 +12,14 @@
             style="font-size: 20px; color: darkorange"
             icon="question-circle"
           />
-          Pendiente
+          Pending
         </div>
         <div v-else >
           <font-awesome-icon
             style="font-size: 20px; color: darkred"
             icon="times-circle"
           />
-          Rechazado
+          Rejected
         </div>
         <b-button
           class="bttn-app"

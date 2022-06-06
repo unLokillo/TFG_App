@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="top-all-neologismes">
-      <h5>Tus neologismos propuestos</h5>
+      <h5>Your proposed terms</h5>
     </div>
 
     <div class="neologisme-cards">
@@ -20,21 +20,21 @@
             style="font-size: 20px; color: darkorange"
             icon="question-circle"
           />
-          Pendiente
+          Pending
         </div>
         <div class="neo_card_pendent" v-else-if="value.state=='aceptado'">
           <font-awesome-icon
             style="font-size: 20px; color: green"
             icon="circle-check"
           />
-          Aceptado
+          Accepted
         </div>
         <div v-else>
           <font-awesome-icon
             style="font-size: 20px; color: darkred"
             icon="times-circle"
           />
-          Rechazado
+          Rejected
         </div>
         <b-button
           class="bttn-app"

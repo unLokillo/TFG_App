@@ -7,7 +7,7 @@
               class="title-header"
             >
             <div class="title-header">
-            PESCANEO
+            GreenTerms
             </div>
       </router-link>
     </div>

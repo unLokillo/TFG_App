@@ -5,7 +5,7 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </a>
     </div>
-    <h4>Modificar Información de usuario</h4>
+    <h4>Modify profile</h4>
     <b-input-group prepend="Alias: " class="mt-3">
       <b-form-input
         v-model="form.nickname"
@@ -13,15 +13,15 @@
       ></b-form-input>
     </b-input-group>
 
-    <b-input-group prepend="Nombre: " class="mt-3">
+    <b-input-group prepend="Name: " class="mt-3">
       <b-form-input v-model="form.name" :value="form.name"></b-form-input>
     </b-input-group>
 
-    <b-input-group prepend="Apellidos: " class="mt-3">
+    <b-input-group prepend="Surname: " class="mt-3">
       <b-form-input v-model="form.surname"></b-form-input>
     </b-input-group>
 
-    <b-input-group prepend="Correo electrónico: " class="mt-3">
+    <b-input-group prepend="Email: " class="mt-3">
       <b-form-input
         v-model="form.email"
         :value="form.email"
@@ -30,7 +30,7 @@
     </b-input-group>
 
     <div class="password-box">
-      <b-input-group prepend="Contraseña: " class="mt-3">
+      <b-input-group prepend="Passwords: " class="mt-3">
         <b-form-input
           type="password"
           v-model="form.password"
@@ -38,17 +38,17 @@
         ></b-form-input>
       </b-input-group>
 
-      <b-input-group prepend="Repite la Contraseña: " class="mt-3">
+      <b-input-group prepend="Password again: " class="mt-3">
         <b-form-input type="password" v-model="r_password"></b-form-input>
       </b-input-group>
     </div>
 
     <div class="selectors-card">
-      <h6>Fecha de Nacimiento: {{form.date}}</h6>
+      <h6>Birthdate: {{form.date}}</h6>
       <b-form-datepicker v-model="form.date" class="mb-2">{{form.date}}</b-form-datepicker>
     </div>
     <div class="selectors-card">
-      <h6>Genero</h6>
+      <h6>Gender</h6>
       <b-form-select
         v-model="form.gender"
         :value="form.gender"
@@ -57,7 +57,7 @@
       ></b-form-select>
     </div>
     <div class="selectors-card">
-      <h6>Lengua materna</h6>
+      <h6>Mother tongue</h6>
       <b-form-select
         class="mt-3"
         v-model="form.mother_tongue"
@@ -67,7 +67,7 @@
       ></b-form-select>
     </div>
     <div class="selectors-card">
-      <h6>Escuela UPM</h6>
+      <h6>UPM school</h6>
       <b-form-select
         class="mt-3"
         v-model="form.school"
@@ -82,7 +82,7 @@
         type="submit"
         v-on:click="submit()"
         variant="primary"
-        >Guardar</b-button
+        >Save</b-button
       ><br><br><br>
       <!--<div class="selectors-card">
         <h6>Avatar</h6>
@@ -148,10 +148,10 @@ export default {
       },
       genders: [
         { text: "Select One", value: null },
-        "Masculino",
-        "Femenino",
-        "No binario",
-        "Prefiero no decirlo",
+        "Masculine",
+        "Femenine",
+        "Non binary",
+        "Prefer not to say",
       ],
       schools: [
         { text: "Select One", value: null },
@@ -167,12 +167,12 @@ export default {
       ],
       mother_tonges: [
         { text: "Select One", value: null },
-        "Español",
-        "Inglés",
-        "Portugués",
-        "Alemán",
-        "Francés",
-        "Chino",
+        "Spanish",
+        "English",
+        "Portuguese",
+        "German",
+        "French",
+        "Chinese",
       ],
       show: true,
       r_password: "",

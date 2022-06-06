@@ -6,10 +6,10 @@
       </a>
     </div>
     <div class="v-ranking-title">
-      <h3>Participantes destacados</h3>
+      <h3>Users ranking</h3>
     </div>
     <p style="color: var(--fail)" v-if="!logged.success">
-        Necesitas haber iniciado sesión para acceder a esta opción
+        You need to be logged in to use this functionality
       </p>
     <div class="v-ranking-user" v-for="(value, index) in users" :key="index">
       <div class="position-badge" :style="asign_color(value.position)">
@@ -37,7 +37,7 @@
       <div>
         <b-dropdown
           right
-          text="Opciones"
+          text="Options"
           class="m-2"
           v-if="logged.privileges == 'admin'"
         >
@@ -45,13 +45,13 @@
             v-on:click="addPrivileges('linguist', value.id)"
             v-if="value.privileges == 'user'"
           >
-            Convertir en Lingüista
+            Turn into linguist
           </b-dropdown-item>
           <b-dropdown-item
             v-on:click="addPrivileges('admin', value.id)"
             v-if="value.privileges != 'admin'"
           >
-            Convertir en Administrador
+            Turn into admin
           </b-dropdown-item>
           <b-dropdown-divider
             v-if="value.privileges != 'admin'"
@@ -61,7 +61,7 @@
             v-if="value.privileges == 'linguist'"
           >
             <div style="color: red !important">
-              Quitar privilegios de Lingüista
+              Remove linguist privileges
             </div>
           </b-dropdown-item>
           <b-dropdown-item
@@ -72,14 +72,14 @@
               style="color: red !important"
               v-if="value.nickname != logged.username"
             >
-              Quitar privilegios de Administrador
+              Remove admin privileges
             </div>
             <div style="color: red !important" v-else>
-              Dejar de ser Administrador
+              Stop being admin
             </div>
           </b-dropdown-item>
           <b-dropdown-item v-on:click="deleteData(value.id)">
-            <div style="color: red !important">Eliminar Usuario</div>
+            <div style="color: red !important">Remove user</div>
           </b-dropdown-item>
         </b-dropdown>
       </div>

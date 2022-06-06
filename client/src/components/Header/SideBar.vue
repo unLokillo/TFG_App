@@ -12,7 +12,7 @@
       <template #default="{ hide }">
         <div>
           <div class="sidemenu-top">
-            <h4 id="sidebar-no-header-title">Menú</h4>
+            <h4 id="sidebar-no-header-title">Menu</h4>
             <div style="cursor: pointer" block @click="hide">
               <font-awesome-icon style="font-size: 200%" icon="bars" />
             </div>
@@ -31,7 +31,7 @@
                   icon="plus"
                 />
               </div>
-              Contribuye
+              Contribute
               <div></div>
             </router-link>
 
@@ -45,7 +45,7 @@
                 style="font-size: 120%; !important"
                 icon="award"
               />
-              Logros
+              Badges
               <div></div>
             </router-link>
 
@@ -61,7 +61,7 @@
                   icon="gamepad"
                 />
               </div>
-              Actividades
+              Activities
               <div></div>
             </router-link>
 
@@ -75,7 +75,7 @@
                 style="font-size: 120%; !important"
                 icon="book-open"
               />
-              Tus propuestas
+              Your proposals
               <div></div>
             </router-link>
 
@@ -89,7 +89,7 @@
                 style="font-size: 120%; !important"
                 icon="heart"
               />
-              Neologismos favoritos
+              Favourite terms
               <div></div>
             </router-link>
 
@@ -102,7 +102,7 @@
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
-              Ranking Usuarios
+              Users ranking
               <div></div>
             </router-link>
 
@@ -115,7 +115,7 @@
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
-              Ranking Neologismos
+              Terms ranking
               <div></div>
             </router-link>
 
@@ -127,7 +127,7 @@
                 style="font-size: 120%; !important"
                 icon="info-circle"
               />
-              Información
+              Information
               <div></div>
             </router-link>
 
@@ -158,7 +158,7 @@
                   icon="house"
                 />
               </div>
-              Inicio
+              Home
               <div></div>
             </router-link>
 
@@ -174,7 +174,7 @@
                   icon="plus"
                 />
               </div>
-              Contribuye
+              Contribute
               <div></div>
             </router-link>
 
@@ -188,7 +188,7 @@
                 style="font-size: 120%; !important"
                 icon="award"
               />
-              Logros
+              Badges
               <div></div>
             </router-link>
 
@@ -204,7 +204,7 @@
                   icon="gamepad"
                 />
               </div>
-              Actividades
+              Activities
               <div></div>
             </router-link>
 
@@ -221,7 +221,7 @@
                 style="font-size: 120%; !important"
                 icon="book-open"
               />
-              Tus Propuestas
+              Your proposals
               <div></div>
             </router-link>
 
@@ -235,7 +235,7 @@
                 style="font-size: 120%; !important"
                 icon="heart"
               />
-              Neologismos favoritos
+              Favourite terms
               <div></div>
             </router-link>
 
@@ -248,7 +248,7 @@
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
-              Ranking Usuarios
+              Users ranking
               <div></div>
             </router-link>
 
@@ -261,7 +261,7 @@
                 style="font-size: 120%; !important"
                 icon="trophy"
               />
-              Ranking Neologismos
+              Terms ranking
               <div></div>
             </router-link>
 
@@ -273,7 +273,7 @@
                 style="font-size: 120%; !important"
                 icon="info-circle"
               />
-              Información
+              Information
               <div></div>
             </router-link>
 
@@ -287,7 +287,7 @@
                 style="font-size: 120%; !important"
                 icon="sign-out-alt"
               />
-              Cerrar sesión
+              Log out
               <div></div>
             </b-button>
           </div>
@@ -343,8 +343,8 @@ export default {
           if(response_l.status==204){
             this.flashMessage.show({
                   status: "error",
-                  title: "Has cerrado sesión, ¡hasta pronto!",
-                  message: "Para volver a tener acceso a todas las funcionalidades, inicia sesión en la esquina superior derecha.",
+                  title: "You have logged out, see you soon!",
+                  message: "In order to have access to all functionalities, log in again in the upper right corner.",
                   time: 10000,
                   position: 'left top'
                 });
@@ -360,8 +360,8 @@ export default {
           if(response_l.status==204){
             this.flashMessage.show({
                   status: "error",
-                  title: "Has cerrado sesión, ¡hasta pronto!",
-                  message: "Para volver a tener acceso a todas las funcionalidades, inicia sesión en la esquina superior derecha.",
+                  title: "You have logged out, see you soon!",
+                  message: "In order to have access to all functionalities, log in again in the upper right corner.",
                   time: 10000,
                   position: 'left top'
                 });

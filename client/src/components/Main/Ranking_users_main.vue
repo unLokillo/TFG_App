@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-card">
     <div class="ranking-title">
-      <h3>Participantes destacados</h3>
+      <h3>Users ranking</h3>
     </div>
     <b-table
       class="ranking-table"
@@ -21,7 +21,7 @@
       :to="{ name: 'ranking', params: { userid: $route.params.userid } }"
       tag="b-button"
     >
-      Ver más</router-link
+      See more</router-link
     >
   </div>
 </template>

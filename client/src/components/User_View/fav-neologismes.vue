@@ -6,14 +6,14 @@
       </a>
     </div>
     <div class="top-all-neologismes">
-      <h5>Neologismos favoritos</h5>
+      <h5>Favourite terms</h5>
     </div>
 
     <div class="neologisme-cards">
       <div v-for="(value, index) in neologismes" :key="index">
         <!--<b-avatar :src="value.img"></b-avatar>-->
         <h5>{{ value.name }}</h5>
-        De: {{ value.user }}
+        By: {{ value.user }}
         <div><font-awesome-icon icon="heart" /> {{ value.likes }}</div>
         <b-button
           class="bttn-app"

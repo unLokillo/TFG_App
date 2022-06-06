@@ -2,14 +2,13 @@
   <div class="body-games">
     <Header />
     <div style="background-color: var(--secondary-color); padding: 5%; height:25%">
-      <h3>Actividades</h3>
-      ¡Bienvenido a la zona de Actividades! ¡Aquí encontraras distintas
-      Actividades con las que contribuir al proyecto!
+      <h3>Activities</h3>
+      Welcome to the activity area! Here you will find some activities with which you can contribute to the project.
     </div>
     <div class="games-selection">
       <div class="game-selector">
         <router-link :to="{ name: 'info_g1', params: {} }" tag="div">
-          <strong> Cartas deslizantes </strong>
+          <strong> Sliding cards </strong>
         </router-link>
       </div>
       <!--<div class="game-selector">

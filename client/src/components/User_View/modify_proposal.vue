@@ -5,54 +5,53 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </a>
     </div>
-    <h4>Modificar Propuesta de Neologismo</h4>
+    <h4>Modify term proposal</h4>
     <p style="font-size: 14px">
       <i>
-        Tu neologismo debe ser una palabra del ámbito del Internet de las Cosas que te
-        parezca novedosa.</i
-      >
+        This term should be related to sustainability and needs a good definition or context, as well as sources.
+      </i>
     </p>
-    <b-input-group prepend="Neologismo: " class="mt-3"> <!-- Término en español -->
+    <b-input-group prepend="Term: " class="mt-3"> <!-- Término en español -->
       <b-form-input v-model="form.neologisme"></b-form-input>
     </b-input-group>
     <!-- <b-input-group prepend="Término en inglés: " class="mt-3">
       <b-form-input v-model="form.name_eng"></b-form-input>
     </b-input-group> -->
-    <h6 v-if="this.mostrar && this.ndes>0">Modificar Contextos</h6>
+    <h6 v-if="this.mostrar && this.ndes>0">Modify descriptions</h6>
     <div v-for="(value, index) in form.descriptions" :key="index">
-      <b-input-group prepend="Descripción: " class="mt-3">
+      <b-input-group prepend="Description: " class="mt-3">
         <b-form-input v-model="form.descriptions[index][0]"></b-form-input>
         <b-input-group-append>
           <b-button
             style="background-color: darkred !important"
             v-on:click="del('description_single', index)"
-            >Eliminar</b-button
+            >Delete</b-button
           >
         </b-input-group-append>
       </b-input-group>
     </div>
-    <h6>Añadir Contextos</h6>
+    <h6>Add definition</h6>
     <p style="font-size: 14px">
-      <i> Incluye la frase completa en la que has encontrado el neologismo o descripciones que se le puedan dar</i>
+      <i> Add descriptions, definitions or context that apply to this term.</i>
     </p>
     <TodoBox v-on:childToParent="onDescriptionsClick" />
 
-    <h6 v-if="this.mostrar && this.nsour>0">Modificar Fuentes</h6>
+    <h6 v-if="this.mostrar && this.nsour>0">Modify sources</h6>
     <div v-for="(value, index) in form.sources" :key="'A' + index">
-      <b-input-group prepend="Fuente: " class="mt-3">
+      <b-input-group prepend="Source: " class="mt-3">
         <b-form-input v-model="form.sources[index][0]"></b-form-input>
         <b-input-group-append>
           <b-button
             style="background-color: darkred !important"
             v-on:click="del('source_single', index)"
-            >Eliminar</b-button
+            >Delete</b-button
           >
         </b-input-group-append>
       </b-input-group>
     </div>
-    <h6>Añadir Fuentes</h6>
+    <h6>Add sources</h6>
     <p style="font-size: 14px">
-      <i> Indica con detalle dónde lo has encontrado </i>
+      <i> Point out with detail where did you find the term </i>
     </p>
     <TodoBox v-on:childToParent="onSourcesClick" />
     <b-button
@@ -60,7 +59,7 @@
       type="submit"
       variant="primary"
       v-on:click="submit()"
-      >Modificar</b-button
+      >Save</b-button
     >
   </div>
 </template>

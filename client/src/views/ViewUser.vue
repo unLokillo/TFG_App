@@ -15,8 +15,8 @@
             <div>
               <font-awesome-icon style="font-size: 80px" icon="trophy" /> <br />
               <br />
-              <strong>Posición: {{ position }}</strong> <br />
-              <strong>Puntuación: {{ points }}</strong>
+              <strong>Position: {{ position }}</strong> <br />
+              <strong>Points: {{ points }}</strong>
             </div>
             </router-link>
           </div>
@@ -30,7 +30,7 @@
             >
             <div>
               <font-awesome-icon style="font-size: 20px" icon="award" />
-              Mis logros ({{nbadges}})
+              My badges ({{nbadges}})
             </div>
             </router-link>
           </div>
@@ -44,7 +44,7 @@
                 style="font-size: 20px; color: red"
                 icon="heart"
               />
-              Neologismos favoritos ({{ fav_neo }})
+              Favourite terms ({{ fav_neo }})
             </div>
             </router-link>
           </div>
@@ -53,59 +53,59 @@
 
       <div class="main-info-card">
         <div class="info-card">
-          <strong> Nombre y Apellidos: </strong> {{ this.name }}
+          <strong> Name: </strong> {{ this.name }}
           {{ this.surname }}
         </div>
         <div class="info-card">
-          <strong> Fecha Nacimiento: </strong> {{ this.date }}
+          <strong> Birthdate: </strong> {{ this.date }}
         </div>
         <div class="info-card">
-          <strong> Correo Electrónico: </strong> {{ this.email }}
+          <strong> Email: </strong> {{ this.email }}
         </div>
         <div class="info-card">
-          <strong> Género: </strong> {{ this.gender }}
+          <strong> Gender: </strong> {{ this.gender }}
         </div>
         <div class="info-card">
-          <strong> Escuela UPM: </strong> {{ this.school }}
+          <strong> UPM school: </strong> {{ this.school }}
         </div>
       </div>
 
       <div class="options">
-        <b-dropdown right text="Opciones" class="m-2">
+        <b-dropdown right text="Options" class="m-2">
           <b-dropdown-item
             :to="{ name: 'm-perfil', params: { userid: $route.params.userid } }"
-            >Modificar perfil</b-dropdown-item
+            >Modify profile</b-dropdown-item
           >
           <b-dropdown-divider></b-dropdown-divider>
           <!-- <b-dropdown-item>Cambiar idioma</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider> -->
           <b-dropdown-item
             :to="{ name: 'n-error', params: { userid: $route.params.userid } }"
-            >Notificar error</b-dropdown-item
+            >Notify error</b-dropdown-item
           >
           <b-dropdown-divider
            v-if="this.privileges=='admin' || this.privileges=='linguist'"
           ></b-dropdown-divider>
           <b-dropdown-text v-if="this.privileges=='admin' || this.privileges=='linguist'" style="font-style: italic; font-weight: 300">
-            Descargar CSV de:
+            Download CSV of:
           </b-dropdown-text>
           <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
             <download-csv :data="proposed" name="Proposed.csv">
-              - Propuestas de neologismos
+              - Term proposals
             </download-csv>
           </b-dropdown-item>
           <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
             <download-csv :data="accepted" name="Accepted.csv">
-              - Neologismos aceptados
+              - Accepted terms
             </download-csv>
           </b-dropdown-item>
           <b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
             <download-csv :data="neologismes" name="All_neologismes.csv">
-              - Todos los neologismos
+              - All terms
             </download-csv>
           </b-dropdown-item><b-dropdown-item v-if="this.privileges=='admin' || this.privileges=='linguist'">
             <download-csv style="color: darkred" :data="errores" name="error_notifications.csv">
-              - Errores notificados
+              - Notified errors
             </download-csv>
           </b-dropdown-item>
           <b-dropdown-divider
@@ -113,12 +113,12 @@
           ></b-dropdown-divider>
           <b-dropdown-item v-on:click="logout">
             <div style="color: red !important">
-              Cerrar sesión
+              Log out
             </div></b-dropdown-item
           ><b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item v-on:click="deleteData($route.params.userid)">
             <div style="color: darkred !important">
-              Eliminar cuenta
+              Delete account
             </div></b-dropdown-item
           >
         </b-dropdown>
@@ -126,7 +126,7 @@
     </div>
 
     <div class="bottom-menu">
-      <h4>Neologismos propuestos y aceptados</h4>
+      <h4>Proposed and accepted terms</h4>
       <div class="user-rankings">
         <Non_Accepeted_Neos />
         <Accepeted_Neos />

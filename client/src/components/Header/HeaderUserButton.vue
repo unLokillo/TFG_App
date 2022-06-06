@@ -18,7 +18,7 @@
               /> -->
     </b-button>
     <router-link :to="`/login`" class="header-img" v-else style="text-decoration: none; border-width:0px"
-      ><div style="color: white">Iniciar sesión</div></router-link
+      ><div style="color: white">Log In</div></router-link
     >
   </div>
 </template>

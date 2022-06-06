@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="v-ranking-title">
-      <h3>Ranking Neologismos</h3>
+      <h3>Terms ranking</h3>
     </div>
     <div v-if="logged.privileges == 'admin' || logged.privileges == 'linguist'">
     <b-button
@@ -15,7 +15,7 @@
         v-if="!toggle_proposals"
         style="margin-bottom: 1rem"
       >
-        Revisar propuestas
+        Review proposals
     </b-button>
     <b-button
         class="bttn-app"
@@ -23,7 +23,7 @@
         v-else
         style="margin-bottom: 1rem"
       >
-        Ver todos los neologismos
+        See all terms
     </b-button>
     </div>
     <div v-if="!toggle_proposals">

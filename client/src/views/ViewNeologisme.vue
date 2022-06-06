@@ -27,15 +27,14 @@
     </div>
 
     <div class="rejected-neologisme-admin" v-if="form.state == 'rechazado'">
-      <h4>Su propuesta ha sido rechazada</h4>
+      <h4>Your proposal has been rejected</h4>
       <p>
-        La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong
-        >, ha sido rechazada por la siguiente razón: <br />
+        The proposal of the term: <strong>{{ form.neologisme }}</strong
+        > has been rejected for the following reason: <br />
         {{ form.mssg }}
         <br />
         <strong
-          >Si usted lo desea puede modificar la informacón requerida, y el
-          neologismo será evaluado nuevamente. Gracias por su atencón
+          >You can modify the required information for the term to be reviewed again. Thank you for your comprehension.
         </strong>
       </p>
 
@@ -46,20 +45,19 @@
         }"
         class="bttn-app"
         style="background-color: var(--fail) !important"
-        >Modificar</router-link
+        >Modify</router-link
       >
     </div>
 
     <div class="rejected-neologisme" v-if="rech">
-      <h4>Su propuesta ha sido rechazada</h4>
+      <h4>Your proposal has been rejected</h4>
       <p>
-        La propuesta del Neologismo: <strong>{{ form.neologisme }}</strong
-        >, ha sido rechazada por la siguiente razón: <br />
+        The proposal of the term: <strong>{{ form.neologisme }}</strong
+        > has been rejected for the following reason: <br />
         {{ form.state }}
         <br />
         <strong
-          >Si usted lo desea puede modificar la información requerida, y el
-          neologismo será evaluado nuevamente. Gracias por su atención
+          >You can modify the required information for the term to be reviewed again. Thank you for your comprehension.
         </strong>
       </p>
 
@@ -70,12 +68,12 @@
         }"
         class="bttn-app"
         style="background-color: var(--fail) !important"
-        >Modificar</router-link
+        >Modify</router-link
       >
     </div>
     <br />
     <div class="descriptions-card">
-      <h4>Contextos</h4>
+      <h4>Descriptions</h4>
       <div v-for="(value, index) in form.descriptions" :key="index">
         <div v-if="index < 3" class="descriptions">
           {{ index + 1 }}.- {{ value[0] }}
@@ -83,7 +81,7 @@
       </div>
     </div>
     <div class="descriptions-card">
-      <h4>Fuentes</h4>
+      <h4>Sources</h4>
       <div v-for="(value, index) in form.sources" :key="index">
         <div v-if="index < 3" class="descriptions">
           {{ index + 1 }}.- {{ value[0] }}
@@ -96,8 +94,8 @@
         </div>-->
     <br>
     <div class="user-tag">
-      <div>Creado por: {{ form.user }}</div>
-      <div v-if="form.date!='None'">Aprobado el {{ form.date }}</div>
+      <div>Created by: {{ form.user }}</div>
+      <div v-if="form.date!='None'">Approved on {{ form.date }}</div>
     </div>
     <div
       class="admin-options"
@@ -109,7 +107,7 @@
         v-on:click="accept()"
         style="background-color: var(--success) !important"
       >
-        Aceptar propuesta
+        Accept proposal
       </b-button>
       <b-button
         class="bttn-app"
@@ -119,7 +117,7 @@
         }"
         style="background-color: var(--fail) !important"
       >
-        Rechazar propuesta
+        Reject proposal
       </b-button>
     </div>
     <FlashMessage></FlashMessage>
@@ -133,7 +131,7 @@
         params: { userid: $route.params.userid, neoId: $route.params.neoId },
       }"
     >
-      Modificar propuesta
+      Modify proposal
     </router-link>
     <b-button
       v-if="form.user == username && form.state == 'pendiente'"
@@ -141,7 +139,7 @@
       @click="deleteneo"
       style="background-color: var(--fail) !important; margin-top:1rem;"
     >
-      Eliminar propuesta
+      Delete proposal
     </b-button>
 
     <div v-if="form.state == 'aceptado' && (username == form.user || login.privileges == 'admin' || login.privileges == 'linguist')">
@@ -150,7 +148,7 @@
         @click="deleteneo"
         style="background-color: var(--fail) !important"
       >
-        Eliminar neologismo
+        Delete term
       </b-button>
     </div>
   </div>
@@ -289,8 +287,8 @@ export default {
       this.updateneo += 1
       this.flashMessage.show({
               status: "success",
-              title: "Neologismo aceptado",
-              message: "Has marcado este neologismo como aceptado. Ahora aparecerá en el ranking para todos los usuarios.",
+              title: "Term accepted",
+              message: "You have set this term as accepted. From now on it will appear in the global rankings.",
               time: 6000,
               position: 'right bottom',
               //html: '<h3>ey</h3>'
@@ -305,8 +303,8 @@ export default {
             this.$router.go(-1)
             this.flashMessage.show({
               status: "error",
-              title: "Neologismo eliminado",
-              message: "Has marcado este neologismo como no válido o rechazado. Para volver a marcarlo como propuesta habrá que modificarlo",
+              title: "Term deleted",
+              message: "You have set this term as not valid or rejected. For setting it as a proposal again it needs to be modified.",
               time: 6000,
               position: 'right bottom',
               //html: '<h3>ey</h3>'

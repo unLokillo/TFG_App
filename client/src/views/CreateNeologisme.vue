@@ -6,11 +6,10 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </router-link>
     </div>
-    <h4>Crear Neologismo</h4>
+    <h4>Propose a term</h4>
     <p style="font-size: 14px">
       <i>
-        Un neologismo es una palabra del ámbito del Internet de las Cosas que te
-        parezca novedosa.</i
+        This term should be related to sustainability and needs a good definition or context, as well as sources.</i
       >
     </p>
     <!-- <h6>Término en inglés</h6>
@@ -26,24 +25,23 @@
       id="input-1"
       v-model="form.neologisme"
       type="text"
-      placeholder="Introduce el Neologismo"
+      placeholder="Term"
       required
     ></b-form-input> <!--  término en español -->
     <div>
       <div>
-        <h6>Contextos</h6>
+        <h6>Definitions/contexts</h6>
         <p style="font-size: 14px">
           <i>
-            Añade descripciones o definiciones que se le podrían dar al
-            neologismo</i
-          >
+            Add descriptions, definitions or context that apply to this term.
+          </i>
         </p>
         <TodoBox v-on:childToParent="onDescriptionsClick" />
       </div>
 
-      <h6>Fuentes</h6>
+      <h6>Sources</h6>
       <p style="font-size: 14px">
-        <i> Indica con detalle dónde lo has encontrado </i>
+        <i> Point out with detail where did you find the term </i>
       </p>
       <TodoBox v-on:childToParent="onSourcesClick" />
     </div><br>
@@ -59,7 +57,7 @@
         @change="handleUploadImage"
       />
     </div>-->
-    <b-button @click="submit"> Listo </b-button>
+    <b-button @click="submit"> Submit </b-button>
   </div>
 </template>
 
@@ -129,8 +127,8 @@ export default {
       });
       this.flashMessage.show({
         status: "success",
-        title: "Neologismo creado",
-        message: "¡Has conseguido un nuevo LOGRO! Para ver tus logros busca en el panel lateral",
+        title: "Term proposal created",
+        message: "You have earned a new BADGE! Search the badges section in the sidebar to check it out",
         time: 8000,
         position: "left top"
       });

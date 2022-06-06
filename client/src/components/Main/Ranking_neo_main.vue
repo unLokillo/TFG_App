@@ -1,6 +1,6 @@
 <template v-if='this.appear'>
   <div class="ranking-card">
-    <div class="ranking-title"><h3>Neologismos destacados</h3></div>
+    <div class="ranking-title"><h3>Terms ranking</h3></div>
     <b-table
       class="ranking-table"
       small
@@ -17,7 +17,7 @@
       :to="{ name: 'ranking_neo', params: { userid: $route.params.userid } }"
       tag="b-button"
     >
-      Ver más</router-link
+      See more</router-link
     >
   </div>
 </template>

@@ -5,17 +5,17 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </a>
     </div>
-    <h2>Notificar error</h2>
-    <p>Por favor, cuéntanos con detalle qué ha pasado.</p>
+    <h2>Tell us an error</h2>
+    <p>Tell us with detail what happened, please.</p>
     <b-form-textarea
-      placeholder="Explicanos cuál es el problema (de 10 a 500 caracteres)"
+      placeholder="Explain the problem (from 10 to 500 characters)"
       rows="5"
       v-model="text"
       :state="text.length >= 10 && text.length <= 500"
       class="reject-info"
     ></b-form-textarea>
     <b-button @click="submit">
-      Aceptar
+      Submit
     </b-button>
   </div>
 </template>

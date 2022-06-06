@@ -25,10 +25,10 @@ export default {
   --secondary-color: #c5cece;
   --third-color: rgb(245, 245, 245);
   --border: rgb(156, 155, 155);
-  --border-left: rgb(58, 92, 245);
+  --border-left: rgb(5, 240, 130);
   --letter-color: rgb(245, 245, 245);
-  --buttons: rgb(52, 129, 192);
-  --buttons_hover: rgb(40, 96, 143);
+  --buttons: rgb(137, 196, 72);
+  --buttons_hover: rgb(47, 173, 28);
   --success: #69b00b;
   --fail: #b00b69;
   --gold: #f7c628;
@@ -67,6 +67,14 @@ export default {
 
 button {
   background-color: var(--buttons) !important;
+  border-radius: none !important;
+  border: none !important;
+  //padding: 2% !important;
+  color: var(--letter-color) !important;
+}
+
+button:hover {
+  background-color: var(--buttons_hover) !important;
   border-radius: none !important;
   border: none !important;
   //padding: 2% !important;

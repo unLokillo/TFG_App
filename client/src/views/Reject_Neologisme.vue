@@ -5,8 +5,8 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </a>
     </div>
-    <h2>Rechazar neologismo</h2>
-    <p>Por favor, cuéntanos por qué rechazas este neologismo</p>
+    <h2>Reject term</h2>
+    <p>Tell us why you reject this term, please.</p>
     <b-form-textarea
       v-model="mssg"
       placeholder="¿Por qué no es adecuado?"
@@ -18,7 +18,7 @@
       v-on:click="submit(mssg)"
       style="background-color: var(--success) !important"
     >
-      Enviar
+      Submit
     </b-button>
   </div>
 </template>

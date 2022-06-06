@@ -8,7 +8,7 @@
     <div class="top-badges_menu-section">
       <h3 style="display:flex; justify-content: space-between; width:60%">
         <font-awesome-icon style="font-size: 40px; text-align: left;" icon="trophy" />
-        Mis logros
+        My badges
         <font-awesome-icon style="font-size: 40px; text-align: right;" icon="trophy" />
       </h3>
       
@@ -41,20 +41,22 @@ export default {
       fields: [
           {
             key: 'Nombre',
-            label: 'Logro',
+            label: 'Badge',
             sortable: false
           },
           {
             key: 'Acción',
+            label: 'Action',
             sortable: false
           },
           {
             key: 'Fecha',
+            label: 'Date',
             sortable: true,
           },
           {
             key: 'Puntos',
-            label: 'Puntuación',
+            label: 'Points',
             sortable: true
           }
         ],

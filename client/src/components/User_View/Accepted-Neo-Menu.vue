@@ -1,7 +1,7 @@
 <template v-if='this.appear'>
   <div class="ranking-card">
     <div class="ranking-title">
-      <h3>Neologismos Aceptados</h3>
+      <h3>Accepted terms</h3>
     </div>
     <div class="neo-card" v-for="(value, index) in neologismes" :key="index">
       <div v-if="index < 5">

@@ -5,10 +5,10 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </router-link>
     </div>
-    <h3>Iniciar sesión</h3>
+    <h3>Log in</h3>
     <b-form-input
       v-model="form.email_or_user"
-      placeholder="Correo electronico"
+      placeholder="Email"
       :state="this.correct_login"
       required
       v-on:keypress.enter="getUserInfo"
@@ -16,7 +16,7 @@
     <b-form-input
       v-model="form.password"
       type="password"
-      placeholder="Contraseña"
+      placeholder="Password"
       :state="this.correct_login"
       v-on:keypress.enter="getUserInfo"
     ></b-form-input>
@@ -24,17 +24,16 @@
     <b-form-text id="password-help-block"></b-form-text>
 
     <b-form-invalid-feedback id="input-live-feedback">
-      Usuario o contraseña incorrectos
+      Incorrect user or password
     </b-form-invalid-feedback>
 
     <div class="links">
       <p>
         <a href="/forgot-password" class="blue-text ml-1"
-          >¿Has olvidado la <br />
-          contraseña?</a
+          >Forgot the password?</a
         >
       </p>
-      <p><a href="/create-user" class="blue-text ml-1">Regístrate</a></p>
+      <p><a href="/create-user" class="blue-text ml-1">Sign in</a></p>
     </div>
     <FlashMessage :position="'left top'"></FlashMessage>
     <b-button
@@ -42,7 +41,7 @@
       class="mt-3"
       type="submit"
       variant="primary"
-      >Enviar</b-button
+      >Submit</b-button
     >
   </div>
 </template>
@@ -97,8 +96,8 @@ export default {
                 this.flashMessage.setStrategy('multiple');
                 this.flashMessage.show({
                   status: "success",
-                  title: "¡Has conseguido un nuevo logro!",
-                  message: "Para verlo, ve a la sección de tus logros",
+                  title: "You have earned a new badge!",
+                  message: "Go to your badges section to check it out",
                   time: 5000,
                   position: 'left top'
                 });
@@ -110,8 +109,8 @@ export default {
             
             this.flashMessage.show({
               status: "success",
-              title: "Has iniciado sesión",
-              message: "Nos alegramos de tenerte de vuelta!",
+              title: "You are now logged in!",
+              message: "We are happy to have you back :)",
               time: 5000,
               position: 'left top',
               //html: '<h3>ey</h3>'

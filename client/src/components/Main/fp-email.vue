@@ -5,8 +5,8 @@
         <font-awesome-icon style="font-size: 140%" icon="times" />
       </router-link>
     </div>
-    <h2>¿Has olvidado la contraseña?</h2>
-    <p>Introduce tu email para poder restablecer tu contraseña.</p>
+    <h2>Have you forgotten your password?</h2>
+    <p>Submit your email for setting a new one.</p>
     <b-form-input
       id="input-1"
       v-model="email"
@@ -21,17 +21,17 @@
       id="input-live-feedback"
       v-if="!this.correct_email"
     >
-      No existe una cuenta asociada a ese email
+      There is no account associated with that email
     </b-form-invalid-feedback>
     <b-button
       style="width: 70%"
       v-on:click="submit"
       type="submit"
       v-if="this.correct_email"
-      >Confirmar</b-button
+      >Confirm</b-button
     >
     <b-button style="width: 70%" v-on:click="submit" type="submit" v-else
-      >Reintentar</b-button
+      >Retry</b-button
     >
   </div>
 </template>
@@ -59,8 +59,8 @@ export default {
           if (response.status == 200) {
             this.flashMessage.show({
               status: "warning",
-              title: "Recuperación de contraseña",
-              message: "Se te ha enviado un enlace por correo electrónico para cambiar tu contraseña que tiene validez hasta dentro de 10 minutos.",
+              title: "Password recovery",
+              message: "A link for setting a new password has been sent to you via email. USE IT IN THE NEXT 10 MINUTES.",
               time: 8000,
               position: 'left top',
               //html: '<h3>ey</h3>'
