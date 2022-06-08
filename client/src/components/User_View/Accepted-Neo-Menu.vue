@@ -6,7 +6,7 @@
     <div class="neo-card" v-for="(value, index) in neologismes" :key="index">
       <div v-if="index < 5">
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
-        <h5>{{ value.neologisme }}</h5>
+        <h5>{{ value.name_eng }}</h5>
         <div><font-awesome-icon icon="heart" /> {{ value.liked }}</div>
         <b-button
           class="bttn-app"

@@ -1,7 +1,7 @@
 <template>
   <div class="card-body">
     <div class="card-neo-header">
-      <h2 class="titulito">{{ this.neologismeData.neologismo }}</h2>
+      <h2 class="titulito">{{ this.neologismeData.name_eng }}</h2>
       <div class="neo-likes">
         <font-awesome-icon icon="heart" /> {{ this.neologismeData.liked }}
       </div>

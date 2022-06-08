@@ -42,7 +42,7 @@ export default {
     return {
       labels: [
         { key: "position", label: "Posición" },
-        { key: "neologismo", label: "Neologismo" },
+        { key: "name_eng", label: "Term" },
         { key: "user", label: "Usuario" },
         { key: "liked", label: "Puntuación" },
       ],

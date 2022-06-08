@@ -29,15 +29,15 @@
                 class="rounded-borders"
               />
             </div>-->
-            <div class="image_container" style="color: black; margin-bottom:70px" v-if="appear & !finished"><h1>{{current.name}}</h1></div>
+            <div class="image_container" style="color: black; margin-bottom:70px" v-if="appear & !finished"><h1>{{current.name_eng}}</h1></div>
             <div class="info">
               <div class="game-card" v-if="appear">
-                <h5>Contexto</h5>
+                <h5>Context</h5>
                 <div v-for="(value, index) in current.descriptions" :key="index" >
                   <p>{{index+1}} - {{ value[0] }}</p>
                 </div>
 
-                <h5>Fuentes</h5>
+                <h5>Sources</h5>
                 <div>
                 <div v-for="(value, index) in current.sources" :key="index">
                   <p>{{index+1}} - {{ value[0] }}</p>
@@ -58,15 +58,15 @@
       >
         <div style="height: 100%">
           <!-- <img :src="next.src" class="rounded-borders" /> -->
-          <div class="image_container" style="color: black; margin-bottom:70px; margin-top: 120px"><h1>{{next.name}}</h1></div>
+          <div class="image_container" style="color: black; margin-bottom:70px; margin-top: 120px"><h1>{{next.name_eng}}</h1></div>
           <div class="info">
               <div class="game-card" v-if="appear">
-                <h5>Contexto</h5>
+                <h5>Context</h5>
                 <div v-for="(value, index2) in next.descriptions" :key="index2" >
                   <p>{{index2+1}} - {{ value[0] }}</p>
                 </div>
 
-                <h5>Fuentes</h5>
+                <h5>Sources</h5>
                 <div>
                 <div v-for="(value, index3) in next.sources" :key="index3">
                   <p>{{index3+1}} - {{ value[0] }}</p>
@@ -76,7 +76,7 @@
           </div>
           <div class="text">
             <h2>
-              {{ next.name }}
+              {{ next.name_eng }}
             </h2>
           </div>
         </div>
@@ -141,6 +141,7 @@ export default {
           card.push({
                   id: res.data[i].id,
                   name: res.data[i].neologismo,
+                  name_eng: res.data[i].name_eng,
                   descriptions: res.data[i].descriptions,
                   sources: res.data[i].sources,
                 });

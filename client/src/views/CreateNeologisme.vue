@@ -12,20 +12,20 @@
         This term should be related to sustainability and needs a good definition or context, as well as sources.</i
       >
     </p>
-    <!-- <h6>Término en inglés</h6>
+    <h6>Term in english</h6>
     <b-form-input
       id="input-1"
       v-model="form.name_eng"
       type="text"
-      placeholder="Introduce el término en inglés"
+      placeholder="Introduce the term in english"
       required
     ></b-form-input>
-    <h6>Término en español</h6> -->
+    <h6>Term in spanish</h6>
     <b-form-input
       id="input-1"
       v-model="form.neologisme"
       type="text"
-      placeholder="Term"
+      placeholder="Introduce the term in spanish"
       required
     ></b-form-input> <!--  término en español -->
     <div>
@@ -74,7 +74,7 @@ export default {
       image: undefined,
       form: {
         neologisme: "",
-        // name_eng: "",
+        name_eng: "",
         descriptions: "",
         sources: "",
       },
@@ -118,7 +118,7 @@ export default {
       formData.append("numSources", this.form["sources"].length);
 
       formData.append("neologisme", this.form.neologisme);
-      // formData.append("name_eng", this.form.name_eng);
+      formData.append("name_eng", this.form.name_eng);
       formData.append("liked", 0);
       formData.append("state", "pendiente");
 

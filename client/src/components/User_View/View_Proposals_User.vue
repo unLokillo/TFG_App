@@ -13,7 +13,7 @@
       <div v-for="(value, index) in neologismes" :key="index">
         {{ index + 1 }}
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
-        <h5>{{ value.neologisme }}</h5>
+        <h5>{{ value.name_eng }}</h5>
         
         <div class="neo_card_pendent" v-if="value.state=='pendiente'">
           <font-awesome-icon

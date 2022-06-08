@@ -37,7 +37,7 @@
       </div>
       <div class="avatar-card">
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
-        {{ value.neologismo }}
+        {{ value.name_eng }}
       </div>
       <div class="author">
         <font-awesome-icon style="font-size: 15px; margin-right: 7px" icon="fa-user" />
@@ -71,7 +71,7 @@
       </div>
       <div class="avatar-card">
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
-        {{ value.neologismo }}
+        {{ value.name_eng }}
       </div>
       <div class="author">
         <font-awesome-icon style="font-size: 15px; margin-right: 7px" icon="fa-user" />

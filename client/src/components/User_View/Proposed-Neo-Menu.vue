@@ -6,7 +6,7 @@
     <div class="neo-card" v-for="(value, index) in neologismes" :key="index">
       <div v-if="index < 5">
         <!--<b-avatar :src="require(`../../assets/images/${value.img}`)"></b-avatar>-->
-        <h5>{{ value.neologisme }}</h5>
+        <h5>{{ value.name_eng }}</h5>
         <div class="neo_card_pendent" v-if="value.state == 'pendiente'">
           <font-awesome-icon
             style="font-size: 20px; color: darkorange"

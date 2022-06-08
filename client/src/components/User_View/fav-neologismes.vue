@@ -12,7 +12,7 @@
     <div class="neologisme-cards">
       <div v-for="(value, index) in neologismes" :key="index">
         <!--<b-avatar :src="value.img"></b-avatar>-->
-        <h5>{{ value.name }}</h5>
+        <h5>{{ value.name_eng }}</h5>
         By: {{ value.user }}
         <div><font-awesome-icon icon="heart" /> {{ value.likes }}</div>
         <b-button

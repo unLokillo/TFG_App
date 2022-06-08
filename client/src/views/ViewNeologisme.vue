@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-neo-header">
-      <h2>{{ form.neologisme }}</h2>
+      <h2><strong>{{ form.name_eng }}</strong> - <i>{{ form.neologisme }}</i></h2>
       <div class="neo-likes" v-if="this.liked">
         <font-awesome-icon
           v-on:click="like"
@@ -29,7 +29,7 @@
     <div class="rejected-neologisme-admin" v-if="form.state == 'rechazado'">
       <h4>Your proposal has been rejected</h4>
       <p>
-        The proposal of the term: <strong>{{ form.neologisme }}</strong
+        The proposal of the term: <strong>{{ form.name_eng }}</strong
         > has been rejected for the following reason: <br />
         {{ form.mssg }}
         <br />
@@ -52,7 +52,7 @@
     <div class="rejected-neologisme" v-if="rech">
       <h4>Your proposal has been rejected</h4>
       <p>
-        The proposal of the term: <strong>{{ form.neologisme }}</strong
+        The proposal of the term: <strong>{{ form.name_eng }}</strong
         > has been rejected for the following reason: <br />
         {{ form.state }}
         <br />
