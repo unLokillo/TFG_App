@@ -10,7 +10,7 @@
         </p>
       </div>
       <h4>
-        Una application for proposing, defining and learning terms in the area of
+        An application for proposing, defining and learning terms in the area of
         <strong>sustainability</strong>. <br>
         For more info click
         <strong>
