@@ -10,43 +10,32 @@
         Preguntas Frecuentes
       </h2>
     </div>
-    <h4>¿Qué es un neologismo?</h4>
-    Un neologismo es cualquier palabra de la lengua que resulta novedosa, de
-    algún modo, para los hablantes. Pueden ser palabras prestadas, creadas desde
-    cero, pero también palabras que ya se usaban y a las que se incorporan
-    nuevos significados.
-    <h4>¿Qué es un término?</h4>
-    Un término puede estar formado por una sola o por varias palabras, y se
-    utiliza para referirse a un concepto especializado en un ámbito de
-    especialidad. Por ejemplo, emisión, en el ámbito de la descarbonización, es un término.
+    <h4>What is a term?</h4>
+    A term can consist of a single word or several words, and is used to refer 
+    to a specialised concept in a specialised field. For example, 
+    sustainability is a term.
     <h4>
-      ¿Por qué es importante desarrollar una terminología propia en español?
+      Why is it important to develop our own terminology in Spanish? 
     </h4>
-    Porque si disponemos de una terminología bien formada en español seremos
-    capaces también de comunicarnos adecuadamente en todos los niveles de
-    especialidad. Si los términos están bien recogidos y definidos, y además su
-    forma se adecua a las reglas del español, nos resultará mucho más fácil
-    utilizarlos para comunicarnos en nuestra propia lengua. Además, trabajar en
-    un ámbito de especialidad en nuestra propia lengua nos ayuda a comprenderlo
-    mejor y nos permite avanzar e innovar con más autonomía y garantías.
+    Because if we have a well-formed terminology in Spanish we will also be 
+    able to communicate adequately at all levels of speciality. If the terms 
+    are well collected and defined, and their form is in accordance with the 
+    rules of Spanish, it will be much easier for experts to use them to 
+    communicate in our own language. Furthermore, working in a specialised 
+    field in our own language helps us to understand it better and allows us 
+    to advance and innovate with more autonomy and guarantees. 
     <h4>
-      ¿Por qué es importante que los especialistas en descarbonización propongan y opinen
-      sobre las palabras que usan?
+      Why is it important for students to propose and give their opinion on the 
+      words they use? 
     </h4>
-    Creemos que si los especialistas se implican en el proceso de detección y
-    generación de los neologismos propios de su ámbito tendrán muchas más
-    posibilidades de incorporarlos en su comunicación especializada diaria, y
-    las posibilidades de que se implanten serán mayores. Esto les ayudará a
-    desenvolverse profesionalmente con más solvencia y a poner nombres más
-    funcionales y, en definitiva, más operativos desde un punto de vista
-    cognitivo y profesional, a los conceptos especializados que manejen en su
-    día a día.
-    <h4>¿Qué papel desempeñan las lingüistas en todo este proceso?</h4>
-    Las profesionales del lenguaje y la terminología se encargan de ordenar y
-    sistematizar la información, las intuiciones y las preferencias de los
-    especialistas, con el fin de devolvérselos a estos en forma de recursos
-    útiles para su comunicación profesional, como glosarios y diccionarios
-    especializados en diversos formatos.
+    We believe that if specialists -and students are, after all, experts-to-be- 
+    are involved in the process of detecting and generating the terms specific 
+    to their field, they will have a much greater chance of incorporating them 
+    into their daily specialised communication, and the chances of them becoming 
+    established will be greater. This will help them to develop professionally 
+    with more solvency and to give more functional and, in short, more 
+    operative names from a cognitive and professional point of view, to the 
+    specialised concepts they handle in their day-to-day work.
     <div class="final"></div>
   </div>
 </template>

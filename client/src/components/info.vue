@@ -9,25 +9,25 @@
       <h2 style="border-bottom: 1px solid var(--border)">Información</h2>
     </div>
     <p>
-      Pescaneo es una aplicación que permite la captura y valoración de
-      neologismos en el ámbito de la descarbonización. Se enmarca en el
-      proyecto IoTerm, desarrollado por profesoras del Departamento de
-      Lingüística Aplicada a la Ciencia y la Tecnología de la Universidad
-      Politécnica de Madrid en colaboración con el grupo de investigación
-      Ateneo-NeoUsal de la Universidad de Salamanca. <br />
+      Term-fishing is an application that allows to capture, describe and 
+      evaluate terms in the field of sustainability. It has been developed 
+      as part of the educational innovation project "Gamification strategies 
+      applied to the collaborative acquisition of scientific-technical 
+      vocabulary in English and Spanish", developed by professors of the 
+      Universidad Politécnica de Madrid. <br />
       <br />
-      El objetivo principal de este proyecto es implicar a las expertas y
-      expertos tecnólogos en la identificación, recogida y valoración de nuevos
-      términos en el ámbito del Internet de las Cosas, de una manera
-      colaborativa y lúdica.
+      The main objective of this project is to motivate students of different 
+      degrees of the UPM in the acquisition of scientific-technical 
+      vocabulary in the field of sustainability in a collaborative and 
+      playful way. 
       <br /><br />
-      Con ayuda de esta flota de “pescadoras y pescadores de términos”
-      pretendemos detectar, analizar, valorar y recopilar los neologismos
-      terminológicos que surgen en el ámbito de la descarbonización en inglés y en español.
+      With the help of this fleet of "term fishermen and fisherwomen" we aim 
+      to detect, analyse, evaluate and compile terms related to 
+      sustainability on campus both in English and Spanish. 
       <br />
       <br />
 
-      <strong style="align-content: center"> ¿Te vienes de pesca? </strong>
+      <strong style="align-content: center"> Coming fishing? </strong>
     </p>
     <div></div>
   </div>
